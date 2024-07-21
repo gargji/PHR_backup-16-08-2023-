@@ -1,0 +1,164 @@
+    .form-1 {
+        display: flex;
+        flex-direction: column;
+        background: #0000008c;
+        width: 38%;
+        box-shadow: 0 19px 38px rgba(0, 0, 0, 10%);
+        border-radius: 15px;
+        padding: 15px 0px;
+        margin-top: 45px;
+    }
+
+    .form-1 h1 {
+        text-align: center;
+        margin-top: 1.4rem;
+        margin-bottom: 1.4rem;
+    }
+
+    /* input[type="email"],
+    input[type="password"] {
+        border: none;
+        outline: none;
+        border: 1px solid #ddd;
+        background: #fff;
+        margin: 0.9rem 4rem;
+        font-size: 1rem;
+        color: rgb(14, 11, 11);
+        height: 45px;
+        padding-left: 15px;
+        border-radius: 1px;
+    } */
+
+    label {
+        margin: 0 4rem;
+    }
+
+    span {
+        margin: 0 4rem;
+        color: #fff;
+        cursor: pointer;
+    }
+
+    button {
+        margin: 2rem 4rem;
+        margin-bottom: 1.4rem;
+        padding: 0.4rem;
+        cursor: pointer;
+        border-radius: 5px;
+        border: none;
+        font-size: 1.1rem;
+        font-weight: bolder;
+        color: #fff;
+        background: linear-gradient(to right, #ff6d3a, #e7693d, #ef5d2b, #dd4b18);
+    }
+
+    .logintext {
+        font-size: 30px;
+        color: #fff;
+        font-weight: bold;
+    }
+
+    .loginqus {
+        padding: 0rem 4rem;
+    }
+
+    .loginqus h3 {
+        font-size: 20px;
+    }
+
+    .loginqus p {
+        font-size: 12px;
+    }
+
+    .marginForm h1 {
+        font-size: 30px;
+        padding: 50px 0px;
+        margin-left: 20%;
+    }
+
+    .form-1 label {
+        color: #fff;
+    }
+
+    .backImg {
+        background-image: url('../../../assets/MainBanner.jpg');
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: cover;
+    }
+
+    .cc_slider_cont1_wrapper {
+        margin-left: 10% !important;
+    }
+
+    @media only screen and (max-width: 1024px) {
+        .form-1 {
+            width: 100%;
+        }
+
+        .cc_slider_cont1_wrapper {
+            margin-left: 0px !important;
+        }
+    }
+
+    @media only screen and (max-width: 320px) {
+        .form-1 {
+            margin-top: 48px !important;
+        }
+
+        h1 {
+            font-size: 24px;
+        }
+
+        input {
+            font-size: 14px !important;
+        }
+
+        .loginqus a {
+            padding: 0 !important;
+        }
+    }
+
+    @media only screen and (max-width: 425px) {
+        .numbertag p {
+            width: 98px !important;
+        }
+
+        .numbertag {
+            padding-right: 0 !important;
+            padding-left: 0 !important;
+        }
+
+        .loginqus h3 {
+            font-size: 16px;
+        }
+
+        .nummerdiv {
+            display: block !important;
+        }
+    }
+
+    @media only screen and (max-width: 1200px) {
+        .form-1 {
+            width: 100%;
+        }
+    }
+
+    @media only screen and (max-width: 375px) {
+        .loginqus a {
+            padding-left: 0px !important;
+        }
+    }
+
+
+    p {
+        text-align: justify;
+    }
+
+    .nummerdiv {
+        justify-content: space-between;
+    }
+
+    .backImg {
+        filter: brightness(0.9)
+    }

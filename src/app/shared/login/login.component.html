@@ -1,0 +1,64 @@
+<p-toast position="top-right" style="z-index:999"></p-toast>
+<app-header></app-header>
+<div class="container-fluid backImg">
+    <div class="row" style="height: 80vh;">
+        <div class="col-xl-12 col-lg-7 col-md-12 col-sm-12 col-12 formclass">
+            <div class="cc_slider_cont1_wrapper" style="margin-left:13%">
+                <form *ngIf="loginform" class="form-1" [formGroup]="loginForm">
+                    <h1 class="logintext">Login</h1>
+                    <label for="email" class="mb-2">Email</label>
+                    <div class="col-10 m-auto">
+                        <input pInputText type="email" formControlName="email" id="password"
+                            placeholder="Enter Your Email ID" />
+                    </div><br>
+                    <label for="password" class="mb-2">Password</label>
+                    <div class="col-10 m-auto">
+                        <p-password [feedback]="false" [toggleMask]="true" formControlName="password"
+                            [inputStyle]="{'width': '100%'}" [style]="{'width': '100%'}"></p-password>
+                    </div><br>
+                    <!-- <span>Forgot Password</span> -->
+                    <button (click)="submit_login_details()" type="button">Login</button>
+                    <div class="loginqus">
+                        <h3 style="color:#fff">Have Any Question?</h3>
+                        <p style="color: #fff;">Call Us or send an email. Our office is open from 9am to 5pm GMT, Monday
+                            to Friday excliding bank Holidays</p>
+                        <div style="display: flex;" class="nummerdiv">
+                            <a href="#" style=" color: #fff;">
+                                <p>+91 9027370662</p>
+                            </a>
+                            <a href="#" style="color: #fff;">
+                                <p>openEMR@dnavigation.com</p>
+                            </a>
+                        </div>
+                    </div>
+                </form>
+
+                <form *ngIf="matchauthenticator" class="form-1"  >
+                    <h1 class="logintext">OTP Verification</h1>
+                    <label for="email" class="mb-2">Enter Otp on Authenticator App</label>
+                    <div class="col-10 m-auto">
+                        <input pInputText type="email"  [(ngModel)]="token" id="password"
+                            placeholder="Enter Otp" />
+                            <!-- <h3 class="mt-2">  <p><a (click)="anotherway()">another way to login</a></p></h3> -->
+                    </div><br>
+                    <button (click)="anotherway()" class="mb-0" type="button">Another Way To Login</button>
+                    <button (click)="verifyToken()" type="button">SUBMIT</button>
+                </form>
+                <form *ngIf="showbackupcodeform" class="form-1"  [formGroup]="codeform">
+                    <h1 class="logintext">back Verification</h1>
+                    <label for="email" class="mb-2">Enter Backup codes</label>
+                    <div class="col-10 m-auto">
+                        <p-inputMask formControlName="backupcode" mask="****-****-****-****-****-****-****-****-****" 
+                        placeholder="xxxx-xxxx-xxxx-xxxx-xxxx-xxxx-xxxx-xxxx-xxxx"></p-inputMask>
+           
+                        
+                            <!-- <h3 class="mt-2">  <p><a (click)="anotherway()">another way to login</a></p></h3> -->
+                    </div><br>
+                    <button (click)="REVERSE()" class="mb-0" type="button">Back to otp login</button>
+                    <button (click)="verifycode()" type="button">SUBMIT</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<app-footer></app-footer>

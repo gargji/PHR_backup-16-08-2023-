@@ -1,0 +1,365 @@
+<p-toast position="top-right"></p-toast>
+<div  class="container-fluid" style="padding-right: 0;">
+    <div style="width:100%; display:flex; height:65rem ;    padding-top: 3rem;
+    ">
+        <div style="width:13%">
+            <!-- <div  style=" border-right: 2px solid #ccc;height: 85vh;padding: 0px;"> -->
+                <div  style=" border-right: 2px solid #ccc;padding: 0px;">
+                <div class="p-fluid" style="display: flex;justify-content: flex-end;align-items: center;">
+                    <div style="position: relative;padding-top: 7px;padding-bottom: 7px;width: 100%;">
+                        <span class="p-input-icon-left ml-auto"
+                            style="width: 10%;position:absolute;top: 1.9rem;z-index: 999;padding: 0px;">
+                            <i class="pi pi-search"></i>
+                        </span>
+                        <p-autoComplete [style]=" {'height': '35px'}" [suggestions]="scoredname"
+                            (completeMethod)="scroedcard_search($event)" field="flowsheet_name" (onSelect)="scored_cardgOncselect($event)"
+                            [dropdown]="true">
+                            <ng-template pTemplate="scoredname" let-scoredname>
+                                <div style="display: flex; justify-content: space-between; width: 100%;">
+                                    <div>
+                                        <span>{{scoredname?.flowsheet_name}}</span>
+                                    </div>
+                                    <div style="height: 25px; width: 25px;" (clfavoraick)="toggleStarColor($event,scoredname)">
+                                        <span>
+                                            <i [class]="scoredname?.favoratestar=='0'?'fa fa-star-o':'fa fa-star'"
+                                                [style]="scoredname?.favoratestar=='0'?'color:black':'color:#ffb600'"
+                                                aria-hidden="true" style="padding: 10px;font-size: 15px;font-weight: bold;"></i>
+                                        </span>
+                                    </div>
+                                </div>
+                            </ng-template>
+                        </p-autoComplete>
+                    </div>
+                </div>
+                <div class="listingfav col-lg-12" *ngFor="let favora of favorate" [ngClass]="{'selected': favora?.name === statusClass?.name}" >
+                    <div style="display: flex; justify-content: space-between; width: 100%;" (click)="scored_cardgOncselects(favora)">
+                        <div>
+                            <span>{{favora?.flowsheet_name}}</span>
+                        </div>
+                        <div style="height: 25px; width: 25px;" (clfavoraick)="toggleStarColor($event,favora)">
+                            <span>
+                                <i [class]="favora?.favoratestar=='0'?'fa fa-star-o':'fa fa-star'"
+                                    [style]="favora?.favoratestar=='0'?'color:black':'color:#ffb600'"
+                                    aria-hidden="true" style="padding: 10px;font-size: 15px;font-weight: bold;"></i>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div style="width:14% ;padding-top:.3rem">
+            <div style="height:7vh">
+                <div id="flowsheets">
+                    <div>
+                        <!-- <button>Time Filter</button> -->
+                        <!-- <button type="button" class="btn btn-secondary">Time Filter</button> -->
+                        <p-overlayPanel #op>
+                            <ng-template pTemplate>
+                                <label>Filter To</label>
+                                <p-selectButton id="Alergies" [options]="filtertime"
+                                (onChange)="Get_frequencydata($event,guid)" formControlName="Frequency"
+                                [style]="{'width':'100%'}" optionLabel="name"
+                                optionValue="id">*</p-selectButton>
+                                <label> Jump To</label>
+                                <input type="date"  (ngModelChange)="onDateChange($event)"  pInputText />
+                            </ng-template>
+                        </p-overlayPanel>
+                        <p-button class="pbutton" (click)="op.toggle($event)" pTooltip="" label="Time Filter"
+                        [style]="{'width':'100%','background-color':'rgb(24, 111, 180)', 'border':'none','padding':'0.5rem 0.8rem','border-radius':'2px','font-weight':'500','margin-right':'10px'}">
+                      </p-button>
+                        <!-- <button type="text" pButton label="Time Filter" ></button> -->
+                    </div>
+                    <p-accordion [activeIndex]="0" style="height: 64rem"> <!-- 0 represents the index of the tab you want to be open by default -->
+                        <p-accordionTab header="{{labsname}}" [(selected)]="activeStatus">
+                            <div *ngFor="let col of sidebarsubheader" style="display: flex; width:100%; padding: 7px;">
+                                <div style="width:80%;" >
+                                    {{col.flowsheet_header_name}}
+                                </div>
+                                <div style="display: flex; justify-content:flex-end; width:20%">
+                                    <input type="checkbox" (change)="savecheckbox($event,col)" [(ngModel)]="col.value" [value]="col.value">
+                                </div>
+                            </div>
+                        </p-accordionTab>
+                    </p-accordion>
+                </div>
+            </div>
+        </div>
+        <div style="width:100%;" >
+            <div style="width:100%; height:55rem; overflow:scroll;display: flex;padding-top: .3rem;"class='containe'>
+                <div id="flowsheet">
+                    <div *ngFor="let coli of flowsheetdatalabs;   let m = index">
+                        <div
+                            style="width:100%; background-color:rgb(226 227 231) ;padding: .6rem; font-weight: 600;color:#0e89d8;border-top:3px solid rgb(184, 175, 175);padding-left: 1.6rem;">
+                            {{coli.key}}</div>
+                          <div>
+                          <p-table [columns]="cols" [value]="coli?.data"
+                            [tableStyle]="{'background-color': 'rgb(226 227 231)'}" id="flowsheettable">
+                            <ng-template pTemplate="header" let-columns>
+                                <tr  *ngIf="m==0">
+                                    <th style=" border:5px black!important;color:#0e89d8;">
+                                        <button
+                                            style="outline: none; border:none; background-color: #F05F40; border-radius: 3px; color: white; "
+                                            (click)="addtime()"> Add Column</button>
+                                    </th>
+                                        <th  *ngFor="let col of columns;let col_index = index " style="  color:#303133; "
+                                        class="vitalflowsheet">
+                                        <div style="border:5px black">
+                                           
+                                           
+                                            <div>  {{ col.date | date: 'M-d-yy' }}</div>
+                                            <div> {{ col.date | date: ' h:mm a' }} </div>
+                                            <!-- {{ col.date | date('M/d/yy, h:mm a') }} -->
+                                            <!-- {{col.times}}
+                                            {{col.datess}} -->
+                                          
+                                        </div>
+                                    </th>
+                                </tr>
+                            </ng-template>
+                            <ng-template pTemplate="body" dataKey="id" let-rowData let-columns="columns"
+                                let-rowi="rowIndex" let-product>
+                                <tr>
+                                    <td pEditableColumn style="border:1px solid rgb(184, 175, 175) ; position: relative;">
+                                        <div style="display: flex; justify-content: center; ">
+                                        <div style="width:100%; color:#303133; background-color:#e5ecf0; font-weight: 600;  "
+                                            class="vitalflowsheet">
+                                            {{product.labservicename}}
+                                        </div>
+                                        <div style="width:4rem; background-color:#e5ecf0;  color:#303133;">
+                                            <i style="padding-right: 6px;" class="pi pi-th-large"  (click)="get_data_intable(product)"></i>
+                                            <i class="pi pi-history" (click)="get_graph_data(product)"></i>
+                                        </div>
+                                        </div>
+                                    </td>
+                                    <td *ngFor="let col of columns;let i = index" 
+                                        style="border:1px solid rgb(184, 175, 175) ; width:5rem; margin-top:1rem;">
+        
+                                        <!-- <div  *ngIf="product.Service_catogeory!='RAD'"  class="flowsheetContaner" (change)="fillsheet($event,col.field,product.labservicename)"id="{{product.id}}_{{col.date}}_{{product.labservicename}}"  (click)="sidebardata($event,col.date,rowData.flowsheetsubheader,product.id,col.date,product.labservicename,product)">
+
+                                        </div> -->
+                                        <div *ngIf="product.Service_catogeory!='RAD'"  class="flowsheetContaner"  id="{{product.id}}_{{col.date}}_{{product.labservicename}}"
+                                        (click)="sidebardata($event,col.date,rowData.flowsheetsubheader,product.id,col.date,product.labservicename,product)">
+                                       
+                                   </div>
+                                        <div *ngIf="product.Service_catogeory=='RAD'" class="flowsheetContaner" 
+                                   (click)="sidebardata($event,col.date,rowData.flowsheetsubheader,product.id,col.date,product.labservicename,product)">
+                                         
+                                           <span style="border: 1px solid; padding: 4px;border-radius: 50%;" id="{{product.id}}_{{col.date}}_{{product.labservicename}}_'red'" *ngIf="product.Service_catogeory=='RAD'"><i  class="pi pi-book" (click)="ops.toggle($event)" (click)="sidebardata($event,col.date,rowData.flowsheetsubheader,product.id,col.date,product.labservicename,product)"></i> </span>
+                                           <span style="border: 1px solid; padding: 4px;border-radius: 50%;" *ngIf="product.Service_catogeory=='RAD'"
+                                           (click)="sidebardata($event,col.date,rowData.flowsheetsubheader,product.id,col.date,product.labservicename,product)"
+                                           [ngClass]="{'blue-background':id}">
+                                         <i  class="pi pi-pencil"></i>
+                                     </span>
+                                     </div>
+                                    </td>
+                                    <!-- <td *ngFor="let col of columns;let i = index"
+                                        style="border:1px solid rgb(184, 175, 175) ; width:5rem">
+                                      
+                                        <div class="flowsheetContaner"
+                                            (click)="sidebardata($event,col.date,rowData.flowsheetsubheader,product.id,col.date,product.labservicename,product)"
+                                            (click)="newsscorecalculate" id="{{product.id}}_{{col.date}}_{{product.labservicename}}"
+                                            (change)="fillsheet($event,col.field,product.labservicename)"></div>
+                                    </td> -->
+                                </tr>
+                            </ng-template>
+                        </p-table>
+                        <p-overlayPanel #ops>
+                            <ng-template pTemplate>
+                                <label>Impression :-{{showradvalue}}</label>
+                            </ng-template>
+                        </p-overlayPanel>
+                            </div>
+                    </div>
+                    <div id="showTextBox"></div>
+                    <div id="flowsheet">
+                    </div>
+                    <div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div>
+        </div>
+    </div>
+    <div></div>
+    <!-- <p-dialog header="Add Date and Time" [(visible)]="display" [style]="{width: '55rem'}">
+        <label style="text-align: left; padding-top: 11px; font-weight: bold;">Date and Time </label>
+        <div>
+            <p-calendar [(ngModel)]="date1" appendTo="body" [showTime]="true" [showSeconds]="true"></p-calendar>
+        </div>
+        <div
+            style="width:100%; display: flex; justify-content: flex-end; border-top: 2px solid rgb(194, 184, 184); margin-bottom: 1rem; margin-top: 1rem;">
+            <div style="margin-top: 1rem;">
+                <button icon="pi pi-save" class="save_button" (click)="pushvalue()"><i class="fa fa-save">&nbsp;</i>Save
+                </button>
+                <button type="button" class="topshift " (click)="canceldropdown()"><i class="fa fa-times">&nbsp;</i>Cancel </button>
+            </div>
+        </div>
+    </p-dialog> -->
+
+
+
+
+    <!--  -->
+
+    <p-dialog header="Add Date and Time" [(visible)]="display" [modal]="true" [responsive]="true" id="trial"
+    [style]="{width: '35vw','height':'26vh'}"  >
+   
+    <!-- <div class="container"></div> -->
+   
+          
+     <div class="form-group  mt-2">
+
+    <span class="p-float-label " >
+        <p-calendar [(ngModel)]="date1" appendTo="body" [showTime]="true" [showSeconds]="true"
+        [style]="{'width':'100%'}" ></p-calendar>
+
+
+
+        <label for="float-input">Date and Time</label>
+    </span>
+
+
+
+
+        <div class="button-container" >
+
+            <button  (click)="pushvalue()" pButton type="button" style="margin-bottom: 5px;" label="Save"
+                class="p-button-success " ></button>
+
+
+                <!-- <button  (click)="canceldisplay()"pButton type="button" style="margin-bottom: 5px;" label="Cancel" 
+                class="p-button-warning" ></button> -->
+        </div>
+       
+    </div>
+</p-dialog>
+
+    <!--  -->
+</div>
+<p-sidebar [(visible)]="displaysidebar" id="flowssheet_sidebar"
+[style]="{width:'20rem','height':'100%'}" position="right"
+[modal]="false">
+    <form [formGroup]="flowsheetform">
+        <div id="allergies_component">
+            <div class="col-lg-12 form-group">
+                <div  *ngIf="Service_catogeory!='RAD'" class="col-lg-12 form-group"><span style="font-size: 16px; font-weight: 500;padding-left:1.6rem">{{headernames}}</span>
+                    <div style="font-size: 19px; font-weight: 600;"class="timeheader"></div>
+                    <input type="text" formControlName="flowsheetinput" pInputText />
+                </div>
+                <div *ngIf="Service_catogeory=='RAD'" style="padding: .6rem;">
+                    <label>Impression</label>
+                    <textarea class="form-control" rows="5" formControlName="Impression"  style="border-radius: 2px;" placeholder="Enter ..."></textarea>
+                   </div>
+                <!-- <div class="col-lg-10 form-group">
+                    <label>Select Single Option </label>
+                </div> -->
+            </div>
+            <div *ngIf="Service_catogeory!='RAD'" style="padding: .5rem; border: 7px solid rgb(175, 169, 169);">
+                <div style="display: flex; justify-content: center;">
+                    <button type="button" class="btn btn-secondary callculater" (click)="valuepush1(1)">1</button>
+                    <button type="button" class="btn btn-secondary callculater" (click)="valuepush1(2)">2</button>
+                    <button type="button" class="btn btn-secondary callculater" (click)="valuepush1(3)">3</button>
+                    <button type="button" class="btn btn-secondary callculater" (click)="valuepush1(4)">4</button>
+                </div>
+                <div style="display: flex; justify-content: center;">
+                    <button type="button" class="btn btn-secondary callculater" (click)="valuepush1(5)">5</button>
+                    <button type="button" class="btn btn-secondary callculater" (click)="valuepush1(6)">6</button>
+                    <button type="button" class="btn btn-secondary callculater" (click)="valuepush1(7)">7</button>
+                    <button type="button" class="btn btn-secondary callculater" (click)="valuepush1(8)">8</button>
+                </div>
+                <div style="display: flex; justify-content: center;">
+                    <button type="button" class="btn btn-secondary callculater" (click)="valuepush1(9)">9</button>
+                    <button type="button" class="btn btn-secondary callculater" (click)="valuepush1(0)">0</button>
+                    <button type="button" class="btn btn-secondary callculater" (click)="valuepush1('.')">.</button>
+                    <button type="button" class="btn btn-secondary callculater" (click)="valuepush1(',')">,</button>
+                </div>
+            </div>
+            <div
+            style="width:100%; display: flex; justify-content: center; border-top: 2px solid rgb(216, 208, 208);  margin-top: 1rem;">
+            <div style="margin-top: 1rem;">
+                <button class="btn btn-outline-info m-1" (click)="savesidebardata()" icon="pi pi-save"><i
+                        class="fa fa-add">&nbsp;</i>Add  </button>
+
+                <button (click)="flowsheetsave()" icon="pi pi-save" class="btn btn-outline-info"><i
+                        class="fa fa-save">&nbsp;</i>Save </button>
+            </div>
+        </div>
+            <div *ngIf="Service_catogeory!='RAD'" style="padding: 1rem;">
+                <div style="font-size: 18px; border-top: 1px solid #0000001c; border-bottom: 1px solid #0000001c;padding: 0.6rem;">
+                    ReferenceRange
+                </div>
+                <div style="font-size: 14px; font-weight: 600;padding: 0.6rem;">
+                    ReferenceRangeMin  : {{ReferenceRangeMin}} {{Unit}}
+                </div>
+                <div style="font-size: 14px;  font-weight: 600;padding: 0.6rem;">
+                    ReferenceRangeMax : {{ReferenceRangeMax}} {{Unit}}
+                </div>
+            </div>
+           
+        </div>
+
+    </form>
+</p-sidebar>
+
+
+
+
+<!--  -->
+
+
+<!--  -->
+<p-dialog id="tmp" [style]="{width: '65vw','height':'50vh'}" [(visible)]="displaydata"
+[modal]="true">
+<ng-template pTemplate="header" [style]="{'background': 'black', 'font-size': '21px' }">
+    {{headerdialog}}
+</ng-template>
+<div style="border: 1px solid #bebbbb; padding: 1px;">
+
+    <div style="padding: 2px; height: 40vh; overflow: scroll; ">
+        <p-table [value]="viewdetaildata" styleClass="p-datatable-striped"
+            [tableStyle]="{'width': '60vw'}" rowi>
+            <ng-template pTemplate="header">
+                <tr>
+                    <th tyle="width: 10%;">
+                        S.No
+                    </th>
+                    <th style="width: 40%;">
+                        {{headerdialog}}
+                    </th>
+                    <th style="width: 50%;">
+                        Date
+                    </th>
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-product index let-i="rowIndex">
+                <tr>
+                    <td tyle="width: 10%;">
+                        {{i+1}}
+                    </td>
+                    <td style="width: 40%;">
+                        {{product.value}}
+                    </td>
+                    <td style="width: 50%;">
+                        {{product.datetimevalue}}
+                    </td>
+                </tr>
+            </ng-template>
+        </p-table>
+    </div>
+</div>
+<div style="width:100%;    padding: 10px; display: flex; justify-content: flex-end;">
+    <p-button class="pbutton" label="Close" icon="pi pi-times" (click)="closedialogs()"
+        [style]="{'margin-left': '10px','height': '34px','background-color':'rgb(187 186 184)', 'border':'none','padding':'0.5rem 0.8rem','border-radius':'2px','font-weight':'500'}"></p-button>
+</div>
+</p-dialog>
+<p-dialog header="{{headerdialog}}" id="allergies_component" [(visible)]="displayDialogGraph"
+[modal]="true" [style]="{width: '70vw',height:'80vh'}" [draggable]="false"
+[resizable]="false">
+
+<div style="display: flex;align-items: center; justify-content: center;width: 100%; ">
+    <p-chart [responsive]=true type="line" width="1230px" id="myChart1"
+        (onDataSelect)="selectData($event)" height="730px" [data]="graphdatas"
+        [options]="advanceSingleoption"></p-chart>
+</div>
+</p-dialog>

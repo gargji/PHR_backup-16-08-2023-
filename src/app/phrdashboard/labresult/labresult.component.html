@@ -1,0 +1,564 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="row">
+                <div class="col-lg-12 appointmentschudule fordataviewchange ">
+                    <!-- <div class="row " style="margin-top: 65px;">
+                        <div class="col-lg-9">
+                            <div class="mb-3">
+                                <h1>Appointment And Visits ({{usernames}})</h1>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 btnappoinment">
+                            <button routerLink="../book_appointment" class="messageview" fdprocessedid="vbz069">Schedule An Appointment</button>
+                              
+                        </div>
+
+
+                    </div> -->
+                    <!--  -->
+                    <div class="row mt-5">
+                        <div class="col-lg-12">
+                           
+
+
+
+
+                                <p-tabView>
+                                    <p-tabPanel header="Labs">
+
+                                        <p-tabView>
+                                            <p-tabPanel header="Lab Order">
+                                                <p-table [value]="laborder" responsiveLayout="scroll"
+                                                    paginatorPosition="bottom" #dt1 dataKey="id" [paginator]="true"
+                                                    styleClass="p-datatable-striped"
+                                                    [globalFilterFields]="['emailId','userId','statename','CountryName', 'phone','Specialityname','cityname',  'clinicName']"
+                                                    scrollDirection="both" styleClass="p-mt-3" [scrollable]="true"
+                                                    [rowsPerPageOptions]="[10,15,25,50]" [rows]="15">
+                                                    <ng-template pTemplate="caption">
+                                                        <div class="flex globalSearch">
+                                                            <p
+                                                                style="font-weight: bold; font-size: 1.2rem; margin-bottom: 0;">
+                                                                Total
+                                                                Records:{{laborderdatalength}} <span
+                                                                    class="dislength"></span></p>
+                                                        </div>
+                                                    </ng-template>
+                                                    <ng-template pTemplate="header">
+
+                                                        <tr>
+                                                            <th style="width:5%;border-top:2px solid #e7ecf1;"
+                                                                pSortableColumn="sno">
+                                                                <!-- <p-sortIcon
+                            field="Sno"></p-sortIcon> -->
+                                                                S.No
+                                                            </th>
+                                                            <th style="width:15%;border-top:2px solid #e7ecf1;"
+                                                                pSortableColumn="name"> <p-sortIcon
+                                                                    field="name"></p-sortIcon>order Name</th>
+
+                                                            <th style="width:10%;border-top:2px solid #e7ecf1;"
+                                                                pSortableColumn="DatePerformed"><p-sortIcon
+                                                                    field="DatePerformed"></p-sortIcon>Order Date</th>
+
+
+                                                            <th style="width:10%;border-top:2px solid #e7ecf1;"
+                                                                pSortableColumn="DatePerformed"><p-sortIcon
+                                                                    field="DatePerformed"></p-sortIcon>Shared_by</th>
+
+
+
+                                                            <th style="width:10%;border-top:2px solid #e7ecf1;"
+                                                                pSortableColumn="Notes"> Action</th>
+
+                                                        </tr>
+                                                    </ng-template>
+                                                    <ng-template pTemplate="body" let-item let-i="rowIndex">
+                                                        <tr>
+                                                            <td style="width:5%; ">{{i + 1}}</td>
+                                                            <td style="width:15%;">{{item.ParentName}}</td>
+                                                            <!-- <td style="width:8%;">{{item.invoicenumber}}</td> -->
+                                                            <!-- <td style="width:8%;">{{item.FrequencyName}}</td> -->
+                                                            <td style="width:10%;">{{item.TransactionTime |date:
+                                                                'dd/MM/yyyy'}}</td>
+                                                            <!-- <td style="width:10%;">{{item.duedate |date: 'dd/MM/yyyy'}}</td> -->
+
+                                                            <!-- <td style="width:10%;">{{item.EndDate}}</td> -->
+                                                            <!-- <td style="width:5%;">{{item.RouteName}}</td>
+                    <td style="width:10%;">{{item.primaryindication}}</td> -->
+
+                                                            <td style="width:10%;">{{item.provider_name}}</td>
+
+                                                            <td style="width:10%;"> <button class="btn btn-info"
+                                                                    (click)="download(item)"><i
+                                                                        class="pi pi-download"></i></button></td>
+                                                        </tr>
+                                                    </ng-template>
+
+                                                </p-table>
+                                            </p-tabPanel>
+                                            <p-tabPanel header="Lab Result">
+                                                <p-table [value]="labresult" responsiveLayout="scroll"
+                                                    paginatorPosition="bottom" #dt1 dataKey="id" [paginator]="true"
+                                                    styleClass="p-datatable-striped"
+                                                    [globalFilterFields]="['emailId','userId','statename','CountryName', 'phone','Specialityname','cityname',  'clinicName']"
+                                                    scrollDirection="both" styleClass="p-mt-3" [scrollable]="true"
+                                                    [rowsPerPageOptions]="[7,14,21,28]" [rows]="7">
+                                                    <ng-template pTemplate="caption">
+                                                        <div class="flex globalSearch">
+                                                            <p
+                                                                style="font-weight: bold; font-size: 1.2rem; margin-bottom: 0;">
+                                                                Total
+                                                                Records:{{labresultdatalength}} <span
+                                                                    class="dislength"></span></p>
+                                                        </div>
+                                                    </ng-template>
+                                                    <ng-template pTemplate="header">
+
+                                                        <tr>
+                                                            <th style="width:5%;border-top:2px solid #e7ecf1;"
+                                                                pSortableColumn="sno">
+                                                                <!-- <p-sortIcon
+                                                        field="Sno"></p-sortIcon> -->
+                                                                S.No
+                                                            </th>
+                                                            <th style="width:15%;border-top:2px solid #e7ecf1;"
+                                                                pSortableColumn="name"> <p-sortIcon
+                                                                    field="name"></p-sortIcon>Result Name</th>
+
+                                                            <th style="width:10%;border-top:2px solid #e7ecf1;"
+                                                                pSortableColumn="DatePerformed"><p-sortIcon
+                                                                    field="DatePerformed"></p-sortIcon>Result Date</th>
+                                                            <th style="width:15%;border-top:2px solid #e7ecf1;"
+                                                                pSortableColumn="name"> <p-sortIcon
+                                                                    field="name"></p-sortIcon>Lab Name</th>
+
+
+
+                                                            <th style="width:10%;border-top:2px solid #e7ecf1;"
+                                                                pSortableColumn="DatePerformed"><p-sortIcon
+                                                                    field="DatePerformed"></p-sortIcon>Reviewed by</th>
+
+                                                            <th style="width:10%;border-top:2px solid #e7ecf1;"
+                                                                pSortableColumn="DatePerformed"><p-sortIcon
+                                                                    field="DatePerformed"></p-sortIcon>intrepretation
+                                                            </th>
+
+                                                            <th style="width:10%;border-top:2px solid #e7ecf1;"
+                                                                pSortableColumn="Notes"> Action</th>
+
+                                                        </tr>
+                                                    </ng-template>
+                                                    <ng-template pTemplate="body" let-item let-i="rowIndex">
+                                                        <tr>
+                                                            <td style="width:5%; ">{{i + 1}}</td>
+                                                            <td style="width:15%;">{{item.ParentName}}</td>
+                                                            <!-- <td style="width:8%;">{{item.invoicenumber}}</td> -->
+                                                            <!-- <td style="width:8%;">{{item.FrequencyName}}</td> -->
+                                                            <td style="width:10%;">{{item.resultDate |date:
+                                                                'dd/MM/yyyy'}}</td>
+                                                            <!-- <td style="width:10%;">{{item.duedate |date: 'dd/MM/yyyy'}}</td> -->
+
+                                                            <!-- <td style="width:10%;">{{item.EndDate}}</td> 
+                                             <td style="width:5%;">{{item.RouteName}}</td>-->
+                                                            <td style="width:10%;">{{item.lab_section_full_Name}}</td>
+
+                                                            <td style="width:10%;">{{item.Reviewer}}</td>
+
+                                                            <td style="width:10%;">{{item.intrepretation}}</td>
+
+                                                            <td style="width:10%;"> <button class="btn btn-info"
+                                                                    (click)="showDialog(item)"><i
+                                                                        class="pi pi-eye"></i></button></td>
+                                                        </tr>
+                                                    </ng-template>
+
+                                                </p-table>
+                                            </p-tabPanel>
+
+                                        </p-tabView>
+
+                                    </p-tabPanel>
+                                    <p-tabPanel header="Images">
+                                        <p-tabView>
+                                            <p-tabPanel header="Images Order">
+                                                <p-table [value]="images" responsiveLayout="scroll"
+                                                paginatorPosition="bottom" #dt1 dataKey="id" [paginator]="true"
+                                                styleClass="p-datatable-striped"
+                                                [globalFilterFields]="['emailId','userId','statename','CountryName', 'phone','Specialityname','cityname',  'clinicName']"
+                                                scrollDirection="both" styleClass="p-mt-3" [scrollable]="true"
+                                                [rowsPerPageOptions]="[10,15,25,50]" [rows]="15">
+                                                <ng-template pTemplate="caption">
+                                                    <div class="flex globalSearch">
+                                                        <p
+                                                            style="font-weight: bold; font-size: 1.2rem; margin-bottom: 0;">
+                                                            Total
+                                                            Records:{{imagerorderdatalength}} <span
+                                                                class="dislength"></span></p>
+                                                    </div>
+                                                </ng-template>
+                                                <ng-template pTemplate="header">
+
+                                                    <tr>
+                                                        <th style="width:5%;border-top:2px solid #e7ecf1;"
+                                                            pSortableColumn="sno">
+                                                            <!-- <p-sortIcon
+                        field="Sno"></p-sortIcon> -->
+                                                            S.No
+                                                        </th>
+                                                        <th style="width:15%;border-top:2px solid #e7ecf1;"
+                                                            pSortableColumn="name"> <p-sortIcon
+                                                                field="name"></p-sortIcon>order Name</th>
+
+                                                        <th style="width:10%;border-top:2px solid #e7ecf1;"
+                                                            pSortableColumn="DatePerformed"><p-sortIcon
+                                                                field="DatePerformed"></p-sortIcon>Order Date</th>
+
+
+                                                        <th style="width:10%;border-top:2px solid #e7ecf1;"
+                                                            pSortableColumn="DatePerformed"><p-sortIcon
+                                                                field="DatePerformed"></p-sortIcon>Shared_by</th>
+
+
+
+                                                        <th style="width:10%;border-top:2px solid #e7ecf1;"
+                                                            pSortableColumn="Notes"> Action</th>
+
+                                                    </tr>
+                                                </ng-template>
+                                                <ng-template pTemplate="body" let-item let-i="rowIndex">
+                                                    <tr>
+                                                        <td style="width:5%; ">{{i + 1}}</td>
+                                                        <td style="width:15%;">{{item.labOrderName}}</td>
+                                                        <!-- <td style="width:8%;">{{item.invoicenumber}}</td> -->
+                                                        <!-- <td style="width:8%;">{{item.FrequencyName}}</td> -->
+                                                        <td style="width:10%;">{{item.TransactionTime |date:
+                                                            'dd/MM/yyyy'}}</td>
+                                                        <!-- <td style="width:10%;">{{item.duedate |date: 'dd/MM/yyyy'}}</td> -->
+
+                                                        <!-- <td style="width:10%;">{{item.EndDate}}</td> -->
+                                                        <!-- <td style="width:5%;">{{item.RouteName}}</td>
+                <td style="width:10%;">{{item.primaryindication}}</td> -->
+
+                                                        <td style="width:10%;">{{item.provider_name}}</td>
+
+                                                        <td style="width:10%;"> <button class="btn btn-info"
+                                                                (click)="download(item)"><i
+                                                                    class="pi pi-download"></i></button></td>
+                                                    </tr>
+                                                </ng-template>
+
+                                            </p-table>
+                                            </p-tabPanel>
+                                            <p-tabPanel header="Images Result">
+                                                <p-table [value]="imagelabresult" responsiveLayout="scroll"
+                                                paginatorPosition="bottom" #dt1 dataKey="id" [paginator]="true"
+                                                styleClass="p-datatable-striped"
+                                                [globalFilterFields]="['emailId','userId','statename','CountryName', 'phone','Specialityname','cityname',  'clinicName']"
+                                                scrollDirection="both" styleClass="p-mt-3" [scrollable]="true"
+                                                [rowsPerPageOptions]="[7,14,21,28]" [rows]="7">
+                                                <ng-template pTemplate="caption">
+                                                    <div class="flex globalSearch">
+                                                        <p
+                                                            style="font-weight: bold; font-size: 1.2rem; margin-bottom: 0;">
+                                                            Total
+                                                            Records:{{imagelabresultlength}} <span
+                                                                class="dislength"></span></p>
+                                                    </div>
+                                                </ng-template>
+                                                <ng-template pTemplate="header">
+
+                                                    <tr>
+                                                        <th style="width:5%;border-top:2px solid #e7ecf1;"
+                                                            pSortableColumn="sno">
+                                                            <!-- <p-sortIcon
+                                                    field="Sno"></p-sortIcon> -->
+                                                            S.No
+                                                        </th>
+                                                        <th style="width:15%;border-top:2px solid #e7ecf1;"
+                                                            pSortableColumn="name"> <p-sortIcon
+                                                                field="name"></p-sortIcon>Result Name</th>
+
+                                                        <th style="width:10%;border-top:2px solid #e7ecf1;"
+                                                            pSortableColumn="DatePerformed"><p-sortIcon
+                                                                field="DatePerformed"></p-sortIcon>Result Date</th>
+                                                        <th style="width:15%;border-top:2px solid #e7ecf1;"
+                                                            pSortableColumn="name"> <p-sortIcon
+                                                                field="name"></p-sortIcon>Lab Name</th>
+
+
+
+                                                        <th style="width:10%;border-top:2px solid #e7ecf1;"
+                                                            pSortableColumn="DatePerformed"><p-sortIcon
+                                                                field="DatePerformed"></p-sortIcon>Reviewed by</th>
+
+                                                        <th style="width:10%;border-top:2px solid #e7ecf1;"
+                                                            pSortableColumn="DatePerformed"><p-sortIcon
+                                                                field="DatePerformed"></p-sortIcon>intrepretation
+                                                        </th>
+
+                                                        <th style="width:10%;border-top:2px solid #e7ecf1;"
+                                                            pSortableColumn="Notes"> Action</th>
+
+                                                    </tr>
+                                                </ng-template>
+                                                <ng-template pTemplate="body" let-item let-i="rowIndex">
+                                                    <tr>
+                                                        <td style="width:5%; ">{{i + 1}}</td>
+                                                        <td style="width:15%;">{{item.ParentName}}</td>
+                                                        <!-- <td style="width:8%;">{{item.invoicenumber}}</td> -->
+                                                        <!-- <td style="width:8%;">{{item.FrequencyName}}</td> -->
+                                                        <td style="width:10%;">{{item.resultDate |date:
+                                                            'dd/MM/yyyy'}}</td>
+                                                        <!-- <td style="width:10%;">{{item.duedate |date: 'dd/MM/yyyy'}}</td> -->
+
+                                                        <!-- <td style="width:10%;">{{item.EndDate}}</td> 
+                                         <td style="width:5%;">{{item.RouteName}}</td>-->
+                                                        <td style="width:10%;">{{item.lab_section_full_Name}}</td>
+
+                                                        <td style="width:10%;">{{item.Reviewer}}</td>
+
+                                                        <td style="width:10%;">{{item.intrepretation}}</td>
+
+                                                        <td style="width:10%;"> <button class="btn btn-info"
+                                                                (click)="showDialog(item)"><i
+                                                                    class="pi pi-eye"></i></button></td>
+                                                    </tr>
+                                                </ng-template>
+
+                                            </p-table>
+                                            </p-tabPanel>
+
+                                        </p-tabView>
+                                    </p-tabPanel>
+                                    <p-tabPanel header="Systems">
+                                        <p-tabView>
+                                            <p-tabPanel header="System Order">
+                                                <p-table [value]="systemdata" responsiveLayout="scroll"
+                                                paginatorPosition="bottom" #dt1 dataKey="id" [paginator]="true"
+                                                styleClass="p-datatable-striped"
+                                                [globalFilterFields]="['emailId','userId','statename','CountryName', 'phone','Specialityname','cityname',  'clinicName']"
+                                                scrollDirection="both" styleClass="p-mt-3" [scrollable]="true"
+                                                [rowsPerPageOptions]="[10,15,25,50]" [rows]="15">
+                                                <ng-template pTemplate="caption">
+                                                    <div class="flex globalSearch">
+                                                        <p
+                                                            style="font-weight: bold; font-size: 1.2rem; margin-bottom: 0;">
+                                                            Total
+                                                            Records:{{systemdatalength}} <span
+                                                                class="dislength"></span></p>
+                                                    </div>
+                                                </ng-template>
+                                                <ng-template pTemplate="header">
+
+                                                    <tr>
+                                                        <th style="width:5%;border-top:2px solid #e7ecf1;"
+                                                            pSortableColumn="sno">
+                                                            <!-- <p-sortIcon
+                        field="Sno"></p-sortIcon> -->
+                                                            S.No
+                                                        </th>
+                                                        <th style="width:15%;border-top:2px solid #e7ecf1;"
+                                                            pSortableColumn="name"> <p-sortIcon
+                                                                field="name"></p-sortIcon>order Name</th>
+
+                                                        <th style="width:10%;border-top:2px solid #e7ecf1;"
+                                                            pSortableColumn="DatePerformed"><p-sortIcon
+                                                                field="DatePerformed"></p-sortIcon>Order Date</th>
+
+
+                                                        <th style="width:10%;border-top:2px solid #e7ecf1;"
+                                                            pSortableColumn="DatePerformed"><p-sortIcon
+                                                                field="DatePerformed"></p-sortIcon>Shared_by</th>
+
+
+
+                                                        <th style="width:10%;border-top:2px solid #e7ecf1;"
+                                                            pSortableColumn="Notes"> Action</th>
+
+                                                    </tr>
+                                                </ng-template>
+                                                <ng-template pTemplate="body" let-item let-i="rowIndex">
+                                                    <tr>
+                                                        <td style="width:5%; ">{{i + 1}}</td>
+                                                        <td style="width:15%;">{{item.labOrderName}}</td>
+                                                        <!-- <td style="width:8%;">{{item.invoicenumber}}</td> -->
+                                                        <!-- <td style="width:8%;">{{item.FrequencyName}}</td> -->
+                                                        <td style="width:10%;">{{item.TransactionTime |date:
+                                                            'dd/MM/yyyy'}}</td>
+                                                        <!-- <td style="width:10%;">{{item.duedate |date: 'dd/MM/yyyy'}}</td> -->
+
+                                                        <!-- <td style="width:10%;">{{item.EndDate}}</td> -->
+                                                        <!-- <td style="width:5%;">{{item.RouteName}}</td>
+                <td style="width:10%;">{{item.primaryindication}}</td> -->
+
+                                                        <td style="width:10%;">{{item.provider_name}}</td>
+
+                                                        <td style="width:10%;"> <button class="btn btn-info"
+                                                                (click)="download(item)"><i
+                                                                    class="pi pi-download"></i></button></td>
+                                                    </tr>
+                                                </ng-template>
+
+                                            </p-table>
+                                            </p-tabPanel>
+                                            <p-tabPanel header=" Result">
+                                                <p-table [value]="systemdataresult" responsiveLayout="scroll"
+                                                paginatorPosition="bottom" #dt1 dataKey="id" [paginator]="true"
+                                                styleClass="p-datatable-striped"
+                                                [globalFilterFields]="['emailId','userId','statename','CountryName', 'phone','Specialityname','cityname',  'clinicName']"
+                                                scrollDirection="both" styleClass="p-mt-3" [scrollable]="true"
+                                                [rowsPerPageOptions]="[7,14,21,28]" [rows]="7">
+                                                <ng-template pTemplate="caption">
+                                                    <div class="flex globalSearch">
+                                                        <p
+                                                            style="font-weight: bold; font-size: 1.2rem; margin-bottom: 0;">
+                                                            Total
+                                                            Records:{{systemresultdatalength}} <span
+                                                                class="dislength"></span></p>
+                                                    </div>
+                                                </ng-template>
+                                                <ng-template pTemplate="header">
+
+                                                    <tr>
+                                                        <th style="width:5%;border-top:2px solid #e7ecf1;"
+                                                            pSortableColumn="sno">
+                                                            <!-- <p-sortIcon
+                                                    field="Sno"></p-sortIcon> -->
+                                                            S.No
+                                                        </th>
+                                                        <th style="width:15%;border-top:2px solid #e7ecf1;"
+                                                            pSortableColumn="name"> <p-sortIcon
+                                                                field="name"></p-sortIcon>Result Name</th>
+
+                                                        <th style="width:10%;border-top:2px solid #e7ecf1;"
+                                                            pSortableColumn="DatePerformed"><p-sortIcon
+                                                                field="DatePerformed"></p-sortIcon>Result Date</th>
+                                                        <th style="width:15%;border-top:2px solid #e7ecf1;"
+                                                            pSortableColumn="name"> <p-sortIcon
+                                                                field="name"></p-sortIcon>Lab Name</th>
+
+
+
+                                                        <th style="width:10%;border-top:2px solid #e7ecf1;"
+                                                            pSortableColumn="DatePerformed"><p-sortIcon
+                                                                field="DatePerformed"></p-sortIcon>Reviewed by</th>
+
+                                                        <th style="width:10%;border-top:2px solid #e7ecf1;"
+                                                            pSortableColumn="DatePerformed"><p-sortIcon
+                                                                field="DatePerformed"></p-sortIcon>intrepretation
+                                                        </th>
+
+                                                        <th style="width:10%;border-top:2px solid #e7ecf1;"
+                                                            pSortableColumn="Notes"> Action</th>
+
+                                                    </tr>
+                                                </ng-template>
+                                                <ng-template pTemplate="body" let-item let-i="rowIndex">
+                                                    <tr>
+                                                        <td style="width:5%; ">{{i + 1}}</td>
+                                                        <td style="width:15%;">{{item.ParentName}}</td>
+                                                        <!-- <td style="width:8%;">{{item.invoicenumber}}</td> -->
+                                                        <!-- <td style="width:8%;">{{item.FrequencyName}}</td> -->
+                                                        <td style="width:10%;">{{item.resultDate |date:
+                                                            'dd/MM/yyyy'}}</td>
+                                                        <!-- <td style="width:10%;">{{item.duedate |date: 'dd/MM/yyyy'}}</td> -->
+
+                                                        <!-- <td style="width:10%;">{{item.EndDate}}</td> 
+                                         <td style="width:5%;">{{item.RouteName}}</td>-->
+                                                        <td style="width:10%;">{{item.lab_section_full_Name}}</td>
+
+                                                        <td style="width:10%;">{{item.Reviewer}}</td>
+
+                                                        <td style="width:10%;">{{item.intrepretation}}</td>
+
+                                                        <td style="width:10%;"> <button class="btn btn-info"
+                                                                (click)="showDialog(item)"><i
+                                                                    class="pi pi-eye"></i></button></td>
+                                                    </tr>
+                                                </ng-template>
+
+                                            </p-table>
+                                            </p-tabPanel>
+
+                                        </p-tabView>
+                                    </p-tabPanel>
+                                </p-tabView>
+
+
+
+               
+
+
+                        </div>
+                    </div>
+                    <!--  -->
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class=" flex justify-content-center">
+    <!-- <p-button (click)="showDialog()" icon="pi pi-external-link" label="Show"></p-button> -->
+    <p-dialog header="Header" [(visible)]="display" [modal]="true" [style]="{ width: '60rem' }"
+        [breakpoints]="{ '1199px': '75vw', '575px': '90vw' }">
+        <ng-template pTemplate="header">
+            <div class="inline-flex align-items-center justify-content-center gap-2">
+                <!-- <p-avatar image="https://primefaces.org/cdn/primeng/images/avatar/amyelsner.png" shape="circle" /> -->
+                <i class=" fa fa-solid fa-flask"></i> &nbsp;
+                <span class="font-bold white-space-nowrap">Lab Result</span>
+                <button class="btn btn-info" style="position: absolute;
+                right: 4rem;
+                top: 1rem;" (click)="saveDiv(modeldata)">download</button>
+            </div>
+        </ng-template>
+
+
+
+        <!-- <div class="card "id="rah"> -->
+
+        <div class=""  >
+           
+            <div class="row col-lg-12">
+                <label class="col-lg-2">Text:</label>
+                <label class="col-lg-8"><b>lever</b></label>
+            </div>
+            <p-table [value]="modeldata" [tableStyle]="{ 'min-width': '50rem' }" style="margin-top: 3rem;"
+                [scrollable]="true">
+                <ng-template pTemplate="header">
+                    <tr>
+                        <th>
+                            S.no
+                        </th>
+                        <th> Name</th>
+                        <th>Result</th>
+                        <th>Reference</th>
+                        <th>Interpretation</th>
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="body" let-product let-i="rowIndex">
+                    <tr>
+                        <td>{{i+1}}</td>
+                        <td>{{ product.labOrderName }}</td>
+                        <td>{{ product.Results }}</td>
+                        <td>{{ product.min }} - {{ product.max }}</td>
+                        <td>{{ product.intrepretation }}</td>
+                    </tr>
+                </ng-template>
+            </p-table>
+        </div>
+        <!-- </div> -->
+
+
+
+        <ng-template pTemplate="footer">
+            <p-button icon="pi pi-check" (click)="display = false" label="Ok"></p-button>
+        </ng-template>
+    </p-dialog>
+</div>
+
+
+<div id="maindiv" style="display: none;"></div>

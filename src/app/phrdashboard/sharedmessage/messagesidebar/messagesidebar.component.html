@@ -1,0 +1,54 @@
+
+    <nav id="sidebar">
+        <h2 class="mainsection">Message Center</h2>
+   <ul class="list-unstyled CTAs">
+     
+       <li>
+           <a (click)="showBasicDialog3()" style="cursor: pointer;" class="article">Send a Message</a>
+       </li>
+
+       <p-dialog header="Reply" [(visible)]="displayBasic3">
+        <app-compousemessage  (CancleDialogtoenit)="cancelDialog2()" ></app-compousemessage>
+      </p-dialog>
+
+      
+
+
+   </ul>
+
+  
+
+   <ul class="list-unstyled components">
+    <li class="active" >
+        <a routerLink="../massage"  data-toggle="collapse" style="cursor: pointer;" aria-expanded="false" > <i class="fa fa-envelope-o" aria-hidden="true"></i> &nbsp;Inbox</a>
+   
+    </li>
+    <li>  
+        <a routerLink="../starred" data-toggle="collapse" aria-expanded="false" > <i class="fa fa-star-o" aria-hidden="true"></i> &nbsp;Starred</a>
+    </li>
+    <li>
+        <a routerLink="../drafts" data-toggle="collapse" aria-expanded="false" > <i class="fa fa-file-text-o" aria-hidden="true"></i> &nbsp;Drafts</a>
+   
+    </li>
+
+    <li>
+        <a routerLink="../trash" data-toggle="collapse" aria-expanded="false" > <i class="fa fa-trash-o" aria-hidden="true"></i> &nbsp;Trash</a>
+    </li>
+
+      
+       <li>
+        <a routerLink="../appointment" data-toggle="collapse" aria-expanded="false" > <i class="fa fa-calendar" aria-hidden="true"></i> &nbsp;Appointment</a>
+        </li>
+
+       <li>
+           <a routerLink="../reminder" data-toggle="collapse" aria-expanded="false" > <i class="fa fa-bell-o" aria-hidden="true"></i> &nbsp;Reminder</a>
+       </li>
+
+        <li>
+            <a routerLink="../sharedocument" data-toggle="collapse" aria-expanded="false" > <i class="fa fa-share-square-o" aria-hidden="true"></i> &nbsp;Share Document</a>
+            </li>
+
+     
+   </ul>
+
+</nav>

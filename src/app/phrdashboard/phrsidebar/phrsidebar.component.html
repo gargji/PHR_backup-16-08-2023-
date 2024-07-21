@@ -1,0 +1,21 @@
+
+
+<div class="sidebar">
+	<div class="sidebarhead" style="margin-top: .3rem;display: none;">
+		<h1>{{usernames}}</h1>
+	</div>
+	
+		<div class="search">
+			<input type="text" class="searchTerm" placeholder="Search..." [(ngModel)]="searchTerm" (keyup)="onInputChange()">
+		   <button type="submit" class="searchButton">
+			 <i class="fa fa-search"></i>
+		  </button>
+		</div>
+	 
+		<div class="sidebarsection">
+			<h1>Find Care</h1>
+		</div>
+		<p-panelMenu [model]="items">
+		</p-panelMenu>
+
+  </div>

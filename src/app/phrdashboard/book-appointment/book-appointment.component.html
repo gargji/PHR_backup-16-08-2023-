@@ -1,0 +1,925 @@
+<p-toast position="top-right"></p-toast>
+<p-confirmDialog [style]="{width: '40vw'}"></p-confirmDialog>
+
+<div class="container-fluid  ">
+
+
+    <div class="row">
+        <div class="col-lg-12 content">
+            <div class="row " style="padding-bottom: 3rem;">
+
+
+                <div class="col-lg-9
+                 ">
+                    <div class="row">
+                        <div class="col-md-10">
+                            <div class="appointmentschudule">
+                                <h1>Schedule an Appointment ({{usernames}})</h1>
+                            </div>
+                        </div>
+                        <div class="col-md-2 startbtn">
+                            <button class="btn btn-primary " (click)="startover()">Start Over</button>
+                        </div>
+                    </div>
+
+
+                    <div class="container1">
+                        <div class="uldiv">
+                            <ul class=" appointmentNav nav nav-tabs nav-fill wizard d-flex" id="myTab" role="tablist" #my>
+                                <li class="nav-item active" style="text-align: left;" #reason >
+                                   
+                                    <button href="#ReasonForVisit" class="nav-link active navbtn"  id="ReasonForVisit-tab" data-toggle="tab" role="tab" aria-controls="home" aria-selected="true">
+                                        <i *ngIf="inputreasionofvisitValue" class="pi pi-pencil edittab"  (click)="edit()"></i>
+                                        <span class="step">
+                                            <img *ngIf="empty=='0'" src="assets/location (1).png" height="40px"
+                                                width="40px" alt="Avatar">
+                                            <img *ngIf="empty!='0'" src="assets/accept.png" height="40px"
+                                                width="40px" alt="Avatar">
+                                        </span>
+                                       
+                                        <div class="">
+                                            <p style="font-size: 16px;" class="tabheadhead">Reason For Visit </p>
+                                            <p style="margin-bottom: auto;">{{inputreasionofvisitValue}}</p>
+                                        </div>
+
+                                    </button>
+                                </li>
+                                <li #location class="nav-item" (click)="checkmsg()" >
+                                   
+                                    <button [disabled]="Reasion_Of_visit == ''? true: false" href="#location" class="nav-link navbtn"  id="location-tab" data-toggle="tab" role="tab" aria-controls="profile" aria-selected="false">
+                                        <i  *ngIf="inputhospitalnameValue" class="pi pi-pencil edittab" (click)="edit1()" ></i>
+                                        <span class="step">
+                                            <img *ngIf="empty1=='0'" src="assets/map.png" height="40px"
+                                                width="40px" alt="Avatar">
+                                            <img *ngIf="empty1!='0'" src="assets/accept.png" height="40px"
+                                                width="40px" alt="Avatar">
+                                        </span>
+                                        <div class="tablocationdata">
+                                            <p class="locationsectionone" style="font-size: 16px;">Location</p>
+                                            <p style=" margin-top: -10px;margin-bottom: auto;">
+                                                {{inputhospitalnameValue}}</p>
+
+                                        </div>
+                                    </button>
+                                </li>
+                                <li #providers class="nav-item">
+                                    <button href="#Provider" [disabled]="newhospitalid == ''? true: false" (click)="providerselecter()" class="nav-link navbtn"  id="Provider-tab" data-toggle="tab" role="tab" aria-controls="contact" aria-selected="false">
+                                        <i *ngIf="inputprovidernameValue" class="pi pi-pencil edittab" (click)="edit2()"  ></i>
+                                        <span class="step">
+                                            <img *ngIf="provider=='0'" src="assets/user.png" height="40px"
+                                                width="40px" alt="Avatar">
+                                            <img *ngIf="provider!='0'" src="assets/accept.png" height="40px"
+                                                width="40px" alt="Avatar">
+                                        </span>
+                                        <div class="tablocationdata">
+                                            <p class="locationsectionone" style="font-size: 16px;">Providers</p>
+                                            <p style=" margin-top: -10px; margin-bottom: auto;">
+                                                {{inputprovidernameValue}}</p>
+
+                                        </div>
+
+
+                                    </button>
+                                </li>
+
+
+                                <!-- trial -->
+
+
+                                <li #Times class="nav-item">
+                                    
+                                    <button  href="#Time" [disabled]="ProviderID == ''? true: false" class="nav-link navbtn"  id="Time-tab" data-toggle="tab" role="tab" aria-controls="contact" aria-selected="false">
+                                       <i *ngIf="Slot_time" class="pi pi-pencil edittab"  ></i>
+                                        <span class="step">
+
+                                            <img *ngIf="timeslotvarifie=='0'" src="assets/clock.png"
+                                                height="40px" width="40px" alt="Avatar">
+                                            <img *ngIf="timeslotvarifie!='0'" src="assets/accept.png"
+                                                height="40px" width="40px" alt="Avatar">
+                                        </span>
+                                        <div class=" ">
+                                            <p class=" " style="font-size: 16px;">Time</p>
+                                            <p style=" margin-top: -10px;margin-bottom: auto; " class="">
+                                                {{Slot_time}} {{Slot_days}} {{Slot_date | date :'d/M/y'}}</p>
+
+                                        </div>
+
+
+                                    </button>
+                                </li>
+                                <!-- <li #Times class="nav-item">
+                                    <button href="#Time" [disabled]="ProviderID == ''? true: false" class="nav-link" style="height: 15vh; width: max-content;    " id="Time-tab" data-toggle="tab" role="tab" aria-controls="contact" aria-selected="false">
+                                    <span class="step">
+
+
+                                        <img *ngIf="timeslotvarifie=='0'" src="assets/clock.png" height="40px"
+                                            width="40px" alt="Avatar">
+                                        <img *ngIf="timeslotvarifie!='0'" src="assets/accept.png" height="40px"
+                                            width="40px" alt="Avatar">
+
+
+                                        </span>
+                                        <div class="tablocationdata">
+                                        <p class="locationsectionone" style="font-size: 16px;">Time</p>
+
+                                  
+                                 
+                                        <p class="" style=" margin-top: -10px; text-align: left;">{{Slot_time}} &nbsp; {{Slot_days}} &nbsp; {{Slot_date}}</p>
+                                
+                                    </div>    </button>
+                                </li> -->
+                                <li #VerifyAndSchedule class="nav-item">
+                                    <button href="#VerifyAndSchedule" [disabled]="slotid == ''? true: false" class="nav-link navbtn"  id="VerifyAndSchedule-tab" data-toggle="tab" role="tab" aria-controls="contact" aria-selected="false">
+                                        <span class="step">
+
+                                            <img src="assets/calendar1.png" height="40px" width="40px"
+                                                alt="Avatar">
+                                            <p class="locationsection"
+                                                style="font-size: 16px; margin-bottom: auto;">Verify
+                                                And
+                                                Schedule</p>
+                                        </span>
+                                    </button>
+                                </li>
+
+                            </ul>
+                        </div>
+                        <div class="container-fluid">
+                            <div class="tab-content" id="myTabContent">
+                                <div class="tab-pane fade show active ml-3" id="ReasonForVisit" role="tabpanel" aria-labelledby="ReasonForVisit-tab">
+                                    <h3 class="datascheduling">What Kind Of Appointment Are You Scheduling?</h3>
+                                    <div class="appointmentwork">
+                                        <div class="row">
+                                            <div class="col-lg-4">
+                                                <div class="w3-card-4">
+
+                                                    <div class="blockadd" style="cursor: pointer;" (click)="addreasonofvisitDialog()">
+
+
+                                                        <i class="fa fa-plus" aria-hidden="true"></i> <span> Add Reason
+                                                            Of Visit</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-4" *ngFor="let item of ReasonOfVisitdata">
+                                                <div class="w3-card-4 cardfixheight" style="cursor: pointer;">
+                                                    <div class="w3-container BlockMain">
+                                                        <div class="row1" style="padding-top: 10px;">
+                                                            <div class="blockdetail"  (click)="reasonofvisit($event,item)">
+                                                                <p title="{{item.chief_complan_name}}" style="font-size: 20px; color:rgb(23, 15, 146); font-weight: bold;  overflow: hidden;text-overflow: ellipsis; white-space: nowrap;">
+                                                                    {{item.chief_complan_name}}
+
+
+                                                                </p>
+                                                                <p><b> Time :</b> &nbsp;{{item.transaction_time}}
+                                                                </p>
+                                                              
+                                                            </div>
+                                                        </div>
+
+                                                    </div>  
+                                                    <button class="delbtn boxfooter" (click)="delete_patientprobl(item.id)"><i
+                                                        class="fa fa-trash-o" aria-hidden="true"></i>Remove</button>
+                                                </div>
+                                            </div>
+                                            <!-- <p-dialog header="Add Reason Of Visit" [(visible)]="addreasonofvisitModal" [modal]="true" (onHide)="ReasonForVisitdiolog($event)" [style]="{width: '50vw'}" [draggable]="false" [resizable]="false">
+
+                                                <form [formGroup]="reasonofvisitinsert" prependId="false" style="margin-top: 10px;">
+                                                    <div class="mb-3 row">
+                                                        <label style=" color: black; font-weight: bold;" for="staticEmail" class="col-sm-2 col-form-label">Chief
+                                                            Complaint:</label>
+                                                        <div class="col-sm-8">
+                                          
+                                                            <p-autoComplete [ngClass]="showErrorBorderOnControls(reasonofvisitinsert.controls.reasonofvisit_insert)" formControlName="reasonofvisit_insert" [forceSelection]="true" [suggestions]="currentreasonofvisit" (completeMethod)="filterreasonofvisit($event)"
+                                                                field="name" appendTo="body" [style]="{'width':'100%'}" [inputStyle]="{'width':'100%'}"></p-autoComplete>
+
+                                                        </div>
+
+                                                        <div class="col-sm-2" style="padding-top: 5px;">
+
+                                                            <input type="checkbox" id="FavoriteField" name="team" formControlName="inputvalue_data" (click)="addmyfevrate($event)" value="providertime">
+                                                            <label for="FavoriteField"> &nbsp;Add Favorite</label>
+
+                                                        </div>
+                                                    </div>
+                                                </form>
+                                                <ng-template pTemplate="footer">
+                                                    <p-button icon="pi pi-check" (click)="submit_reasonofvisit()" label="Submit" styleClass="p-button-text"></p-button>
+                                                </ng-template>
+                                            </p-dialog> -->
+
+
+                                            <!-- new form -->
+                                            <p-dialog header="Add Reason Of Visit" [(visible)]="addreasonofvisitModal" [modal]="true"
+                                            [responsive]="true" id="trial"  (onHide)="ReasonForVisitdiolog($event)">
+                                            <!-- <div class="container"></div> -->
+                                            <form [formGroup]="reasonofvisitinsert" prependId="false" style="margin-top: 10px;">
+                                                <div class="form-container">
+                                                    <div class="form-group ">
+                                                        <span class="p-float-label">
+                                                            <!-- <input type="text" id="float-input" pInputText/> -->
+                                                            <p-autoComplete [ngClass]="showErrorBorderOnControls(reasonofvisitinsert.controls.reasonofvisit_insert)" formControlName="reasonofvisit_insert" [forceSelection]="true" [suggestions]="currentreasonofvisit" (completeMethod)="filterreasonofvisit($event)"
+                                                            field="name" appendTo="body" [style]="{'width':'100%'}"  [inputStyle]="{'width':'100%'}"></p-autoComplete>
+                                                            <label for="float-input">Chief
+                                                                Complaint</label>
+                                                        </span>
+                
+                
+                
+                                                    </div>
+                                                    <div class="form-group mt-5">
+                
+                                                        <!-- <span class="p-float-label"> -->
+                                                             <!-- <input type="checkbox" id="FavoriteField" name="team" formControlName="inputvalue_data" (click)="addmyfevrate($event)" value="providertime">
+                                                            <label for="FavoriteField"> &nbsp;Add Favorite</label> -->
+
+                                                            <input type="checkbox" id="FavoriteField" name="team" formControlName="inputvalue_data" (click)="addmyfevrate($event)" value="providertime" >
+                                                             <label  for="FavoriteField"  class="favlabel">Add Favorite</label>
+
+                                                        <!-- </span> -->
+                                                    </div>
+                                                    <!-- <div class="form-group mt-5">
+                            <p-dropdown [options]="" [ngClass]="showErrorBorderOnControls(medicationinsert.controls.Patient_instration)" [style]="{'width':'100%'}" formControlName="Patient_instration" placeholder="Select Status" optionLabel="" appendTo="body" [showClear]="true" ></p-dropdown>
+                          </div> -->
+                                                    <!-- <div class="form-group mt-5">
+                                                        <span class="p-float-label">
+                                                            <textarea id="float-input" rows="1" cols="10"
+                                                                formControlName="healthissue_note" pInputTextarea
+                                                                [style]="{'width':'100%'}"></textarea>
+                                                            <label for="float-input">Note</label>
+                                                        </span>
+                                                    </div> -->
+                                                </div>
+                                                <div class="button-container">
+                                                    <!-- <button pButton type="button" label="Cancel" class="p-button-secondary" ></button> -->
+                                                    <button pButton type="button" label="Submit" (click)="submit_reasonofvisit()"
+                                                        class="p-button-success"></button>
+                                                </div>
+                                            </form>
+                                        </p-dialog>
+
+                                             <!-- new form end -->
+                                        </div>
+
+                                    </div>
+                                </div>
+                                <!-- <div *ngIf="isshow"> -->
+                                <div class="tab-pane fade" id="location" role="tabpanel" aria-labelledby="location-tab">
+                                    <div class="appointmentwork">
+                                        <div class="row">
+                                            <div class="col-lg-4">
+                                                <div class="w3-card-4">
+
+                                                    <div class="blockaddlocation" style="cursor:pointer;" (click)="appointmenthospitalloactionDialog()">
+
+                                                        <i class="fa fa-plus" aria-hidden="true"></i> <span> Add
+                                                            Hospital Location</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-4" *ngFor="let item of HospitalLocationdata">
+                                                <div class="w3-card-4 locationfixheight" style="cursor:pointer;" >
+                                                    <div class="w3-container BlockMain" (click)="hospital_location($event,item.hospital_name,item)">
+                                                        <div class="row1" style="padding-top: 10px;">
+                                                            <div class="blockdetail">
+                                                                <p title="{{item.hospital_name}}" style="font-size: 20px; color:rgb(23, 15, 146); font-weight: bold;">
+                                                                    {{item.hospital_name}} </p>
+                                                                <p title={{item.address}} class="cardp"><b>Address :</b>{{item.address}}</p>
+                                                            </div>
+                                                        </div>
+                                                        
+                                                    </div><button class="delbtn boxfooter" (click)="delete_hospital(item.id)"><i
+                                                        class="fa fa-trash-o" aria-hidden="true"></i>Remove</button>
+
+                                                    <!-- <button class="w3-button w3-block boxfooter" (click)="delete_patientprobl(item.id)"><i
+                                                    class="fa fa-trash-o" aria-hidden="true"></i>Remove</button> -->
+                                                </div>
+                                            </div>
+                                            <!-- <p-dialog header="Add Hospital Location" [(visible)]="hospitallocationModal" [modal]="true" [showEmptyMessage]="true" (onHide)="ReasonForVisitdiolog($event)" [style]="{width: '50vw'}" [draggable]="false" [resizable]="false">
+
+                                                <form [formGroup]="Hospitallocationinsert" prependId="false" style="margin-top: 10px;">
+                                                    <div class="mb-3 row">
+                                                        <label style=" color: black; font-weight: bold;" for="staticEmail" class="col-sm-3 col-form-label">Hospital
+                                                            Name:</label>
+                                                        <div class="col-sm-7">
+                                                            <p-dropdown appendTo="body" [ngClass]="showErrorBorderOnControls(Hospitallocationinsert.controls.Hospital_name_insert)" [options]="Hospitalclinicname" [style]="{'width':'100%'}" formControlName="Hospital_name_insert" placeholder="Select Hospital" optionLabel="clinicName"
+                                                                [showClear]="true" optionvalue="guid" (onChange)="location_data($event)"></p-dropdown>
+                                                
+
+                                                        </div>
+
+                                                        <div class="col-sm-2" style="padding-top: 5px;">
+
+                                                            <input type="checkbox" id="FavoriteField" name="team" formControlName="inputhospitalvalue_data" (click)="addhospitalnamefevrate($event)" value="providertime">
+                                                            <label for="FavoriteField"> &nbsp;Add Favorite</label>
+
+                                                        </div>
+
+
+                                                    </div>
+
+                                                    <div class="mb-3 row">
+                                                        <label style="color: black; font-weight: bold;" for="staticEmail" class="col-sm-3 col-form-label">Hospital
+                                                            Address:</label>
+                                                        <div class="col-sm-9">
+                                                            <h2 style="color: black;" formControlName="location_addressname">{{adressvalue}}
+                                                            </h2>
+                                                        </div>
+                                                    </div>
+
+
+                                                </form>
+                                                <ng-template pTemplate="footer">
+                                                    <p-button icon="pi pi-check" (click)="submit_phrhospitaldata()" label="Submit" styleClass="p-button-text"></p-button>
+                                                </ng-template>
+                                            </p-dialog> -->
+
+
+                                                <!-- new form -->
+                                                <p-dialog header="Add Hospital Location" [(visible)]="hospitallocationModal" [modal]="true"
+                                                [responsive]="true" id="trial"   (onHide)="HospitalLocationDiolog($event)">
+                                                <!-- <div class="container"></div> -->
+                                                <form [formGroup]="Hospitallocationinsert" prependId="false" style="margin-top: 10px;">
+                                                    <div class="form-container">
+                                                        <div class="form-group ">
+                                                            <!-- <span class="p-float-label"> -->
+                                                                <!-- <input type="text" id="float-input" pInputText/> -->
+                                                                <!-- <p-autoComplete [ngClass]="showErrorBorderOnControls(reasonofvisitinsert.controls.reasonofvisit_insert)" formControlName="reasonofvisit_insert" [forceSelection]="true" [suggestions]="currentreasonofvisit" (completeMethod)="filterreasonofvisit($event)"
+                                                                field="name" appendTo="body" [style]="{'width':'100%'}" [inputStyle]="{'width':'100%'}"></p-autoComplete>
+                                                                <label for="float-input">Chief
+                                                                    Complaint</label>
+                                                            </span> -->
+
+                                                            <p-dropdown appendTo="body" [ngClass]="showErrorBorderOnControls(Hospitallocationinsert.controls.Hospital_name_insert)" [options]="Hospitalclinicname" [style]="{'width':'100%'}" formControlName="Hospital_name_insert" placeholder="Select Hospital" optionLabel="clinicName"
+                                                            [showClear]="true" optionvalue="guid" (onChange)="location_data($event)"></p-dropdown>
+                    
+                    
+                    
+                                                        </div>
+                                                        <div class="form-group mt-5 ">
+                                                            <!-- <span class="p-float-label"> -->
+<!--                     
+                                                                <label style="color: black; font-weight: bold;" for="staticEmail" class="col-sm-4 col-form-label">Hospital
+                                                                    Address:</label>
+                                                                <div class="col-sm-8">
+                                                                    <h2 style="color: black;" formControlName="location_addressname">{{adressvalue}}
+                                                                    </h2>
+                                                                </div> -->
+                                                            <!-- </span> -->
+                    
+                                                            <!-- <div class="col-md-6 "> -->
+                                                                <span class="p-float-label">
+                                        
+                                                                    <input pInputText type="text"  [style]="{'width':'100%'}" formControlName="location_addressname" id="disabled-input" readonly  value={{adressvalue}}/>
+                                                                    <label for="float-input">Hospital
+                                                                        Address</label>
+                                                                </span>
+                                                            <!-- </div> -->
+                    
+                                                        </div>
+                                                        <div class="form-group mt-5">
+                    
+                                                            <!-- <span class="p-float-label"> -->
+                                                                 <!-- <input type="checkbox" id="FavoriteField" name="team" formControlName="inputvalue_data" (click)="addmyfevrate($event)" value="providertime">
+                                                                <label for="FavoriteField"> &nbsp;Add Favorite</label> -->
+    
+                                                                <input type="checkbox" id="FavoriteField" name="team" formControlName="inputhospitalvalue_data" (click)="addhospitalnamefevrate($event)" value="providertime">
+                                                                 <label  for="FavoriteField" class="favlabel">Add Favorite</label>
+    
+                                                            <!-- </span> -->
+                                                        </div>
+                                                        <!-- <div class="form-group mt-5">
+                                <p-dropdown [options]="" [ngClass]="showErrorBorderOnControls(medicationinsert.controls.Patient_instration)" [style]="{'width':'100%'}" formControlName="Patient_instration" placeholder="Select Status" optionLabel="" appendTo="body" [showClear]="true" ></p-dropdown>
+                              </div> -->
+                                                        <!-- <div class="form-group mt-5">
+                                                            <span class="p-float-label">
+                                                                <textarea id="float-input" rows="1" cols="10"
+                                                                    formControlName="healthissue_note" pInputTextarea
+                                                                    [style]="{'width':'100%'}"></textarea>
+                                                                <label for="float-input">Note</label>
+                                                            </span>
+                                                        </div> -->
+                                                    </div>
+                                                    <div class="button-container">
+                                                        <!-- <button pButton type="button" label="Cancel" class="p-button-secondary" ></button> -->
+                                                        <button pButton type="button" label="Submit" (click)="submit_phrhospitaldata()"
+                                                            class="p-button-success"></button>
+                                                    </div>
+                                                </form>
+                                            </p-dialog>
+    
+                                                 <!-- new form end -->
+
+                                        </div>
+
+                                    </div>
+                                </div>
+                                <!-- </div> -->
+                                <div class="tab-pane fade" id="Provider" role="tabpanel" aria-labelledby="Provider-tab">
+                                    <div class="appointmentwork">
+                                        <div class="row">
+                                            <div class="col-lg-4">
+                                                <div class="w3-card-4">
+
+                                                    <div class="blockaddprovider" style="cursor: pointer;" (click)="ProviderdataDialog()">
+
+                                                        <i class="fa fa-plus" aria-hidden="true"></i> <span> Add
+                                                            Provider Name </span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-4" *ngFor="let item of providerdata">
+                                                <div class="w3-card-4 providerfixheight" style="cursor:pointer;" >
+                                                    <div class="w3-container BlockMain" (click)="providernamesub($event,item.Provider_name,item)">
+                                                        <div class="row1" style="padding-top: 10px;">
+                                                            <div class="blockdetail">
+                                                                <p class="cardp" title="{{item.Provider_name}}" style="font-size: 20px; color:rgb(23, 15, 146); font-weight: bold;">
+                                                                    <b style="color: black;">Provider <i class=" fa fa-regular fa-stethoscope"></i>:</b> &nbsp;{{item.Provider_name}}
+                                                                </p>
+                                                                <p title="{{item.experience?.replaceAll('<p>', '').replaceAll('</p>', '')}}" class="cardp"><b>Experience :</b> <span [innerHTML]="item.experience?.replaceAll('<p>', '<span>').replaceAll('</p>', '</span>')"></span>
+                                                                </p>
+                                                                <p><b>Qualification :</b><span [innerHTML]="item.qualification?.replaceAll('<p>', '<span>').replaceAll('</p>', '</span>')"></span>
+                                                                </p>
+                                                                <p title="{{(item.Profile?.replaceAll('<p>', '').replaceAll('</p>', ''))}}"  class="cardp"><b>Profile :</b><span [innerHTML]="item.Profile?.replaceAll('<p>', '<span>').replaceAll('</p>', '</span>')"></span>
+                                                                </p>
+                                                                <!-- <p><b>Gender :</b> <span [innerHTML]="item.gender.replaceAll('<p>', '<span>').replaceAll('</p>', '</span>')"></span> -->
+                                                                <!-- </p> -->
+                                                            </div>
+                                                        </div>
+
+                                                    </div>
+                                                    <button class="delbtn boxfooter" (click)="delete_provider(item.id)"><i
+                                                        class="fa fa-trash-o" aria-hidden="true"></i>Remove</button>
+                                                </div>
+                                            </div>
+                                            <!-- <p-dialog header="Add Provider Name" [(visible)]="ProviderdataModal" [modal]="true" (onHide)="Providerdatadiolog($event)" [style]="{width: '50vw',height:'30vh'  }" [draggable]="false" [resizable]="false">
+
+                                                <form [formGroup]="providerdatainsert" prependId="false" style="margin-top: 10px;">
+                                                    <div class="mb-3 row">
+                                                        <label style=" color: black; font-weight: bold;" for="staticEmail" class="col-sm-3 col-form-label">Provider
+                                                            Name :</label>
+                                                        <div class="col-sm-7">
+                                                            <p-dropdown appendTo="body" [ngClass]="showErrorBorderOnControls(providerdatainsert.controls.provider_name_insert)" [options]="providernamedata" [style]="{'width':'100%'}" formControlName="provider_name_insert" (onChange)="provider_data($event)" placeholder="Select Provider Name"
+                                                                optionLabel="firstname" [showClear]="true"></p-dropdown>
+                                                        </div>
+
+                                                        <div class="col-sm-2" style="padding-top: 5px;">
+
+                                                            <input type="checkbox" id="FavoriteField" name="team" formControlName="inputprovidervalue_data" (click)="addproviderfevrate($event)" value="providertime">
+                                                            <label for="FavoriteField"> &nbsp;Add Favorite</label>
+
+                                                        </div>
+
+
+                                                    </div>
+                                                </form>
+                                                <ng-template pTemplate="footer">
+                                                    <p-button icon="pi pi-check" (click)="submit_provider()" label="Submit" styleClass="p-button-text"></p-button>
+                                                </ng-template>
+                                            </p-dialog> -->
+
+                                            <!-- new form start -->
+                                            <p-dialog header="Add Provider Name" [(visible)]="ProviderdataModal" [modal]="true"
+                                            [responsive]="true" id="trial"  (onHide)="Providerdatadiolog($event)">
+                                            <!-- <div class="container"></div> -->
+                                            <form [formGroup]="providerdatainsert" prependId="false" style="margin-top: 10px;">
+                                                <div class="form-container">
+                                                    <div class="form-group ">
+                                                        <p-dropdown appendTo="body" [ngClass]="showErrorBorderOnControls(providerdatainsert.controls.provider_name_insert)" [options]="providernamedata" [style]="{'width':'100%'}" formControlName="provider_name_insert" (onChange)="provider_data($event)" placeholder="Select Provider Name"
+                                                        optionLabel="firstname" [showClear]="true"></p-dropdown>
+                
+                
+                
+                                                    </div>
+                                                    <div class="form-group mt-5">
+                
+                                                        <!-- <span class="p-float-label"> -->
+                                                             <!-- <input type="checkbox" id="FavoriteField" name="team" formControlName="inputvalue_data" (click)="addmyfevrate($event)" value="providertime">
+                                                            <label for="FavoriteField"> &nbsp;Add Favorite</label> -->
+
+                                                            <input type="checkbox" id="FavoriteField" name="team" formControlName="inputprovidervalue_data" (click)="addproviderfevrate($event)" value="providertime">
+                                                             <label  for="FavoriteField" class="favlabel">Add Favorite</label>
+
+                                                        <!-- </span> -->
+                                                    </div>
+                                                    <!-- <div class="form-group mt-5">
+                            <p-dropdown [options]="" [ngClass]="showErrorBorderOnControls(medicationinsert.controls.Patient_instration)" [style]="{'width':'100%'}" formControlName="Patient_instration" placeholder="Select Status" optionLabel="" appendTo="body" [showClear]="true" ></p-dropdown>
+                          </div> -->
+                                                    <!-- <div class="form-group mt-5">
+                                                        <span class="p-float-label">
+                                                            <textarea id="float-input" rows="1" cols="10"
+                                                                formControlName="healthissue_note" pInputTextarea
+                                                                [style]="{'width':'100%'}"></textarea>
+                                                            <label for="float-input">Note</label>
+                                                        </span>
+                                                    </div> -->
+                                                </div>
+                                                <div class="button-container">
+                                                    <!-- <button pButton type="button" label="Cancel" class="p-button-secondary" ></button> -->
+                                                    <button pButton type="button" label="Submit" (click)="submit_provider()"
+                                                        class="p-button-success"></button>
+                                                </div>
+                                            </form>
+                                        </p-dialog>
+
+                                               <!-- new form end -->
+
+                                        </div>
+
+                                    </div>
+                                </div>
+                                <div class="tab-pane fade ml-3" id="Time" role="tabpanel" aria-labelledby="Time-tab">
+
+                                    <!-- <div style="float: right; display: inline;">
+                                        <span>Appoinment type</span>
+                                        <button  [ngStyle]="myStyles"  class="btn m-1 rounded"><i class="pi pi-users"></i></button>
+                                        <button  [ngStyle]="myStyles1"  class="btn m-1" (click)="chnageappoinmentmode()"><i class="pi pi-phone"></i></button>
+                                        <button [ngStyle]="myStyles2" class="btn m-1" (click)="chnageappoinmentmode()"><i class="pi pi-video"></i></button>
+                                    </div> -->
+
+
+                                    <div class="appointment-buttons " style="float: right; display: inline;">
+                                        <!-- <span>Appoinment type</span> -->
+                                        <button *ngFor="let item of Appoinemtdata" class="btn rounded m-1" 
+                                          [ngClass]="{'active': appointmentMode === item.id}"
+                                          (click)="setAppointmentMode(item)"
+                                        >
+                                        <i *ngIf="item.id==1" class="pi pi-users"></i>
+                                        <i *ngIf="item.id==2" class="pi pi-video"></i>
+                                        <i *ngIf="item.id==3" class="pi pi-phone"></i>
+                                        <i *ngIf="item.id==4" class="pi pi-comments"></i>
+                                        </button>
+                                        <!-- <button class="btn m-1 rounded"
+                                          [ngClass]="{'active': appointmentMode === 'tele'}"
+                                          (click)="setAppointmentMode('tele')"
+                                        >
+                                        <i class="pi pi-phone"></i>
+                                        </button>
+                                        <button class="btn rounded m-1"
+                                          [ngClass]="{'active': appointmentMode === 'video'}"
+                                          (click)="setAppointmentMode('video')"
+                                        >
+                                        <i class="pi pi-video"></i>
+                                        </button> -->
+                                      </div>
+                                    <!-- esko dekhna h -->
+                                    <div class="appointmentwork">
+                                        <div>
+                                        <h1>What Time Works For You?</h1>
+                                    </div>
+                                    
+                                    </div>
+                                 <div class="container">
+                                   
+                                    <div class="row" style="padding-top: 20px;padding-left: 10px;width: 100%; ">
+
+                                        <!-- for new calender add this close -->
+                                        <!-- <div class="col-lg-4">
+                                            <p style="margin-bottom: 10px;">Start Search On:</p>
+                                            <div class="field col-12 md:col-4 mb-4">
+                                                <p-calendar [(ngModel)]="date3" [showIcon]="true" inputId="icon" (onSelect)="calendr()" appendTo="body"></p-calendar>
+                                            </div>
+                                         
+
+
+                                        </div> -->
+                                        <div class=" ">
+                                            <!-- <div class="col-lg-2"></div> -->
+                                            <!-- <div class="col-lg-10  "> -->
+                                            <div class="container mainappointmentschudule">
+                                                <img src="assets/stethoscope.png" height="auto" alt="Avatar">
+                                                <p style="text-align: justify;">In case of an emergency, dial 911. If your child needs urgent medical attention, please call your physician's office. If you feel your child may need urgent evaluation for high fever, severe illness, or
+                                                    significant injury, please contact your Texas Children's Pediatrics practice by phone so that we may best serve your needs.</p>
+                                                <!-- <p>if you feel your child may need urgent evaluation foe hight fever, severe illness, or significant injury, please contact your texas children's pediatrics practice by phone so that  we may best serve your
+                                                    needs.
+                                                </p> -->
+                                            </div>
+                                            <!-- reqest visit -->
+                                            <div class="text-right mt-3" *ngIf="Appointmentslotbookingdata==''">
+                                                <!-- <p-button (click)="showDialog()" icon="pi pi-external-link" label="Reqest For  Appoinment" class="reqbtn"></p-button> -->
+                                                <button class="btn btn-primary startover" (click)="showDialog()">Request For  Appoinment</button>
+                                            </div>
+
+
+
+                                            <!-- reqest visit end -->
+                                            <div *ngIf="Appointmentslotbookingdata!=''">
+                                                <div class="appointmentdate" *ngFor="let date of objectKeys(totaltimevalue_obj)">
+                                                    <h1>{{ date | date:'d/M/y' }}</h1>
+
+                                                    <div class="btnbnttime">
+                                                        <div class="mb-3 row">
+                                                            <button *ngFor="let slot of totaltimevalue_obj[date ]" type="button" class="btntimeappointment col-lg-2" (click)="Appointment_slottime(slot)">
+                                                            {{ transform(slot['Start_time']) }}
+                                                        </button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="btnmoreappointment" *ngIf="filteredData !=''">
+                                                <button (click)="showmore()" type="button">Show More Appointment Times</button>
+                                            </div>
+                                            <div class="btnmoreappointment" *ngIf="Appointmentslotbookingdata==''">
+                                                <button type="button">No Appoinment Times Available </button>
+                                            </div>
+                                        </div>
+
+                                        <!--  -->
+                                    </div></div>
+                                </div>
+                                <div class="tab-pane fade" id="VerifyAndSchedule" role="tabpanel" aria-labelledby="VerifyAndSchedule-tab">
+
+                                    <div class="container mainappointmentFinaldata">
+                                        <h1 class="finalvarification">Reason For Visit</h1>
+                                        <p class="finalvaluedata">{{finalData.inputreasionofvisitValue}}</p>
+                                        <h1 class="finalvarification">Hospital Name</h1>
+                                        <p class="finalvaluedata">{{finalData.inputhospitalnameValue}}</p>
+                                        <h1 class="finalvarification">Providers Name</h1>
+                                        <p class="finalvaluedata">{{finalData.inputprovidernameValue}}</p>
+                                        <h1 class="finalvarification">Appointment Type</h1>
+                                        <p class="finalvaluedata">{{appoinment_typename}}</p>
+                                        <h1 class="finalvarification">Appointment Time</h1>
+                                        <p class="finalvaluedata">{{finalData.Slot_time  }} &nbsp; {{finalData.Slot_days}} &nbsp; {{finalData.Slot_date | date:'d/M/y'}}</p>
+                                        <div class="col-lg-3">
+                                            <a><button class="btn btn-primary" (click)="Finalappointmentdata(finalData)"
+                                                    style="width: 70%;">Submit</button></a>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 .calendr">
+
+                    <!-- <div class="container MainBlock">
+
+                        <div class="appointStatus">
+
+                            <span>Related Links</span>
+                        </div>
+
+
+                        <div class="appoteam">
+                            <img src="assets/stethoscope.png" height="auto" alt="Avatar">
+                            <p>e-Visit</p>
+                           
+
+                        </div>
+
+                        <div class="appointmanage">
+
+                            <a href="#2"> <span>See Provider Details And Manage <i aria-hidden="true"
+                                        class="fa fa-share" style="font-weight: bold;"></i> </span> </a>
+                        </div>
+                    </div> -->
+                    <!-- <p-calendar [(ngModel)]="date3" [showIcon]="true" inputId="icon" (onSelect)="calendr()" appendTo="body"></p-calendar> -->
+                    <p-calendar class="max-w-full" [(ngModel)]="date3"  (onSelect)="calendr()" [inline]="true" [minDate]="minDate"></p-calendar>
+                </div>
+
+
+            </div>
+        </div>
+
+
+
+    </div>
+</div>
+
+<!-- reqest visit dilog -->
+<!-- <p-dialog header="Header" [(visible)]="visible" [style]="{width: '50vw'}">
+
+</p-dialog> -->
+
+
+
+<p-dialog header="Reqest For Appoinment" [modal]="true"  [style]="{width: '50vw'}">
+    <form [formGroup]="reqestforvisit" style="margin-top: 10px;">
+        <div class="mb-3 row">
+            <label style=" color: black; font-weight: bold;" for="staticEmail" class="col-sm-3 col-form-label">Reason for visit :</label>
+            <div class="col-sm-9">
+                <input pInputText type="text" placeholder="Reason for visit" [style]="{'width':'100%'}" formControlName="reason" readonly />
+            </div>
+        </div>
+
+        <div class="mb-3 row">
+            <!-- <label style=" color: black; font-weight: bold;" for="staticEmail"
+                                class="col-sm-2 col-form-label">Frequency :</label> -->
+            <label style=" color: black; font-weight: bold;" for="staticEmail" class="col-sm-3 col-form-label">Hospital location :</label>
+            <div class="col-sm-9">
+                <input pInputText type="text" placeholder="Hospital location" [style]="{'width':'100%'}" formControlName="location" readonly/>
+                <!-- <input type="text" formControlName="Frequency_name" [style]="{'width':'100%'}" pInputText [(ngModel)]="medFreequancy">  -->
+            </div>
+        </div>
+
+        <div class="mb-3 row">
+            <!-- <label style=" color: black; font-weight: bold;" for="staticEmail"
+                                class="col-sm-2 col-form-label">Frequency :</label> -->
+            <label style=" color: black; font-weight: bold;" for="staticEmail" class="col-sm-3 col-form-label">Provider Name :</label>
+            <div class="col-sm-9">
+                <input pInputText type="text" placeholder="Normal" [style]="{'width':'100%'}" formControlName="provider" id="disabled-input" [disabled]="true" />
+                <!-- <input type="text" formControlName="Frequency_name" [style]="{'width':'100%'}" pInputText [(ngModel)]="medFreequancy">  -->
+            </div>
+        </div>
+        <!-- dropdown start-->
+        <div class="mb-3 row">
+            <!-- <label style=" color: black; font-weight: bold;" for="staticEmail"
+                        class="col-sm-2 col-form-label">Frequency :</label> -->
+            <label style=" color: black; font-weight: bold;" for="staticEmail" class="col-sm-3 col-form-label">Appoinment Type :</label>
+            <div class="col-sm-9">
+                <p-dropdown   [ngClass]="showErrorBorderOnControls(reqestforvisit.controls.Appoinment_type)" appendTo="body" [options]="Appoinemtdata" [style]="{'width':'100%'}" formControlName="Appoinment_type" placeholder="Select" optionLabel="appointment_type" [showClear]="true" optionValue="id"></p-dropdown>
+                <!-- <input type="text" formControlName="Frequency_name" [style]="{'width':'100%'}" pInputText [(ngModel)]="medFreequancy">  -->
+            </div>
+        </div>
+
+
+
+        <!-- dropdown end-->
+
+        <div class="mb-3 row">
+            <!-- <label style=" color: black; font-weight: bold;" for="staticEmail"
+                                class="col-sm-2 col-form-label">Frequency :</label> -->
+            <label style=" color: black; font-weight: bold;" for="staticEmail" class="col-sm-3 col-form-label">Any time :</label>
+            <div class="col-sm-9">
+                <input type="checkbox" id="FavoriteField" formControlName="anytime_data" (click)="anytime($event)" value="providertime" style="width: 20px; height: 38px;">
+
+                <!-- <input type="text" formControlName="Frequency_name" [style]="{'width':'100%'}" pInputText [(ngModel)]="medFreequancy">  -->
+            </div>
+        </div>
+
+
+        <div class="mb-3 row">
+            <label style=" color: black; font-weight: bold;" for="staticEmail" class="col-sm-3 col-form-label"> Date :</label>
+
+            <div class="col-sm-9">
+                <!-- <p-calendar formControlName="date" appendTo="body" [style]="{'width':'100%'}"></p-calendar> -->
+                <p-calendar [ngClass]="showErrorBorderOnControls(reqestforvisit.controls.date)" dateFormat="dd/mm/yy" formControlName="date" selectionMode="multiple" [readonlyInput]="true" appendTo="body" [style]="{'width':'100%' }" [disabled]="isdisable"></p-calendar>
+
+            </div>
+        </div>
+
+        <div class="mb-3 row">
+            <label style=" color: black; font-weight: bold;" for="staticEmail" class="col-sm-3 col-form-label">Start Time :</label>
+
+            <div class="col-sm-9">
+
+                <p-calendar formControlName="time" [ngClass]="showErrorBorderOnControls(reqestforvisit.controls.time)"  [timeOnly]="true" appendTo="body" [style]="{'width':'100%'}" hourFormat="12" (onSelect)="ontimesubmit1()" [disabled]="isdisable"></p-calendar>
+            </div>
+        </div>
+        <div class="mb-3 row">
+            <label style=" color: black; font-weight: bold;" for="staticEmail"  class="col-sm-3 col-form-label">End Time :</label>
+
+            <div class="col-sm-9">
+
+                <p-calendar formControlName="endtime" dateFormat="dd/mm/yy" [ngClass]="showErrorBorderOnControls(reqestforvisit.controls.endtime)" appendTo="body" [timeOnly]="true" [style]="{'width':'100%'}" hourFormat="12" (onSelect)=" ontimesubmit2()" [disabled]="isdisable"></p-calendar>
+
+            </div>
+        </div>
+
+
+    </form>
+    <ng-template pTemplate="footer">
+        <p-button icon="pi pi-check" label="Submit" styleClass="p-button-text" (onClick)="submit()"></p-button>
+    </ng-template>
+</p-dialog>
+
+<p-dialog header="Request For Appoinment" [(visible)]="visible" [modal]="true" [responsive]="true" (onHide)="clearreqform()"
+id="trial"  [resizable]="false">
+
+<form [formGroup]="reqestforvisit" prependId="false" style="margin-top: 10px;">
+    <div class="form-container">
+        <div class="form-group mt-3 row">
+            <div class="col-sm-6"> 
+                <span class="p-float-label">
+
+                <input pInputText type="text" placeholder="Reason for visit" [style]="{'width':'100%'}" formControlName="reason" readonly />
+                <label for="float-input">Reason for visit</label>
+            </span>
+        </div>
+            <div class="col-sm-6 colmedi5">
+                <span class="p-float-label">
+
+                    <input pInputText type="text" placeholder="Hospital location" [style]="{'width':'100%'}" formControlName="location" readonly/>
+                    <label for="float-input">Hospital location</label>
+                </span>
+            </div>
+           
+
+
+
+        </div>
+        <div class="form-group mt-5">
+            <!-- <div class="container-fluid"> -->
+                <div class="row">
+                    <div class="col-sm-6 ">
+                        <span class="p-float-label">
+
+                            <input pInputText type="text" placeholder="Normal" [style]="{'width':'100%'}" formControlName="provider" id="disabled-input" readonly />
+                            <label for="float-input">Provider Name</label>
+                        </span>
+                    </div>
+                    <div class="col-sm-6 colmedi5">
+                        <!-- <div class="row colmedi6"> -->
+
+                            <!-- <div class="col-md-6 col-sm-4 colmedi5"> -->
+                                <!-- <span class="p-float-label"> -->
+                                    <p-dropdown appendTo="body" [options]="Appoinemtdata" [style]="{'width':'100%'}" [ngClass]="showErrorBorderOnControls(reqestforvisit.controls.Appoinment_type)" formControlName="Appoinment_type" placeholder="Select" optionLabel="appointment_type" [showClear]="true" optionValue="id"></p-dropdown>
+                                <!-- <label for="float-input">Dose</label> -->
+                            <!-- </span> -->
+                            </div>
+                          
+
+                        <!-- </div> -->
+                    <!-- </div> -->
+
+                </div>
+            <!-- </div> -->
+        </div>
+        <div class="form-group mt-5">
+           
+                <!-- <input type="checkbox" id="FavoriteField" name="team" formControlName="inputvalue_data" (click)="addmyfevrate($event)" value="providertime" > -->
+                <input type="checkbox" id="FavoriteField" formControlName="anytime_data" (click)="anytime($event)" value="providertime" >
+                <label  for="FavoriteField"  class="favlabel">Any Time Any Date</label>
+        
+        </div>
+        <div class="form-group mt-5">
+            <span class="p-float-label">
+                <p-calendar dateFormat="dd/mm/yy" [ngClass]="showErrorBorderOnControls(reqestforvisit.controls.date)" formControlName="date" selectionMode="multiple" [readonlyInput]="true" appendTo="body" [style]="{'width':'100%' }" [disabled]="isdisable"></p-calendar>
+                <label [ngStyle]="{'color': isdisable ? 'grey' : ''}" for="float-input">Date</label>
+            </span>
+        </div>
+
+
+      </div>
+<!-- <div class="form-group mt-5"> -->
+
+        <div class="form-group mt-5">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-sm-6 colmedi">
+                        <span class="p-float-label">
+                            <p-calendar formControlName="time" [ngClass]="showErrorBorderOnControls(reqestforvisit.controls.time)" [timeOnly]="true" appendTo="body" [style]="{'width':'100%'}" hourFormat="12" (onSelect)="ontimesubmit1()" [disabled]="isdisable"></p-calendar>
+                            <label  [ngStyle]="{'color': isdisable ? 'grey' : ''}" for="float-input">Start Time</label>
+                        </span>
+                    </div>
+                    <div class="col-sm-6 colmedi4">
+                        <span class="p-float-label">
+                            <p-calendar formControlName="endtime" [ngClass]="showErrorBorderOnControls(reqestforvisit.controls.endtime)" appendTo="body" [timeOnly]="true" [style]="{'width':'100%'}" hourFormat="12" (onSelect)=" ontimesubmit2()" [disabled]="isdisable"></p-calendar>
+                            <label [ngStyle]="{'color': isdisable ? 'grey' : ''}" for="float-input">End Time</label>
+                        </span>
+                </div>
+                </div>
+            </div>
+           
+        </div>
+
+       <!--    <div class="form-group mt-5">
+
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-lg-6 colmedi">
+                        <span class="p-float-label">
+                            <p-calendar [showIcon]="true" inputId="basic"
+                                [ngClass]="showErrorBorderOnControls(medicationinsert.controls.start_date)"
+                                appendTo="body" #myInput formControlName="start_date"
+                                [style]="{'width':'100%'}" id="helthproblem"></p-calendar>
+
+
+
+                            <label for="float-input">Start Date </label>
+                        </span>
+                    </div>
+                    <div class="col-lg-6 colmedi2">
+                        <span class="p-float-label">
+                            <p-calendar inputId="basic" [showIcon]="true"
+                                [ngClass]="showErrorBorderOnControls(medicationinsert.controls.End_date)"
+                                appendTo="body" #myInput formControlName="End_date"
+                                [style]="{'width':'100%'}" id="helthproblem"></p-calendar>
+
+
+
+
+                            <label for="float-input">End Date </label>
+                        </span>
+                    </div>
+                </div>
+            </div>
+
+           </div> -->
+
+
+            <!-- <div class="form-group mt-5"> -->
+
+
+        <!-- </div> --> 
+
+
+    <!-- </div> -->
+    <div class="button-container mt-2">
+        <!-- <button pButton type="button" label="Cancel" class="p-button-secondary" ></button> -->
+        <button pButton type="button" label="Submit" (click)="submit()"
+            class="p-button-success"></button>
+    </div>
+</form>
+</p-dialog>

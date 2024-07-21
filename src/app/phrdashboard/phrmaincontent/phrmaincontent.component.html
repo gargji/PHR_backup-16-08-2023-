@@ -1,0 +1,134 @@
+<div class="container-fluid">
+  <div class="main-appointment-container container">
+    <div class="row mt-3 p-0">
+      <h5 class="welcomeMessage">Welcome {{username}} </h5>
+    </div>
+    <div  class="comment">
+
+      <div class="timeline2"></div>
+      <div class="circle2">
+        <p class="Textalginment">{{ loginPatientDetails?.patient_name ? loginPatientDetails.patient_name.charAt(0) :
+          '' }}
+        </p>
+      </div>
+      <h3  class="pasientName">{{username}}</h3>
+      <div class="MainBlock" *ngIf="appointmentRecords">
+        <div class="appointStatus">
+          <i class="fa fa-folder-open" style="font-weight:bold" aria-hidden="true"></i>
+          <span> {{appointmentRecords?.Message_type }}</span>
+        </div>
+        <div class="appointStatus">
+          <p class="m-0">Appointment With : <span>{{appointmentRecords?.providertitle}}
+              {{appointmentRecords?.provider_name}}</span></p>
+        </div>
+        <div class="appointStatus">
+          <p title={{appointmentRecords?.message}}>Message : <span> {{appointmentRecords?.message.length > 70
+              ?appointmentRecords?.message.substring(0,70)+"...":appointmentRecords?.message}}</span></p>
+        </div>
+        <div class="BoxFooter">
+          <a (click)="viewAllAppointmentNavigate()"><i class="fa fa-envelope-o" aria-hidden="true"
+              style="font-weight:bold"></i>
+            <span> View All Appointment ({{appointmentLength}})</span>
+          </a>
+        </div>
+      </div>
+      <div class="MainBlock" *ngIf="vaccineAllRecords">
+        <div class="appointtime">
+          <div class="appointStatus">
+            <i class="fas fa-syringe" style="font-weight:bold" aria-hidden="true"> </i>
+            <span>{{vaccineAllRecords?.Message_type }}</span>
+          </div>
+        </div>
+        <div class="appointStatus">
+          <i class="fa fa-clock-o" aria-hidden="true"> </i>
+          <span>&nbsp; {{vaccineAllRecords?.Transaction_Time |date: 'dd/MM/yyyy hh:mm a'}}</span>
+        </div>
+        <div class="appointStatus">
+          <p title={{vaccineAllRecords?.message}}>Message : <span> {{vaccineAllRecords?.message?.length > 70
+              ?vaccineAllRecords?.message.substring(0,70)+"...":vaccineAllRecords?.message }}</span></p>
+        </div>
+        <div class="BoxFooter">
+          <a (click)="viewAllAppointmentNavigate()"><i class="fa fa-envelope-o" aria-hidden="true"
+              style="font-weight:bold"></i>
+            <span> View All Appointment ({{vaccineAllRecordsLength}})</span>
+          </a>
+        </div>
+      </div>
+      <div class="MainBlock" *ngIf="orderAllRecords">
+        <div class="appointStatus">
+          <i class="fa fa-shopping-bag" style="font-weight:bold" aria-hidden="true"> </i>
+          <span>&nbsp; {{orderAllRecords?.Message_type }}</span>
+        </div>
+        <div class="appointStatus">
+          <p title={{orderAllRecords?.message}}>Message : <span> {{orderAllRecords?.message.length > 70
+              ?orderAllRecords?.message.substring(0,70)+"...":orderAllRecords?.message }}</span></p>
+        </div>
+        <div class="BoxFooter">
+          <a (click)="viewAllOrderNavigate()"><i class="fa fa-envelope-o" aria-hidden="true"
+              style="font-weight:bold"></i>
+            <span> View All Order ({{orderAllRecordsLength}})</span>
+          </a>
+        </div>
+      </div>
+      <div class="MainBlock" *ngIf="reminderAllRecords">
+        <div class="appointStatus">
+          <i class="fa fa-folder-open" style="font-weight:bold" aria-hidden="true"> </i>
+          <span>&nbsp; {{reminderAllRecords?.Message_type}}</span>
+        </div>
+        <div class="appointStatus">
+          <p title={{reminderAllRecords?.message}}>Message : <span> {{reminderAllRecords?.message.length > 70
+              ?reminderAllRecords?.message.substring(0,70)+"...":reminderAllRecords?.message }}</span></p>
+        </div>
+        <div class="BoxFooter">
+          <a (click)="viewAllReminderNavigate()"><i class="fa fa-envelope-o" aria-hidden="true"
+              style="font-weight:bold"> </i>
+            <span>&nbsp; View All Reminder ({{reminderAllRecordsLength}})</span>
+          </a>
+        </div>
+      </div>
+    </div>
+    <!-- <div *ngIf="appointmentLength<0" class="row no-record-found m-0 p-0 justify-content-center">
+      <p class="mt-3">No Vaccine Records !</p>
+    </div> -->
+
+    <!-- <div *ngIf="reminderAllRecordsLength>0" class="comment">
+      <div class="timeline3"></div>
+      <div class="circle3">
+        <p class="Textalginment">{{ loginPatientDetails?.patient_name ? loginPatientDetails.patient_name.charAt(0) :
+          '' }}</p>
+      </div>
+      <h3 class="pasientName">{{loginPatientDetails?.patient_name| titlecase}}</h3>
+
+    </div> -->
+    <!-- <div *ngIf="reminderAllRecordsLength<0" class="row no-record-found m-0 p-0 justify-content-center">
+      <p class="mt-3">No Reminder Records !</p>
+    </div> -->
+    <!--  <div *ngIf="orderAllRecordsLength>0" class="comment">
+      <div class="timeline4"></div>
+      <div class="circle4">
+        <p class="Textalginment">{{ loginPatientDetails?.patient_name ? loginPatientDetails.patient_name.charAt(0) :
+          '' }}</p>
+      </div>
+      <h3 class="pasientName">{{loginPatientDetails?.patient_name| titlecase}}</h3>
+      <div class="MainBlock">
+        <div class="appointStatus">
+          <i class="fa fa-shopping-bag" style="font-weight:bold" aria-hidden="true"> </i>
+          <span>&nbsp; {{orderAllRecords.Message_type | titlecase}}</span>
+        </div>
+        <div class="appointStatus">
+          <p title={{orderAllRecords.message}}>Message : <span> {{orderAllRecords.message.length > 70
+              ?orderAllRecords.message.substring(0,70)+"...":orderAllRecords.message | titlecase}}</span></p>
+        </div>
+        <div class="BoxFooter">
+          <a (click)="viewAllOrderNavigate()"><i class="fa fa-envelope-o" aria-hidden="true"
+              style="font-weight:bold"></i>
+            <span> View All Order ({{orderAllRecordsLength}})</span>
+          </a>
+        </div>
+      </div>
+    </div> -->
+    <!-- <div *ngIf="orderAllRecordsLength<0" class="row no-record-found m-0 p-0 justify-content-center">
+      <p class="mt-3">No Order Records !</p>
+    </div> -->
+  </div>
+</div>

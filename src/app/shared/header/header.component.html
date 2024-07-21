@@ -1,0 +1,54 @@
+<div class="top_header_wrapper d-none d-sn-none d-md-block d-lg-block">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                <div class="top_header_add">
+                    <ul>
+                        <li><i class="fa fa-map-marker" aria-hidden="true"></i><span>Address :</span> -512/fonia,canada</li>
+                        <li><i class="fa fa-phone" aria-hidden="true"></i><span>Call us :</span> +61 5001444-122</li>
+                        <li><i class="fa fa-envelope" aria-hidden="true"></i><a href="https://mail.google.com/mail/?view=cm&fs=1&tf=1&to=someone@example.com" target="_blank"><span>Email :</span> <span class="__cf_email__" data-cfemail="c1a5b4acacb881a4b9a0acb1ada4efa2aeac">[email&#160;protected]</span></a></li>
+                    </ul>
+                </div>
+                <div class="header_social">
+                    <ul>
+                        <li><a href="#"><i class="fa fa-youtube-play" aria-hidden="true"></i></a></li>
+                        <li><a href="#"><i class="fa fa-linkedin" aria-hidden="true"></i></a></li>
+                        <li><a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
+                        <li><a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<nav class="navbar navbar-expand-lg navbar-light ">
+    <a class="navbar-brand" href="#"><img src="assets/Healaxylogo1.jpeg" alt="logo" title="logo" class="img-responsive  "></a>
+    <button  class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
+        <ul class="navbar-nav ml-auto mt-2 mt-lg-0">
+            <li class="nav-item ">
+                <a class=" btn btn-outline-info" routerLink="phrdashboard">Schedule an appointment <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item ">
+                <a class=" btn btn-outline-info" href="/"> My Chart <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item ">
+                <a class=" btn btn-outline-info" href="/">Contact Us <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item ">
+                <a class=" btn btn-outline-info" href="/">Refer a patient <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item">
+                <a class=" btn btn-outline-info" href="/">Services</a>
+            </li>
+            <li class="nav-item ">
+                <a class=" btn btn-info" *ngIf="_opened!=1" (click)="collapse()" routerLink="/login">LOGIN</a>
+                <a class=" btn btn-info text-white"*ngIf="_opened==1" (click)="DEL()">logout</a>
+            </li>
+        </ul>
+      
+    </div>
+</nav>

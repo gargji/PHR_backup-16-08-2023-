@@ -1,0 +1,277 @@
+<p-toast position="top-right"></p-toast>
+<p-confirmDialog [style]="{width: '40vw'}"></p-confirmDialog>
+
+<p-dataView [value]="cars">
+    <ng-template pTemplate="header">
+        <div class="flex flex-column md:flex-row md:justify-content-between con" style="margin-top: 2%;">
+            <div class="Medication">
+                <h1>Procedure <i class="fas fa-bed-pulse"></i></h1>
+            </div>
+            <div class="actionbtn">
+                <p-button (click)="showModalDialog()" class="madicationAdd custom-button" icon="pi pi-plus"
+                    label="Add Procedure "></p-button>
+                <!-- <p-dialog header="Add Madication" [(visible)]="displayModal" [modal]="true" [style]="{width: '50vw'}"
+                (onHide)="Medication($event)"  [resizable]="false">
+                    <form [formGroup]="medicationinsert" style="margin-top: 10px;">
+                        <div class="mb-3 row">
+                            <label style=" color: black; font-weight: bold;" for="staticEmail"
+                                class="col-sm-3 col-form-label">Madication :</label>
+                            <div class="col-sm-9">
+                                <p-autoComplete formControlName="medication_insert" [showEmptyMessage]="true"
+                                 [suggestions]="medication_drug" 
+                                    appendTo="body" field="generic_name" [style]="{'width':'100%'}"
+                                    [inputStyle]="{'width':'100%'}" [minLength]="3"></p-autoComplete>
+                            </div>
+                        </div>
+
+                        <div class="mb-3 row">
+                        
+                                <label style=" color: black; font-weight: bold;" for="staticEmail"
+                                class="col-sm-3 col-form-label">Frequency :</label>
+                            <div class="col-sm-9">
+                                <p-dropdown [options]="Frequencyshow" [style]="{'width':'100%'}"
+                                formControlName="Frequency_name" placeholder="Select Frequency"
+                                optionLabel="name" [showClear]="true" ></p-dropdown>
+                              
+                            </div>
+                        </div>
+
+                        <div class="mb-3 row">
+        
+                                <label style=" color: black; font-weight: bold;" for="staticEmail"
+                                class="col-sm-3 col-form-label">Patient Instrations :</label>
+                            <div class="col-sm-9">
+                                <p-dropdown [options]="Instrationsshow"  [style]="{'width':'100%'}"
+                                formControlName="Patient_instration" placeholder="Select Patient Instrations"
+                                optionLabel="name" [showClear]="true"></p-dropdown>
+                               
+                            </div>
+                        </div>
+
+
+                        <div class="mb-3 row">
+                            <label style=" color: black; font-weight: bold;" for="staticEmail"
+                                class="col-sm-3 col-form-label">Start Date :</label>
+                                
+                            <div class="col-sm-9">
+                                <p-calendar inputId="basic"  appendTo="body" #myInput formControlName="start_date"
+                                     [style]="{'width':'100%'}"></p-calendar>
+                            </div>
+                        </div>
+
+                        <div class="mb-3 row">
+                            <label style=" color: black; font-weight: bold;" for="staticEmail"
+                                class="col-sm-3 col-form-label">End Date :</label>
+                            <div class="col-sm-9">
+                                <p-calendar inputId="basic" appendTo="body" #myInput formControlName="End_date"
+                                     [style]="{'width':'100%'}"></p-calendar>
+                            </div>
+                        </div>
+
+                    </form>
+                    <ng-template pTemplate="footer">
+                        <p-button icon="pi pi-check" (click)="submit_madiaction()" label="Submit"
+                            styleClass="p-button-text"></p-button>
+                    </ng-template>
+                </p-dialog> -->
+                <p-dialog header="Header" [(visible)]="displayModal" [modal]="true" [responsive]="true" id="trial"
+                    (onHide)="Medication($event)">
+                    <ng-template pTemplate="header">
+                        <span *ngIf="!isEdit" class="text-xl font-bold">Add procedure</span>
+                        <span *ngIf="isEdit" class="text-xl font-bold">Update procedure</span>
+                    </ng-template>
+                    <!-- <div class="container"></div> -->
+                 
+                    <form [formGroup]="procedureinsert" prependId="false" style="margin-top: 10px;">
+                        <div class="form-container">
+                            <div class="form-group ">
+                                <span class="p-float-label">
+
+                                    <p-autoComplete formControlName="procedure_name" #myInput [ngClass]="showErrorBorderOnControls(procedureinsert.controls.procedure_name)"
+                                        [suggestions]="medication_drug" (completeMethod)="filterProcedure($event)"
+                                        appendTo="body" field="name" [style]="{'width':'100%'}"
+                                        [inputStyle]="{'width':'100%'}" [minLength]="3" ></p-autoComplete>
+                                    <label for="float-input">Procedure Name</label>
+                                </span>
+
+
+
+                            </div>
+                       
+                            <!-- <div class="form-group mt-5">
+                            <p-dropdown [options]="proceduretype" [ngClass]="" [style]="{'width':'100%'}"
+                                formControlName="procedure_type" placeholder="Procedure Type"
+                                optionLabel="procedure_type"[showClear]="true"></p-dropdown>
+                        </div> -->
+
+                            <!-- indication for procedure -->
+                            <div class="form-group mt-5 ">
+                                <span class="p-float-label">
+
+                                    <p-autoComplete formControlName="procedure_indication" #myInput [ngClass]="showErrorBorderOnControls(procedureinsert.controls.procedure_indication)"
+                                        [showEmptyMessage]="true" [forceSelection]="true"
+                                        [suggestions]="indication_data" (completeMethod)="filterindication($event)"
+                                        appendTo="body" field="term" [style]="{'width':'100%'}"
+                                        [inputStyle]="{'width':'100%'}" [minLength]="3"></p-autoComplete>
+                                    <label for="float-input">Indication Name</label>
+                                </span>
+
+
+
+                            </div>
+
+
+                            <div class="form-group mt-5">
+
+                                <span class="p-float-label">
+                                    <p-calendar  [ngClass]="showErrorBorderOnControls(procedureinsert.controls.start_date)" inputId="basic" [showIcon]="true" appendTo="body" #myInput
+                                        formControlName="start_date" dateFormat="dd/mm/yy" [style]="{'width':'100%'}"
+                                        id="helthproblem"></p-calendar> 
+
+
+
+                                    <label for="float-input">Date onset</label>
+                                </span>
+                            </div>
+
+                            <div class="form-group mt-5">
+                                <span class="p-float-label">
+                                    <textarea id="float-input" rows="1" cols="10" formControlName="note" pInputTextarea
+                                        [style]="{'width':'100%'}"></textarea>
+                                    <label for="float-input">Note</label>
+                                </span>
+                            </div>
+                        </div>
+                        <div class="button-container" *ngIf="!isEdit">
+
+                            <button pButton type="button" label="Submit" (click)="submit_procedure()"
+                                class="p-button-success"></button>
+                        </div>
+                        <div class="button-container" *ngIf="isEdit">
+
+                            <button pButton type="button" label="Update" (click)="update_procedure(editid)"
+                                class="p-button-success"></button>
+                        </div>
+                    </form>
+                </p-dialog>
+
+                <p-dataViewLayoutOptions></p-dataViewLayoutOptions>
+            </div>
+        </div>
+    </ng-template>
+    <ng-template let-car pTemplate="listItem">
+        <div class="container-fluid Maindivscroll" style="border: none;">
+            <div class="row">
+                <div class="col-lg-4" *ngFor="let item of  medicationdata">
+                    <div class="w3-card-4">
+
+                        <div class="w3-container BlockMain">
+
+                            <!-- ... -->
+                            <div class="" style="padding-top: 10px;">
+                                <div class="blockdetail" style="padding-bottom: 10px;">
+                                    <p-menu   #menu [model]="items" [popup]="true" appendTo="body" [item]="item" (onShow)='data(item)' ></p-menu>
+                                    <div *ngIf="item.uploaded_by=='PHR'"  class="text-right dots" style="position: absolute; DISPLAY: INLINE; right: 30px;">
+                                        <i class="pi pi-ellipsis-v" (click)="menu.toggle($event)"></i>
+                                    </div>
+                                </div>
+                            </div>
+
+                      
+
+                            <div>
+
+                                <p title={{item.ProcedureName}}
+                                    style="font-size: 20px; color:rgb(23, 15, 146); font-weight: bold;" class="cardp">
+                                    {{item.ProcedureName}}</p>
+                                <!-- <p>Per mom raw reanuts</p> -->
+                                <p title={{item.IndicationForProcedureName}} class="cardp"><span style="font-weight: bold;">Indication:
+                                    </span> {{item.IndicationForProcedureName}} </p>
+                                <p><span style="font-weight: bold;"><b> <i class="pi pi-calendar"></i></b></span>
+                                    {{item.DatePerformed |date: 'dd/MM/yyyy'}}</p>
+                                <!-- <p> <span style="font-weight: bold;"> Note: </span> {{item.Notes}}</p> -->
+                                <i title={{item.Notes}} class="fa-solid fa-message" aria-hidden="true"></i>  <span title={{item.Notes}}> Note</span>
+
+                                    <!-- <i class="fa-solid fa-message"></i>
+                                    <i class="fa-solid fa-notes"></i> -->
+                                    <!-- <i class="fa-regular fa-note-sticky"></i> -->
+                                    
+
+                                    
+
+
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    
+
+   
+    </ng-template>
+    <ng-template let-car pTemplate="gridItem">
+        <p-table [value]="medicationdata" responsiveLayout="scroll" paginatorPosition="bottom" #dt1 dataKey="id"
+            [paginator]="true"  styleClass="p-datatable-striped" 
+            [globalFilterFields]="['emailId','userId','statename','CountryName', 'phone','Specialityname','cityname',  'clinicName']"
+            scrollDirection="both" styleClass="p-mt-3" [scrollable]="true" [rowsPerPageOptions]="[10,15,25,50]"
+            [rows]="15">
+            <ng-template pTemplate="caption">
+                <div class="flex globalSearch">
+                    <p style="font-weight: bold; font-size: 1.2rem; margin-bottom: 0;">Total
+                        Records:{{medicationlength}} <span class="dislength"></span></p>
+                </div>
+            </ng-template>
+            <ng-template pTemplate="header">
+
+                <tr>
+                    <th style="width:5%;border-top:2px solid #e7ecf1;" pSortableColumn="sno">
+                        <!-- <p-sortIcon
+                            field="Sno"></p-sortIcon> -->
+                        S.No
+                    </th>
+                    <th style="width:15%;border-top:2px solid #e7ecf1;" pSortableColumn="name"> <p-sortIcon
+                            field="name"></p-sortIcon>Procedure</th>
+                    <th style="width:8%;border-top:2px solid #e7ecf1;" pSortableColumn="term"> <p-sortIcon
+                            field="term"></p-sortIcon>Indication</th>
+                    <!-- <th style="width:8%;border-top:2px solid #e7ecf1;" pSortableColumn="Frequency"><p-sortIcon
+                            field="Frequency"></p-sortIcon>Frequency</th> -->
+                    <th style="width:10%;border-top:2px solid #e7ecf1;" pSortableColumn="DatePerformed"><p-sortIcon
+                            field="DatePerformed"></p-sortIcon>Date</th>
+                    <!-- <th style="width:10%;border-top:2px solid #e7ecf1;" pSortableColumn="EndDate"><p-sortIcon
+                            field="EndDate"></p-sortIcon>End Date</th> -->
+                    <!-- <th style="width:5%;border-top:2px solid #e7ecf1;" pSortableColumn="RouteName"><p-sortIcon
+                            field="RouteName"></p-sortIcon>Route</th> -->
+                    <!-- <th style="width:10%;border-top:2px solid #e7ecf1;" pSortableColumn="PrimaryCondition"><p-sortIcon
+                            field="PrimaryCondition"></p-sortIcon>Primary Condition</th> -->
+                    <th style="width:10%;border-top:2px solid #e7ecf1;" pSortableColumn="Notes"><p-sortIcon
+                            field="Notes"></p-sortIcon> Notes</th>
+
+                    <th style="width:10%;border-top:2px solid #e7ecf1;" pSortableColumn="Notes"> Action</th>
+
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-item let-i="rowIndex">
+                <tr>
+                    <td style="width:5%; ">{{i + 1}}</td>
+                    <td style="width:15%;">{{item.name}}</td>
+                    <td style="width:8%;">{{item.term}}</td>
+                    <!-- <td style="width:8%;">{{item.FrequencyName}}</td> -->
+                    <td style="width:10%;">{{item.DatePerformed |date: 'dd/MM/yyyy'}}</td>
+                    <!-- <td style="width:10%;">{{item.EndDate}}</td> -->
+                    <!-- <td style="width:5%;">{{item.RouteName}}</td>
+                    <td style="width:10%;">{{item.primaryindication}}</td> -->
+                    <td style="width:10%;">{{item.Notes}}</td>
+                    <td  style="width:10%;">
+                        <button *ngIf="item.uploaded_by=='PHR'" class="btn btn-outline-info mr-2" (click)="edit_procedure(item.id)"><i class="pi pi-fw pi-pencil"></i></button>
+                        <button *ngIf="item.uploaded_by=='PHR'" class="btn btn-outline-danger" (click)="delete_procedure(item.id)"><i class="pi pi-fw pi-trash"></i></button>
+                     <span *ngIf="item.uploaded_by!='PHR'"style="width:10%;"> <button class="btn btn-outline-info" disabled><i class="pi pi-lock"></i></button></span>
+                    </td>
+                </tr>
+            </ng-template>
+
+        </p-table>
+    </ng-template>
+
+</p-dataView>

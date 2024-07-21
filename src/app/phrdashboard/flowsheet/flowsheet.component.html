@@ -1,0 +1,464 @@
+<p-toast position="top-right"></p-toast>
+<!-- <div class="container-fluid"> -->
+<div class=" col-lg-12 mainForm">
+    <div style="width:100%; display:flex "class=
+    "mb-5" >
+        <div style="    min-width: 15%; max-height: 83vh;"  [class.collapse]="isCollapsed" id=""  class="sidebar ">
+            <div  
+            >
+            <h2 style="padding-top: 1.5rem;">vitals</h2>
+                <div id="flowsheets">
+                    <p-accordion [activeIndex]="true">
+                        <p-accordionTab header="Vitals" [(selected)]="activeState">
+                            <div *ngFor="let col of sidebarsubheader" style="display: flex; width:100%; padding: 7px;">
+                                <div style="width:80%" [style.color]>
+                                    {{col.header}}
+                                </div>
+                                <div style="display: flex; justify-content:flex-end; width:20%">
+                                    <input type="checkbox" (change)="savecheckbox($event,col.id,col.header)"
+                                        [(ngModel)]="col.value" value="colss.value">
+                                </div>
+                            </div>
+                        </p-accordionTab>
+                    </p-accordion>
+                </div>
+            </div>
+        </div>
+        <div style="padding-top: 3.3rem; min-width:85% ;overflow:auto ; max-height: 83vh; width: 100%;">
+            <div style="  display:flex">
+                <div id="flowsheet">
+                    <!-- <div
+                    style="width:100%; background-color:rgb(226 227 231) ;padding: .6rem; padding-left: 2rem; color:#0e89d8;border-top:3px solid rgb(184, 175, 175);font-weight: 600;">
+                    BP</div> -->
+                    
+                    <div 
+                    style="width:100%; background-color:rgb(226 227 231) ;padding: .6rem; padding-left: 2rem; padding-left: 2rem;font-weight: 600;color:#0e89d8;">
+                    <button  (click)="toggleCollapse()" class="navbar-toggler"><span class=" pi pi-align-justify" ></span></button>
+                    Blood Pressure    
+                    <!-- <div style="width:100%"> -->
+                        <!-- <div style="display: flex; justify-content: center"> -->
+                            <button  (click)="flowsheetsave()"  class="btn btn-outline-info ml-5"><i
+                                    class="fa fa-save"> </i> Save </button>
+                        <!-- </div> -->
+                    <!-- </div> -->
+                </div> 
+                    <p-table [value]="flowsheetvital" [columns]="cols" class="flowsheet" >
+                        
+                        <ng-template pTemplate="header" let-columns>
+                            <tr>
+                                <th style=" border:5px black!important;color:#0e89d8;">
+                            
+                                    <button
+                                        style="outline: none; border:none; background-color: #F05F40; border-radius: 3px; color: white; width: 18.2rem; "
+                                        (click)="addtime()"> Add Column</button>
+                                </th>
+                                <th *ngFor="let col of columns;let col_index = index "  style=" color:#494d50;  width:15rem !important">
+                                    <div style="display: flex; justify-content: space-between;">
+                                        <div style="border:5px black;">
+                                            {{col.DateAndTime}}
+                                        </div>
+                                        <div>
+                                            <button (click)="DeleteRecords(col)" [style]="{'margin-left':'5px'}"
+                                                title="Delete" pButton pRipple type="button" icon="pi pi-trash"
+                                                class="p-button-rounded p-button-warning buttton-icon"></button>
+                                            <button (click)="editdata(col)" [style]="{'margin-left':'5px'}" title="Edit"
+                                                pButton type="button" icon="pi pi-pencil"
+                                                class="p-button-secondary p-button-rounded buttton-icon"></button>
+                                        </div>
+                                    </div>
+                                </th>
+                            </tr>
+                        </ng-template>
+                        <ng-template pTemplate="body"  let-rowData="rowData" let-i="rowIndex"  let-columns="columns">
+                            <tr style=" background-color: #efeff1;">
+                                    <td pEditableColumn style="border:1px solid rgb(184, 175, 175);">
+                                        <div style="display: flex; justify-content: center;">
+                                            <div style="width:15rem; color:#303133; background-color:#e5ecf0; ; font-weight: 600;     height: 24.2px;"
+                                                class="vitalflowsheet">
+                                                {{customHeaders[i]}}
+                                            </div>
+                                            <div style="width:4rem; background-color:#e5ecf0;  color:#303133;">
+                                                <i style="padding-right: 6px;" class="pi pi-th-large"
+                                                    (click)="get_data_intable(customHeaders[i])"></i>
+                                                <i class="pi pi-history" (click)="get_graph_data(customHeaders[i])"></i>
+                                            </div>
+                                        </div>
+                                    </td>
+                                <td style="border: 1px solid grey;  width:15rem; padding-left: 10px !important;" *ngFor="let col of columns; let k = index" class="flowsheetContaner"  (click)="sidebardata(col.DateAndTime,'customHeaders',i,k,'BP',customHeaders[i])"  id="{{i}}_{{k}}_BP">
+                                    <span  style="width:15rem;" *ngFor="let datv of dataValues; let j = index">  
+                                        <div  *ngIf="col.DateAndTime == datv.DateAndTime;" >{{dataValues[j][customHeaders[i]]}}</div>
+                                    </span>
+                                </td> 
+                            </tr>
+                        </ng-template>
+                    </p-table>
+                   <div
+                        style="width:100%; background-color:rgb(226 227 231) ;padding: .6rem; padding-left: 2rem; padding-left: 2rem;font-weight: 600;color:#0e89d8;border-top:3px solid rgb(184, 175, 175);">
+                        Heart Rate</div>
+                    <p-table [value]="HeartRatee"  [columns]="cols" class="flowsheet">
+                        <ng-template pTemplate="body"  let-rowData="rowData" let-i="rowIndex"  let-columns="columns">
+                            <tr style=" background-color: #efeff1;">
+                                    <td pEditableColumn style="border:1px solid rgb(184, 175, 175)">
+                                        <div style="display: flex; justify-content: center;">
+                                            <div style="width:15rem; color:#303133; background-color:#e5ecf0; ; font-weight: 600; height:24.2px"
+                                                class="vitalflowsheet">
+                                                {{customHeaders1[i]}}
+                                            </div>
+                                            <div style="width:4rem; background-color:#e5ecf0;  color:#303133;">
+                                                <i style="padding-right: 6px;" class="pi pi-th-large"
+                                                    (click)="get_data_intable(customHeaders1[i])"></i>
+                                                <i class="pi pi-history" (click)="get_graph_data(customHeaders1[i])"></i>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td style="border: 1px solid grey; width:15rem;" *ngFor="let col of columns; let k = index"  class="flowsheetContaner" (click)="sidebardata(col.DateAndTime,'customHeaders',i,k,'HeartRat',customHeaders1[i])" id="{{i}}_{{k}}_HeartRat">
+                                        <span   *ngFor="let datv of dataValues; let j = index">     
+                                            <div class="flowsheetContaner" *ngIf="col.DateAndTime == datv.DateAndTime;"  > {{dataValues[j][customHeaders1[i]]}}</div>
+                                        </span>
+                                    </td>
+                                    
+                            </tr>
+                        </ng-template>
+                    </p-table>
+                    <div
+                        style="width:100%; background-color:rgb(226 227 231);padding: .6rem; padding-left: 2rem;font-weight: 600; color:#0e89d8;border-top:3px solid rgb(184, 175, 175);">
+                        Respiration</div>
+                    <p-table [columns]="cols" [value]="Respirationsvalue" class="flowsheet">
+                        <ng-template pTemplate="body"  let-rowData="rowData" let-i="rowIndex"  let-columns="columns">
+                            <tr style=" background-color: #efeff1;">
+                                <td pEditableColumn style="border:1px solid rgb(184, 175, 175)">
+                                    <div style="display: flex; justify-content: center;">
+                                        <div style="width:15rem; color:#303133; background-color:#e5ecf0; ; font-weight: 600; height:24.2px"
+                                            class="vitalflowsheet">
+                                            {{customHeaders2[i]}}
+                                        </div>
+                                        <div style="width:4rem; background-color:#e5ecf0;  color:#303133;">
+                                            <i style="padding-right: 6px;" class="pi pi-th-large"
+                                                (click)="get_data_intable(customHeaders2[i])"></i>
+                                            <i class="pi pi-history" (click)="get_graph_data(customHeaders2[i])"></i>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td style="border: 1px solid grey; width:15rem;" *ngFor="let col of columns; let k = index" class="flowsheetContaner"  id="{{i}}_{{k}}_Respirationeheader"  (click)="sidebardata(col.DateAndTime,'customHeaders',i,k,'Respirationeheader',customHeaders2[i])">
+                                    <span   *ngFor="let datv of dataValues; let j = index">     
+                                        <div class="flowsheetContaner" *ngIf="col.DateAndTime == datv.DateAndTime;"  >{{dataValues[j][customHeaders2[i]]}}</div>
+                                    </span>
+                                </td>
+                            </tr>
+                        </ng-template>
+                    </p-table>
+
+                   <div
+                        style="width:100%; background-color:rgb(226 227 231) ;padding: .6rem; padding-left: 2rem; color:#0e89d8;border-top:3px solid rgb(184, 175, 175);font-weight: 600;">
+                        Body Temprature</div>
+                    <p-table [columns]="cols" [value]="BodyTempraturee"class="flowsheet">
+                        <ng-template pTemplate="body"  let-rowData="rowData" let-i="rowIndex"  let-columns="columns">
+                       
+                            <tr style=" background-color: #efeff1;" >
+                                
+                                <td pEditableColumn style="border:1px solid rgb(184, 175, 175)">
+                                    <div style="display: flex; justify-content: center;">
+                                        <div style="width:15rem; color:#303133; background-color:#e5ecf0; ; font-weight: 600; height:24.2px"
+                                            class="vitalflowsheet">
+                                            {{customHeaders3[i]}}
+                                        </div>
+                                        <div style="width:4rem; background-color:#e5ecf0;  color:#303133;">
+                                            <i style="padding-right: 6px;" class="pi pi-th-large"
+                                                (click)="get_data_intable(customHeaders3[i])"></i>
+                                            <i class="pi pi-history" (click)="get_graph_data(customHeaders3[i])"></i>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td style="border: 1px solid grey; width:15rem;" *ngFor="let col of columns; let k = index" class="flowsheetContaner"  id="{{i}}_{{k}}_BodyTempratur"  (click)="sidebardata(col.DateAndTime,'customHeaders',i,k,'BodyTempratur',customHeaders3[i])">
+                                    <span   *ngFor="let datv of dataValues; let j = index">     
+                                        <div class="flowsheetContaner"*ngIf="col.DateAndTime == datv.DateAndTime;"  >{{dataValues[j][customHeaders3[i]]}}</div>
+                                    </span>
+                                </td>
+                            </tr>
+                        </ng-template>
+                    </p-table>
+                    <div
+                        style="width:100%; background-color:rgb(226 227 231) ;padding: .6rem; padding-left: 2rem; color:#0e89d8;border-top:3px solid rgb(184, 175, 175);font-weight: 600;">
+                        Anthropometry</div>
+                    <p-table [columns]="cols" [value]="Antropometrys"class="flowsheet">
+                        <ng-template pTemplate="body"  let-rowData="rowData" let-i="rowIndex"  let-columns="columns">
+                       
+                            <tr style=" background-color: #efeff1;">
+                                
+                                <td pEditableColumn style="border:1px solid rgb(184, 175, 175)">
+                                    <div style="display: flex; justify-content: center;">
+                                        <div style="width:15rem; color:#303133; background-color:#e5ecf0; ; font-weight: 600; height:24.2px"
+                                            class="vitalflowsheet">
+                                            {{customHeaders4[i]}}
+                                        </div>
+                                        <div style="width:4rem; background-color:#e5ecf0;  color:#303133;">
+                                            <i style="padding-right: 6px;" class="pi pi-th-large"
+                                                (click)="get_data_intable(customHeaders4[i])"></i>
+                                            <i class="pi pi-history" (click)="get_graph_data(customHeaders4[i])"></i>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td style="border: 1px solid grey; width:15rem;" *ngFor="let col of columns; let k = index" class="flowsheetContaner" id="{{i}}_{{k}}_Antropometry" (click)="sidebardata(col.DateAndTime,'customHeaders',i,k,'Antropometry',customHeaders4[i])">
+                                    <span   *ngFor="let datv of dataValues; let j = index">     
+                                        <div class="flowsheetContaner" *ngIf="col.DateAndTime == datv.DateAndTime;"  >{{dataValues[j][customHeaders4[i]]}}</div>
+                                    </span>
+                                </td>
+                            </tr>
+                        </ng-template>
+                    </p-table>
+                      <div>
+                        <div
+                            style="width:100%; background-color:rgb(226 227 231) ;padding: .6rem; padding-left: 2rem; color:#0e89d8;border-top:3px solid rgb(184, 175, 175);font-weight: 600;">
+                            Consciousness</div>
+                        <p-table [columns]="cols" [value]="Consciousnesse"class="flowsheet">
+                            <ng-template pTemplate="body"  let-rowData="rowData" let-i="rowIndex"  let-columns="columns">
+                                <tr style=" background-color: #efeff1;">
+                                
+                                    <td pEditableColumn style="border:1px solid rgb(184, 175, 175)">
+                                        <div style="display: flex; justify-content: center;">
+                                            <div style="width:15rem; color:#303133; background-color:#e5ecf0; ; font-weight: 600; height:24.2px"
+                                                class="vitalflowsheet">
+                                                {{customHeaders5[i]}}
+                                            </div>
+                                            <div style="width:4rem; background-color:#e5ecf0;  color:#303133;">
+                                                <i style="padding-right: 6px;" class="pi pi-th-large"
+                                                    (click)="get_data_intable(customHeaders5[i])"></i>
+                                                <i class="pi pi-history" (click)="get_graph_data(customHeaders5[i])"></i>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td style="border: 1px solid grey; width:15rem;" *ngFor="let col of columns; let k = index" class="flowsheetContaner" id="{{i}}_{{k}}_Consciousnes" (click)="sidebardata(col.DateAndTime,'customHeaders',i,k,'Consciousnes',customHeaders5[i])">
+                                        <span   *ngFor="let datv of dataValues; let j = index">     
+                                            <div class="flowsheetContaner" *ngIf="col.DateAndTime == datv.DateAndTime;"  >{{dataValues[j][customHeaders5[i]]}}</div>
+                                        </span>
+                                    </td>
+                                </tr>
+                            </ng-template>
+                            <!-- <ng-template pTemplate="body"  let-rowData="rowData" let-i="rowIndex"  let-columns="columns">
+                                <tr style=" background-color: #efeff1;">
+                                        <td pEditableColumn style="border:1px solid rgb(184, 175, 175)">
+                                            <div style="display: flex; justify-content: center;">
+                                                <div style="width:15rem; color:#303133; background-color:#e5ecf0; ; font-weight: 600; height:24.2px"
+                                                    class="vitalflowsheet">
+                                                    {{customHeaders1[i]}}
+                                                </div>
+                                                <div style="width:4rem; background-color:#e5ecf0;  color:#303133;">
+                                                    <i style="padding-right: 6px;" class="pi pi-th-large"
+                                                        (click)="get_data_intable(product)"></i>
+                                                    <i class="pi pi-history" (click)="get_graph_data(product)"></i>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td style="border: 1px solid grey; width:15rem;" *ngFor="let col of columns; let k = index"  class="flowsheetContaner" (click)="sidebardata(col.DateAndTime,'customHeaders',i,k,'HeartRat',customHeaders1[i])" id="{{i}}_{{k}}_HeartRat">
+                                            <span   *ngFor="let datv of dataValues; let j = index">     
+                                                <div class="flowsheetContaner" *ngIf="col.DateAndTime == datv.DateAndTime;"  > {{dataValues[j][customHeaders1[i]]}}</div>
+                                            </span>
+                                        </td>
+                                        
+                                </tr>
+                            </ng-template> -->
+                        </p-table>
+                        <div>
+                        </div>
+                    </div>
+                    <!-- <div style="width:100%">
+                        <div style="display: flex; justify-content: center">
+                            <button (click)="flowsheetsave()"  class="btn btn-outline-info mb-5 mt-2"><i
+                                    class="fa fa-save"> </i> Save </button>
+                        </div>
+                    </div> -->
+                </div>
+            </div>
+        </div>
+        
+    </div>
+    <!-- <p-dialog header="Add Date and Time" [(visible)]="flase1" [style]="{width: '55vw' }">
+        <label style="text-align: left; padding-top: 11px; font-weight: bold;">Date and Time </label>
+        <div>
+            <p-calendar [(ngModel)]="date1" appendTo="body" [showTime]="true" [showSeconds]="true"></p-calendar>
+        </div>
+        <div
+            style="width:100%; display: flex; justify-content: flex-end; border-top: 2px solid rgb(194, 184, 184); margin-bottom: 1rem; margin-top: 1rem;">
+            <div style="margin-top: 1rem;">
+                <button icon="pi pi-save" class="save_button" (click)="pushvalue()"><i class="fa fa-save">&nbsp;</i>Save
+                </button>
+                <button type="button" class="topshift " (click)="canceldisplay()"><i class="fa fa-times">&nbsp;</i>Cancel </button>
+            </div>
+        </div>
+    </p-dialog>  -->
+
+
+    <!-- new form -->
+
+    <p-dialog header="Date and Time" [(visible)]="display" [modal]="true" [responsive]="true" id="trial"
+    [style]="{width: '35vw','height':'26vh'}" (onHide)="canceldisplay()" >
+   
+    <!-- <div class="container"></div> -->
+   
+          
+     <div class="form-group  mt-2">
+
+    <span class="p-float-label " >
+        <p-calendar [(ngModel)]="date1" appendTo="body" [showTime]="true" [showSeconds]="true"
+        [style]="{'width':'100%'}" ></p-calendar>
+
+
+
+        <label for="float-input">Date and Time</label>
+    </span>
+
+
+
+
+        <div class="button-container" >
+
+            <button  (click)="pushvalue()" pButton type="button" style="margin-bottom: 5px;" label="Save"
+                class="p-button-success " ></button>
+
+
+                <!-- <button  (click)="canceldisplay()"pButton type="button" style="margin-bottom: 5px;" label="Cancel" 
+                class="p-button-warning" ></button> -->
+        </div>
+       
+    </div>
+</p-dialog>
+
+<!-- new form end -->
+    <p-sidebar [(visible)]="displaysidebar" [style]="{width:'25rem','margin-top':'5.5rem','height':'86%'}"
+        position="right" [modal]="false" id="flowssheet_sidebar">
+        <form [formGroup]="flowsheetform">
+            <div id="allergies_component">
+                <div class="col-lg-12 ">
+                    <div class="col-lg-12 form-group" *ngIf="subheaders=='SBP'  || subheaders=='DBP'  || subheaders=='MBP'  || subheaders=='Pulse'  || subheaders=='RR' || subheaders=='spO2'  || subheaders=='O2Flow' ||  subheaders=='Temprature' ||  subheaders=='Height' || subheaders=='Weight' || subheaders=='HeadOFC' || subheaders=='BSA'"
+                    >
+                        <div  class="timeheader">{{subheaders}}</div>
+                        <!-- <div class="timeheader">{{vitalcolms}}</div> -->
+                        <input type="number" formControlName="flowsheetinput" (click)="saveinput()" pInputText />
+                    </div>
+                    <div *ngIf="subheaders=='BP_Site'  || subheaders=='Temprature_site'" class="col-lg-12 form-group">
+                        <label>Select Single Option </label>
+                        <p-dropdown [options]="vitalsitedata" appendTo="body"
+                        optionValue="name" optionLabel="name"  (onChange)="sidwbarfilddataqq()"
+                            formControlName="flowsheedropdowns" id="auto"></p-dropdown>
+                    </div>
+                 <div *ngIf="subheaders=='Cuff_size'"  class="col-lg-12 form-group">
+                        <p-dropdown [options]="cuffsize"
+                            appendTo="body" formControlName="flowsheedropdowns" (onChange)="sidwbarfilddataqq()" optionValue="name" optionLabel="name" id="auto"></p-dropdown>
+                    </div>
+                       <div *ngIf="subheaders=='Method'"  class="col-lg-12 form-group">
+                        <p-dropdown [options]="method" placeholder="Select Method"
+                            appendTo="body" formControlName="flowsheedropdowns" (onChange)="sidwbarfilddataqq()" optionValue="name" optionLabel="name" id="auto"></p-dropdown>
+                    
+                    </div>
+                    <div *ngIf="subheaders=='Position'"  class="col-lg-12 form-group">
+                        <p-dropdown [options]="position" placeholder="Select Position"
+                            appendTo="body" formControlName="flowsheedropdowns" (onChange)="sidwbarfilddataqq()" optionValue="name" optionLabel="name" id="auto"></p-dropdown>
+                    </div>
+                  <div *ngIf="subheaders=='Temprature_Device'"  class="col-lg-12 form-group">
+                        <p-dropdown [options]="Temprature_Device" (onChange)="sidwbarfilddataqq()" placeholder="Select Device" appendTo="body" formControlName="flowsheedropdowns" optionValue="name" optionLabel="name"></p-dropdown>
+
+                    </div>
+                    <div *ngIf="subheaders=='Consciousness'"  class="col-lg-12 form-group">
+                        <p-dropdown [options]="Consciousness" (onChange)="sidwbarfilddataqq()" placeholder="Select Consciousness" appendTo="body" formControlName="flowsheedropdowns" optionValue="shortName" optionLabel="shortName"></p-dropdown>
+
+                    </div> 
+                    <div *ngIf="subheaders=='HpercapnicRF' || subheaders=='SuplementalO2'" class="col-lg-10 form-group">
+                        <div class="timeheader">{{subheaders}}</div>
+                        <p-dropdown [options]="beoleandata"
+                            (onChange)="sidwbarfilddataqq()" placeholder="Select Consciousness"
+                            appendTo="body" formControlName="flowsheedropdowns"
+                            optionValue="name" optionLabel="name"></p-dropdown>
+
+                    </div>
+                    <!-- <p-selectButton id="conciousnessoptions" [options]="patientservice.patientViewModel.getMaster_consciousness" formControlName="Consciousness"  (Hover)="onChangePrimaryTarget($event)"  appendTo="body"  optionLabel="shortName" optionValue="id"> -->
+                </div>
+                <div style="padding: .5rem; border: 7px solid rgb(175, 169, 169);">
+                    <div style="display: flex;">
+                        <button type="button" class="btn btn-secondary callculater" (click)="valuepush1(1)">1</button>
+                        <button type="button" class="btn btn-secondary callculater" (click)="valuepush1(2)">2</button>
+                        <button type="button" class="btn btn-secondary callculater" (click)="valuepush1(3)">3</button>
+                        <button type="button" class="btn btn-secondary callculater" (click)="valuepush1(4)">4</button>
+                    </div>
+                    <div style="display: flex;">
+                        <button type="button" class="btn btn-secondary callculater" (click)="valuepush1(5)">5</button>
+                        <button type="button" class="btn btn-secondary callculater" (click)="valuepush1(6)">6</button>
+                        <button type="button" class="btn btn-secondary callculater" (click)="valuepush1(7)">7</button>
+                        <button type="button" class="btn btn-secondary callculater" (click)="valuepush1(8)">8</button>
+                    </div>
+                    <div style="display: flex;">
+                        <button type="button" class="btn btn-secondary callculater" (click)="valuepush1(9)">9</button>
+                        <button type="button" class="btn btn-secondary callculater" (click)="valuepush1(0)">0</button>
+                        <button type="button" class="btn btn-secondary callculater" (click)="valuepush1('.')">.</button>
+                        <button type="button" class="btn btn-secondary callculater" (click)="valuepush1(',')">,</button>
+                    </div>
+                </div>
+                <div
+                    style="width:100%; display: flex; justify-content: center; border-top: 2px solid rgb(216, 208, 208); margin-bottom: 1rem; margin-top: 1rem;">
+                    <div style="margin-top: 1rem;">
+                        <button class="btn btn-outline-info m-1" (click)="savesidebardata()" icon="pi pi-save"><i
+                                class="fa fa-add">&nbsp;</i>Add  </button>
+
+                        <button (click)="flowsheetsave()" icon="pi pi-save" class="btn btn-outline-info"><i
+                                class="fa fa-save">&nbsp;</i>Save </button>
+                    </div>
+                </div>
+
+            </div>
+        </form>
+
+    </p-sidebar>
+    <p-dialog id="tmp" [style]="{width: '65vw','height':'50vh'}" [(visible)]="displaydata" >
+        <ng-template pTemplate="header" [style]="{'background': 'black', 'font-size': '21px' }">
+            {{headerdialog}}
+        </ng-template>
+        <div style="border: 1px solid #bebbbb; padding: 1px;">
+
+            <div style="padding: 2px;border: 1px solid rgb(190, 187, 187); height: 40vh; overflow: scroll; ">
+                <p-table [value]="viewdetaildata" styleClass="p-datatable-striped" [tableStyle]="{'width': '60vw'}" rowi>
+                    <ng-template pTemplate="header" >
+                        <tr>
+                            <th tyle="width: 10%;">
+                                S.No
+                            </th>
+                            <th style="width: 40%;">
+                                {{headerdialog}}
+                            </th>
+                            <th style="width: 50%;">
+                                Date
+                            </th>
+
+                        </tr>
+                    </ng-template>
+                    <ng-template pTemplate="body" let-product index  let-i="rowIndex">
+                        <tr>
+                            <td tyle="width: 10%;">
+                                {{i+1}}
+                            </td>
+                            <td style="width: 40%;">
+                                {{product.name}}
+                            </td>
+                            <td style="width: 50%;">
+                                {{product.DateAndTime}}
+                            </td>
+                        </tr>
+                    </ng-template>
+                </p-table>
+            </div>
+        </div>
+        <div style="width:100%;    padding: 10px; display: flex; justify-content: flex-end;">
+            <p-button class="pbutton" label="Close" icon="pi pi-times" (click)="closedialogs()"
+                [style]="{'margin-left': '10px','height': '34px','background-color':'rgb(187 186 184)', 'border':'none','padding':'0.5rem 0.8rem','border-radius':'2px','font-weight':'500'}"></p-button>
+
+        </div>
+    </p-dialog>
+    <p-dialog header="{{headerdialogs}}" id="allergies_component" [(visible)]="displayDialogGraph"
+    [modal]="true" [style]="{width: '70vw',height:'90vh'}" [draggable]="false"
+    [resizable]="false">
+
+    <div  style="display: flex;align-items: center; justify-content: center;width: 100%; ">
+        <p-chart [responsive]=true type="line" width="1230px" id="myChart1"
+            (onDataSelect)="selectData($event)" height="730px" [data]="graphdatas"
+            [options]="advanceSingleoption"></p-chart>
+    </div>
+</p-dialog>
+</div>       

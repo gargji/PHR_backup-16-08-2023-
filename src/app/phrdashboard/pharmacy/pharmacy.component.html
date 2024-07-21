@@ -1,0 +1,247 @@
+<p-toast position="top-right"></p-toast>
+<p-confirmDialog [style]="{width: '40vw'}"></p-confirmDialog>
+
+<p-dataView [value]="cars">
+    <ng-template pTemplate="header">
+        <div class="flex flex-column md:flex-row md:justify-content-between con" style="margin-top: 2%;">
+            <div class="Medication">
+                <h1>My Pharmacy <i class="fa fa-solid fa-suitcase-medical"></i></h1>
+            </div>
+            <div class="actionbtn">
+                <p-button (click)="showModalDialog()" class="madicationAdd custom-button" icon="pi pi-plus"
+                    label="Add Pharmacy "></p-button>
+              
+                <p-dialog header="Header" [(visible)]="displayModal" [modal]="true" [responsive]="true" id="trial"
+                    (onHide)="Medication($event)">
+                    <ng-template pTemplate="header">
+                        <span  class="text-xl font-bold">Add Pharmacy</span>
+                        <!-- <span *ngIf="isEdit" class="text-xl font-bold">Update procedure</span> -->
+                    </ng-template>
+                    <!-- <div class="container"></div> -->
+                 
+                    <form [formGroup]="procedureinsert" prependId="false" style="margin-top: 10px;">
+                        <div class="form-container">
+                            <div class="form-group row ">
+                                <div class="col-sm-6"> 
+                                    <span class="p-float-label">
+                    
+                                    <input pInputText type="text" placeholder="Pharmacy Name"  [ngClass]="showErrorBorderOnControls(procedureinsert.controls.Pharmacy_Name)"  [style]="{'width':'100%'}" formControlName="Pharmacy_Name"  />
+                                    <label for="float-input">Pharmacy Name</label>
+                                </span>
+                            </div>
+                                <div class="col-sm-6 colmedi5">
+                                    <span class="p-float-label">
+                    
+                                        <input pInputText type="text"  placeholder="Pharmacy Email" [ngClass]="showErrorBorderOnControls(procedureinsert.controls.Pharmacy_Email)"[style]="{'width':'100%'}" formControlName="Pharmacy_Email" />
+                                        <label for="float-input">Pharmacy Email</label>
+                                    </span>
+                                </div>
+
+
+
+                            </div>
+
+                            <div class="form-group row mt-5 ">
+                                <div class="col-sm-6"> 
+                                    <span class="p-float-label">
+                    
+                                    <input pInputText type="number"  [ngClass]="showErrorBorderOnControls(procedureinsert.controls.Mobile)"  [style]="{'width':'100%'}" formControlName="Mobile"  />
+                                    <label for="float-input">Mobile</label>
+                                </span>
+                            </div>
+                                <div class="col-sm-6 colmedi5">
+                                    <span class="p-float-label">
+                    
+                                        <input pInputText type="number"  [style]="{'width':'100%'}" formControlName="Phone" [ngClass]="showErrorBorderOnControls(procedureinsert.controls.Phone)"/>
+                                        <label for="float-input">Phone</label>
+                                    </span>
+                                </div>
+
+
+
+                            </div>
+                       
+                            <!-- <div class="form-group mt-5">
+                            <p-dropdown [options]="proceduretype" [ngClass]="" [style]="{'width':'100%'}"
+                                formControlName="procedure_type" placeholder="Procedure Type"
+                                optionLabel="procedure_type"[showClear]="true"></p-dropdown>
+                        </div> -->
+
+                            <!-- indication for procedure -->
+                            <div class="form-group mt-5 ">
+                                <span class="p-float-label">
+
+                                    <textarea id="float-input" rows="1" cols="10" formControlName="Address" pInputTextarea [ngClass]="showErrorBorderOnControls(procedureinsert.controls.Address)"
+                                    [style]="{'width':'100%'}"></textarea>
+                                    <label for="float-input">Address</label>
+                                </span>
+
+
+
+                            </div>
+                            <div class="form-group mt-5">
+                                <div class="container-fluid">
+                                    <div class="row">
+                                        <div class="col-sm-6 colmedi">
+                                            <!-- <p-dropdown [options]="Instrationsshow"
+                                          
+                                            [style]="{'width':'100%'}" formControlName="Country" 
+                                            placeholder="Country" optionLabel="name" appendTo="body"
+                                            [showClear]="true"></p-dropdown> -->
+                                            <span class="p-float-label">
+
+                                            <p-autoComplete  [forceSelection]="true" formControlName="country" 
+                                            [style]="{'width':'100%'}" appendTo="body" [ngClass]="showErrorBorderOnControls(procedureinsert.controls.country)"(onSelect) 
+                                            ="getStatesdataSelectedCountry($event)" (completeMethod)="findCountry($event)"    [showEmptyMessage]="true" [suggestions]="results"  field="Country" [minLength]="3"
+                                            placeholder=""></p-autoComplete>
+                                            <label for="float-input">Country</label>
+                                        </span>
+                                        </div>
+                                        <div class="col-sm-6 colmedi4">
+                                        <!-- <p-dropdown [options]="patientproblemdata"
+                                 
+                                        [style]="{'width':'100%'}" formControlName="State"
+                                        placeholder="State" optionLabel="problem_name" appendTo="body"
+                                        [showClear]="true"></p-dropdown> -->
+                                        <p-dropdown [ngClass]="showErrorBorderOnControls(procedureinsert.controls.district)"  placeholder="State" 
+                                        [style]="{'width':'100%'}" formControlName="state" [options]="state1" appendTo="body" [filter]="true" (onChange)="getStatesdataSelectedDistric($event)" optionLabel="states_name"     optionValue="states_name"></p-dropdown>
+                                    </div>
+                                    </div>
+                                </div>
+                               
+                            </div>
+
+                            <div class="form-group mt-5">
+                                <div class="container-fluid">
+                                    <div class="row">
+                                        <div class="col-sm-6 colmedi">
+                                            <!-- <p-dropdown [options]="Instrationsshow"
+                                          
+                                            [style]="{'width':'100%'}" formControlName="City" 
+                                            placeholder="City" optionLabel="name" appendTo="body"
+                                            [showClear]="true"></p-dropdown> -->
+                                            <!-- <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8"> -->
+                                                <p-dropdown (onChange)="selectDistictData($event)" [ngClass]="showErrorBorderOnControls(procedureinsert.controls.district)" placeholder="District" appendTo="body"  [style]="{'width':'100%'}"formControlName="district" [options]="distict1"    optionValue="district_name" optionLabel="district_name"   [filter]="true"></p-dropdown>
+                                            </div>
+                                        <div class="col-sm-6 colmedi4">
+                                            <span class="p-float-label">
+                                            <p-autoComplete  formControlName="postalCode" [forceSelection]="true" appendTo="body" [style]="{'width':'100%'}" [ngClass]="showErrorBorderOnControls(procedureinsert.controls.postalCode)"   (completeMethod)="findPostalCode($event)"  optionValue="id"  [showEmptyMessage]="true" [suggestions]="postalcode"  field="postalcode" [minLength]="3"></p-autoComplete>
+                                            <label for="float-input">Postal Code</label>
+                                        </span>
+                                    </div>
+                                    </div>
+                                </div>
+                               
+                            </div>
+
+                            <!-- <div class="form-group mt-5">
+
+                                <span class="p-float-label">
+                                    <p-calendar  [ngClass]="showErrorBorderOnControls(procedureinsert.controls.start_date)" inputId="basic" [showIcon]="true" appendTo="body" #myInput
+                                        formControlName="start_date" dateFormat="dd/mm/yy" [style]="{'width':'100%'}"
+                                        id="helthproblem"></p-calendar> 
+
+
+
+                                    <label for="float-input">Date onset</label>
+                                </span>
+                            </div> -->
+
+                            <!-- <div class="form-group mt-5">
+                                <span class="p-float-label">
+                                    <textarea id="float-input" rows="1" cols="10" formControlName="note" pInputTextarea
+                                        [style]="{'width':'100%'}"></textarea>
+                                    <label for="float-input">Note</label>
+                                </span>
+                            </div> -->
+                        </div>
+                        <div class="button-container">
+
+                            <button pButton type="button" label="Submit" (click)="submit_procedure()"
+                                class="p-button-success"></button>
+                        </div>
+                        <!-- <div class="button-container" *ngIf="isEdit">
+
+                            <button pButton type="button" label="Update" (click)="update_procedure(editid)"
+                                class="p-button-success"></button>
+                        </div> -->
+                    </form>
+                </p-dialog>
+
+                <!-- <p-dataViewLayoutOptions></p-dataViewLayoutOptions> -->
+            </div>
+        </div>
+    </ng-template>
+
+    <ng-template let-car pTemplate="listItem">
+        <p-table [value]="medicationdata" responsiveLayout="scroll" paginatorPosition="bottom" #dt1 dataKey="id"
+            [paginator]="true"  styleClass="p-datatable-striped" 
+            [globalFilterFields]="['emailId','userId','statename','CountryName', 'phone','Specialityname','cityname',  'clinicName']"
+            scrollDirection="both" styleClass="p-mt-3" [scrollable]="true" [rowsPerPageOptions]="[10,15,25,50]"
+            [rows]="15">
+            <ng-template pTemplate="caption">
+                <div class="flex globalSearch">
+                    <p style="font-weight: bold; font-size: 1.2rem; margin-bottom: 0;">Total
+                        Records:{{medicationlength}} <span class="dislength"></span></p>
+                </div>
+            </ng-template>
+            <ng-template pTemplate="header">
+
+                <tr>
+                    <th style="width:5%;border-top:2px solid #e7ecf1;" pSortableColumn="sno">
+                        <!-- <p-sortIcon
+                            field="Sno"></p-sortIcon> -->
+                        S.No
+                    </th>
+                    <th style="width:15%;border-top:2px solid #e7ecf1;" pSortableColumn="name"> <p-sortIcon
+                            field="name"></p-sortIcon>Pharmacy Name</th>
+                    <th style="width:8%;border-top:2px solid #e7ecf1;" pSortableColumn="term"> <p-sortIcon
+                            field="term"></p-sortIcon> Email</th>
+                    <!-- <th style="width:8%;border-top:2px solid #e7ecf1;" pSortableColumn="Frequency"><p-sortIcon
+                            field="Frequency"></p-sortIcon>Frequency</th> -->
+                  
+                    <th style="width:10%;border-top:2px solid #e7ecf1;" pSortableColumn="EndDate"><p-sortIcon
+                            field="EndDate"></p-sortIcon> Mob</th>
+                    <th style="width:10%;border-top:2px solid #e7ecf1;" pSortableColumn="RouteName"><p-sortIcon
+                            field="RouteName"></p-sortIcon> phone</th>
+                            <th style="width:10%;border-top:2px solid #e7ecf1;" pSortableColumn="DatePerformed"><p-sortIcon
+                                field="DatePerformed"></p-sortIcon> address</th>
+                    <th style="width:10%;border-top:2px solid #e7ecf1;" pSortableColumn="PrimaryCondition"><p-sortIcon
+                            field="PrimaryCondition"></p-sortIcon>Country</th>
+                    <th style="width:10%;border-top:2px solid #e7ecf1;" pSortableColumn="Notes"><p-sortIcon
+                            field="Notes"></p-sortIcon> state</th>
+                            <th style="width:10%;border-top:2px solid #e7ecf1;" pSortableColumn="Notes"><p-sortIcon
+                                field="Notes"></p-sortIcon> city</th>
+                                <th style="width:10%;border-top:2px solid #e7ecf1;" pSortableColumn="Notes"><p-sortIcon
+                                    field="Notes"></p-sortIcon> postal_code</th>
+                    <th style="width:10%;border-top:2px solid #e7ecf1;" pSortableColumn="Notes"> Action</th>
+
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-item let-i="rowIndex">
+                <tr>
+                    <td style="width:5%; ">{{i + 1}}</td>
+                    <td style="width:15%;">{{item.pharmacy_name}}</td>
+                    <td style="width:8%;">{{item.pharmacy_email}}</td>
+                    <!-- <td style="width:8%;">{{item.FrequencyName}}</td> -->
+         
+                    <td style="width:10%;">{{item.mobile}}</td> 
+             <td style="width:5%;">{{item.phone}}</td>
+             <td style="width:10%;">{{item.pharmacy_address}}</td>
+                    <td style="width:10%;">{{item.county}}</td>
+                    <td style="width:10%;">{{item.state}}</td>
+                    <td style="width:10%;">{{item.city}}</td>
+                    <td style="width:10%;">{{item.postal_code}}</td>
+                 
+                    <td  style="width:10%;">
+                        <!-- <button *ngIf="item.uploaded_by=='PHR'" class="btn btn-outline-info mr-2" (click)="edit_procedure(item.id)"><i class="pi pi-fw pi-pencil"></i></button> -->
+                        <button  class="btn btn-outline-danger" (click)="delete_procedure(item.id)"><i class="pi pi-fw pi-trash"></i></button>
+
+                    </td>
+                </tr>
+            </ng-template>
+
+        </p-table>
+    </ng-template>
+
+</p-dataView>

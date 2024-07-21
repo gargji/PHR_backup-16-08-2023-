@@ -1,0 +1,73 @@
+<p-toast position="top-right"></p-toast>
+<p-confirmDialog [style]="{width: '25vw'}"></p-confirmDialog>
+
+<div class="uploadfile col-lg-12 col-md-12 col-sm-12">
+  <button class="btn btn-primary" style="float: right;margin-top: 4rem;" (click)="show()">digital signature</button>
+  <!-- (ngSubmit)="OnSubmit($event)" -->
+  <form [formGroup]="signatureupload" >
+   
+    <div class="file-upload" style="padding-top: 5%;">
+      
+      <!-- <button class="file-upload-btn" type="file" >Add Your Signatures </button> -->
+      
+      <!-- <input type="file" class="file-upload-btn"  (change)="onFileSelected($event)"> -->
+    
+      <div class="image-upload-wrap">
+        <input class="file-upload-input" (change)="onFileChange($event)"  type='file' accept="image/*" />
+        <div class="drag-text" >
+          <h3>Drag and drop a file or select add Image </h3>
+          <h2 class="SignatureHeadding">Please sign your signatures on a blank sheet.</h2>
+          <div >
+            <img [src]="safeURl(url)"  alt="no signature upload" height="250" width="auto" style="margin-bottom: 20px; max-width: 100%;">
+           
+
+          </div>
+          
+        </div>
+      </div>
+     <div class="row" style="justify-content: center;">
+      <div class="submit_btn" >
+        <button  class="file_upload_submitadd" (click)="submit_signature()" >Upload</button>
+
+    </div>
+    <div class="delete_btn" >
+      <button  class="file_delete_submitadd" (click)="delete_sgnature(patientID)" >Delete</button>
+
+  </div>
+     </div>
+     
+    </div>
+
+  </form>
+    
+</div>
+
+
+
+<!-- <div class="" style="border: 1px solid black;">
+  <canvas #canvas width="400" height="400"></canvas>
+</div> -->
+
+<p-dialog header="Add Problem " [(visible)]="display" [modal]="true"
+[responsive]="true" id="trial">
+<form [formGroup]="signatureupload" >
+<canvas #canvas width="500" height="500"></canvas>
+<div class="button-container">
+  <!-- <button pButton type="button" label="Cancel" class="p-button-secondary" ></button> -->
+  <div class="row" style="justify-content: center;">
+    <div class="submit_btn" >
+      <button  class="file_upload_submitadd" (click)="savePad()" >Upload</button>
+
+  </div>
+  <div class="delete_btn" >
+    <button  class="file_delete_submitadd" (click)="clear()" >clear</button>
+
+</div>
+</div>
+</div>
+</form>
+</p-dialog>
+
+<!-- <button (click)="clear()">clear</button>
+<button (click)="savePad()">save</button> -->
+

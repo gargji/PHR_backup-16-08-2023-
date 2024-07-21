@@ -1,0 +1,465 @@
+<p-toast position="top-right"></p-toast>
+<a routerLink="Invoice" class="topheadtext"><i class="fa fa-credit-card naviconother" aria-hidden="true">
+    </i> &nbsp;Billing Summary
+</a>
+<a  (click)="sharerecord()" class="topheadtext" style="color:#000"><i class="fa fa-share-square-o naviconother"
+        aria-hidden="true">
+    </i> &nbsp;Share My Record
+</a>
+<!-- <a href="#" class="topheadtext"><i class="fa fa-wpexplorer naviconother" aria-hidden="true">
+        </i> &nbsp;Lucy  
+        </a> -->
+<a routerLink="#" class="topheadtext"><i class="fa fa-link naviconother" aria-hidden="true">
+    </i> &nbsp;Link My Accounts
+</a>
+<a routerLink="massage" class="topheadtext"><i class="fa fa-envelope naviconother" aria-hidden="true">
+    </i> &nbsp;Message
+</a>
+<a routerLink="book_appointment" class="topheadtext"><i class="fa fa-calendar-o naviconother" aria-hidden="true">
+    </i> &nbsp;Book an Appointment
+</a>
+<div class="userdropdown">
+
+    <div class="navbar" style="padding:0px">
+        <i class="pi  pi-cog" style="font-size: 2rem" (click)="setting()"></i>
+        <div class="dropdown " style="padding-top: 3px;">
+            <button class="dropbtn">
+                <h1>{{singlecarreataer}}</h1>
+                <span style="padding-top: 10px;">{{usernames}}</span>
+                <i class="fa fa-caret-down" style="padding-top: 15px; padding-left: 5px;"></i>
+            </button>
+
+
+            <!-- ngif -->
+            <div class="dropdown-content">
+                <a routerLink="family_appointment" class="Patientfamily">
+                    <h1 style="background-color: rgb(8, 6, 6);">D</h1><span style="padding-top: 10px;">Deepak</span>
+                </a>
+                <a routerLink="family_appointment" class="Patientfamily">
+                    <h1 style="background-color: rgb(226, 14, 14);">B</h1><span style="padding-top: 10px;">Brind</span>
+                </a>
+                <a routerLink="family_appointment" class="Patientfamily">
+                    <h1 style="background-color: rgb(170, 131, 25);">H</h1><span
+                        style="padding-top: 10px;">Himanshu</span>
+                </a>
+                <a routerLink="family_appointment" class="Patientfamily">
+                    <h1 style="background-color: rgb(16, 78, 212);">A</h1><span style="padding-top: 10px;">Aman</span>
+                </a>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+
+
+
+
+
+
+
+<!-- <link href="https://fonts.googleapis.com/css?family=Work+Sans:400,600,700&display=swap" rel="stylesheet"> -->
+
+<!-- <div *ngIf="show1"> -->
+
+
+<!-- <p-button (click)="showDialog()" icon="pi pi-external-link" label="Show"></p-button> -->
+<p-dialog header="Manage Accounts" [(visible)]="show1" [style]="{width: '70vw ',height:'60vh'}" [modal]="true"
+    id="accountdilog" [draggable]="true">
+
+    <div class="layout">
+        <input name="nav" type="radio" class="nav home-radio" id="home" checked="checked" />
+        <div class="page home-page">
+            <div class="page-contents">
+                <!-- <h2>Home</h2> -->
+                <!-- <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quas voluptates dolore id aspernatur odit minus quidem deleniti ab rerum exercitationem dolores neque officiis explicabo possimus blanditiis sed, voluptatem ut. Ab?</p>
+        <p><label for="about">Learn more</label></p> -->
+                <p>family</p>
+
+
+            </div>
+        </div>
+        <label class="nav My_Family" for="home" (click)="activetab('My_Family')">
+            <span>
+                <i class="pi pi-users"></i>
+                My Family
+            </span>
+        </label>
+
+        <input name="nav" type="radio" class="nav home-radio" id="My Contacts" checked="checked" />
+        <div class="page home-page">
+            <div class="page-contents">
+                <p>
+                    contact page
+                </p>
+            </div>
+        </div>
+        <label class="nav My_Contacts" for="My Contacts"  (click)="activetab('My_Contacts')">
+            <span>
+                <i class="pi pi-phone"></i>
+                My Contacts
+            </span>
+        </label>
+
+        <input name="nav" type="radio" class="about-radio" id="Account Info" />
+        <div class="page about-page">
+            <div class="page-contents">
+
+                <form [formGroup]="accountinfo" style="margin-top: 10px;">
+
+                    <div style="height: calc(100vh - 40rem) !important;">
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <!-- <h2>genral informtion</h2> -->
+                                <div class="mb-3 row">
+                                    <label style=" color: black; font-weight: bold;" for="staticEmail"
+                                        class="col-sm-3 col-form-label">First Name :</label>
+                                    <div class="col-sm-9">
+                                        <input pInputText formControlName="fname" [style]="{'width':'100%'}" />
+                                    </div>
+                                </div>
+                                <div class="mb-3 row">
+                                    <label style=" color: black; font-weight: bold;" for="staticEmail"
+                                        class="col-sm-3 col-form-label">Last Name :</label>
+                                    <div class="col-sm-9">
+                                        <input pInputText formControlName="lname" [style]="{'width':'100%'}" />
+                                    </div>
+                                </div>
+                                <div class="mb-3 row">
+                                    <label style=" color: black; font-weight: bold;" for="staticEmail"
+                                        class="col-sm-3 col-form-label">Middle Name :</label>
+                                    <div class="col-sm-9">
+                                        <input pInputText formControlName="mname" [style]="{'width':'100%'}" />
+                                    </div>
+                                </div>
+                                <div class="mb-3 row">
+                                    <label style=" color: black; font-weight: bold;" for="staticEmail"
+                                        class="col-sm-3 col-form-label">Phone :</label>
+                                    <div class="col-sm-9">
+                                        <input pInputText formControlName="phone" [style]="{'width':'100%'}" />
+                                    </div>
+                                </div>
+                                <div class="mb-3 row">
+                                    <label style=" color: black; font-weight: bold;" for="staticEmail"
+                                        class="col-sm-3 col-form-label">Email :</label>
+                                    <div class="col-sm-9">
+                                        <!-- <p-inputgroup> -->
+                                        <span>{{userdata?.emailId1}}</span>
+                                        <button (click)="emailedit()" class="btn  m-2"
+                                            style="background-color: #5271e4; color: white;"><i class="pi pi-pencil
+                                        "></i></button>
+                                        <!-- </p-inputgroup> -->
+                                    </div>
+                                </div>
+
+
+                            </div>
+                            <div class="col-lg-6">
+                                <!-- <h2 style="color: black;">contact information</h2> -->
+
+                                <div class="mb-3 row">
+                                    <label style=" color: black; font-weight: bold;" for="staticEmail"
+                                        class="col-sm-3 col-form-label">Country :</label>
+                                    <div class="col-sm-9">
+                                        <p-autoComplete (completeMethod)="filtercountry($event)"
+                                            formControlName="Country" [suggestions]="countrydata" appendTo="body"
+                                            [forceSelection]="true" field=Country [style]="{'width':'100%'}"
+                                            [inputStyle]="{'width':'100%'}" [minLength]="3"
+                                            (change)="getstate($event)"></p-autoComplete>
+                                        <!-- <input type="text" formControlName="Frequency_name" [style]="{'width':'100%'}" pInputText [(ngModel)]="medFreequancy">  -->
+                                        <!-- <input pInputText  formControlName="Country"   
+                                [style]="{'width':'100%'}"/> -->
+                                    </div>
+                                </div>
+
+                                <div class="mb-3 row">
+                                    <label style=" color: black; font-weight: bold;" for="staticEmail"
+                                        class="col-sm-3 col-form-label">State :</label>
+                                    <div class="col-sm-9">
+                                        <p-dropdown [options]="statedata" [style]="{'width':'100%'}"
+                                            formControlName="state" appendTo="body" optionLabel="states_name"
+                                            [showClear]="true" (onChange)="getcity($event)"></p-dropdown>
+                                        <!-- <input type="text" formControlName="Frequency_name" [style]="{'width':'100%'}" pInputText [(ngModel)]="medFreequancy">  -->
+                                    </div>
+                                </div>
+                                <div class="mb-3 row">
+
+                                    <label style=" color: black; font-weight: bold;" for="staticEmail"
+                                        class="col-sm-3 col-form-label">City :</label>
+                                    <div class="col-sm-9">
+                                        <p-dropdown [options]="citydata" [style]="{'width':'100%'}"
+                                            formControlName="city" placeholder="" optionLabel="district_name"
+                                            [showClear]="true" appendTo="body"></p-dropdown>
+                                        <!-- <input type="text" formControlName="Frequency_name" [style]="{'width':'100%'}" pInputText [(ngModel)]="medFreequancy">  -->
+                                    </div>
+                                </div>
+
+
+                            </div>
+
+                            <div class="text-right w-100"
+                                style="margin-right: 1.5rem !important; margin-bottom: 0.5rem;">
+                                <button class="btn" style="background-color: #5271e4; color: white;">Submit</button>
+                            </div>
+                        </div>
+                    </div>
+
+                </form>
+
+            </div>
+
+        </div>
+
+        <label class="nav Account_Info" for="Account Info"  (click)="activetab('Account_Info')">
+            <span>
+                <i class="pi pi-user-edit"></i>
+                Account Info
+            </span>
+        </label>
+
+        <input name="nav" type="radio" class="contact-radio" id="Change Passsword" />
+        <div class="page contact-page w-50" >
+            <div class="page-contents">
+
+                <form [formGroup]="changepassword" style="margin-top: 10px;">
+
+                    <div style="height: calc(100vh - 45rem) !important;">
+
+                        <!-- <h2>genral informtion</h2> -->
+                        <div class="mb-3 row">
+                            <label style=" color: black; font-weight: bold;" for="staticEmail"
+                                class="col-sm-3 col-form-label">Cuurent Password :</label>
+                            <div class="col-sm-9">
+                                <input pInputText formControlName="cuurentpass" [style]="{'width':'50%'}" />
+                            </div>
+                        </div>
+                        <div class="mb-3 row">
+                            <label style=" color: black; font-weight: bold;" for="staticEmail"
+                                class="col-sm-3 col-form-label">New Password :</label>
+                            <div class="col-sm-9">
+                                <input pInputText formControlName="newpass" [style]="{'width':'50%'}" />
+                            </div>
+                        </div>
+                        <div class="mb-3 row">
+                            <label style=" color: black; font-weight: bold;" for="staticEmail"
+                                class="col-sm-3 col-form-label">Confirm  Password :</label>
+                            <div class="col-sm-9">
+                                <input pInputText formControlName="confirmnewpass" [style]="{'width':'50%'}" />
+                            </div>
+                        </div>
+                        <div class="text-right w-100"
+                            style="margin-right: 1.5rem !important; margin-bottom: 0.5rem; margin-top: 32px;">
+                            <button (click)="chnagepass()" class="btn "
+                                style="background-color: #5271e4; color: white;">Submit</button>
+                        </div>
+                    </div>
+
+                </form>
+
+            </div>
+            <!-- <div class="" style="position: absolute; bottom: 0; right: 0;">
+            <button class="btn btn-info">Submit</button>
+    </div> -->
+        </div>
+        <label class="nav Change_Passsword" for="Change Passsword"  (click)="activetab('Change_Passsword')">
+            <span>
+                <i class="pi pi-key"></i>
+                Change Passsword
+            </span>
+
+        </label>
+    </div>
+
+
+
+</p-dialog>
+
+
+
+
+
+<!-- </div> -->
+
+
+<p-dialog header="Manage Accounts" [style]="{width: '70vw ',height:'60vh'}" [modal]="true" id="" [draggable]="true">
+
+    <div class="card">
+        <p-tabView>
+            <p-tabPanel header="Header I">
+                <p>
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore
+                    et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+                    aliquip ex ea commodo
+                    consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat
+                    nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt
+                    mollit anim id est laborum.
+                </p>
+            </p-tabPanel>
+            <p-tabPanel header="Header II">
+                <p>
+                    Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium,
+                    totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae
+                    dicta sunt explicabo. Nemo enim
+                    ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni
+                    dolores eos qui ratione voluptatem sequi nesciunt. Consectetur, adipisci velit, sed quia non numquam
+                    eius modi.
+                </p>
+            </p-tabPanel>
+            <p-tabPanel header="Header III">
+                <p>
+                    At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum
+                    deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non
+                    provident, similique sunt in culpa
+                    qui officia deserunt mollitia animi, id est laborum et dolorum fuga. Et harum quidem rerum facilis
+                    est et expedita distinctio. Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil
+                    impedit quo minus.
+                </p>
+            </p-tabPanel>
+        </p-tabView>
+    </div>
+
+</p-dialog>
+
+
+
+<!--  for share record -->
+<p-dialog header="Share Records" [(visible)]="displayModal" [modal]="true" [responsive]="true" id="trial" [style]="{height:'58vh'}"
+    [resizable]="false" id="trial">
+
+    <form [formGroup]="sharerecordfrom">
+        <div class="form-group mt-2">
+
+
+            <span class="p-float-label">
+
+                <input type="text" [style]="{width: '100%'}" pInputText formControlName="orgamization_name">
+
+                <label for="float-input">organization_name</label>
+
+            </span>
+
+        </div>
+
+        <div class="form-group mt-4">
+            <!-- <p-dropdown appendTo="body"  [options]="Hospitalclinicname"   placeholder="Select Hospital" optionLabel="clinicName"
+            [showClear]="true" optionvalue="guid"  [multiselect]="true"></p-dropdown> -->
+
+            <p-multiSelect placeholder="Select Hospital"  [options]="Hospitalclinicname"  [style]="{'width':'100%'}" formControlName="hospitalname" 
+             optionLabel="clinicName" ></p-multiSelect>
+             <!-- <select id="multiselect" class="form-control" multiple [formControl]="multiselectControl" (change)="onChange($event.target.value)">
+                <option *ngFor="let option of options" [value]="option">{{ option }}</option>
+              </select> -->
+            <!-- (onChange)="location_data($event)" -->
+        </div>
+<div class="form-group mt-5">
+
+
+        <div class="container-fluid ">
+            <div class="row m-2">
+                <div class="col-md-5" style="justify-content: space-between;background-color:#e3e4e7 ;
+        display: flex;">
+                    <label for="">Medication</label>
+                    <!-- <p-toggleButton [(ngModel)]="checked" onLabel="Yes" offLabel="No"></p-toggleButton> -->
+
+                    <p-inputSwitch formControlName="Medication" class="switch"
+                        ></p-inputSwitch>
+
+                </div>
+                <div class="col-md-2"></div>
+                <div class="col-md-5" style="justify-content: space-between;
+   
+    display: flex;background-color:#e3e4e7 ;">
+                    <label for="">Allergies</label>
+                    <p-inputSwitch formControlName="Allergies" class="switch"
+                        ></p-inputSwitch>
+                </div>
+            </div>
+            <div class="row m-2">
+                <div class="col-md-5" style="justify-content: space-between;background-color:#e3e4e7 ;
+    display: flex;">
+                    <label for="">Labs</label>
+                    <!-- <p-toggleButton [(ngModel)]="checked" onLabel="Yes" offLabel="No"></p-toggleButton> -->
+
+                    <p-inputSwitch formControlName="Labs" class="switch" ></p-inputSwitch>
+
+                </div>
+                <div class="col-md-2"></div>
+                <div class="col-md-5" style="justify-content: space-between;
+
+display: flex;background-color:#e3e4e7 ;">
+                    <label for="">Problem List</label>
+                    <p-inputSwitch formControlName="Problem_List" class="switch"
+                      ></p-inputSwitch>
+                </div>
+            </div>
+            
+
+            <div class="row m-2">
+                <div class="col-md-5" style="justify-content: space-between;background-color:#e3e4e7 ;
+    display: flex;">
+                    <label for="">Procedures</label>
+                    <!-- <p-toggleButton [(ngModel)]="checked" onLabel="Yes" offLabel="No"></p-toggleButton> -->
+
+                    <p-inputSwitch formControlName="Procedures" class="switch"
+                    ></p-inputSwitch>
+
+                </div>
+                <div class="col-md-2"></div>
+                <div class="col-md-5" style="justify-content: space-between;
+
+display: flex;background-color:#e3e4e7 ;">
+                    <label for="">Diet</label>
+                    <p-inputSwitch formControlName="Diet" class="switch"></p-inputSwitch>
+                </div>
+            </div>
+            <div class="row m-2">
+                <div class="col-md-5" style="justify-content: space-between;background-color:#e3e4e7 ;
+display: flex;">
+                    <label for="">Immunizations</label>
+                    <!-- <p-toggleButton [(ngModel)]="checked" onLabel="Yes" offLabel="No"></p-toggleButton> -->
+
+                    <p-inputSwitch formControlName="Immunizations" class="switch"
+                       ></p-inputSwitch>
+
+                </div>
+                <div class="col-md-2"></div>
+                <div class="col-md-5" style="justify-content: space-between;
+
+display: flex;background-color:#e3e4e7 ;">
+                    <label for="">Therapies</label>
+                    <p-inputSwitch formControlName="Therapies" class="switch"
+                       ></p-inputSwitch>
+                </div>
+            </div>
+            <div class="row m-2">
+                <div class="col-md-5" style="justify-content: space-between;background-color:#e3e4e7 ;
+display: flex;">
+                    <label for="">Documents</label>
+                    <!-- <p-toggleButton [(ngModel)]="checked" onLabel="Yes" offLabel="No"></p-toggleButton> -->
+
+                    <p-inputSwitch formControlName="Documents" class="switch"
+                    ></p-inputSwitch>
+
+                </div>
+                <div class="col-md-2"></div>
+                <div class="col-md-5" style="justify-content: space-between;
+
+display: flex;background-color:#e3e4e7 ;">
+                    <label for="">Family History</label>
+                    <p-inputSwitch formControlName="Family_History" class="switch"
+                       ></p-inputSwitch>
+                </div>
+            </div>
+
+            
+        </div>
+    </div>
+    <div class="button-container">
+
+        <button pButton type="button" label="Submit" (click)="onSubmit($event)"
+            class="p-button-success"></button>
+</div>
+    </form>
+</p-dialog>
+
+<!--  for share record -->

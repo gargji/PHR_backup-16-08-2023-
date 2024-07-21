@@ -1,0 +1,119 @@
+<!-- <p-dialog header="matebul" [(visible)]="viewdoc" -->
+    <p-toast position="top-right"></p-toast>
+    <p-dialog header="verify secret key" [(visible)]="example" [modal]="true" [responsive]="true" id="trial" class="docview"
+    [style]="{height: '28vh',width:'30vw'}" >
+   
+   
+    <!-- <div class="container"></div> -->
+    <form [formGroup]="matchkeyform" prependId="false" style="margin-top: 10px;">
+        <div class="form-container">
+          
+     
+
+            <div class="form-group ">
+           
+              
+                <span class="p-float-label" >
+                 
+                    <input type="text" [style]="{width: '100%'}" pInputText formControlName="key">
+
+                    <label for="float-input">Enter Secret Key</label>
+          
+                </span>
+
+            </div>
+
+
+           
+
+
+        </div>
+
+
+
+        <div class="button-container" >
+
+            <button pButton type="button" style="margin-bottom: 5px;" label="submit" 
+                class="p-button-success" (click)="onmatch()" ></button>
+        </div>
+       
+    </form>
+</p-dialog>
+
+<!-- </div> -->
+
+
+
+<app-header *ngIf="docview"></app-header>
+
+<div *ngIf="docview"  >
+    <div class="container-fluid " style=" height: 80vh;   ">
+
+        <div class="d-flex" style="height: 80vh;">
+           <div id="collapseWidthExample"  [style.width]="isCollapsed ? '12%' : '0'" [style.transition]="'width 5s'" style="min-width: 13%;background-color: #f5f2f2;   padding-top: 2rem;" class="text-center "  [class.collapse]="isCollapsed">
+                <div style="margin-top: 30%;"></div>
+                <ul *ngFor="let item of docdata">
+                    <li class="li" (click)="docchnage(item)">{{item.fileName}}</li>
+
+                </ul>
+
+
+            </div>
+            <button  style="    display: flex;
+            background: beige;" (click)="toggleCollapse()" class="navbar-toggler"><span class=" pi pi-align-justify" ></span></button>
+            <div class="" style="min-width: 80%; max-width: 100%;width: 100%;">
+
+
+                <!-- <div style="text-align: right;background-color: #f5f2f2; padding: 10px;">
+    <button class="btn btn-outline-info mr-2" ><i class="pi pi-download"></i></button>
+</div>
+                 
+                <iframe src="https://media.istockphoto.com/id/1649298438/photo/joyful-retired-couple-hiking.jpg?s=2048x2048&w=is&k=20&c=NdZsIz0Za4yFt34gqQcNbtZEpAahxO2p_Jk9SPfr2co=" style="width: 100%;height:74vh;" class="img-fluid"></iframe> -->
+                <!-- <div style=""> -->
+                                           
+                          
+                    <div style="width: 80%;   border: 2px dotted;"
+                        *ngIf="file_name.split('.').pop() != 'pdf' && file_name.split('.').pop()!='xlsx'">
+                       
+                      <div style="position: relative;height:74vh; " class=""> <button style="position: absolute;right: 0; background-color: #5271e4; color: white;" class="btn " (click)="downloadDocument()"> <i class="pi pi-download"></i></button>
+                            <img [src]="safeUrl" style=" padding: 10px;max-height: -webkit-fill-available;" class="img-fluid" >
+                        </div>
+
+                    </div>
+                 
+
+                    <div style="width: 80%;   border: 2px dotted;height: 74vh;"
+                    *ngIf="file_name.split('.').pop() !='pdf' && file_name.split('.').pop() =='xlsx'">
+                   
+                     
+                    <div style="position: relative; " class=""> 
+                        <button style="right: 0; position: absolute; background-color: #5271e4; color: white;" class="btn " (click)="downloadDocument()"> <i class="pi pi-download"></i></button>
+                        <h1 style="color:black   ;  font-size: x-large;" class="text-center">Not view  for exal file   <span style="font-size: xx-large;" class="pi pi-file"></span> </h1>
+                 
+                     
+                        <!-- <button style="position: absolute; background-color: #5271e4; color: white;" class="btn " (click)="downloadDocument()"> <i class="pi pi-download"></i></button> -->
+                    </div> 
+
+                </div>
+                    <div
+                        *ngIf="file_name.split('.').pop() == 'pdf' && file_name.split('.').pop()!='xlsx'">
+
+
+                        <iframe [src]="safeUrl" style="width: 100%;height:74vh;" class="img-fluid"></iframe>
+
+
+
+
+                    </div>
+                <!-- </div> -->
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<app-footer *ngIf="docview"></app-footer>
+<!-- </p-dialog> -->

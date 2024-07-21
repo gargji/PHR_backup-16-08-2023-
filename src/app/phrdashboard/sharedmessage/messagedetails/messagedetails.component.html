@@ -1,0 +1,128 @@
+<ng-templete *ngIf="displayMessageList==true">
+<div class="col-lg-12" style="margin-top: 5px;">
+
+  <div class="row conversionheader">
+    <div  class="col-lg-1 conversionmsg">
+     <a (click)="goBack($event)"><i class="fa fa-arrow-left iconsection" aria-hidden="true" > Back</i></a> 
+     
+     <!-- <a (click)="openClickedComponent('Inbox')" data-toggle="collapse" aria-expanded="false" > <i class="fa fa-envelope-o" aria-hidden="true"></i> &nbsp;Inbox</a> -->
+
+    </div>
+   
+    <div class="col-lg-11 conversionmsg">
+
+      <div style=" padding-right: 20px; cursor: pointer;">
+        <a (click)="showBasicDialog()"> <i class="fa fa-reply iconsection"aria-hidden="true"></i>&nbsp;
+          <h1> Reply</h1>
+        </a>
+        <p-dialog header="Reply" [(visible)]="displayBasic" [modal]="true">
+        
+        </p-dialog>
+
+      </div>
+
+
+
+      <a  (click)="boolmarkmessage()"> <i class="fa fa-bookmark iconsection"  aria-hidden="true"></i>&nbsp;
+        <h1 style="cursor: pointer;">bookmarked</h1>
+      </a>
+      &nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
+      <a  (click)="Trashmessage()">
+        <i class="fa fa-trash-o iconsection" aria-hidden="true"></i>&nbsp;
+        <h1 style="cursor: pointer;">Trash</h1>
+      </a>
+    </div>
+  </div>
+  <div class="row">
+  
+    <div class="col-lg-12" style="margin-top: 1%;">
+      <div id="accordion">
+      
+          
+        <div aria-labelledby="headingOne"  *ngFor="let boat of messagedata; let i=index;" class="messagemainsection">
+          <div class="card-body">
+            <div class="image">
+              <img src="assets/img.jpg" style="width: 40px; height: auto;">
+              <span class="nametagdetails">&nbsp; {{boat.message.FirstName}}</span>
+              <h3 class="questionmark">{{boat.message.subject}}</h3>
+              <div style="display: flex; padding: 10px 0px; padding-left: 45px;">
+                <p class="appointmentdetails"> &nbsp;{{boat.message.message}}
+              
+
+             
+              </div>
+              <i *ngIf="boat.message.SenderType=='ehr'" class="fa-solid fa-share"></i>
+              <div class="DateTime">
+                <p>{{boat.message.Transaction_Time.split(' ')[0]}}</p>
+                <p>{{boat.message.Transaction_Time.split(' ')[1]}}</p>
+              
+              </div> 
+            <div style="float: right;">     <p style="margin-bottom: 2rem !important;" [innerHTML]="boat.message.signatures?.replaceAll('<p>', '</br>').replaceAll('</p>', '</span>')"></p></div>
+
+            <!-- [innerHTML]="item.experience?.replaceAll('<p>', '<span>').replaceAll('</p>', '</span>')" -->
+            
+              <a  *ngFor="let doc of boat.document" target="_blank" href="{{imgPath}}{{doc.Document_path}}" download><span  class="time-right"><button class="messageview"> <i class="fa fa-file-text-o" aria-hidden="true"></i>
+                  {{doc.Document_name}}</button></span> </a> &nbsp;&nbsp;
+                
+              <div  class="BoxFooter">
+                <div class="msgdate" style="display:flex; justify-content: flex-end;" >
+                  <p>{{boat.Transaction_Time}}</p>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      
+
+      
+        </div>
+     
+
+
+      <div style="margin-top: 30px;margin-bottom: 20px;">
+        <p-button (click)="showBasicDialog2()" icon="pi pi-external-link" label="Reply Now!"></p-button>
+       
+
+
+        <p-dialog header="Reply" (onHide)="cancelbutton($event)" [(visible)]="display" [modal]="true" > 
+      
+        <app-compousemessage (CancleDialogtoenit)="cancelDialog()"  [Conversation_id]="Conversation_id" [firstname]="firstname" [events]="eventsSubject.asObservable()"> </app-compousemessage>
+      
+        </p-dialog>
+
+      </div>
+    </div>
+  </div>
+</div>
+</ng-templete>
+
+<ng-templete *ngIf="displayMmessageBox"> 
+  <div *ngIf="tab=='draft'">
+    <app-messagedrafts  [Conversation_id]="Conversation_id"></app-messagedrafts>
+  </div>
+  <div *ngIf="tab=='inbox'">
+    <app-messagecontent  [Conversation_id]="Conversation_id"></app-messagecontent>
+  </div>
+  <div *ngIf="tab=='trash'">
+    <app-trash  [Conversation_id]="Conversation_id"></app-trash>
+  </div>
+  <div *ngIf="tab=='Starred'">
+    <app-bookmarked  [Conversation_id]="Conversation_id"></app-bookmarked>
+  </div>
+  <div *ngIf="tab=='Sent'">
+    <app-sentmsg  [Conversation_id]="Conversation_id"></app-sentmsg>
+  </div>
+  <div *ngIf="tab=='Appointment'">
+    <app-messageappointment  [Conversation_id]="Conversation_id"></app-messageappointment>
+  </div>
+  <div *ngIf="tab=='Vaccine'">
+    <app-messagevaccine  [Conversation_id]="Conversation_id"></app-messagevaccine>
+  </div>
+  <div *ngIf="tab=='Labs & Result'">
+    <app-messagelabs  [Conversation_id]="Conversation_id"></app-messagelabs>
+  </div>
+  <div *ngIf="tab=='Reminder'">
+    <app-messagereminder  [Conversation_id]="Conversation_id"></app-messagereminder>
+  </div>
+</ng-templete>

@@ -1,0 +1,213 @@
+
+
+h3{
+    color: #000;
+    font-size: 1.125rem;
+  }
+.column{
+    padding-top: 3%;
+}
+  .comment {
+    position: relative;
+    padding: 15px 0px 20px 10px;
+  }
+  
+  
+
+ 
+  .container::after {
+    content: "";
+    clear: both;
+    display: table;
+  }
+  .MainBlock{
+    background-color: #f3f3f354;
+    padding: 10px 20px;
+    border: 1px dotted   #774bdd;
+    border-radius: 10px;
+    margin-top: 20px;
+    -webkit-box-shadow: -1px 0px 5px 0px rgba(0,0,0,0.2);
+-moz-box-shadow: -1px 0px 5px 0px rgba(0,0,0,0.2);
+box-shadow: -1px 0px 5px 0px rgba(0,0,0,0.2);
+
+  }
+
+
+ /* rightside design */
+
+ .appoteam{
+    font-size: 1rem;
+    border: 1px solid #dbdeed;
+    background-color: #f3eded;
+    /* margin-left: 70px; */
+    padding-top: 10px;
+    width: 100%;
+    border-radius: 5px;
+  font-weight: bold;
+  }
+  .appoteam p{
+    margin-bottom: 10px;
+    padding-left: 15px;
+
+  }
+
+ .appoteam img {
+    float: left;
+    max-width: 50px;
+    width: 100%;
+    margin-right: 10px;
+    border-radius: 50%;
+    margin-top: 0px;
+    margin-left: 5px;
+  }
+  
+  .appoteam img.right {
+    float: right;
+    margin-left: 20px;
+    margin-right:0;
+  }
+.parmacyhead{
+    font-size: 12px;
+}
+.parmacyhead a{
+    font-size: 20px;
+    padding: 9px;
+}
+
+.appointteams{
+    margin-top: 10px;
+}
+
+.appointmentschudule h1{
+    font-size: 1.6rem;
+    color: #5271e4;
+    font-weight: bold;
+    margin: 30px 0px;
+    }
+    
+
+
+
+
+
+
+    /* sndjsdnjsndj */
+
+
+    .profile-header {
+        background: #FFFFFF;
+        box-shadow: 0 0 15px rgba(0, 0, 0, .1);
+        padding: 30px 30px 0;
+      }
+      .profile-header .follow {
+        position: absolute;
+        top: 0;
+        left: 0;
+      }
+      
+      .profile-header .avatar {
+        height: 110px;
+        width: 110px;
+        float: left;
+        margin-right: 20px;
+        background: url('../../../assets/3135715.png');
+        background-size: cover;
+        border-radius: 50%;
+        border: 10px solid #5271e4;
+      }
+      
+      .profile-header .username {
+        font-size: 25px;
+        font-weight: bold;
+      }
+      
+      .profile-header .social i:nth-child(1) {
+        color: #3b5998;
+      }
+      .profile-header .social i:nth-child(2) {
+        color: #3f729b;
+      }
+      .profile-header .social i:nth-child(3) {
+        color: #55acee;
+      }
+      .profile-header .social i:nth-child(4) {
+        color: #bd081c;
+      }
+      
+      .profile-header .counter {
+        text-align: center;
+        font-weight: bold;
+      }
+      
+      .profile-header .counter span:first-child {
+        display: block;
+        font-size: 44px;
+        margin-bottom: -10px;
+      }
+      .profile-header .counter:nth-child(1) {
+        color: #3baeff;
+      }
+      .profile-header .counter:nth-child(2) {
+        color: #00ffae;
+        border-left: 1px solid #EEE;
+      }
+      .profile-header .counter:nth-child(3) {
+        color: #1b0933;
+        border-left: 1px solid #EEE;
+      }
+      .profile-header .user-views div {
+        font-weight: bold;
+          display: inline-block;
+          border-bottom: 3px solid;
+          padding: 30px 60px 10px 60px;
+      }
+      .profile-header .user-views div:nth-child(1) {
+        margin-left:-30px;
+        border-color: #1b0933;
+      }
+      .profile-header .user-views div:nth-child(2) {
+        margin-left:-3px;
+        border-color: #ff5454;
+      }
+      .profile-header .user-views div:nth-child(3) {
+        margin-left:-3px;
+        border-color: #00ffae;
+      }
+
+      .time-right{
+        float: right;
+        color: #aaa;
+    }
+
+    .messageview {
+      background: #5271e4;
+      border: 1px solid #ddd;
+      padding: 5px 10px;
+      color: #fff;
+      border-radius: 5px;
+  }
+
+  .statusdetals{
+    color: #fbf9f9;
+    font-size: 20px;
+    padding-bottom: 10px;
+    font-weight: bold;
+    text-align: center;
+    background: #5271e4;
+    padding-top: 14px;
+  }
+
+
+  .btnmoreappointment{
+    margin-bottom: 50px;
+    margin-top: 30px;
+    text-align: center;
+}
+
+.btnmoreappointment button{
+  border: 1px solid #1d4ed8;
+  background-color: #b0d2fd4a;
+  padding: 5px 10px;
+  color: #1d4ed8;
+  border-radius: 5px;
+}

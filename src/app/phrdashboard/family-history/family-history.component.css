@@ -1,0 +1,67 @@
+.familyhistory{
+    padding-top: 5%;
+  }
+  .familyhistory h1{
+      font-size: 25px; 
+      color:#5271e4; 
+      /* margin-top: 2% ; */
+      font-weight: bold;
+      
+  }
+  .familyhistory p{
+      font-size: 15px; 
+      padding: 10px 0px;
+      
+  }
+  
+
+/* Handle */
+.Maindivscroll::-webkit-scrollbar-thumb {
+    background: rgb(69, 51, 92); 
+    border-radius: 2px;
+  }
+  
+  .medicalhistorytab h2{
+/* font-size: 22px; */
+color: #5271e4; 
+font-size: 22px;
+font-weight: bold;
+margin-bottom: 15px;
+margin-top: 10px;
+  }
+
+  table {
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+  }
+  
+  td{
+    border: 0px solid #dddddd;
+    text-align: left;
+    padding: 8px;
+  }
+  th{
+    background-color: #e3e4e7;
+    text-align: left;
+    /* margin-top: 10px; */
+    padding: 8px;
+  }
+
+  .nodataststus{
+    background-color: rgb(212, 212, 212);
+    padding: 20px 30px;
+    margin: 20px 0px;
+  }
+  .nodataststus h3{
+  text-align: center;
+  font-size: 20px;
+  }
+  .familyhistory2{
+    float: right;
+    margin-top: -4%;
+  }
+  .familyhistory2 i{
+    font-size: 30px;
+    padding: 0px 10px;
+  }

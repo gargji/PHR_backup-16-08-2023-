@@ -1,0 +1,370 @@
+.column {
+    /* margin-top: 40px; */
+    padding-top: 5%;
+}
+
+.healthsummary {
+    padding-top: 5%;
+}
+
+.healthsummary h1 {
+    font-size: 25px;
+    color: #5271e4;
+    /* margin-top: 2% ; */
+    font-weight: bold;
+}
+
+.healthsummary p {
+    font-size: 15px;
+    padding: 10px 0px;
+}
+
+.mainSidebar {
+    height: 87.5vh;
+    bottom: 0px;
+}
+
+@media (max-width: 1366px) {
+    .mainSidebar {
+        height: 82vh;
+        bottom: 0px;
+    }
+}
+
+.Sidebar {
+    background-color: azure;
+}
+
+.topnav {
+    overflow: hidden;
+    background-color: #f3eded;
+    box-shadow: 0px 2px 5px 1px rgb(189 189 189 / 75%);
+}
+
+.topnav a {
+    float: left;
+    color: #000;
+    text-align: center;
+    padding: 5px 16px;
+    text-decoration: none;
+    font-size: 0.938rem;
+    font-weight: bold;
+}
+
+.topnav a:hover {
+    background-color: rgb(243, 237, 237);
+    color: black;
+}
+
+/* .navicon {
+    background-color: #5271e4;
+    padding: 10px;
+    border: 0px;
+    border-radius: 50%;
+    color: #fff;
+} */
+
+.energencyslogan h2 {
+    color: #000;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+/* .callemer {
+    color: #5271e4;
+} */
+
+
+/* card style */
+
+.w3-btn,
+.w3-button {
+    border: none;
+    display: inline-block;
+    padding: 8px 16px;
+    vertical-align: middle;
+    overflow: hidden;
+    text-decoration: none;
+    color: inherit;
+    background-color: inherit;
+    text-align: center;
+    cursor: pointer;
+    white-space: nowrap
+}
+
+.w3-bar-block.w3-center .w3-bar-item {
+    text-align: center
+}
+
+.w3-block {
+    display: block;
+    width: 100%
+}
+
+.w3-container,
+.w3-panel {
+    padding: 0.01em 16px
+}
+
+.w3-panel {
+    margin-top: 16px;
+    margin-bottom: 16px
+}
+
+.w3-card,
+.w3-card-2 {
+    box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12)
+}
+
+.w3-card-4,
+.w3-hover-shadow:hover {
+    box-shadow: 0 4px 10px 0 rgba(0, 0, 0, 0.0), 0 4px 20px 0 rgba(0, 0, 0, 0.19)
+}
+
+.w3-left {
+    float: left!important;
+}
+
+.w3-right {
+    float: right!important;
+}
+
+
+/* Colors */
+
+.w3-grey,
+.w3-hover-grey:hover,
+.w3-gray,
+.w3-hover-gray:hover {
+    color: #000!important;
+    background-color: #9e9e9e!important
+}
+
+.w3-light-grey,
+.w3-hover-light-grey:hover,
+.w3-light-gray,
+.w3-hover-light-gray:hover {
+    color: #000!important;
+    background-color: #f1f1f1!important
+}
+
+.w3-dark-grey,
+.w3-hover-dark-grey:hover,
+.w3-dark-gray,
+.w3-hover-dark-gray:hover {
+    color: #fff!important;
+    background-color: #616161!important
+}
+
+.w3-border-grey,
+.w3-hover-border-grey:hover,
+.w3-border-gray,
+.w3-hover-border-gray:hover {
+    border-color: #9e9e9e!important
+}
+
+.w3-border-light-grey,
+.w3-hover-border-light-grey:hover,
+.w3-border-light-gray,
+.w3-hover-border-light-gray:hover {
+    border-color: #f1f1f1!important
+}
+
+.w3-border-dark-grey,
+.w3-hover-border-dark-grey:hover,
+.w3-border-dark-gray,
+.w3-hover-border-dark-gray:hover {
+    border-color: #616161!important
+}
+
+.BlockMain {
+    margin-top: 30px;
+}
+
+.boxfooter {
+    border-top: 1px solid #616161;
+}
+
+.blockdetail p {
+    /* margin-bottom: 0rem !important; */
+    /* padding: 5px */
+}
+
+.blockdetail {
+    margin-left: 10px;
+}
+
+.blockdetail i {
+    color: #5271e4;
+    /* width: 100%; */
+}
+
+.blockdetail {
+    margin-left: 10px;
+}
+
+.blockadd {
+    padding-top: 50px;
+    padding-bottom: 50px;
+    text-align: center;
+    /* justify-content: center; */
+    margin-top: 30px;
+    border: 1px dashed #616161;
+}
+
+.topnav {
+    position: fixed;
+    width: 100%;
+    z-index: 999;
+}
+
+.Maindivscroll {
+    height: 87vh;
+    overflow: scroll;
+}
+
+.Maindivscroll::-webkit-scrollbar {
+    width: 5px;
+    height: 10px;
+}
+
+
+/* Handle */
+
+.Maindivscroll::-webkit-scrollbar-thumb {
+    background: rgb(69, 51, 92);
+    border-radius: 2px;
+}
+
+.appointmentschudule h1 {
+    font-size: 1.6rem;
+    color: #5271e4;
+    font-weight: bold;
+}
+
+.messageview {
+    background: #5271e4;
+    border: 1px solid #ddd;
+    padding: 5px 10px;
+    color: #fff;
+    border-radius: 5px;
+}
+
+
+/* .Visitscard {
+    height: 32vh
+} */
+
+.text-red {
+    color: rgb(231, 101, 101);
+}
+
+.text-green {
+    color: green;
+}
+
+
+.pastVisitscard{
+    min-height: 276px !important;
+    /* min-height: 235px !important; */
+  }
+ 
+
+
+/* .w3-card-4.Visitscard {
+    width: 50vh;
+} */
+
+@media (max-width: 1297px) {
+    .appointmentschudule {
+        top: 102px
+    }
+}
+
+@media only screen and (max-width: 1298px) {
+    .appointmentschudule {
+        top: 46px
+    }
+}
+
+.btnappoinment {
+    text-align: right;
+    margin-bottom: 5px;
+}
+
+@media (max-width: 1024px) {
+    body {
+        font-size: 14px !important;
+    }
+}
+
+@media only screen and (max-width: 425px) {
+    h1 {
+        font-size: 1.1rem !important;
+    }
+    h3 {
+        font-size: 15px !important;
+    }
+    p {
+        font-size: 15px !important;
+    }
+    .w3-card-4.Visitscard {
+        height: 33vh;
+    }
+    .appointmentschudule h1 {
+        margin-bottom: 7px;
+    }
+    .location {
+        width:200px !important;
+
+    }
+}
+    @media only screen and (max-width: 320px) {
+        .btnappoinment {
+            text-align: center;
+        }
+    }
+    .p-tabview .p-tabview-nav {
+        padding-left: 30px;
+    }
+  
+
+    
+/* } */
+
+@media (max-width: 768px){
+.appointmentschudule {
+    top: 80px;
+}
+}
+
+.pastVisitscard{
+    /* transition:  1s; */
+    /* box-shadow: 0 4px 10px 0 rgba(0, 0, 0, 0.0), 0 4px 20px 0 rgb(71 76 245 / 69%); */
+
+}
+.pastVisitscard{
+   
+/* transform: scale(1.03); */
+/* width:500px */
+}
+.cardp{
+     overflow: hidden;text-overflow: ellipsis; white-space: nowrap;
+
+}
+.dots:hover{
+    border-radius: 50%; 
+    background-color: #e2e2e2;
+    width: 30px;
+    height: 30px;
+  
+    cursor: pointer;
+  }
+
+  .dots1{
+  
+    position: absolute;
+    right: 0.5rem;
+    top: 0.5rem;
+
+  }

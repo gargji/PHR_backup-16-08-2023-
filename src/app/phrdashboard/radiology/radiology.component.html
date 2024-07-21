@@ -1,0 +1,36 @@
+<div class="container-fluid Maindivscroll">
+    <div class="healthsummary">
+        <h1>Test Results(Radiology)</h1>
+        <p>Use the tabs to open a section of your All Test Results.</p>
+    </div>
+    <div class="card">
+                <div class="row">
+                    <div class="col-lg-3" *ngFor="let item of phrradiologydata" >
+                        <div class="w3-card-4">
+
+                            <div class="w3-container BlockMain" >
+                              
+                                <div class="row" style="padding-top: 10px;">
+                                    
+                                    <div class="blockdetail" style="padding-bottom: 10px;">
+
+                                        <p style="font-size: 2  0px; color:rgb(23, 15, 146); font-weight: bold;" > {{item.ParentName}} </p>
+                                        <p><b>Lab Results : </b>{{item.Results}}</p>
+                                        <p><b>Result :</b> {{item.intrepretation}}</p>
+                                        <p><b>Result Date :</b> {{item.resultDate}}</p>
+                                        <i class="fa fa-info-circle" aria-hidden="true"></i> <span> Learn More </span>
+                                    </div>
+                                </div>
+                            </div>
+                            <button class="w3-button w3-block boxfooter"><i class="fa fa-file"
+                                    aria-hidden="true"></i>&nbsp; PDF Report</button>
+                        </div>
+                    </div>
+                </div>
+           
+    </div>
+</div>
+
+
+
+

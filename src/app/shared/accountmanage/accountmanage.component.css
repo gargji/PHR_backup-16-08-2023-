@@ -1,0 +1,322 @@
+
+
+html{
+    height: 50% !important;
+}
+.container-fluid{
+    padding-left: 0;
+    padding-right: 0;
+}
+.li{
+    margin-left: 10%;
+    margin: 0% 0 0 0;
+    text-align: center;
+    padding: 0.6rem;
+}
+
+li.li:hover{
+    transition: cubic-bezier(0.075, 0.82, 0.165, 1);
+    background-color: #757575 !important;
+    color: white !important;
+    cursor: pointer !important;
+    transition: background-color 5s;
+    transition: color 1s
+  
+  }
+  .page-content-wrapper{
+    height: 80vh;
+}
+#trial label{
+    color:#5271e4
+    }
+    span.p-float-label{
+        padding-top: 3px;
+      }
+
+      .button-container {
+        text-align: right;
+        margin-top: 20px;
+       
+          position: relative;
+          top: 2rem;
+    /* bottom: 5px; */
+    
+      }
+
+      .app-documentview{
+        display: block !important;
+      }
+
+
+/* sidebar */
+
+      @media (max-width: 1272px) {
+      
+        #collapseWidthExample{
+          padding-top: 6% !important;
+        }
+      }
+      /* @media (max-width: 1044px) {
+      
+        #collapseWidthExample{
+          padding-top:7% !important;
+          min-width: 15% !important;
+        }
+    
+        .Medication{
+          padding-top: 0.6%;
+    
+        }
+     
+      } */
+      /* @media (max-width: 950px) {
+    
+        #collapseWidthExample{
+      
+          min-width: 17% !important;
+        }
+      } */
+      @media (max-width: 820px) {
+     
+        #collapseWidthExample{
+          padding-top: 9% !important;
+        }
+       
+      }
+      /* @media (max-width: 768px) {
+        #collapseWidthExample{
+          min-width: 19% !important;
+         }
+     
+       } */
+      /* @media (max-width: 706px) {
+     
+        #collapseWidthExample{
+         min-width: 20% !important;
+        }
+    
+       
+      } */
+      /* @media (max-width: 606px) {
+     
+        #collapseWidthExample{
+          min-width: 25% !important;
+          padding-top: 13% !important;
+    
+         }
+         
+      } */
+      @media (max-width: 520px) {
+   
+        #collapseWidthExample {
+          min-width: 30% !important;
+          padding-top: 15% !important;
+      }
+    
+       
+      }
+      @media (max-width: 425px) {
+     
+        #collapseWidthExample {
+         
+          padding-top: 19% !important;
+      }
+    
+      
+       
+      }
+    
+    
+      @media (max-width: 375px) {
+      
+    
+  
+        
+        #collapseWidthExample {
+          min-width: 39% !important;
+          /* padding-top: 15% !important; */
+      }
+    }
+
+
+
+    .sidebar {
+      margin: 0;
+      padding: 0;
+      width: 200px;
+      background-color: #f1f1f1;
+      position: fixed;
+      height: 100%;
+      overflow: auto;
+    }
+    
+    .sidebar a {
+      display: block;
+      color: black;
+      padding: 16px;
+      text-decoration: none;
+    }
+     
+    .sidebar a.active {
+      background-color: #04AA6D;
+      color: white;
+    }
+    
+    .sidebar a:hover:not(.active) {
+      background-color: #555;
+      color: white;
+    }
+    
+    div.content {
+      margin-left: 200px;
+      padding: 1px 16px;
+      height: 1000px;
+    }
+    
+    @media screen and (max-width: 700px) {
+      .sidebar {
+        width: 100%;
+        height: auto;
+        position: relative;
+      }
+      .sidebar a {float: left;}
+      div.content {margin-left: 0;}
+    }
+    
+    @media screen and (max-width: 400px) {
+      .sidebar a {
+        text-align: center;
+        float: none;
+      }
+    }
+    .w3-card-4, .w3-hover-shadow:hover {
+overflow: hidden;
+
+      box-shadow: 0 4px 10px 0 rgba(112, 111, 111, 0.20), 0 4px 20px 0 rgba(206, 206, 206, 0.10);
+border-radius: 5px;
+  }
+
+
+  h1,h2{
+    color: black;
+   
+    font-size: 24px;
+    margin-bottom: 10px;
+    line-height: 28px;
+  }
+h5{
+  color:black
+}
+
+.row{
+  margin-left: 0 !important;
+
+  
+}
+.list,.list1{
+  cursor: pointer;
+ padding-right: 0 !important;
+ /* margin-left:2rem */
+}
+.list:hover{
+  background-color:#55555578;
+  color: blue;
+}
+.list:hover i {
+  color: blue; /* Text color of the <i> element when hovering over list */
+}
+.list:hover h5 {
+  color: blue; /* Text color of the <i> element when hovering over list */
+}
+.mobile  p-avatar{
+  margin-left: 2rem;
+}
+.email  p-avatar{
+  margin-left: 2rem;
+}
+.list1:hover > h5 {
+  color: blue;
+}
+.list1:hover {
+  background-color:#55555578;
+}
+
+.container::-webkit-scrollbar-thumb {
+  background: rgb(69, 51, 92);
+  border-radius: 2px;
+}
+.container::-webkit-scrollbar {
+  width: 5px;
+  height: 10px;
+}
+
+
+#inboxSubMenu li a{
+  background: #c6c6cd !important;
+  color: rgb(49, 49, 49) !important;
+}
+
+#inboxSubMenu li a:hover{
+  background: #5271e4 !important;
+  color: #fff !important;
+}
+
+.submenu {
+  display: none;
+}
+
+.submenu.show {
+  display: block;
+}
+.session p,.session h2{
+  padding: .6rem;
+}
+.info-button {
+  background-color: transparent; /* Make the button transparent */
+  color: #333; /* Set text color */
+  transition: color 0.3s ease; /* Smooth transition for color change */
+}
+
+.info-button:hover {
+  color: #007bff; /* Change color on hover */
+}
+.actn-btn button{
+height: 20px;
+}
+
+/* Add your hover styles here */
+.li:hover {
+  background-color: lightgray;
+  cursor: pointer;
+}
+
+/* Add your active styles here */
+.active {
+  background-color: #555;
+      color: white;
+  /* Add any other styles for the active state */
+}
+
+#collapseWidthExample i{
+  margin-right: 1rem;
+
+}
+/* 
+ */
+ @media only screen and (max-width: 768px) {
+  #collapseWidthExample {
+      width: 8% !important; /* Adjust this width according to your requirement */
+  }
+
+  #collapseWidthExample .menu-text {
+      display: none;
+  }
+  #avtar:hover{
+    cursor: pointer;
+    background-color: #555;
+  }
+
+  
+}
+
+ 

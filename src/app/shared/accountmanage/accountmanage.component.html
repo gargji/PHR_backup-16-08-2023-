@@ -1,0 +1,1550 @@
+<!-- <p-dialog header="matebul" [(visible)]="viewdoc" -->
+<p-toast position="top-right"></p-toast>
+<p-dialog header="verify you " [(visible)]="example" [modal]="true" [responsive]="true" id="trial" class="docview"
+    [style]="{height: '28vh',width:'30vw'}">
+
+
+    <!-- <div class="container"></div> -->
+    <form [formGroup]="matchkeyform" prependId="false" style="margin-top: 10px;">
+        <div class="form-container">
+
+
+
+            <div class="form-group ">
+
+
+                <span class="p-float-label">
+
+                    <input type="text" [style]="{width: '100%'}" pInputText formControlName="key">
+                    <!-- <p-inputOtp  formControlName="key"></p-inputOtp> -->
+                    <label for="float-input">Enter Your Password</label>
+
+                </span>
+
+            </div>
+
+
+
+
+
+        </div>
+
+
+
+        <div class="button-container">
+
+            <button pButton type="button" style="margin-bottom: 5px;" label="submit" class="p-button-success"
+                (click)="onmatch()"></button>
+        </div>
+
+    </form>
+</p-dialog>
+
+<!-- </div> -->
+
+
+
+
+
+
+<app-header [_opened]="1" *ngIf="data1"></app-header>
+
+<div *ngIf="data1">
+    <div class="container-fluid " style=" height: 80vh;   ">
+
+        <div class="d-flex" style="height: 80vh;">
+            <div id="collapseWidthExample" [style.width]="isCollapsed ? '12%' : '14%'" [style.transition]="'width 5s'"
+                style="min-width: 12%; background-color: rgb(57, 59, 59); color:white; padding-top: 2rem;"
+                class="text-center" [class.collapse]="isCollapsed">
+                <div style="margin-top: 30%;"></div>
+                <ul>
+                    <li class="li" (click)="chnagecontainer('PROFILE')" [class.active]="activeMenu === 'PROFILE'">
+                        <span><i class="fa-solid fa-user"></i></span><span class="menu-text">PROFILE</span>
+                    </li>
+                    <li class="li" (click)="chnagecontainer('account')" [class.active]="activeMenu === 'account'">
+                        <span><i class="fa-solid fa-shield"></i></span><span class="menu-text">Account</span>
+                    </li>
+                    <li class="li" (click)="chnagecontainer('Session')" [class.active]="activeMenu === 'Session'">
+                        <span><i class="fa-solid fa-blog"></i></span><span class="menu-text">Session</span>
+                    </li>
+                    <li class="li" (click)="chnagecontainer('Multifactor')"
+                        [class.active]="activeMenu === 'Multifactor'"><span><i
+                                class="fa-solid fa-user-shield"></i></span><span class="menu-text">Multi-Factor <br>
+                            Authentication</span></li>
+                </ul>
+            </div>
+
+            <!-- <button  style="    display: flex;
+            background: beige;" (click)="toggleCollapse()" class="navbar-toggler"><span class=" pi pi-align-justify" ></span></button> -->
+            <div *ngIf="this.conaintershow=='PROFILE'" class="container" style=" max-width: 100%;width: 100%;background-color: #e9eaed;    height: 100%;
+            overflow: auto;">
+
+                <div class="row" style="    " id="information">
+
+
+                    <div class="offset-md-1 col-md-10 mt-5">
+                        <h1> Profile</h1>
+                        <div class="w3-card-4 account" style="background-color:#ffffff;">
+                            <div class="row p-4">
+                                <div class="col-md-1 " id="avtar">
+                                    <!-- <p-avatar icon="pi pi-user" styleClass="mr-4" shape="circle" size="xlarge"></p-avatar> -->
+                                    <p-avatar [image]="imageUrl" class="ml-3" size="xlarge" shape="circle"
+                                        id="imageupload" (click)="openFileUploadDialog()"></p-avatar>
+
+                                    <input type="file" #fileInput style="display: none;"
+                                        (change)="onFileSelected($event)">
+
+
+
+
+
+
+                                </div>
+                                <div class="col-md-10 d-flex">
+                                    <div>
+                                        <h2>{{userdata.displayName}}</h2>
+                                        <p style="margin-top: -5px;">{{userdata.emailId1}}</p>
+                                    </div>
+
+                                </div>
+                                <div class="col-md-1">
+                                    <button (click)="updateuserpersonaldetail()" class="btn btn-outline-info">Update</button>
+                                </div>
+
+                            </div>
+                            <form [formGroup]="accountinfo">
+                                <div class="row">
+                                    <div class="col-lg-1"></div>
+                                    <div class="col-lg-5 ">
+
+                                        <div class="mb-3 ">
+                                            <label style=" color: black; font-weight: bold;" for="staticEmail"
+                                                class="col-lg-3 col-form-label">First Name :</label>
+                                            <div class="col-lg-9">
+                                                <input pInputText formControlName="fname" />
+                                            </div>
+                                        </div>
+                                        <div class="mb-3 ">
+                                            <label style=" color: black; font-weight: bold;" for="staticEmail"
+                                                class="col-lg-3 col-form-label">Last Name :</label>
+                                            <div class="col-lg-9">
+                                                <input pInputText formControlName="lname" />
+                                            </div>
+                                        </div>
+                                        <div class="mb-3 ">
+                                            <label style=" color: black; font-weight: bold;" for="staticEmail"
+                                                class="col-lg-4 col-form-label">Display Name :</label>
+                                            <div class="col-lg-9">
+                                                <input pInputText formControlName="mname" />
+                                            </div>
+                                        </div>
+
+
+
+                                    </div>
+                                    <div class="col-lg-1"></div>
+                                    <div class=" col-lg-5 ">
+                                        <!-- <h2 style="color: black;">contact information</h2> -->
+
+                                        <div class="mb-3 ">
+                                            <label style=" color: black; font-weight: bold;" for="staticEmail"
+                                                class="col-lg-3 col-form-label">Country :</label>
+                                            <div class="col-lg-9">
+                                                <p-autoComplete (completeMethod)="filtercountry($event)"
+                                                    formControlName="Country" [suggestions]="countrydata"
+                                                    appendTo="body" [forceSelection]="true" field=Country
+                                                    [style]="{'width':'100%'}" [inputStyle]="{'width':'100%'}"
+                                                    [minLength]="3"
+                                                    (change)="getStatesdataSelectedDistric($event)"></p-autoComplete>
+                                                <!-- <input type="text" formControlName="Frequency_name" [style]="{'width':'100%'}" pInputText [(ngModel)]="medFreequancy">  -->
+                                                <!-- <input pInputText  formControlName="Country"   
+                                    [style]="{'width':'100%'}"/> -->
+                                            </div>
+                                        </div>
+
+                                        <div class="mb-3 ">
+                                            <label style=" color: black; font-weight: bold;" for="staticEmail"
+                                                class="col-lg-3 col-form-label">State :</label>
+                                            <div class="col-lg-9">
+                                                <p-dropdown [options]="statedata" [style]="{'width':'100%'}"
+                                                    formControlName="state" appendTo="body" optionLabel="states_name"
+                                                    [showClear]="true"
+                                                    (onChange)="getStatesdataSelectedDistric($event)"></p-dropdown>
+                                                <!-- <input type="text" formControlName="Frequency_name" [style]="{'width':'100%'}" pInputText [(ngModel)]="medFreequancy">  -->
+                                            </div>
+                                        </div>
+                                        <div class="mb-3 ">
+
+                                            <label style=" color: black; font-weight: bold;" for="staticEmail"
+                                                class="col-lg-3 col-form-label">City :</label>
+                                            <div class="col-lg-9">
+                                                <p-dropdown [options]="citydata" [style]="{'width':'100%'}"
+                                                    formControlName="city" placeholder="" optionLabel="district_name"
+                                                    [showClear]="true" appendTo="body"></p-dropdown>
+                                                <!-- <input type="text" formControlName="Frequency_name" [style]="{'width':'100%'}" pInputText [(ngModel)]="medFreequancy">  -->
+                                            </div>
+                                        </div>
+
+
+                                    </div>
+
+                                </div>
+                            </form>
+
+                        </div>
+
+                    </div>
+                </div>
+
+
+                <!-- new card for email -->
+                <div class="row email" style="    " id="email">
+
+
+                    <div class="offset-md-1 col-md-10 mt-5">
+
+                        <div class="w3-card-4" style="background-color:#ffffff;">
+                            <div class="m-3 p-3">
+
+
+                                <h1> My Email Addresses</h1>
+                                <p>You can use the following email addresses to sign in to your account and also to
+                                    reset your password if you ever forget it.</p>
+                            </div>
+                            <div class="row ">
+                                <!-- loop lgega -->
+                                <div *ngFor="let item of emaillist2" class=" col-sm-12 d-flex list "
+                                    style="padding: .5rem;">
+                                    <div class="col-lg-10 d-flex">
+                                        <p-avatar icon="pi pi-envelope" styleClass="mr-4" shape="circle"
+                                            size="large"></p-avatar>
+                                        <div>
+
+                                            <h5>{{item.emailId1}} <i class="fa fa-solid fa-crown"></i></h5>
+                                            <p>{{this.getTimeAgo( item.transaction_time)}}</p>
+
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-2 text-center">
+                                        <P style="font-weight: 600;color: green;"> ACTIVE </P>
+                                    </div>
+                                </div>
+
+                                <!-- loop lgega -->
+                                <div *ngFor="let item of emaillist1" class="col-sm-12 d-flex list"
+                                    style="padding: .5rem;">
+                                    <div class="col-lg-10 d-flex">
+                                        <p-avatar icon="pi pi-envelope" styleClass="mr-4" shape="circle"
+                                            size="large"></p-avatar>
+                                        <div>
+
+                                            <h5>{{item.email}}</h5>
+                                            <p>{{this.getTimeAgo( item.transaction_time)}}</p>
+
+                                        </div>
+
+                                    </div>
+                                    <div class="col-lg-2 text-center" style="display: flex;
+                                justify-content: space-evenly;">
+                                        <i (click)="setbydeaulemail(item)" class="fa fa-solid fa-crown"
+                                            style="font-size: larger;"> </i>
+
+                                        <i class="pi pi-trash" style="font-size: larger;"
+                                            (click)="deletemail(item)"></i>
+                                    </div>
+                                </div>
+                                <!-- <div style="border-top: 1px solid black;"></div> -->
+
+                                <div class="col-sm-12  list1"
+                                    style="padding: .5rem;text-align: center;border-top: 1px solid;">
+                                    <h5 (click)="addDATA(2)"><i class="pi pi-plus"></i> Add new email</h5>
+                                </div>
+
+                            </div>
+
+
+                        </div>
+
+                    </div>
+                </div>
+
+                <!-- new card for mobile -->
+                <div class="row mobile mb-5" style="    " id="phone">
+
+
+                    <div class="offset-md-1 col-md-10 mt-5">
+
+                        <div class="w3-card-4" style="background-color:#ffffff;">
+                            <div class="m-3 p-3">
+
+
+                                <h1> My Mobile Numbers</h1>
+                                <p>View and manage all of the mobile numbers associated with your account..</p>
+                            </div>
+                            <div class="row ">
+                                <div *ngFor="let item of mobilenumberlist2" class="col-sm-12 d-flex list"
+                                    style="padding: .5rem;">
+                                    <div class="col-lg-10 d-flex">
+                                        <p-avatar icon="pi pi-phone" styleClass="mr-4" shape="circle"
+                                            size="large"></p-avatar>
+                                        <div>
+
+                                            <h5>{{item.mobilePhone }} <i class="fa fa-solid fa-crown"></i></h5>
+                                            <p>{{this.getTimeAgo( item.transaction_time)}}</p>
+
+                                        </div>
+
+                                    </div>
+                                    <div class="col-lg-2 text-center">
+                                        <P style="font-weight: 600;color: green;"> ACTIVE </P>
+                                    </div>
+                                </div>
+                                <!-- loop lgega -->
+                                <div *ngFor="let item of mobilenumberlist1" class="col-sm-12 d-flex list "
+                                    style="padding: .5rem;">
+                                    <div class="col-lg-10 d-flex">
+                                        <p-avatar icon="pi pi-phone" styleClass="mr-4" shape="circle"
+                                            size="large"></p-avatar>
+                                        <div>
+                                            <h5>{{item.mobile_number }}<i class=" pi pi-crown"></i></h5>
+                                            <p>{{this.getTimeAgo( item.transaction_time)}}</p>
+                                        </div>
+                                    </div>
+
+                                    <!-- <div class="col-lg-10">
+
+                                    </div > -->
+                                    <div class="col-lg-2 text-center" style="display: flex;
+                                    justify-content: space-evenly;">
+                                        <i (click)="setbydeaulmob(item)" class="fa fa-solid fa-crown"
+                                            style="font-size: larger;"> </i>
+
+                                        <i class="pi pi-trash" style="font-size: larger;"
+                                            (click)="deletephone(item)"></i>
+                                    </div>
+                                </div>
+                                <!-- loop lgega -->
+
+                                <div class="col-sm-12  list1"
+                                    style="padding: .5rem;text-align: center;border-top: 1px solid;">
+                                    <h5 (click)="addDATA(1)"><i class="pi pi-plus"></i> Add new Mobile number</h5>
+                                </div>
+
+                            </div>
+
+
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+
+            <!-- for session -->
+
+            <div *ngIf="this.conaintershow=='Session'" class="container" style="min-width: 80%; max-width: 100%;width: 100%;background-color: #e9eaed;    height: 100%;
+            overflow: auto;">
+
+
+
+
+                <!-- new card for acctive session -->
+                <div class="row  email" style="    ">
+
+
+                    <div class="offset-md-1 col-md-10 mt-5">
+
+                        <div class="w3-card-4" style="background-color:#ffffff;">
+                            <div class="m-3 p-3">
+
+
+                                <h1> Active Sessions</h1>
+                                <p>View and manage all of your active sessions..</p>
+                            </div>
+                            <div class="row ">
+                                <!-- loop lgega -->
+                                <div *ngFor="let item of sessiondata" class="col-sm-12 d-flex list "
+                                    style="padding: .5rem;">
+
+                                    <p-avatar *ngIf="item.device=='Desktop'" icon="fa fa-solid fa-desktop"
+                                        styleClass="mr-4" shape="circle" size="large"></p-avatar>
+                                    <p-avatar *ngIf="item.device != 'Desktop'" icon="fa fa-solid fa-mobile"
+                                        styleClass="mr-4" shape="circle" size="large"></p-avatar>
+                                    <div class="col-md-4 ">
+
+                                        <h5>{{item.device}}<i class=" pi pi-crown"></i></h5>
+                                        <p>{{this.getTimeAgo( item.transaction_time)}}</p>
+
+                                    </div>
+
+                                    <div class="col-md-4 session" style="display: flex;">
+                                        <h2 *ngIf="item.device == 'Desktop'"><i class="fa fa-brands fa-windows "></i>
+                                        </h2>
+                                        <h2 *ngIf="item.device != 'Desktop'"><i class="fa fa-brands fa-android "></i>
+                                        </h2>
+                                        <h2 *ngIf="item.browser=='Chrome'"><i class="fa fa-brands fa-chrome "></i></h2>
+                                        <h2 *ngIf="item.browser=='Microsoft Edge'"><i class="fa fa-brands fa-edge "></i>
+                                        </h2>
+                                        <p class="">{{item.location.slice(0, 28) }}</p>
+                                    </div>
+                                    <div class="offset-md-1 col-md-1 session">
+                                        <p *ngIf="item.sessionid==sessionid" style="color:green;font-weight: 600;">
+                                            Active </p>
+                                        <button class="btn btn-danger" *ngIf="item.sessionid !=sessionid"
+                                            (click)="logout(item.sessionid)">Terminate </button>
+                                    </div>
+                                </div>
+                                <!-- loop lgega -->
+                                <!-- <div class="col-sm-12 d-flex list " style="padding: .5rem;">
+                                    <p-avatar icon="fa fa-solid fa-mobile" styleClass="mr-4" shape="circle"
+                                        size="large"></p-avatar>
+                                    <div class="col-md-4">
+
+                                        <h5>Personal Computer <i class=" pi pi-crown"></i></h5>
+                                        <p>7 month ago</p>
+
+                                    </div>
+
+                                    <div class="col-md-4 session" style="display: flex;">
+                                        <h2><i class="fa fa-brands fa-android "></i></h2>
+                                        <h2><i class="fa fa-brands fa-chrome "></i></h2>
+                                        <p class="p-3">Ghaziabad, Uttar Pradesh, India </p>
+                                    </div>
+                                    <div class="offset-md-1 col-md-1 session">
+                                        <p>Terminate</p>
+                                    </div>
+                                </div> -->
+                                <!-- <div style="border-top: 1px solid black;"></div> -->
+
+                                <!-- <div class="col-sm-12  list1"
+                                    style="padding: .5rem;text-align: center;border-top: 1px solid;">
+                                    <h5 (click)="showmaildilog()"><i class="pi pi-plus"></i> Add new email</h5>
+                                </div> -->
+
+                            </div>
+
+
+                        </div>
+
+                    </div>
+                </div>
+
+                <!-- new card for mobile -->
+                <div class="row mobile mb-3" style="    ">
+
+
+                    <div class="offset-md-1 col-md-10 mt-5">
+
+                        <div class="w3-card-4" style="background-color:#ffffff;">
+                            <div class="m-3 p-3">
+
+
+                                <h1> Activity History</h1>
+                                <p>View and manage all of your account activity.</p>
+                            </div>
+                            <div class="row ">
+                                <!-- loop lgega -->
+                                <div *ngFor="let item of modeldata.slice(0, 3) " class="col-lg-12 d-flex list  "
+                                    (mouseenter)="item.showIcon = true" (mouseleave)="item.showIcon = false">
+                                    <!-- <p-avatar icon="fa fa-solid fa-desktop" styleClass="mr-4" shape="circle"
+                                        size="large"></p-avatar> -->
+
+
+                                    <div class="col-lg-6 session" style="display: flex;">
+                                        <h2 *ngIf="item.device=='Mobile'"><i class="fa fa-brands fa-android "></i></h2>
+                                        <h2 *ngIf="item.device=='Desktop'"><i class="fa fa-brands fa-windows "></i></h2>
+                                        <h2><i class="fa fa-brands fa-chrome "></i></h2>
+                                        <p class="">{{item.location.slice(0, 28) }}</p>
+                                    </div>
+                                    <div class="col-lg-4 session">
+
+                                        <!-- <h5>Personal Computer <i class=" pi pi-crown"></i></h5> -->
+                                        <!-- <p>7 month ago</p> -->
+                                        <p>{{this.getTimeAgo( item.transaction_time)}}</p>
+
+                                    </div>
+                                    <p>
+                                        <i class="pi pi-info-circle p-2" style="font-size:large;" *ngIf="item.showIcon"
+                                            (click)="showspecificdata(item)">
+
+                                        </i>
+                                    </p>
+
+                                </div>
+                                <!-- loop lgega -->
+
+                                <!-- <div style="border-top: 1px solid black;"></div> -->
+
+                                <div class="col-lg-12  list1"
+                                    style="padding: .5rem;text-align: center;border-top: 1px solid;">
+                                    <h5 (click)="showmaildilog2()"> Show All History</h5>
+                                </div>
+
+                            </div>
+
+
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+            <!-- for account -->
+
+            <div *ngIf="this.conaintershow=='account'" class="container" style="min-width: 80%; max-width: 100%;width: 100%;background-color: #e9eaed;    height: 100%;
+            overflow: auto;">
+
+
+
+
+                <!-- new card for acctive session -->
+                <div class="row  email" style="    ">
+
+
+                    <div class="offset-md-1 col-md-10 mt-5">
+
+                        <div class="w3-card-4" style="background-color:#ffffff;">
+                            <div class="m-3 p-3 ">
+
+
+                                <h1> Change Password</h1>
+                                <p>Last changed {{ userdata?.last_chnage_password ?
+                                    getTimeAgo(userdata?.last_chnage_password) : "No chnage"}}</p>
+
+                                <div class="text-right">
+                                    <!-- loop lgega -->
+                                    <button (click)="addDATA(3)" class="btn btn-outline-primary"> Change
+                                        Password</button>
+
+
+                                </div>
+
+                            </div>
+
+
+
+                        </div>
+
+                    </div>
+                </div>
+
+                <!-- new card for mobile -->
+                <div class="row mobile mb-3" style="    ">
+
+
+                    <div class="offset-md-1 col-md-10 mt-5">
+
+                        <div class="w3-card-4" style="background-color:#ffffff;">
+                            <div class="m-3 p-3">
+
+
+                                <h1>Allowed IP Address</h1>
+                                <p>Restrict access to your account by adding a range of trusted IP addresses..</p>
+                            </div>
+                            <div class="row ">
+                                <!-- loop lgega -->
+                                <div *ngFor="let item of ipdata " class="col-lg-12 d-flex list  "
+                                    (mouseenter)="item.showIcon = true" (mouseleave)="item.showIcon = false">
+                                    <!-- <p-avatar icon="fa fa-solid fa-desktop" styleClass="mr-4" shape="circle"
+                                        size="large"></p-avatar> -->
+
+
+                                    <div class="col-lg-4 session" style="display: flex; text-align: center;">
+                                        <h2 *ngIf="item.device=='Mobile'"><i class="fa fa-brands fa-android "></i></h2>
+                                        <h2 *ngIf="item.device=='Desktop'"><i class="fa fa-brands fa-windows "></i></h2>
+                                        <!-- <h2><i class="fa fa-brands fa-chrome "></i></h2> -->
+                                        <h2><i class="fa fa-thin fa-shield"></i></h2>
+                                        <p class="">{{item.ip_name }}</p>
+
+                                    </div>
+                                    <div class="col-lg-4 session">
+                                        <!-- <p class="">{{item.ip_address }}</p> -->
+                                        <p *ngIf="item.ip_range_start" class="">{{item.ip_range_start
+                                            }}-{{item.ip_range_end}}</p>
+                                        <p *ngIf="item.ip_address" class="">{{item.ip_address }}</p>
+                                    </div>
+                                    <div class="col-lg-4 session">
+
+                                        <!-- <h5>Personal Computer <i class=" pi pi-crown"></i></h5> -->
+                                        <!-- <p>7 month ago</p> -->
+                                        <p style="display: inline;">{{this.getTimeAgo( item.transation_time)}}
+                                        </p>
+
+                                        <i class="pi pi-trash p-2" style="font-size:large;"
+                                            (click)="deleteip(item)">
+
+                                        </i>
+
+                                    </div>
+
+                                    <p>
+                                        <i class="pi pi-info-circle p-2" style="font-size:large;" *ngIf="item.showIcon"
+                                            (click)="showspecificdata(item)">
+
+                                        </i>
+                                    </p>
+                                </div>
+                                <!-- loop lgega -->
+
+                                <!-- <div style="border-top: 1px solid black;"></div> -->
+
+                                <div class="col-lg-12  list1"
+                                    style="padding: .5rem;text-align: center;border-top: 1px solid;">
+                                    <h5 (click)="addDATA(4)"><i class="pi pi-plus"></i> Add Allowed IP Address</h5>
+                                </div>
+
+                            </div>
+
+
+                        </div>
+
+                    </div>
+                </div>
+
+
+                <div class="row  email " style="    ">
+
+
+                    <div class="offset-md-1 col-md-10 mt-5">
+
+                        <div class="w3-card-4 mb-4" style="background-color:#ffffff;">
+                            <div class="m-3 p-3 " style="padding-bottom: 0 !important;">
+
+
+                                <h1>Account Logged In Limit</h1>
+                                <p>Set maximum no. of active logins for a user.</p>
+
+                                <div class="text-right">
+                                    <!-- loop lgega -->
+                                    <!-- <div >   <p><i style="font-size:3rem" class="pi pi-trash"></i></p></div> -->
+
+                                    <button (click)="addDATA(5)" class="btn btn-outline-primary"><i
+                                            class="pi pi-add"></i> Set</button>
+
+
+                                </div>
+
+                            </div>
+
+
+
+                        </div>
+
+                    </div>
+                </div>
+
+                <!-- for geo fancing -->
+
+                <!-- <div class="row  email " style="    ">
+
+
+                    <div class="offset-md-1 col-md-10 mt-5">
+
+                        <div class="w3-card-4 mb-4" style="background-color:#ffffff;">
+                            <div class="m-3 p-3 " style="padding-bottom: 0 !important;">
+
+
+                                <h1>Account geofancing </h1>
+                                <p>Allowed to  area to access this site </p>
+
+                                <div class="text-right">
+                                  
+                                    <button (click)="addDATA(7)" class="btn btn-outline-primary"><i
+                                            class="pi pi-add"></i> Set</button>
+
+
+                                </div>
+
+                            </div>
+
+
+
+                        </div>
+
+                    </div>
+                </div> -->
+                <!-- for geo fancing -->
+
+                <div class="row  email " style="    ">
+
+
+                    <div class="offset-md-1 col-md-10 mt-5">
+
+                        <div class="w3-card-4 mb-4" style="background-color:#ffffff;">
+                            <div class="m-3 p-3 " style="padding-bottom: 0 !important;">
+
+
+                                <h1> Close Account</h1>
+                                <p>Permanently delete all the data associated with your account and the apps you use.
+                                    Refer help article</p>
+
+                                <div class="text-right">
+                                    <!-- loop lgega -->
+                                    <!-- <div >   <p><i style="font-size:3rem" class="pi pi-trash"></i></p></div> -->
+
+                                    <button (click)="CLOSE()" class="btn btn-outline-primary"><i
+                                            class="pi pi-trash"></i> Close</button>
+
+
+                                </div>
+
+                            </div>
+
+
+
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+
+            <div *ngIf="this.conaintershow=='Multifactor'" class="container" style="min-width: 80%; max-width: 100%;width: 100%;background-color: #e9eaed;    height: 100%;
+            overflow: auto;">
+
+
+
+
+                <!-- new card for acctive session -->
+                <div class="row  email" style="    ">
+
+                    <div class="offset-md-1 col-md-10 mt-5">
+                        <h1><i class="fa-solid fa-user-shield"></i> Multi-Factor Authentication</h1>
+
+                        <div class="w3-card-4" style="background-color:#ffffff;">
+                            <div class="m-3 p-3 ">
+
+
+                                <h1>MFA Modes</h1>
+                                <p>Use multi-factor authentication (MFA) to add an extra layer of security to your
+                                    account.</p>
+
+                                <div>
+                                    <!-- <div class="container"> -->
+                                    <div class="row">
+                                        <div class="col-lg-6">
+
+                                            <div class="w3-card-4" style="background-color:#e7e9ff;">
+                                                <div class="m-3 p-3 ">
+
+
+                                                    <h1><img src="../../../assets/otpicon.png" alt="" height="70"
+                                                            width="70"> SMS-based OTP</h1>
+                                                    <p>Registering your mobile for authentication will help
+                                                        secure your account from unauthorized access.</p>
+
+                                                    <div class="text-right">
+                                                        <!-- loop lgega -->
+                                                        <button (click)="alert1()" class="btn btn-outline-primary">
+                                                            Activate
+                                                        </button>
+                                                        
+                                                        
+                                                        
+                                                        
+                                                        
+
+
+                                                    </div>
+
+                                                </div>
+
+
+
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <div class="w3-card-4" style="background-color:#e7e9ff;">
+                                                <div class="m-3 p-3 ">
+
+
+                                                    <h1><img src="../../../assets/authenticator.png" height="70"
+                                                            width="70" alt=""> OTP Authenticator</h1>
+                                                    <p>Use time-based OTPs generated by authenticator apps to securely
+                                                        sign in to your Healaxy account..</p>
+
+                                                    <div class="text-right">
+                                                        <!-- loop lgega -->
+                                                        <button *ngIf="this.userdata?.authenticator==0"
+                                                            (click)="qrocde()" class="btn btn-outline-primary">
+                                                            Activate</button>
+                                                        <button *ngIf="this.userdata?.authenticator==1"
+                                                            (click)="deactive()" class="btn btn-outline-danger">
+                                                            Deactive</button>
+
+                                                    </div>
+
+                                                </div>
+
+
+
+                                            </div>
+                                        </div>
+
+                                    </div>
+
+                                    <div class="row mt-4">
+                                        <div class="col-lg-6">
+
+                                            <div class="w3-card-4" style="background-color:#e7e9ff;">
+                                                <div class="m-3 p-3 ">
+
+
+                                                    <h1><img src="../../../assets/secretkey.png" alt="" height="70"
+                                                            width="70">Security Key</h1>
+                                                    <p>Configure and use a hardware security key for additional
+                                                        verification during sign-in..</p>
+
+                                                    <div class="text-right">
+                                                        <!-- loop lgega -->
+                                                        <button (click)="alert1()" class="btn btn-outline-primary">
+                                                            Activate</button>
+
+
+                                                    </div>
+
+                                                </div>
+
+
+
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <div class="w3-card-4" style="background-color:#e7e9ff;">
+                                                <div class="m-3 p-3 ">
+
+
+                                                    <h1><img src="../../../assets/passkey.png" alt=""
+                                                            style="height: 70px; width: 70px;;" class="img-fluid">
+                                                        Passkey</h1>
+                                                    <p>Registering your mobile number for authentication will help
+                                                        secure your account from unauthorized access.</p>
+
+                                                    <div class="text-right">
+                                                        <!-- loop lgega -->
+                                                        <!-- <button (click)="getpasskey()" class="btn btn-outline-primary">
+                                                            Activate</button> -->
+
+                                                        <button class="btn btn-outline-primary"
+                                                            *ngIf="this.userdata?.passkey==0"
+                                                            (click)="getpasskey()">Activate</button>
+
+                                                        <button *ngIf="this.userdata?.passkey==1"  (click)="deactivatepasskey()"
+                                                            class="btn btn-outline-danger">
+                                                            Deactive</button>
+
+
+                                                    </div>
+
+                                                </div>
+
+
+
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                    <!-- </div> -->
+                                </div>
+
+                            </div>
+
+
+
+                        </div>
+
+
+                        <div class="w3-card-4 mt-5 mb-2" style="background-color:#ffffff;">
+                            <div class="m-3 p-3 ">
+
+
+                                <h1>MFA Recovery Options</h1>
+                                <p>MFA recovery options will help you restore your account if you lose your device.</p>
+
+                                <div>
+                                    <!-- <div class="container"> -->
+                                        <div><h3>You can set up these recovery options after you enable MFA.</h3></div>
+                                    <div class="row">
+                                        
+                                        <div class="col-lg-6">
+
+                                            <div class="w3-card-4" style="background-color:#e7e9ff;">
+                                                <div class="m-3 p-3 ">
+
+
+                                                    <h1><img src="../../../assets/backu-removebg-preview.png" alt="" height="60"
+                                                            width="70">Backup verification codes</h1>
+                                                    <p>Backup verification codes allow you to access your Healaxy 
+                                                        account when you're having trouble signing in.</p>
+
+                                                    <p *ngIf="backupcodedata">Last generated {{this.getTimeAgo(backupcodedata.time)}}</p>    
+
+                                                    <div class="text-right">
+                                                        <!-- loop lgega -->
+                                                        <button (click)="backupcode()" class="btn btn-outline-primary" >
+                                                            Genrate
+                                                        </button>
+                                                        
+                                                        
+                                                        
+                                                        
+                                                        
+
+
+                                                    </div>
+
+                                                </div>
+
+
+
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            
+                                        </div>
+
+                                    </div>
+
+                                  
+                                    <!-- </div> -->
+                                </div>
+
+                            </div>
+
+
+
+                        </div>
+                    </div>
+                </div>
+
+                <!-- new card for mobile -->
+
+
+
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<app-footer *ngIf="data1"></app-footer>
+<!-- </p-dialog> -->
+
+<p-dialog header="verify you " [(visible)]="example1" [modal]="true" [responsive]="true" id="trial"
+    [style]="{height: '28vh',width:'30vw'}">
+
+
+    <!-- <div class="container"></div> -->
+    <form [formGroup]="matchkeyform" prependId="false" style="margin-top: 10px;">
+        <div class="form-container">
+
+
+
+            <div class="form-group ">
+
+
+                <span class="p-float-label">
+
+                    <input type="text" [style]="{width: '100%'}" pInputText formControlName="key">
+                    <!-- <p-inputOtp  formControlName="key"></p-inputOtp> -->
+                    <label for="float-input">Enter Email</label>
+
+                </span>
+
+            </div>
+
+
+
+
+
+        </div>
+
+
+
+        <div class="button-container">
+
+            <button pButton type="button" style="margin-bottom: 5px;" label="submit" class="p-button-success"
+                (click)="onmatch()"></button>
+        </div>
+
+    </form>
+</p-dialog>
+
+
+<p-dialog header="Header" [(visible)]="example3" [modal]="true" [responsive]="true" id="trial"
+[style]="{
+    'height': adddata === 3 ? '40vh' : (adddata === 4 ? '45vh' : '25vh'),
+    'width': adddata === 3 ? '50vw' : (adddata === 4 ? '30vw' : '30vw')
+  }"
+  >
+    <ng-template pTemplate="header">
+        <div class="inline-flex align-items-center justify-content-center gap-2">
+            <!-- <p-avatar image="https://primefaces.org/cdn/primeng/images/avatar/amyelsner.png" shape="circle" /> -->
+
+            <span *ngIf="adddata === 1" class="font-bold white-space-nowrap">Add Number</span>
+            <span *ngIf="adddata === 2" class="font-bold white-space-nowrap">Add Email</span>
+            <span *ngIf="adddata === 3" class="font-bold white-space-nowrap">Change Password</span>
+            <span *ngIf="adddata === 4" class="font-bold white-space-nowrap">Allowed IP</span>
+            <span *ngIf="adddata === 6" class="font-bold white-space-nowrap">Otp Verification</span>
+            <span *ngIf="adddata === 7" class="font-bold white-space-nowrap">Allow geolocation</span>
+            <span *ngIf="adddata === 5" class="font-bold white-space-nowrap">Set Maximum Number of Active Logins </span>
+
+        </div>
+    </ng-template>
+
+    <!-- <div class="container"></div> -->
+    <form *ngIf="adddata === 1" [formGroup]="addnumber" prependId="false" style="margin-top: 10px;">
+        <div class="form-container">
+            <div class="form-group">
+                <span class="p-float-label">
+                    <input type="text" [style]="{width: '100%'}" pInputText formControlName="mobile_number"    
+                     [ngClass]="showErrorBorderOnControls(addnumber.controls.mobile_number)">
+                    <label for="float-input">Enter Number</label>
+                </span>
+            </div>
+        </div>
+        <div class="button-container">
+            <button pButton type="button" style="margin-bottom: 5px;" label="submit" class="p-button-success"
+                (click)="submitmob()"></button>
+        </div>
+    </form>
+
+    <form *ngIf="adddata === 2" [formGroup]="addemail" prependId="false" style="margin-top: 10px;">
+        <div class="form-container">
+            <div class="form-group">
+                <span class="p-float-label">
+                    <input type="email" [style]="{width: '100%'}" pInputText formControlName="email_address"
+                    [ngClass]="showErrorBorderOnControls(addemail.controls.email_address)">
+                    <label for="float-input">Enter Email Address</label>
+                </span>
+            </div>
+        </div>
+        <div class="button-container">
+            <button pButton type="button" style="margin-bottom: 5px;" label="submit" class="p-button-success"
+                (click)="submitmailid()"></button>
+        </div>
+    </form>
+    <!-- for geolocation -->
+    <form *ngIf="adddata === 7" [formGroup]="addgeolocation" prependId="false" style="margin-top: 10px;">
+        <div class="form-container">
+            <div class="form-group">
+                <span class="p-float-label">
+                    <div class="col-lg-12">
+                        <p-dropdown [options]="statedata" [style]="{'width':'100%'}"
+                        formControlName="state" appendTo="body" optionLabel="states_name"
+                        [showClear]="true"
+                       ></p-dropdown>
+                       <!-- (onChange)="getStatesdataSelectedDistric($event)" -->
+                        <!-- <input type="text" formControlName="Frequency_name" [style]="{'width':'100%'}" pInputText [(ngModel)]="medFreequancy">  -->
+                    </div>
+                    <!-- <label for="float-input">Enter Email Address</label> -->
+                </span>
+            </div>
+        </div>
+        <div class="button-container">
+            <button pButton type="button" style="margin-bottom: 5px;" label="submit" class="p-button-success"
+                (click)="submitgeolocation()"></button>
+        </div>
+    </form>
+    <!-- for geolocation -->
+    <form *ngIf="adddata === 3" [formGroup]="changepassword" style="margin-top: 10px;">
+
+        <div style="height: calc(100vh - 45rem) !important;">
+
+            <!-- <h2>genral informtion</h2> -->
+            <div class="mb-3 row">
+                <label style=" color: black; font-weight: bold;" for="staticEmail"
+                    class="col-sm-3 col-form-label">Cuurent Password :</label>
+                <div class="col-sm-9">
+                    <input pInputText formControlName="cuurentpass" [style]="{'width':'50%'}" />
+                </div>
+            </div>
+            <div class="mb-3 row">
+                <label style=" color: black; font-weight: bold;" for="staticEmail" class="col-sm-3 col-form-label">New
+                    Password :</label>
+                <div class="col-sm-9">
+                    <input pInputText formControlName="newpass" [style]="{'width':'50%'}" />
+                </div>
+            </div>
+            <div class="mb-3 row">
+                <label style=" color: black; font-weight: bold;" for="staticEmail"
+                    class="col-sm-3 col-form-label">Confirm New Password :</label>
+                <div class="col-sm-9">
+                    <input pInputText formControlName="confirmnewpass" [style]="{'width':'50%'}" />
+                </div>
+            </div>
+            <div class="text-right w-100"
+                style="margin-right: 1.5rem !important; margin-bottom: 0.5rem; margin-top: 32px;">
+                <button (click)="chnagepass()" class="btn "
+                    style="background-color: #5271e4; color: white;">Submit</button>
+            </div>
+        </div>
+
+    </form>
+    <form *ngIf="adddata === 4" [formGroup]="todoListForm" prependId="false" style="margin-top: 10px;">
+        <!-- <div class="form-container">
+            <div class="form-group">
+                <span class="p-float-label">
+                    <input type="text" [style]="{width: '100%'}" pInputText formControlName="ip_name">
+                    <label for="float-input">Enter Ip Name</label>
+                </span>
+            </div>
+          
+            <div class="form-group">
+                <i class="pi pi-plus" style="float: inline-end;" (click)="create_new() "></i>
+                <span class="p-float-label">
+                    <input type="text" [style]="{width: '100%'}" pInputText formControlName="ip_address">
+                    <label for="float-input">Enter IP Address</label>
+                    
+                </span>
+            </div> 
+        </div> -->
+        <!-- <div formArrayName="todos"> -->
+
+        <div class="form-group">
+            <span class="p-float-label">
+                <input type="text" [style]="{width: '100%'}" pInputText formControlName="ip_name">
+                <label for="float-input"> IP Name</label>
+            </span>
+        </div>
+        <div class="form-group " style="margin-top: 2rem !important;">
+            <!-- <span class="p-float-label"> -->
+
+            <div class="form-check form-check-inline mr-4">
+                <!-- <input class="form-check-input " type="radio"  id="inlineRadio1"
+                        
+                        value="option1"  (click)="anytime($event)" formControlName="check1"> -->
+                <p-radioButton (click)="anytime()" value="option1" formControlName="check1"></p-radioButton>
+
+                <label class="form-check-label" for="inlineRadio1"> Static IP</label>
+            </div>
+            <div class="form-check form-check-inline">
+                <!-- <input class="form-check-input " type="radio" (click)="anytime($event)" formControlName="check1"
+                        id="inlineRadio2" value="option2"> -->
+                <p-radioButton (click)="anytime()" value="option2" formControlName="check1"></p-radioButton>
+
+                <label class="form-check-label" for="inlineRadio2"> IP Range</label>
+            </div>
+            <!-- </span> -->
+
+
+
+        </div>
+
+        <div *ngIf="isdisable=='option1'" formArrayName="todos">
+
+            <div *ngFor="let todo of todoListForm.get('todos')['controls']; let i = index">
+                <div [formGroupName]="i">
+                    <!-- <input type="text" formControlName="task" placeholder="Enter task">
+            </div> -->
+
+                    <div class="form-group ">
+                        <div class="text-right"> <i *ngIf="i==0" class="pi pi-plus" (click)="addTodo()"></i>
+                            <i *ngIf="i!=0" class="pi pi-times" (click)="remove(i)"></i>
+                        </div>
+
+                        <span class="p-float-label">
+                            <!-- <p-inputMask   mask="999.999.999.999"   variant="filled" [style]="{width: '100%'}"  formControlName="ip" placeholder="xxx.xxx.xxx.xxx"></p-inputMask> -->
+                            <input pInputText type="text"  [style]="{width: '100%'}"  formControlName="ip">
+                            <label for="float-input"> IP </label>
+                        </span>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <div *ngIf="isdisable == 'option2'">
+            <div formArrayName="ranges">
+                <div *ngFor="let range of todoListForm.get('ranges')['controls']; let i = index">
+
+
+                    <div [formGroupName]="i">
+                        <div class="form-group pt-3 ">
+                            <div style="float: right;">
+                                <i *ngIf="i==0" class="pi pi-plus" (click)="addRange()"></i>
+                                <i *ngIf="i!=0" class="pi pi-times" (click)="removerange(i)"></i>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-6 ">
+                                    <span class="p-float-label">
+                                        <input type="text" pInputText formControlName="rangeStart">
+                                        <label for="float-input"> From IP</label>
+                                    </span>
+                                </div>
+                                <div class="col-lg-6 ">
+                                    <span class="p-float-label">
+                                        <input type="text" pInputText formControlName="rangeEnd">
+                                        <label for="float-input"> To IP</label>
+                                    </span>
+                                </div>
+                            </div>
+
+                            <!-- </div> -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <div class="text-right w-100" style="margin-right: 1.5rem !important; margin-bottom: 0.5rem; margin-top: 32px;">
+            <button (click)="submit_allowed_ip()" class="btn "
+                style="background-color: #5271e4; color: white;">Submit</button>
+        </div>
+
+    </form>
+    <form *ngIf="adddata === 5" [formGroup]="setlimit" prependId="false" style="margin-top: 10px;">
+        <div class="form-container">
+            <div class="form-group">
+                <span class="p-float-label">
+                    <input type="number" [style]="{width: '100%'}" pInputText formControlName="Limit" [max]=5>
+                    <label for="float-input">Set Limit</label>
+                </span>
+            </div>
+        </div>
+        <div class="button-container">
+            <button pButton type="button" style="margin-bottom: 5px;" label="submit" class="p-button-success"
+                (click)="submitlimit()"></button>
+        </div>
+    </form>
+
+
+    <form *ngIf="adddata === 6" [formGroup]="verifyotp" prependId="false" style="margin-top: 10px;">
+        <div class="form-container">
+            <div class="form-group">
+                <span class="p-float-label">
+                    <input type="email" [style]="{width: '100%'}" pInputText formControlName="otpvalue">
+                    <label for="float-input">Enter otp</label>
+                </span>
+            </div>
+        </div>
+        <div class="button-container">
+            <button pButton type="button" style="margin-bottom: 5px;" label="submit" class="p-button-success"
+                (click)="matchotp()"></button>
+        </div>
+    </form>
+</p-dialog>
+
+<p-dialog header="Header" [(visible)]="example2" [modal]="true" [style]="{ width: '80vw',height: '80vh' }"
+    [breakpoints]="{ '1199px': '75vw', '575px': '90vw' }">
+    <ng-template pTemplate="header">
+        <div class="inline-flex align-items-center justify-content-center gap-2">
+            <!-- <p-avatar image="https://primefaces.org/cdn/primeng/images/avatar/amyelsner.png" shape="circle" /> -->
+            <i class=" fa fa-solid fa-clock"></i> &nbsp;
+            <span class="font-bold white-space-nowrap">Activity History</span>
+
+        </div>
+    </ng-template>
+
+
+
+    <!-- <div class="card "id="rah"> -->
+
+    <div class="">
+
+
+        <p-table [value]="alldata" [tableStyle]="{ 'min-width': '60rem' }" style="margin-top: 3rem;"
+            [scrollable]="true">
+            <ng-template pTemplate="header">
+                <tr>
+                    <th>
+                        S.no
+                    </th>
+                    <th> Device</th>
+                    <th>Browser</th>
+                    <th>Os </th>
+                    <th>Ip</th>
+                    <th>location</th>
+                    <th>date</th>
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-product let-i="rowIndex">
+                <tr>
+                    <td>{{i+1}}</td>
+                    <td>{{ product.device }}</td>
+                    <td>{{product.browser}}</td>
+                    <td>{{product.os+''+product.os_version}}</td>
+                    <td>{{ product.ip }}</td>
+                    <td *ngIf="product.location!=undefined">{{ product.location }} </td>
+                    <td *ngIf="product.location==undefined">Not Allowed </td>
+                    <td>{{this.getTimeAgo( product .transaction_time)}}</td>
+                </tr>
+            </ng-template>
+        </p-table>
+    </div>
+    <!-- </div> -->
+
+
+
+    <!-- <ng-template pTemplate="footer">
+    <p-button icon="pi pi-check" (click)="display = false" label="Ok"></p-button>
+</ng-template> -->
+</p-dialog>
+
+
+<p-dialog header="Close Account " [(visible)]="example5" [modal]="true" [responsive]="true" id="trial"
+    [style]="{height: '72vh',width:'60vw'}">
+    <div class="row ">
+        <p style="text-align: justify;">You are about to delete your Healaxy Account. Once deleted, you will no longer
+            be able to use any of the Healaxy services
+            and all information associated with Healaxy services and your account will be lost.</p>
+
+        <p style="text-align: justify;">We will take you through the following stages one by one to close your account.
+            Read the following overview, then click Proceed.
+            ,.</p>
+    </div>
+
+    <div class="row">
+        <div class="col-lg-6"><p-panel header="Used apps">
+                <p>
+                    Go through the list of apps you use. The data in these apps will be deleted while closing your
+                    account.
+                </p>
+            </p-panel></div>
+        <div class="col-lg-6"><p-panel header="Paid subscriptions">
+                <p>
+                    The apps in which you have a paid subscription will be listed. Unsubscribe from them in Healaxy
+                    Store.
+                </p>
+            </p-panel></div>
+    </div>
+
+    <div class="row mt-3">
+        <div class="col-lg-6"><p-panel header="App-specific organizations">
+                <p>
+                    App-specific organizations means the different organizations, portals, and departments you have
+                    created within the apps. Some of them require your action to proceed with closing your account while
+                    others will be deleted automatically.
+                </p>
+            </p-panel></div>
+        <div class="col-lg-6"><p-panel header="Close Account
+        ">
+                <p>
+                    Give your consent to close the account and continue.
+                </p>
+            </p-panel></div>
+    </div>
+
+
+
+
+    <div class="button-container">
+
+        <button pButton type="button" style="margin-bottom: 5px;" label="Proceed" class="p-button-success"
+            (click)="closeaccount()"></button>
+
+    </div>
+
+    <!-- </form> -->
+</p-dialog>
+
+
+<p-dialog header="Activate OTP Authenticator" [(visible)]="qrshow" [modal]="true" [responsive]="true" id="trial"
+    [style]="{height: '55vh',width:'40vh '}">
+    <div class="">
+        <div class="text-center">
+            <!-- <h1>Two-Factor Authentication Demo</h1> -->
+            <!-- <button (click)="generateSecret()">Generate Secret</button> -->
+
+
+            <canvas #qrCode></canvas>
+            <p>Scan this QR code with any authenticator app and click Next.</p>
+        </div>
+
+        <div class="text-center" style="background-color: #e7e9ff;">
+            <h3 style="color: black;">For Manual Entry </h3>
+            <p *ngIf="secret">Key: <b>{{ secret }}</b></p>
+        </div>
+        <div class="text-center">
+            <input pInputText type="text" style="width: 80% !important;" [(ngModel)]="token" placeholder="Enter OTP">
+            <button class="btn btn-info" (click)="verifyToken()"><i class="pi pi-check"></i></button>
+            <!-- <p *ngIf="isValid !== null">Token is {{ isValid ? 'valid' : 'invalid' }}</p> -->
+        </div>
+
+
+    </div>
+
+    <!-- </form> -->
+</p-dialog>
+<p-dialog header="Activate Passkey " [(visible)]="passkeyshow" [modal]="true" [responsive]="true" id="trial"
+    [style]="{height: '40vh',width:'30vw '}">
+    <div class="">
+
+        <div>
+            <h5> Passkey can be set up using your iPhone, iPad, or Android device. Once passkey is set up -></h5>
+            <div class="container mt-2">
+                <ol class="m-2 p-3">
+                    <li>Passkey will be the default sign-in mode
+                        You will not be able to use other sign-in modes straightaway.
+                        Alternate modes will be shown only if you’re unable to verify using passkey.</li>
+                    <li class="mt-3" style="color:rgb(231, 101, 101)">
+                        Make sure both devices have Bluetooth and Internet turned ON. Your mobile device must also have
+                        screen lock enabled.
+                    </li>
+                </ol>
+                <div class="text-center">
+                    <button class="btn btn-outline-info" (click)="register()">Activate</button>
+
+                </div>
+
+
+
+            </div>
+
+
+            <!-- <form (ngSubmit)="register()">
+        <input type="text" [(ngModel)]="username" placeholder="Username" required>
+        <button type="submit">Register</button>
+    </form> -->
+
+            <!-- authentication.component.html -->
+            <!-- <h1>WebAuthn Demo</h1> -->
+            <!-- <input [(ngModel)]="username" placeholder="Username">
+    <button (click)="register()">Register</button>
+    <button (click)="login()">Login</button> -->
+        </div>
+
+
+        <div class="text-center">
+            <!-- <input pInputText type="text" style="width: 80% !important;" [(ngModel)]="token" placeholder="Enter OTP">
+            <button  class="btn btn-info" (click)="verifyToken()"><i class="pi pi-check"></i></button> -->
+            <!-- <p *ngIf="isValid !== null">Token is {{ isValid ? 'valid' : 'invalid' }}</p> -->
+        </div>
+
+
+    </div>
+
+    <!-- </form> -->
+</p-dialog>
+
+<!-- <div class="row">
+                      
+    <div class="col-lg-5 ml-lg-5">
+
+        <div class="mb-3 row">
+            <label style=" color: black; font-weight: bold;" for="staticEmail"
+                class="col-md-4 col-form-label">First Name :</label>
+            <div class="col-md-8">
+                <input pInputText formControlName="fname"  />
+            </div>
+        </div>
+        <div class="mb-3 row">
+            <label style=" color: black; font-weight: bold;" for="staticEmail"
+                class="col-sm-4 col-form-label">Last Name :</label>
+            <div class="col-sm-8">
+                <input pInputText formControlName="lname"  />
+            </div>
+        </div>
+        <div class="mb-3 row">
+            <label style=" color: black; font-weight: bold;" for="staticEmail"
+                class="col-sm-4 col-form-label">Display Name :</label>
+            <div class="col-sm-8">
+                <input pInputText formControlName="mname"  />
+            </div>
+        </div>
+     
+
+
+    </div>
+
+    <div class=" col-lg-5 ml-lg-5">
+
+
+        <div class="mb-3 row">
+            <label style=" color: black; font-weight: bold;" for="staticEmail"
+                class="col-sm-4 col-form-label">Country :</label>
+            <div class="col-sm-8">
+                <p-autoComplete (completeMethod)="filtercountry($event)"
+                    formControlName="Country" [suggestions]="countrydata" appendTo="body"
+                    [forceSelection]="true" field=Country [style]="{'width':'100%'}"
+                    [inputStyle]="{'width':'100%'}" [minLength]="3"
+                    (change)="getstate($event)"></p-autoComplete>
+               
+            </div>
+        </div>
+
+        <div class="mb-3 row">
+            <label style=" color: black; font-weight: bold;" for="staticEmail"
+                class="col-sm-4 col-form-label">State :</label>
+            <div class="col-sm-8">
+                <p-dropdown [options]="statedata" [style]="{'width':'100%'}"
+                    formControlName="state" appendTo="body" optionLabel="states_name"
+                    [showClear]="true" (onChange)="getcity($event)"></p-dropdown>
+               
+            </div>
+        </div>
+        <div class="mb-3 row">
+
+            <label style=" color: black; font-weight: bold;" for="staticEmail"
+                class="col-sm-4 col-form-label">City :</label>
+            <div class="col-sm-8">
+                <p-dropdown [options]="citydata" [style]="{'width':'100%'}"
+                    formControlName="city" placeholder="" optionLabel="district_name"
+                    [showClear]="true" appendTo="body"></p-dropdown>
+              
+            </div>
+        </div>
+
+
+    </div>
+
+</div> -->
+
+<p-dialog header="Backup verification codes" [(visible)]="backupcodedilog" [modal]="true" [responsive]="true" id="trial"
+    [style]="{height: '45vh',width:'35vw '}">
+    <div class="">
+
+        <div>
+            <h5> These codes can be used to access your Healaxy account if you have trouble signing in.</h5>
+            <div class="container mt-2" style="border: 4px dotted; padding: 1rem;">
+                <div class="row">
+                    <div *ngFor="let item of code?.backupCodes" class="col-md-4">
+                        <li>{{ item }}</li>
+                    </div>
+                </div>
+             
+            </div>
+            <div  class="row mt-3">
+                <li>Each code can be used only once.</li>
+                <li>For security reasons these codes will not be displayed again.</li>
+                <li>Do not share these codes with anyone.</li>
+            </div>
+           
+            <div class="row mt-3">
+                <div class="col-md-6">
+                    <!-- <button 
+                    class="btn btn-primary" (click)="copyCodes()">Copy Codes</button> -->
+                    <button class="btn btn-primary" (click)="copyCodes()"><i class="pi pi-copy"> Copy</i></button>
+                </div>
+                <div class="col-md-6 text-right">
+                    <button class="btn btn-success" (click)="downloadCodes()"><i class="pi pi-download"> Download</i></button>
+                </div>
+            </div>
+            <!-- <div class="text-center">
+                <button class="btn btn-outline-info" (click)="register()">Activate</button>
+
+            </div> -->
+
+            <!-- <form (ngSubmit)="register()">
+        <input type="text" [(ngModel)]="username" placeholder="Username" required>
+        <button type="submit">Register</button>
+    </form> -->
+
+            <!-- authentication.component.html -->
+            <!-- <h1>WebAuthn Demo</h1> -->
+            <!-- <input [(ngModel)]="username" placeholder="Username">
+    <button (click)="register()">Register</button>
+    <button (click)="login()">Login</button> -->
+        </div>
+
+
+        <div class="text-center">
+            <!-- <input pInputText type="text" style="width: 80% !important;" [(ngModel)]="token" placeholder="Enter OTP">
+            <button  class="btn btn-info" (click)="verifyToken()"><i class="pi pi-check"></i></button> -->
+            <!-- <p *ngIf="isValid !== null">Token is {{ isValid ? 'valid' : 'invalid' }}</p> -->
+        </div>
+
+
+    </div>
+
+    <!-- </form> -->
+</p-dialog>

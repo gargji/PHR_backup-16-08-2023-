@@ -1,0 +1,191 @@
+<p-toast position="top-right" style="z-index:999"></p-toast>
+<!-- <app-header></app-header> -->
+
+<!-- <div class="slider_main_wrapper"> -->
+<!-- <div class="cc_slider_img_section"> -->
+<!-- <div class="owl-carousel owl-theme"> -->
+<!-- <div class="item cc_main_slide4" style="padding-top: 200px;"> -->
+<!-- <div class="med_img_overlay"></div> -->
+<div class="container-fluid backImg">
+
+    <div class="row">
+        <div class="" style="height: 100vh;">
+
+            <div class="cc_slider_cont1_wrapper registermaindiv">
+                <!-- <div class="marginForm">
+                              <h1>PHR Login Form</h1>
+                            </div> -->
+                <form *ngIf="expression1" [formGroup]="dobverify" class="form-1 calr"
+                    style="    margin-top: 250px; width: 130%;">
+                    <h1 class="logintext">Dob Verification</h1>
+
+                    <label for="Email">Patient Name</label>
+                    <input type="text" formControlName="pname" readonly />
+                    <label for="password">Enter Your Dob</label>
+                    <!-- <div class="field col-12 md:col-4 "> -->
+                    <!-- <div class="calenderCostom"> -->
+                    <p-calendar dateFormat="dd/mm/yy" formControlName="dob" [showIcon]="true" inputId="icon" class="text-center calr" 
+                    [ngClass]="showErrorBorderOnControls(dobverify.controls.dob)"
+                        appendTo="body" id="registercal"></p-calendar>
+                    <!-- </div> -->
+                    <!-- </div> -->
+
+
+
+
+                    <!-- <button (click)="submit_registration_details()" pButton class="p-button mb-2" style="justify-content: center;">Submit</button> -->
+                    <button (click)="submit()" pButton class="p-button mb-2 btn2"
+                        style="justify-content: center;">Submit</button>
+                    <!-- <div class="loginqus">
+                                    <h3 style="color:#fff">Have Any Question?</h3>
+                                    <p style="color: #fff;">Call Us or send an email. Our office is open from 9am to 5pm GMT, Monday to Friday excliding bank Holidays</p>
+                                    <div style="display: flex; " class="nummerdiv">
+                                        <a href="tel:9027370662" style=" color: #fff;">
+                                            <p>+91 9027370662</p>
+                                        </a>
+                                        <a href="mailto:openEMR@dnavigation.com" style="color: #fff;" class="atag">
+                                            <p>openEMR@dnavigation.com</p>
+                                        </a>
+                                    </div>
+            
+                                </div> -->
+
+
+                </form>
+                <form *ngIf="expression2" [formGroup]="registrationForm" class="form-1 ">
+                    <h1 class="logintext">Create New Password</h1>
+
+                    <label for="Email">Email</label>
+                    <input type="email" formControlName="email" readonly />
+                    <label for="password">Enter Your Password</label>
+                    <input type="password" formControlName="password" id="password"  [ngClass]="showErrorBorderOnControls(registrationForm.controls.password)"  placeholder="Password" required />
+                    <label for="confirm_password">Re-Enter Your Password</label>
+                    <input type="password" formControlName="confirm_password" id="confirm_password"
+                        placeholder="Confirm Your Password" required />
+
+
+
+                    <!-- for captcha -->
+
+                    <!-- <label for="password"></label>
+                                <input type="text" formControlName="captcha" placeholder="" readonly/><button class="btn btn-primary" (click)="generate()"> genrate</button> -->
+                    <!-- <label for="captcha">enter captcha </label> -->
+                    <div class="  ">
+                        <!-- <div class="col-6"> -->
+                        <input type="text" formControlName="confirmcaptcha" placeholder="Confirm captcha" required
+                            style="width: 40%;" />
+                        <!-- </div> -->
+                        <!-- <div class="col-6"> -->
+                        <div class="captchadiv"><del>
+                                <h2 class="captcha ">{{captcha1}}</h2>
+                            </del></div>
+
+                        <button type="button" class="btncaptcha" pButton icon="pi pi-refresh" styleClass="p-button-warn"
+                            (click)="generate()"></button>
+                        <!-- </div> -->
+
+                    </div>
+                    <!-- <input type="text" formControlName="confirmcaptcha" placeholder="Confirmcaptcha" required /> -->
+                    <div class="tacbox">
+                        <input id="checkbox" type="checkbox" formControlName="termcondtion" />
+                        <label class="labelterm"> Please Read And Accept Healaxy <a class="termcondtion"
+                                (click)="showDialog()">Terms and Conditions</a></label>
+                    </div>
+                    <!--  -->
+
+                    <!-- <button (click)="submit_registration_details()" pButton class="p-button mb-2" style="justify-content: center;">Submit</button> -->
+                    <button (click)="submit_registration_details()" pButton class="p-button mb-2 btn2"
+                        style="justify-content: center;">Submit</button>
+                    <div class="loginqus">
+                        <h3 style="color:#fff">Have Any Question?</h3>
+                        <p style="color: #fff;">Call Us or send an email. Our office is open from 9am to 5pm GMT, Monday
+                            to Friday excliding bank Holidays</p>
+                        <div style="display: flex; " class="nummerdiv">
+                            <a href="tel:9027370662" style=" color: #fff;">
+                                <p>+91 9027370662</p>
+                            </a>
+                            <a href="mailto:openEMR@dnavigation.com" style="color: #fff;" class="atag">
+                                <p>openEMR@dnavigation.com</p>
+                            </a>
+                        </div>
+
+                    </div>
+
+
+                </form>
+
+                <form *ngIf="expression3" [formGroup]="emailverify" class="form-1 " style="    margin-top: 250px;">
+                    <h1 class="logintext">Email Verification</h1>
+
+                    <label for="Email">Enter One Time Password Send To Your Email Address</label>
+                    <input type="text" formControlName="otp" />
+
+
+
+
+
+                    <!-- <button (click)="submit_registration_details()" pButton class="p-button mb-2" style="justify-content: center;">Submit</button> -->
+                    <button (click)="submit2()" pButton class="p-button mb-2 btn2"
+                        style="justify-content: center;">Submit</button>
+
+
+
+                </form>
+            </div>
+            <!-- </div> -->
+        </div>
+
+    </div>
+
+</div>
+
+<!-- </div> -->
+<!-- </div> -->
+<!-- </div> -->
+
+
+
+<!-- <app-footer></app-footer> -->
+
+<p-dialog header="Term And Conditions" [(visible)]="visible" [style]="{width: '50vw'}" [modal]="true" [maximizable]="true">
+    <p class="text-justify">
+       
+        deserunt exercitationem voluptatem vel tempora vero consectetur fugit placeat assumenda, explicabo praesentium
+        eaque id quia nulla cum necessitatibus repudiandae. Explicabo nobis natus deleniti aliquam ea mollitia deserunt
+        expedita quam officia labore voluptatum, a fugit blanditiis libero vel dicta tenetur reprehenderit quibusdam hic
+        voluptate distinctio dolore. Numquam ipsa repellat sequi quis nihil, incidunt excepturi corporis nisi. Natus ex
+        illum maiores eaque voluptates recusandae dolore magni laborum doloribus debitis voluptate, aut dolores placeat
+        blanditiis eum voluptatem libero cupiditate modi optio ullam a deserunt ratione itaque? Quo est vitae illum
+        molestiae facilis esse doloribus animi a sunt necessitatibus? Doloremque voluptas laudantium magnam eaque
+        commodi, iste alias a asperiores, eius autem voluptatem aliquid ipsa, facilis temporibus! Architecto inventore
+        temporibus veniam reiciendis deserunt. Dolores maiores tenetur odit dolorem tempore ut nemo incidunt officia
+        impedit laborum, provident accusantium rem et, assumenda facilis. Iusto minima eveniet incidunt veritatis,
+        tenetur a quo fugit cumque dicta impedit iste culpa repellat. Sit assumenda vero, modi voluptatum explicabo enim
+        nulla perspiciatis eveniet impedit, veritatis magnam facilis fugiat commodi molestiae voluptates laborum
+        accusamus architecto! A corrupti est blanditiis, ex, harum rem laudantium earum sint doloribus officia eligendi
+        necessitatibus id dolorem repudiandae quo maxime animi quasi praesentium? Nam officia dolorem porro repellendus,
+        maiores aliquam nostrum non soluta pariatur doloribus obcaecati exercitationem laborum, fugit odit eaque vel
+        quae. Repudiandae esse quam possimus, magni laborum ratione veritatis neque rerum optio ipsa ullam? Ratione in
+        itaque quidem, temporibus ex cum officiis unde iure aliquam delectus numquam tenetur. Tenetur eveniet
+        necessitatibus, magni delectus ullam cumque consectetur sapiente explicabo excepturi pariatur autem quaerat
+        veniam nam dicta cupiditate molestiae voluptatem impedit esse aspernatur deleniti enim, aperiam, culpa aut
+        mollitia. Totam aut impedit ut amet aliquid sunt dolorem repellat nesciunt, quidem id voluptate consequuntur
+        similique asperiores, libero perspiciatis temporibus provident in nam eum placeat debitis mollitia, quasi
+        voluptatem. Distinctio, quia consequuntur sunt dolores, esse saepe consequatur ab iure nesciunt rerum at
+        placeat, inventore quas voluptatem illum. Nulla laudantium, natus obcaecati iure optio similique fuga sit
+        commodi ipsa nemo, eos cupiditate officiis, molestias animi eligendi error perspiciatis ad dicta! Necessitatibus
+        eius officiis quaerat saepe recusandae, distinctio libero repudiandae neque! Dicta quae cum tenetur laborum
+        fugiat earum obcaecati aliquid quisquam? Quis a nostrum vero vel hic inventore aperiam assumenda, mollitia
+        laboriosam quos praesentium eveniet sunt fugiat ad illo nesciunt. Explicabo provident iure quia ipsum
+        consequatur sunt obcaecati quisquam beatae optio totam perferendis quibusdam officia architecto numquam fugit
+        sapiente quis sit, odit unde tempore? Quo illo et amet, ipsum nisi molestiae impedit reprehenderit consequuntur
+        itaque natus obcaecati vero fuga tenetur?
+    </p>
+    <ng-template pTemplate="footer">
+    <div class="text-right">
+        <button pButton type="button" (click)="chektermcondition()" label="Accept" class="mr-2"></button>
+        <button pButton type="button" (click)="Cancel()"  label="Cancel"></button>
+      </div>
+    </ng-template >  
+      
+</p-dialog>

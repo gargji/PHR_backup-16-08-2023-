@@ -1,0 +1,89 @@
+
+  <div  *ngIf="displayMessageList" class="col-lg-12" style="background-color: #f7f7f7;">
+    <div class="row">
+
+<div class="col-lg-12" >
+<div class="row Conversionmsg">
+<div class="col-lg-6">
+<h2 style="color: rgb(11, 11, 14); font-size: 1.5rem; font-weight: bold; padding-bottom: 10px;">Starred</h2>
+<p><b>Total Count:</b> {{bookmarkmessagecount}}</p>
+</div>
+<div class="col-lg-6">
+    <div class="search-container">
+        <form action="/action_page.php">
+          <input type="text" placeholder="Search.." name="search">
+          <button type="submit"><i class="fa fa-search"></i></button>
+        </form>
+      </div>
+    </div>
+</div>
+<div class="mainmsgbox" >
+  <ng-templete>
+
+      <div class="comment"  *ngFor="let boat of bookmarkeddata">
+        <div class=" MainBlock">
+          <a  (click)="RenderComponent(boat.guid,boat.Conversation_id,boat.FirstName)" >
+          <div class="appointStatus">
+            <div class="msgdate" style="display: flex;" >
+              <div style="padding-right:2rem ;">
+                <i *ngIf="boat.document==1" class="fa fa-paperclip" aria-hidden="true" style="font-weight:bold"></i>
+              </div>
+              <div class="DateTime">
+                <p>{{boat.Transaction_Time.split(' ')[0]}}</p>
+                <p>{{boat.Transaction_Time.split(' ')[1]}}</p>
+              </div>
+            </div>
+            <img src="assets/img.jpg" width="50px" height="45px" alt="Avatar">
+          
+            <div class="ChatBox">
+                <span>{{boat.FirstName}}</span>
+                <p>{{boat.subject}}</p>
+                <div class="appointtime" style="display: flex;">            
+                  <p>{{boat.message}}</p>
+                 </div>
+
+                 <div style="padding-right:2rem;">
+                  <!-- <a target="_blank" download="" href="http://192.168.1.185/mams/helaxy/undefined/imagedetaails.jpg" class="ng-star-inserted">
+                    <span  class="time-right">
+                      <button class="messageview" *ngIf="boat.document==1">
+                        <i  aria-hidden="true" class="fa fa-file-text-o"></i> imagedetaails.jpg
+                      </button>
+                    </span>
+                  </a> -->
+                 
+                  <!-- <i  class="fa fa-paperclip" aria-hidden="true" style="font-weight:bold"></i> -->
+
+                </div>
+
+                
+              </div>
+
+              
+            
+
+            </div>
+           
+          </a>
+          <i *ngIf="boat.SenderType=='ehr'" class="fa-solid fa-share"></i>
+        <!-- <a href="../../../../../6666.jpg" download><span  class="time-right"><button class="messageview"> <i class="fa fa-picture-o" aria-hidden="true"></i>
+          121722231.jpg</button></span> </a> -->
+         
+        </div> 
+      </div>
+   
+    
+
+      
+    
+
+  </ng-templete>
+
+  
+  </div>
+</div>
+    </div>
+   </div>
+   <ng-templete *ngIf="displayMmessageBox">
+    <app-messagedetails  [tab]="'Starred'" [Conversation_id]="Conversation_id"  [firstname]="firstname"></app-messagedetails>  
+    </ng-templete>
+

@@ -1,0 +1,32 @@
+
+<app-mainphrheader>
+</app-mainphrheader>
+<ng-sidebar-container class="mainSidebar">
+    <ng-sidebar [(opened)]="_opened" position="left"  mode="push"  [closeOnClickOutside]="true"     >
+        <app-phrsidebar></app-phrsidebar>
+    </ng-sidebar>
+    <div ng-sidebar-content>
+       
+        <div class="topnav">
+            
+            <a class="active"><i class="fa fa-bars navicon" aria-hidden="true" (click)="_toggleSidebar()"
+                    style="font-weight: bold;">
+                </i> &nbsp;Your Menu
+            </a>
+
+            <app-phrheader class="midheader"></app-phrheader>
+
+        </div>
+        <div class="routerOutletDiv" >
+    
+        
+            <router-outlet>
+            </router-outlet>
+        </div>
+     
+
+            <!-- <app-phrmaincontent></app-phrmaincontent> -->
+        
+    </div>
+</ng-sidebar-container>
+<app-dashboardfooter></app-dashboardfooter>

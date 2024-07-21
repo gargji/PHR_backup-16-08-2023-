@@ -1,0 +1,198 @@
+<p-toast position="top-right"></p-toast>
+<p-confirmDialog [style]="{width: '40vw'}"></p-confirmDialog>
+
+<p-dataView [value]="cars">
+    <ng-template pTemplate="header">
+        <div class="flex flex-column md:flex-row md:justify-content-between" style="margin-top: 2%;">
+            <div class="Medication">
+                <h1>Therapies </h1>
+            </div>
+            <div class="actionbtn">
+                <p-button (click)="showModalDialog()" class="madicationAdd" icon="pi pi-plus"
+                    label="Add Therapies"></p-button>
+                <p-dialog header="Add Therapies " [(visible)]="displayModal" [modal]="true" [responsive]="true"
+                    id="trial" (onHide)="formHideOnReset($event)" [style]="{width: '40vw'}">
+                    <form [formGroup]="therapyForm" prependId="false" style="margin-top: 10px;">
+                        <div class="form-container">
+                            <div class="row m-0 p-0">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <p-dropdown [ngClass]="showErrorBorderOnControls(therapyForm.controls.type)"
+                                            [options]="therapyTypeDetails" [ngClass]="" [style]="{'width':'100%'}"
+                                            formControlName="type" placeholder="Therapy Type" optionLabel="name"
+                                            [showClear]="true" (onChange)="getTherapyList($event)"></p-dropdown>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group ">
+                                        <span class="p-float-label">
+                                            <p-autoComplete
+                                                [ngClass]="showErrorBorderOnControls(therapyForm.controls.name)"
+                                                formControlName="name" #myInput [showEmptyMessage]="true"
+                                                [forceSelection]="true" [suggestions]="therapyListDetails"
+                                                (completeMethod)="filterProcedure($event)" appendTo="body" field="name"
+                                                [style]="{'width':'100%'}" [inputStyle]="{'width':'100%'}"
+                                                [minLength]="3"></p-autoComplete>
+                                            <label for="float-input">Therapy Name</label>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row m-0 p-0 mt-5">
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <span class="p-float-label">
+                                            <p-calendar
+                                                [ngClass]="showErrorBorderOnControls(therapyForm.controls.startDate)"
+                                                inputId="basic" [showIcon]="true" appendTo="body" #myInput
+                                                formControlName="startDate" [style]="{'width':'100%'}"
+                                                id="helthproblem"></p-calendar>
+                                            <label for="float-input">Start Date</label>
+                                        </span>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <span class="p-float-label">
+                                            <p-calendar
+                                                [ngClass]="showErrorBorderOnControls(therapyForm.controls.endDate)"
+                                                inputId="basic" [showIcon]="true" appendTo="body" #myInput
+                                                formControlName="endDate" [style]="{'width':'100%'}"
+                                                id="helthproblem"></p-calendar>
+                                            <label for="float-input">End Date</label>
+                                        </span>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <span class="p-float-label">
+                                        <p-calendar [ngClass]="showErrorBorderOnControls(therapyForm.controls.time)"
+                                            [timeOnly]="true" inputId="timeonly" formControlName="time"
+                                            hourFormat="12"></p-calendar>
+                                        <label for="float-input">Time</label>
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="row m-0 p-0 mt-3">
+                                <div class="col-md-12">
+                                    <div class="form-group mt-5">
+                                        <span class="p-float-label">
+                                            <textarea id="float-input" rows="1" cols="10" formControlName="note"
+                                                pInputTextarea [style]="{'width':'100%'}"></textarea>
+                                            <label for="float-input">Note</label>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="button-container">
+                            <button pButton type="button" label="Submit" (click)="addTherapy()"
+                                class="p-button-success"></button>
+                        </div>
+                    </form>
+                </p-dialog>
+                <p-dataViewLayoutOptions></p-dataViewLayoutOptions>
+            </div>
+        </div>
+    </ng-template>
+    <ng-template let-car pTemplate="listItem">
+        <div class="container-fluid Maindivscroll">
+            <div class="row m-0 p-0">
+                <div class="col-md-3" *ngFor="let item of  therapyRecords">
+                    <div class="w3-card-4">
+                        <div class="w3-container BlockMain">
+                            <div class="row">
+                                <div class="blockdetail" style="padding-bottom: 10px;">
+                                    <div class="row">
+                                        <div class="col-md-10">
+                                            <p title={{item.Name}}
+                                                style="font-size: 20px; color:rgb(23, 15, 146); font-weight: bold;">
+                                                {{item.Name.length > 43 ? item.Name.substring(0,43)+"..." : item.Name}}
+                                            </p>
+                                        </div>
+                                        <div class="col-md-2" style="padding-top: 10px;">
+                                            <!-- <p-menu #menu [model]="items" [popup]="true" appendTo="body" [item]="item"
+                                                (onShow)='data(item)'></p-menu> -->
+                                            <div class="text-right dots"
+                                                style="position: absolute; DISPLAY: INLINE; right: 30px;">
+                                                <!-- <i class="pi pi-ellipsis-v" (click)="menu.toggle($event)"></i> -->
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <p *ngIf="item.Type">
+                                            <b style="font-weight: bold;"> Type :</b> {{item.Type}}
+                                        </p>
+                                        <p *ngIf="item.startDate">
+                                            <b><i class="pi pi-calendar"></i></b>
+                                            {{ item.startDate | date: 'dd/MM/yyyy'}} -
+                                            {{ item.endDate | date: 'dd/MM/yyyy'}}
+                                        </p>
+                                        <p *ngIf="item.time">
+                                            <b><i class="pi pi-clock"></i></b>
+                                            {{ item.time | date :'shortTime'}}
+                                        </p>
+                                        <p *ngIf="item.note" title={{item.note}}>
+                                            <i class="fa-solid fa-message" aria-hidden="true"></i> Note :
+                                            {{item.note.length > 55 ? item.note.substring(0,55)+"..." : item.note}}
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </ng-template>
+    <ng-template let-car pTemplate="gridItem">
+        <p-table [value]="therapyRecords" responsiveLayout="scroll" paginatorPosition="bottom" #dt1 dataKey="id"
+            [paginator]="true" [globalFilterFields]="['name','type','startDate','endDate', 'time','note']"
+            scrollDirection="both" styleClass="p-mt-3" [scrollable]="true" [rowsPerPageOptions]="[10,15,25,50]"
+            [rows]="15">
+            <ng-template pTemplate="caption">
+                <div class="flex globalSearch">
+                    <p style="font-weight: bold; font-size: 1.2rem; margin-bottom: 0;">Total
+                        Records : {{therapyRecordsLength}} <span class="dislength"></span></p>
+                </div>
+            </ng-template>
+            <ng-template pTemplate="header">
+                <tr>
+                    <th style="width:5%;border-top:2px solid #e7ecf1;" pSortableColumn="sno">S.No</th>
+                    <th style="width:10%;border-top:2px solid #e7ecf1;" pSortableColumn="Name"> <p-sortIcon
+                            field="Name"></p-sortIcon>Name</th>
+                    <th style="width:8%;border-top:2px solid #e7ecf1;" pSortableColumn="Type"><p-sortIcon
+                            field="Type"></p-sortIcon>Type</th>
+                    <th style="width:8%;border-top:2px solid #e7ecf1;" pSortableColumn="startDate"><p-sortIcon
+                            field="startDate"></p-sortIcon>Start Date</th>
+                    <th style="width:5%;border-top:2px solid #e7ecf1;" pSortableColumn="endDate"><p-sortIcon
+                            field="endDate"></p-sortIcon>End Date</th>
+                    <th style="width:5%;border-top:2px solid #e7ecf1;" pSortableColumn="time"><p-sortIcon
+                            field="time"></p-sortIcon>Time</th>
+                    <th style="width:15%;border-top:2px solid #e7ecf1;" pSortableColumn="note"><p-sortIcon
+                            field="note"></p-sortIcon>Notes</th>
+                    <th style="width:5%;border-top:2px solid #e7ecf1;">Action</th>
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-item let-i="rowIndex">
+                <tr>
+                    <td style="width:5%;">{{i + 1}}.</td>
+                    <td style="width:10%;">{{item.Name}}</td>
+                    <td style="width:8%;">{{item.Type}}</td>
+                    <td style="width:8%;">{{item.startDate | date: 'dd/MM/yyyy'}}</td>
+                    <td style="width:5%;">{{item.endDate |date: 'dd/MM/yyyy'}}</td>
+                    <td style="width:5%;">{{item.time | date:'h:mm a'}}</td>
+                    <td style="width:15%;">{{item.note}}</td>
+                    <td style="width:5%;">
+                        <div class="row">
+                            <div class="col">
+                                <button class="btn btn-danger" (click)="deleteTherapy(item.id)"><i
+                                        class="fa fa-trash"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+            </ng-template>
+        </p-table>
+    </ng-template>
+</p-dataView>

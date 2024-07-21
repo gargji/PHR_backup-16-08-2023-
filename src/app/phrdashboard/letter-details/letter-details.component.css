@@ -1,0 +1,49 @@
+
+  .card-body H3{
+    font-size: 17px;
+    color: #6f6f6f;
+    font-weight: bold;
+    line-height: 35px;
+  }
+.column{
+    padding-top: 7%;
+}
+  
+.appointmentschudule h1{
+font-size: 1.4rem;
+color: #5271e4;
+font-weight: bold;
+}
+.card {
+  height: auto !important;
+  /* min-height: 400px !important; */
+  /* margin-bottom: 1em !important; */
+  
+}
+.card{
+  /* min-height: 190px !important; */
+  margin-bottom: 1em !important;
+  border: 1px solid !important;
+  border-color: #ddd !important;
+  box-shadow: -1px 0px 5px 0px rgba(0,0,0,0.2);
+}
+.card-title{
+  color: #000;
+  font-size: 1.2rem;
+  font-weight: bold;
+  line-height: initial;
+}
+
+.btnmoreappointment{
+  margin-bottom: 50px;
+  margin-top: 30px;
+  text-align: center;
+  /* border-top: 2px solid #ddd; */
+ }
+ .btnmoreappointment button{
+   border: 1px solid #1d4ed8;
+   background-color: #b0d2fd4a;
+   padding: 5px 10px;
+   color: #1d4ed8;
+   border-radius: 5px;
+  }

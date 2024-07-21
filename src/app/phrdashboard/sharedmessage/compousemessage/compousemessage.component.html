@@ -1,0 +1,92 @@
+<p-toast position="top-right"></p-toast>
+<p-confirmDialog [style]="{width: '40vw'}"></p-confirmDialog>
+
+<div [formGroup]="replyMessage" id="trial">
+       
+      <div  class="form-container">
+
+        <!-- <div class="col-lg-10 col-md-8 col-sm-9 col-xs-9"> -->
+         
+          <!-- <p-autoComplete  [style]="{'width':'100%'}" [inputStyle]="{'width':'100%'}"  appendTo="body" field="Email" formControlName="sender"  [suggestions]="providername"  [minLength]="3"  (completeMethod)="getMasterProviderData($event)" ></p-autoComplete>       -->
+          
+          
+          <!-- <p-autoComplete formControlName="sender"
+         
+          [showEmptyMessage]="true" [suggestions]="providername"
+          (completeMethod)="getMasterProviderData($event)" appendTo="body"
+          [forceSelection]="true" field="Email" [style]="{'width':'100%'}"
+          [inputStyle]="{'width':'100%'}" [minLength]="3"></p-autoComplete> -->
+
+          <div class="form-group    mt-2">
+            <span class="p-float-label">
+                <!-- <input type="text" id="float-input" pInputText/> -->
+                <p-autoComplete formControlName="sender" #myInput id="inputsendr"
+              
+                    [showEmptyMessage]="true" [forceSelection]="true"
+                    [suggestions]="providername"
+                    (completeMethod)="getMasterProviderData($event)" appendTo="body" field="firstname"
+                    [style]="{'width':'100%'}" [inputStyle]="{'width':'100%'}"
+                    [minLength]="3"></p-autoComplete>
+                <label for="float-input">To</label>
+            </span>
+
+
+
+        <!-- </div> -->
+       
+        </div>
+    </div>
+      <!-- <div class="mb-3 row">
+        <label style="  color: black; font-weight: bold;" for="inputSubject" class="col-sm-2 col-form-label">Subject</label>
+        <div class="col-lg-10">
+          <input type="text"  formControlName="To_Subject"  class="form-control" id="inputText">
+        </div>
+      </div> -->
+
+      <div class="form-group  mt-5 ">
+           
+              
+        <span class="p-float-label" >
+         
+            <input type="text" [style]="{width: '100%'}" pInputText formControlName="To_Subject" 
+      >
+
+            <label for="float-input">Subject</label>
+  
+        </span>
+
+    </div>
+     <!-- <textarea rows="5"  formControlName="message"  style="width: 100%;" pInputTextarea></textarea> -->
+
+     <div class="form-group mt-5">
+      <span class="p-float-label">
+          <textarea id="float-input" rows="2" cols="10"
+              formControlName="message" pInputTextarea
+              [style]="{'width':'100%'}"></textarea>
+          <label for="float-input">message</label>
+      </span>
+  </div>
+              <!-- <div class="button-container">
+                                   
+                                    <button pButton type="button" label="Submit" (click)="submit_Immunizations()"
+                                        class="p-button-success"></button>
+                                </div> -->
+      <p-progressBar [value]="processbarTwo"></p-progressBar>
+       <div class="footer">
+          <div class="image-upload">
+            <label for="file-input">
+              <i *ngFor="let dot of showdocument"> {{dot.docu}} </i>
+             
+            </label>
+            <i class="fa fa-trash-o iconaction" (click)="deleteshowdocuments()" aria-hidden="true"> </i>
+            <label for="file-input">
+              <i class="fa fa-paperclip iconaction" aria-hidden="true"> </i>
+            </label>
+           
+            <input id="file-input"  formControlName="document" multiple (change)="fileupload($event)"  type="file"   />
+            <!-- <p-fileUpload name="myfile[]" formControlName="document" url="./upload.php" multiple="multiple" (onChange)="fileupload($event)"></p-fileUpload> -->
+            <p-button (click)="Save_message_1()" label="Submit" styleClass="p-button"></p-button>
+          </div>
+    </div>
+    
+  </div>

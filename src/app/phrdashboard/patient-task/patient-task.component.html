@@ -1,0 +1,174 @@
+<p-toast position="top-right"></p-toast>
+<p-dataView [value]="cars" class="header-task">
+    <ng-template pTemplate="header">
+        <div class="flex flex-column md:flex-row md:justify-content-between" style="margin-top: 2%;">
+            <div class="Medication">
+                <h1>Tasks For Me</h1>
+            </div>
+            <div class="actionbtn">
+                <!-- <p-dataViewLayoutOptions></p-dataViewLayoutOptions> -->
+            </div>
+        </div>
+    </ng-template>
+    <!-- <ng-template let-car pTemplate="gridItem">
+        <div class="container-fluid Maindivscroll">
+            <div class="row m-0 p-0">
+                <div class="col-md-3" *ngFor="let item of  patientTaskDetails">
+                    <div class="w3-card-4">
+                        <div class="w3-container BlockMain">
+                            <div class="row">
+                                <div class="blockdetail" style="padding-bottom: 10px;">
+                                    <div class="row">
+                                        <div class="col-md-10">
+                                            <p title={{item.Name}}
+                                                style="font-size: 20px; color:rgb(23, 15, 146); font-weight: bold;">
+                                                {{item?.shortName?.length > 43 ? item?.shortName?.substring(0,43)+"...":
+                                                item?.shortName}}
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <p>
+                                            <b style="font-weight: bold;"> Category :</b> {{item?.msc_name | titlecase}}
+                                        </p>
+                                        <p>
+                                            <b style="font-weight: bold;"> Assigned By :</b> {{item?.assignedByName}}
+                                        </p>
+                                        <p>
+                                            <b style="font-weight: bold;"> Priority :</b> {{item?.priority_label}}
+                                        </p>
+                                        <p>
+                                            <b><i class="pi pi-calendar"></i></b>
+                                            {{ item.due_date | date: 'dd/MM/yyyy'}}
+                                        </p>
+                                        <p title={{item?.note}}>
+                                            <i class="fa-solid fa-message" aria-hidden="true"></i> Description :
+                                            {{item.description.length > 30 ? item.description.substring(0,30)+"..."
+                                            :item.description}}
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </ng-template> -->
+    <ng-template let-car pTemplate="listItem">
+        <p-table [value]="patientTaskDetails" responsiveLayout="scroll" paginatorPosition="bottom" #dt1 dataKey="id"
+            [paginator]="true" [globalFilterFields]="['name','type','startDate','endDate', 'time','note']"
+            scrollDirection="both" styleClass="p-mt-3" [scrollable]="true" [rowsPerPageOptions]="[9,18,27,36]"
+            [rows]="9">
+            <ng-template pTemplate="caption">
+                <div class="flex globalSearch">
+                    <p style="font-weight: bold; font-size: 1.2rem; margin-bottom: 0;">Total
+                        Records : {{patientTaskDetailsLength}} <span class="dislength"></span></p>
+                </div>
+            </ng-template>
+            <ng-template pTemplate="header">
+                <tr>
+                    <th style="border-top:2px solid #e7ecf1;" pSortableColumn="sno">S.No</th>
+                    <th style="border-top:2px solid #e7ecf1;" pSortableColumn="assignedByName"> <p-sortIcon
+                            field="assignedByName"></p-sortIcon>Assigned By</th>
+                    <th style="border-top:2px solid #e7ecf1;" pSortableColumn="msc_name"><p-sortIcon
+                            field="msc_name"></p-sortIcon>Category</th>
+                    <th style="border-top:2px solid #e7ecf1;" pSortableColumn="shortName"><p-sortIcon
+                            field="shortName"></p-sortIcon>sortName</th>
+                    <th style="border-top:2px solid #e7ecf1;" pSortableColumn="due_date"><p-sortIcon
+                            field="due_date"></p-sortIcon>Due Date</th>
+                    <th style="border-top:2px solid #e7ecf1;" pSortableColumn="priority_label"><p-sortIcon
+                            field="priority_label"></p-sortIcon>Priority</th>
+                    <th style="border-top:2px solid #e7ecf1;" pSortableColumn="description"><p-sortIcon
+                            field="description"></p-sortIcon>Description</th>
+                    <th style="border-top:2px solid #e7ecf1;" pSortableColumn="status"><p-sortIcon
+                            field="status"></p-sortIcon>Status</th>
+                    <th style="border-top:2px solid #e7ecf1;">Action</th>
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-item let-i="rowIndex">
+                <tr>
+                    <td>{{i + 1}}.</td>
+                    <td>{{item?.assignedByName}}</td>
+                    <td>{{item?.msc_name}}</td>
+                    <td>{{item?.shortName}}</td>
+                    <td>{{item?.due_date | date: 'dd/MM/yyyy'}}</td>
+                    <td>{{item?.priority_label }}</td>
+                    <td title={{item.description}}>{{item.description.length > 30 ?
+                        item.description.substring(0,30)+"..." :item.description}}</td>
+                    <td>
+                        <div class="stepwizard">
+                            <div *ngIf="item.status =='0'" class="stepwizard-step" style="width: 60px;">
+                                <span
+                                    style="background-color: rgb(54, 151, 241); border-radius: 25px; color: white; display: flex; font-weight: 500; justify-content: center; padding: 1px 2px 2px; width: 100%;">
+                                    New</span>
+                            </div>
+                            <div *ngIf="item.status =='1'" class="stepwizard-step" style="width: 60px;">
+                                <span
+                                    style="background-color: Green; border-radius: 25px; color: white; display: flex; font-weight: 500; justify-content: center; padding: 1px 2px 2px; width: 100%;">
+                                    Started</span>
+                            </div>
+                            <div *ngIf="item.status =='2'" class="stepwizard-step" style="width: 60px;">
+                                <span
+                                    style="background-color: red;border-radius: 25px; color: white; display: flex; font-weight: 500; justify-content: center; padding: 1px 2px 2px; width: 100%;">
+                                    Deffer</span>
+                            </div>
+                            <div *ngIf="item.status =='3'" class="stepwizard-step" style="width: 60px;">
+                                <span
+                                    style="background-color: #4ebdb2; border-radius: 25px; color: white; display: flex; font-weight: 500; justify-content: center; padding: 1px 2px 2px; width: 100%;">
+                                    Complete</span>
+                            </div>
+                            <div *ngIf="item.status =='4'" class="stepwizard-step" style="width: 60px;">
+                                <span
+                                    style="background-color: purple; border-radius: 25px; color: white; display: flex; font-weight: 500; justify-content: center; padding: 1px 2px 2px; width: 100%;">
+                                    Snooze</span>
+                            </div>
+                            <div *ngIf="item.status =='5'" class="stepwizard-step" style="width: 60px;">
+                                <span
+                                    style="background-color: orangered; border-radius: 25px; color: white; display: flex; font-weight: 500; justify-content: center; padding: 1px 2px 2px; width: 100%;">
+                                    Hold</span>
+                            </div>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="stepwizard-step gap-2 completebutton button-section">
+                            <button *ngIf="item.status=='0'" type=" button" (click)="ChangeTaskStatus(1,item.id)"
+                                class="btn btn-sm action-btn start-btn ">Start</button>
+                            <button *ngIf="item.status=='0'|| item.status=='1'" type="button"
+                                (click)="ChangeDefferTaskStatus(2,item.id)"
+                                class="btn btn-sm action-btn deffer-btn ">Deffer</button>
+                            <button *ngIf="item.status=='1'" type="button" (click)="ChangeTaskStatus(3,item.id)"
+                                class="btn action-btn btn-sm btn-done ">Done</button>
+                            <button *ngIf="item.status =='1' || item.status =='2'" type="button"
+                                (click)="ChangeTaskStatus(4,item.id)"
+                                class="btn btn-sm action-btn btn-snooze ">Snooze</button>
+                            <button type="button" *ngIf="item.status =='2'||item.status =='4'"
+                                class="btn btn-sm action-btn btn-reversed"
+                                (click)="ChangeTaskStatus(0,item.id)">Reverse</button>
+                        </div>
+                    </td>
+                </tr>
+            </ng-template>
+        </p-table>
+    </ng-template>
+</p-dataView>
+<p-dialog header="Add Task Differ Reason" [(visible)]="differReasonDialog" [style]="{ width: '40vw', height: '210px' }"
+    [modal]="true">
+    <div class="container-fluid mb-3">
+        <div class="container">
+            <form [formGroup]="differReasonForm" class="row">
+                <div class="form-section row m-0 p-0">
+                    <div class="col">
+                        <i>Please enter the reason why you want to deffer the task?</i><br>
+                        <input type="text" class="form-control" formControlName="differReason">
+                    </div>
+                </div>
+            </form>
+            <div class="row">
+                <div class="col d-flex justify-content-end">
+                    <button class=" btn btn-info btn-sm" (click)="addDifferReason()">Add</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</p-dialog>

@@ -1,0 +1,89 @@
+<div class="container-fluid Maindivscroll fordataviewchange">
+    <div>
+        <div class="familyhistory">
+            <h1>Preventive Care</h1>
+            <p>Preventive medicine plays an important part in your health and overall well-being. the following
+                procedures are recommended for people of your age, sexn and medical history</p>
+        </div>
+    </div>
+    <p-tabView styleClass="tabview-custom">
+        <p-tabPanel header="Reminder">
+            <p-tabView styleClass="tabview-custom">
+                <p-tabPanel header="Panding">
+                    <div class="row">
+                        <div class="col-lg-4" *ngFor="let item of reminderdatahealthy">
+                            <div class="w3-card-4">
+                                <div class="w3-container BlockMain">
+                                    <div class="row" style="padding-top: 10px;">
+                                        <div class="blockdetail" style="padding-bottom: 10px;">
+                                            <p style="font-size: 20px; color:rgb(23, 15, 146); font-weight: bold;">
+                                                {{item.NameofAlertname}}</p>
+                                            <p style="font-weight: bold;">Overdue since {{item.duedate}}</p>
+                                            <!-- <p>{{item.duedate}}</p> -->
+                                            <p>{{item.Status}}</p>
+                                          <br>
+                                            <!-- <a routerLink="#" style="padding-top: 20px;"> <i class="fa fa-calendar-o"
+                                                    aria-hidden="true"></i> <span> Hide reminder from home
+                                                    page</span></a> -->
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </p-tabPanel>
+                <p-tabPanel header="Historical">
+                    <div class="row">
+                        <div class="col-lg-4" *ngFor="let item of healthyreminderdatahistorical">
+                            <div class="w3-card-4">
+                                <div class="w3-container BlockMain">
+                                    <div class="row" style="padding-top: 10px;">
+                                        <div class="blockdetail" style="padding-bottom: 10px;">
+                                            <p style="font-size: 20px; color:rgb(23, 15, 146); font-weight: bold;">
+                                                {{item.NameofAlertname}}</p>
+                                            <p style="font-weight: bold;">Overdue since {{item.duedate}}</p>
+                                            <!-- <p>{{item.duedate}}</p> -->
+                                            <p>{{item.Status}}</p> <br>
+                                            <!-- <a routerLink="#" style="padding-top: 20px;"> <i class="fa fa-calendar-o"
+                                                    aria-hidden="true"></i> <span> Hide reminder from home
+                                                    page</span></a> -->
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </p-tabPanel>
+            </p-tabView>
+        </p-tabPanel>
+        <p-tabPanel header="Vaccine Reminder">
+            <p-tabView styleClass="tabview-custom">
+                <!-- <p-tabPanel header="Panding"> -->
+                    <div class="row pt-4" >
+                        <div class="col-lg-4" *ngFor="let item of vaccinedataother">
+                            <div class="w3-card-4">
+                                <div class="w3-container vaccinedata">
+                                    <div class="row" style="padding-top: 10px;">
+                                        <div class="blockdetail" style="padding-bottom: 10px;">
+                                            <p style="font-size: 20px; color:rgb(23, 15, 146); font-weight: bold;">
+                                                {{item.VaccineName}}</p>
+                                            <p style="font-weight: bold;">Not due untill November 24, 2022</p>
+                                            <p>Previously Done: 11/23/2024</p>
+                                            <span>Indication :-</span>{{item.IndicationName}}
+                                            <!-- <i class="fa fa-info-circle" aria-hidden="true"></i> <span> Learn More
+                                            </span> <br> -->
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                <!-- </p-tabPanel> -->
+            </p-tabView>
+        </p-tabPanel>
+    </p-tabView>
+</div>
+
+
+
+

@@ -1,0 +1,177 @@
+.column {
+    height: 100%;
+    /* allows both columns to span the full height of the browser window */
+    display: flex;
+    flex-direction: column;
+    /* stacks the left and right headers above the bottom content */
+}
+
+#left {
+    flex-shrink: 0;
+    /* makes sure that content is not cut off in a smaller browser window */
+}
+
+.top-right {
+    flex-shrink: 0;
+    display: flex;
+}
+
+ul {
+    list-style: none;
+}
+
+.Sidebar {
+    background-color: azure;
+}
+
+.topnav {
+    overflow: hidden;
+    background-color: #e3e4e7;
+    position: fixed;
+    /* height: 100px; */
+    width: 100%;
+    z-index: 999;
+}
+
+@media only screen and (max-width: 768px) {
+    .topnav {
+        margin-top: 54px;
+    }
+}
+
+.topnav a {
+    float: left;
+    color: #000;
+    text-align: center;
+    padding: 5px 16px;
+    text-decoration: none;
+    font-size: 0.938rem;
+    font-weight: bold;
+}
+
+@media screen and (max-width: 768px) {
+    .topnav a {
+        padding: 5px 2px;
+    }
+}
+
+.topnav a:hover {
+    background-color: rgb(243, 237, 237);
+    color: black;
+}
+
+
+/* .topnav a.active {
+    background-color: #04AA6D;
+    color: white;
+  } */
+
+.navicon {
+    background-color: #5271e4;
+    padding: 10px;
+    border: 0px;
+    border-radius: 50%;
+    color: #fff;
+}
+
+.mainSidebar {
+    height: 90vh ;
+     bottom: 0px;
+}
+
+ @media (max-width: 1366px) {
+    .mainSidebar {
+        /* height: calc(100vh-13vh); */
+        height: 87vh ;
+        /* bottom: 0px; */
+    }
+} 
+
+.midheader {
+    display: block;
+}
+
+@media screen and (max-width: 768px) {
+    .midheader {
+        display: flex;
+        white-space: nowrap;
+        overflow-y: hidden;
+    }
+}
+
+.routerOutletDiv{
+    /* margin-bottom: 30px; */
+
+}
+/* .col,
+.col-1,
+.col-10,
+.col-11,
+.col-12,
+.col-2,
+.col-3,
+.col-4,
+.col-5,
+.col-6,
+.col-7,
+.col-8,
+.col-9,
+.col-auto,
+.col-lg,
+.col-lg-1,
+.col-lg-10,
+.col-lg-11,
+.col-lg-12,
+.col-lg-2,
+.col-lg-3,
+.col-lg-4,
+.col-lg-5,
+.col-lg-6,
+.col-lg-7,
+.col-lg-8,
+.col-lg-9,
+.col-lg-auto,
+.col-md,
+.col-md-1,
+.col-md-10,
+.col-md-11,
+.col-md-12,
+.col-md-2,
+.col-md-3,
+.col-md-4,
+.col-md-5,
+.col-md-6,
+.col-md-7,
+.col-md-8,
+.col-md-9,
+.col-md-auto,
+.col-sm,
+.col-sm-1,
+.col-sm-10,
+.col-sm-11,
+.col-sm-12,
+.col-sm-2,
+.col-sm-3,
+.col-sm-4,
+.col-sm-5,
+.col-sm-6,
+.col-sm-7,
+.col-sm-8,
+.col-sm-9,
+.col-sm-auto,
+.col-xl,
+.col-xl-1,
+.col-xl-10,
+.col-xl-11,
+.col-xl-12,
+.col-xl-2,
+.col-xl-3,
+.col-xl-4,
+.col-xl-5,
+.col-xl-6,
+.col-xl-7,
+.col-xl-8,
+.col-xl-9,
+.col-xl-auto {
+    padding-left: 0px;
+} */

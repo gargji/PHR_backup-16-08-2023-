@@ -1,0 +1,68 @@
+.callculater{
+    font-size: 30px;
+    font-weight: 600;
+
+    font-variant: center;
+
+    color: aliceblue;
+    background-color: #F05F40;
+    margin: 6px;
+
+    justify-content: center;
+    position: initial;
+    width: 60px
+}
+.timeheader{
+    font-weight: 300;
+    color: rgb(119, 122, 119);
+    
+}
+.btn-change {
+    color: Red;
+    background-color: white;
+  }
+  .flowsheetContaner {
+    min-width:15rem; max-width: fit-content; height:1.9rem;  padding-left: 10px; padding-right: 10px;
+}
+.vitalflowsheet{
+    padding-left: 10px;
+    white-space: nowrap; 
+  /* width: 24px;  */
+  overflow: hidden;
+  text-overflow: "----"; 
+  /* border: 1px solid #000000;  */
+    /* border: 1px solid #000000; */
+ }
+ .activecell{
+  border: 1px solid rgb(184, 175, 175);
+  color:black;
+  background-color: #c7e0f0;
+ }
+ .flowsheetContaner{
+  height: 1rem !important;
+ }
+
+
+ .isCollapsed{
+transition: 10s;
+ }
+ .button-container {
+  text-align: right;
+  margin-top: 20px;
+ 
+    position: relative;
+    top: 2rem;
+/* bottom: 5px; */
+
+}
+  
+#trial label {
+  color: #5271e4;
+}
+
+.mainForm{
+  padding-right: 0;
+
+}
+
+ 

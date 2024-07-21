@@ -1,0 +1,63 @@
+<app-mainphrheader></app-mainphrheader>
+
+<ng-sidebar-container class="mainSidebar">
+
+    <ng-sidebar [(opened)]="_opened" position="left" mode="slide">
+        <app-phrsidebar></app-phrsidebar>
+    </ng-sidebar>
+
+    <div ng-sidebar-content>
+        <router-outlet></router-outlet>
+        <div class="topnav">
+            <a class="active"><i class="fa fa-bars navicon" aria-hidden="true" (click)="_toggleSidebar()"
+                    style="font-weight: bold;">
+                </i> &nbsp;Your Menu
+            </a>
+            <app-phrheader></app-phrheader>
+        </div>
+        <div class="container-fluid Maindivscroll">
+            <div class="row managecontent">
+                <div class="col-lg-9">
+                    <div class="row">
+                        <div class="col-lg-9">
+                            <div class="scheduleappointment">
+                                <h1>Appointment And Visits (Deepak)</h1>
+                            </div>
+                        </div>
+                        <div class="col-lg-3">
+                            <ul class="appointmentbtn">
+                                
+                                
+                                <li class="has-mega gc_main_navigation" style="text-align: center;"><a class="btn" routerLink="''"><i class="fa fa-sign-in" aria-hidden="true"></i>&nbsp;Schedule an appointment</a></li>
+                           
+                            </ul>
+                        </div>
+
+                    </div>
+
+                    <div class="seaduleheader">
+                        <div class="grid p-fluid col-lg-10 headerevent">
+                            <h2>Show : </h2>
+                         <p-dropdown style="padding:0.5rem" [options]="Selectappointment" [(ngModel)]="selectedAppointment" optionLabel="name" [showClear]="true"></p-dropdown>
+                         <a href="#">More Filter Options</a>
+                        </div>
+                  
+                    </div>
+
+                </div>
+              
+                <div class="col-lg-3">
+                    <h1 style="color: black;">hello secand section</h1>
+                 </div>
+            </div>
+         
+
+          
+        </div>
+
+
+    </div>
+
+</ng-sidebar-container>
+
+<!-- <app-footer></app-footer> -->

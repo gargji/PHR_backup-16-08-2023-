@@ -1,0 +1,147 @@
+
+
+html{
+    height: 50% !important;
+}
+.container-fluid{
+    padding-left: 0;
+    padding-right: 0;
+}
+.li{
+    margin-left: 10%;
+    margin: 5%;
+    text-align: center;
+}
+
+li.li:hover{
+    transition: cubic-bezier(0.075, 0.82, 0.165, 1);
+    background-color: #757575 !important;
+    color: white !important;
+    cursor: pointer !important;
+    transition: background-color 5s;
+    transition: color 1s
+  
+  }
+  .page-content-wrapper{
+    height: 80vh;
+}
+#trial label{
+    color:#5271e4
+    }
+    span.p-float-label{
+        padding-top: 3px;
+      }
+
+      .button-container {
+        text-align: right;
+        margin-top: 20px;
+       
+          position: relative;
+          top: 2rem;
+    /* bottom: 5px; */
+    
+      }
+
+      .app-documentview{
+        display: block !important;
+      }
+
+
+/* sidebar */
+
+      @media (max-width: 1272px) {
+      
+        #collapseWidthExample{
+          padding-top: 6% !important;
+        }
+      }
+      @media (max-width: 1044px) {
+      
+        #collapseWidthExample{
+          padding-top:7% !important;
+          min-width: 15% !important;
+        }
+    
+        .Medication{
+          padding-top: 0.6%;
+    
+        }
+     
+      }
+      @media (max-width: 950px) {
+    
+        #collapseWidthExample{
+      
+          min-width: 17% !important;
+        }
+      }
+      @media (max-width: 820px) {
+     
+        #collapseWidthExample{
+          padding-top: 9% !important;
+        }
+       
+      }
+      @media (max-width: 768px) {
+        #collapseWidthExample{
+          min-width: 19% !important;
+         }
+     
+       }
+      @media (max-width: 706px) {
+     
+        #collapseWidthExample{
+         min-width: 20% !important;
+        }
+    
+       
+      }
+      @media (max-width: 606px) {
+     
+        #collapseWidthExample{
+          min-width: 25% !important;
+          padding-top: 13% !important;
+    
+         }
+         
+      }
+      @media (max-width: 520px) {
+   
+        #collapseWidthExample {
+          min-width: 30% !important;
+          padding-top: 15% !important;
+      }
+    
+       
+      }
+      @media (max-width: 425px) {
+     
+        #collapseWidthExample {
+         
+          padding-top: 19% !important;
+      }
+    
+      
+       
+      }
+    
+    
+      @media (max-width: 375px) {
+      
+    
+  
+        
+        #collapseWidthExample {
+          min-width: 39% !important;
+          /* padding-top: 15% !important; */
+      }
+    }
+
+
+
+
+
+
+
+
+      

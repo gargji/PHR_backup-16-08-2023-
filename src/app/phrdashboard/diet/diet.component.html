@@ -1,0 +1,213 @@
+<p-toast position="top-right"></p-toast>
+<p-confirmDialog [style]="{ width: '40vw' }"></p-confirmDialog>
+
+<p-dataView [value]="cars">
+    <ng-template pTemplate="header">
+        <div class="flex flex-column md:flex-row md:justify-content-between" style="margin-top: 2%">
+            <div class="Medication">
+                <h1>Diet</h1>
+            </div>
+            <div class="actionbtn">
+                <p-button (click)="showModalDialog()" class="madicationAdd" icon="pi pi-plus"
+                    label="Add Diet"></p-button>
+                <p-dialog header="Add Diet " [(visible)]="displayModal" [modal]="true" [responsive]="true" id="trial"
+                    (onHide)="formHideOnReset($event)" [style]="{ width: '45vw' }">
+                    <form [formGroup]="addDietForm" prependId="false" style="margin-top: 10px">
+                        <div class="form-container">
+                            <div class="row m-0 p-0">
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <p-dropdown [options]="dietTypeDetails"
+                                            [ngClass]="showErrorBorderOnControls(addDietForm.controls.type)"
+                                            optionLabel="name" [showClear]="true" [style]="{ width: '100%' }"
+                                            formControlName="type" placeholder="Diet Type "
+                                            [showClear]="true"></p-dropdown>
+                                    </div>
+                                </div>
+                                <div class="col-md-5">
+                                    <div class="form-group">
+                                        <span class="p-float-label">
+                                            <p-autoComplete formControlName="name"
+                                                [ngClass]="showErrorBorderOnControls(addDietForm.controls.name)"
+                                                #myInput [showEmptyMessage]="true" [forceSelection]="true"
+                                                [suggestions]="medication_drug"
+                                                (completeMethod)="filterProcedure($event)" appendTo="body" field="name"
+                                                [style]="{ width: '100%' }" [inputStyle]="{ width: '100%' }"
+                                                [minLength]="3"></p-autoComplete>
+                                            <label for="float-input">Diet Name</label>
+                                        </span>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <p-dropdown [options]="intakeDetails"
+                                            [ngClass]="showErrorBorderOnControls(addDietForm.controls.intake)"
+                                            optionLabel="name" [showClear]="true" [style]="{ width: '100%' }"
+                                            formControlName="intake" [showClear]="true"
+                                            placeholder="Select Intake"></p-dropdown>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row m-0 p-0 mt-5">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <span class="p-float-label">
+                                            <p-calendar inputId="basic"
+                                                [ngClass]="showErrorBorderOnControls(addDietForm.controls.startDate)"
+                                                [showIcon]="true" appendTo="body" #myInput formControlName="startDate"
+                                                [style]="{ width: '100%' }" id="startDate" dateFormat="yy-mm-dd"
+                                                id="helthproblem"></p-calendar>
+                                            <label for="float-input">Start Date</label>
+                                        </span>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <span class="p-float-label">
+                                            <p-calendar
+                                                [ngClass]="showErrorBorderOnControls(addDietForm.controls.endDate)"
+                                                inputId="basic" [showIcon]="true" appendTo="body" #myInput
+                                                formControlName="endDate" [style]="{ width: '100%' }" id="startDate"
+                                                dateFormat="yy-mm-dd" id="helthproblem"></p-calendar>
+                                            <label for="float-input">End Date</label>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row m-0 p-0 mt-5">
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <span class="p-float-label">
+                                            <textarea id="float-input" rows="2" cols="10" formControlName="note"
+                                                pInputTextarea [style]="{ width: '100%' }"></textarea>
+                                            <label for="float-input">Notes</label>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="button-container">
+                            <button pButton type="button" label="Submit" (click)="addDiet()"
+                                class="p-button-success"></button>
+                        </div>
+                    </form>
+                </p-dialog>
+                <p-dataViewLayoutOptions></p-dataViewLayoutOptions>
+            </div>
+        </div>
+    </ng-template>
+    <ng-template let-car pTemplate="listItem">
+        <div class="container-fluid Maindivscroll">
+            <div class="row m-0 p-0">
+                <div class="col-lg-4" *ngFor="let item of dietRecords">
+                    <div class="w3-card-4">
+                        <div class="w3-container BlockMain">
+                            <div class="row">
+                                <div class="blockdetail" style="padding-bottom: 10px;line-height: 2rem;">
+                                    <div class="row">
+                                       
+                                                <p-menu   #menu [model]="items" [popup]="true" appendTo="body" [item]="item" (onShow)='data(item)' ></p-menu>
+                                                <div   class="text-right dots" style="position: absolute; DISPLAY: INLINE; right: 30px;">
+                                                    <i class="pi pi-ellipsis-v" (click)="menu.toggle($event)"></i>
+                                                </div>
+                                        
+                                        <div class="col-md-10">
+                                            <p title={{item.Name}}
+                                                style="font-size: 20px; color:rgb(23, 15, 146); font-weight: bold;">
+                                                {{item.Name.length > 43 ? item.Name.substring(0,43)+"..." : item.Name}}
+                                            </p>
+                                        </div>
+                                        <div class="col-md-2" style="padding-top: 10px;">
+                                            <!-- <p-menu #menu [model]="items" [popup]="true" appendTo="body" [item]="item"
+                                                (onShow)='data(item)'></p-menu> -->
+                                            <div class="text-right dots"
+                                                style="position: absolute; DISPLAY: INLINE; right: 30px;">
+                                                <!-- <i class="pi pi-ellipsis-v" (click)="menu.toggle($event)"></i> -->
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <p *ngIf="item.Type">
+                                            <b style="font-weight: bold;"> Type :</b> {{item.Type}}
+                                        </p>
+                                        <p *ngIf="item.intake">
+                                            <b style="font-weight: bold;"> Intake :</b> {{item.intake}}
+                                        </p>
+                                        <p *ngIf="item.startDate">
+                                            <b><i class="pi pi-calendar"></i></b>
+                                            {{ item.startDate | date: 'dd/MM/yyyy'}} -
+                                            {{ item.endDate | date: 'dd/MM/yyyy'}}
+                                        </p>
+                                        <p *ngIf="item.note" title={{item.note}}>
+                                            <i class="fa-solid fa-message" aria-hidden="true"></i> Note :
+                                            {{item.note.length > 55 ? item.note.substring(0,55)+"..." : item.note}}
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </ng-template>
+    <ng-template let-car pTemplate="gridItem">
+        <p-table [value]="dietRecords" responsiveLayout="scroll" paginatorPosition="bottom" #dt1 dataKey="id"
+            [paginator]="true" [globalFilterFields]="['name','type','intake','startDate','endDate','note']"
+            scrollDirection="both" styleClass="p-mt-3" [scrollable]="true" [rowsPerPageOptions]="[10, 15, 25, 50]"
+            [rows]="15">
+            <ng-template pTemplate="caption">
+                <div class="flex globalSearch">
+                    <p style="font-weight: bold; font-size: 1.2rem; margin-bottom: 0">
+                        Total Records : {{ dietRecordsLength }}
+                        <span class="dislength"></span>
+                    </p>
+                </div>
+            </ng-template>
+            <ng-template pTemplate="header">
+                <tr>
+                    <th style="width: 5%; border-top: 2px solid #e7ecf1">S.No</th>
+                    <th style="width: 15%; border-top: 2px solid #e7ecf1" pSortableColumn="name">
+                        <p-sortIcon field="Name"></p-sortIcon>Name
+                    </th>
+                    <th style="width: 8%; border-top: 2px solid #e7ecf1" pSortableColumn="type">
+                        <p-sortIcon field="type"></p-sortIcon>Type
+                    </th>
+                    <th style="width: 8%; border-top: 2px solid #e7ecf1" pSortableColumn="intake">
+                        <p-sortIcon field="intake"></p-sortIcon>Intake
+                    </th>
+                    <th style="width: 10%; border-top: 2px solid #e7ecf1" pSortableColumn="startDate">
+                        <p-sortIcon field="startDate"></p-sortIcon>Start Date
+                    </th>
+                    <th style="width: 10%; border-top: 2px solid #e7ecf1" pSortableColumn="endDate">
+                        <p-sortIcon field="endDate"></p-sortIcon>End Date
+                    </th>
+                    <th style="width: 10%; border-top: 2px solid #e7ecf1" pSortableColumn="note">
+                        <p-sortIcon field="note"></p-sortIcon>Notes
+                    </th>
+                    <th style="width: 10%; border-top: 2px solid #e7ecf1">Action</th>
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-item let-i="rowIndex">
+                <tr>
+                    <td style="width: 5%">{{ i + 1 }} .</td>
+                    <td style="width: 15%">{{ item.Name }}</td>
+                    <td style="width: 8%">{{ item.Type }}</td>
+                    <td style="width: 8%">{{ item.intake }}</td>
+                    <td style="width: 10%">{{ item.startDate | date: 'dd/MM/yyyy' }}</td>
+                    <td style="width: 10%">{{ item.endDate | date: 'dd/MM/yyyy' }}</td>
+                    <td style="width: 10%">{{ item.note }}</td>
+                    <td style="width: 10%">
+                        <div class="row">
+                            <div class="col">
+                                <button class="btn btn-danger" (click)="deleteDiet(item.id)">
+                                    <i class="fa fa-trash"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+            </ng-template>
+        </p-table>
+    </ng-template>
+</p-dataView>

@@ -1,0 +1,302 @@
+<p-toast position="top-right"></p-toast>
+<p-confirmDialog [style]="{width: '40vw'}"></p-confirmDialog>
+
+<p-dataView [value]="cars">
+    <ng-template pTemplate="header">
+        <div class="flex flex-column md:flex-row md:justify-content-between" style="margin-top: 2%;">
+            <div class="Medication">
+                <h1>Medication  </h1>
+            </div>
+            <div class="actionbtn">
+                <p-button (click)="showModalDialog()" class="madicationAdd" icon="pi pi-plus"
+                    label="Add Madication"></p-button>
+    
+
+
+
+                <p-dialog header="Add Medication" [(visible)]="displayModal" [modal]="true" [responsive]="true"
+                id="trial" (onHide)="Medication($event)"  [resizable]="false">
+
+                <form [formGroup]="medicationinsert" prependId="false" style="margin-top: 10px;">
+                    <div class="form-container">
+                        <div class="form-group ">
+                            <span class="p-float-label">
+
+                                <p-autoComplete formControlName="medication_insert"
+                                    [ngClass]="showErrorBorderOnControls(medicationinsert.controls.medication_insert)"
+                                    [showEmptyMessage]="true" [suggestions]="medication_drug"
+                                    (completeMethod)="filterMedication($event)" appendTo="body"
+                                    [forceSelection]="true" field="name" [style]="{'width':'100%'}"
+                                    [inputStyle]="{'width':'100%'}" [minLength]="3"></p-autoComplete>
+                                <label for="float-input">Medication</label>
+                            </span>
+
+
+
+                        </div>
+                        <div class="form-group mt-5">
+                            <div class="container-fluid">
+                                <div class="row">
+                                    <div class="col-lg-6 colmedi">
+                                        <p-dropdown [options]="Frequencyshow"
+                                            [ngClass]="showErrorBorderOnControls(medicationinsert.controls.Frequency_name)"
+                                            [style]="{'width':'100%'}" formControlName="Frequency_name"
+                                            placeholder="Select Frequency" optionLabel="name"
+                                            [showClear]="true" ></p-dropdown>
+                                    </div>
+                                    <div class="col-lg-6  colmedi2">
+                                        <div class="row">
+
+                                            <div class="col-md-6 col-sm-4 ">
+                                                <span class="p-float-label">
+                                                <p-inputNumber  inputId="integeronly"
+                                                    [style]="{'width':'100%'}" formControlName="dose" autocomplete="null" >
+                                                </p-inputNumber>
+                                                <label for="float-input">Dose</label>
+                                            </span>
+                                            </div>
+                                            <div class="col-md-6 col-sm-4 colmedi3"> <p-dropdown
+                                                    [options]="dose_quantity" [style]="{'width':'100%'}"
+                                                    formControlName="dose_unit" placeholder="" optionLabel="name"
+                                                    appendTo="body"></p-dropdown></div>
+
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <!-- </div>
+<div class="form-group mt-5"> -->
+
+                        <div class="form-group mt-5">
+                            <div class="container-fluid">
+                                <div class="row">
+                                    <div class="col-sm-6 colmedi">
+                                        <p-dropdown [options]="Instrationsshow"
+                                        [ngClass]="showErrorBorderOnControls(medicationinsert.controls.Patient_instration)"
+                                        [style]="{'width':'100%'}" formControlName="Patient_instration" 
+                                        placeholder="Select Patient Instructions" optionLabel="name" appendTo="body"
+                                        [showClear]="true"></p-dropdown>
+                                    </div>
+                                    <div class="col-sm-6 colmedi4">
+                                    <p-dropdown [options]="patientproblemdata"
+                             
+                                    [style]="{'width':'100%'}" formControlName="Patient_reason"
+                                    placeholder="Select Reason" optionLabel="problem_name" appendTo="body"
+                                    [showClear]="true"></p-dropdown></div>
+                                </div>
+                            </div>
+                           
+                        </div>
+
+                        <div class="form-group mt-5">
+
+                            <div class="container-fluid">
+                                <div class="row">
+                                    <div class="col-lg-6 colmedi">
+                                        <span class="p-float-label">
+                                            <p-calendar [showIcon]="true" inputId="basic" dateFormat="dd/mm/yy" onchange="datevaild()"
+                                                [ngClass]="showErrorBorderOnControls(medicationinsert.controls.start_date)"
+                                                appendTo="body" #myInput formControlName="start_date"
+                                                [style]="{'width':'100%'}" id="helthproblem"></p-calendar>
+
+
+
+                                            <label for="float-input">Start Date </label>
+                                        </span>
+                                    </div>
+                                    <div class="col-lg-6 colmedi2">
+                                        <span class="p-float-label">
+                                            <p-calendar inputId="basic" [showIcon]="true" dateFormat="dd/mm/yy"
+                                          [minDate]=medicationinsert.value.start_date
+                                                [ngClass]="showErrorBorderOnControls(medicationinsert.controls.End_date)"
+                                                appendTo="body" #myInput formControlName="End_date"
+                                                [style]="{'width':'100%'}" id="helthproblem"></p-calendar>
+
+
+
+
+                                            <label for="float-input">End Date </label>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- </div> -->
+
+
+                            <!-- <div class="form-group mt-5"> -->
+
+
+                        </div>
+
+
+                        <div class="form-group mt-5">
+                            <span class="p-float-label">
+                                <textarea id="float-input" rows="1" cols="10" formControlName="note"
+                                    pInputTextarea [style]="{'width':'100%'}"></textarea>
+                                <label for="float-input">Note</label>
+                            </span>
+                        </div>
+                    </div>
+                    <div class="button-container">
+                        <!-- <button pButton type="button" label="Cancel" class="p-button-secondary" ></button> -->
+                        <button pButton type="button" label="Submit" (click)="submit_madiaction()"
+                            class="p-button-success"></button>
+                    </div>
+                </form>
+            </p-dialog>
+                <p-dataViewLayoutOptions></p-dataViewLayoutOptions>
+            </div>
+        </div>
+    </ng-template>
+    <!-- <ng-template let-car pTemplate="gridItem">
+        <div class="container-fluid Maindivscroll">
+            <div class="row">
+                <div class="col-lg-3" *ngFor="let item of  summarymedicationdata">
+                    <div class="w3-card-4">
+
+                        <div class="w3-container BlockMain">
+
+                            <div class="row" style="padding-top: 10px;">
+
+                                <div class="blockdetail" style="padding-bottom: 10px;">
+
+                                    <p style="font-size: 20px; color:rgb(23, 15, 146); font-weight: bold;">
+                                        {{item.ClinicalDrugName}}</p>
+                                
+                                    <p><span style="font-weight: bold;">Frequency: </span> {{item.FrequencyName}}</p>
+                                    <p><span style="font-weight: bold;">Start Date:</span> {{item.StartingDat}}</p>
+                                    <p> <span style="font-weight: bold;">End Date: </span> {{item.EndDate}}</p>
+                   
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </ng-template> -->
+
+
+    <ng-template let-car pTemplate="gridItem">
+        <div class="container-fluid Maindivscroll" style="border: none;">
+            <div class="row">
+                <div class="col-lg-4" *ngFor="let item of  summarymedicationdata">
+                    <div class="w3-card-4">
+
+                        <div class="w3-container BlockMain">
+
+                            <!-- ... -->
+                            <div class="" style="padding-top: 10px;">
+                                <div class="blockdetail" style="padding-bottom: 10px;">
+                                    <p-menu   #menu [model]="items" [popup]="true" appendTo="body" [item]="item" (onShow)='data(item)' ></p-menu>
+                                    <div *ngIf="item.transaction_by=='patient'"   class="text-right dots" style="position: absolute; DISPLAY: INLINE; right: 30px;">
+                                        <i class="pi pi-ellipsis-v" (click)="menu.toggle($event)"></i>
+                                    </div>
+                                </div>
+                            </div>
+
+                      
+
+                            <div>
+
+                                <p title={{item.ClinicalDrugName}}
+                                    style="font-size: 20px; color:rgb(23, 15, 146); font-weight: bold;" class="cardp">
+                                    {{item.ClinicalDrugName}}</p>
+                                <!-- <p>Per mom raw reanuts</p> -->
+                                <p title={{item.FrequencyName}} class="cardp"><span style="font-weight: bold;">Frequency:
+                                    </span> {{item.FrequencyName}} </p>
+                                    <p title={{item.Dose}}-{{item.doseUnit}} class="cardp"><span style="font-weight: bold;">Dose:
+                                    </span> {{item.Dose}}-{{item.doseUnit}} </p>
+                                    <p title={{item.Instructionsforpatient}} class="cardp"><span style="font-weight: bold;">Instrations:
+                                    </span> {{item.Instructionsforpatient}} </p>
+                                    <p title={{item.IndicationName}} class="cardp"><span style="font-weight: bold;">Reason:
+                                    </span> {{item.IndicationName}} </p>
+                                <p><span style="font-weight: bold;"><b> <i class="pi pi-calendar"></i></b></span>
+                                    {{item.StartingDat | date: 'dd/MM/yyyy'}} -{{item.EndDate | date: 'dd/MM/yyyy'}}</p>
+                                <!-- <p> <span style="font-weight: bold;"> Note: </span> {{item.Notes}}</p> -->
+                                <i title={{item.notes}} class="fa-solid fa-message" aria-hidden="true"></i>  <span title={{item.notes}}> Note</span>
+
+                                    <!-- <i class="fa-solid fa-message"></i>
+                                    <i class="fa-solid fa-notes"></i> -->
+                                    <!-- <i class="fa-regular fa-note-sticky"></i> -->
+                                    
+
+                                    
+
+
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    
+
+   
+    </ng-template>
+    <ng-template let-car pTemplate="listItem">
+        <p-table [value]="summarymedicationdata" responsiveLayout="scroll" paginatorPosition="bottom" #dt1 dataKey="id"
+            [paginator]="true"
+            [globalFilterFields]="['emailId','userId','statename','CountryName', 'phone','Specialityname','cityname',  'clinicName']"
+            scrollDirection="both" styleClass="p-mt-3" [scrollable]="true" [rowsPerPageOptions]="[10,15,25,50]"
+            [rows]="15">
+            <ng-template pTemplate="caption">
+                <div class="flex globalSearch">
+                    <p style="font-weight: bold; font-size: 1.2rem; margin-bottom: 0;">Total
+                        Records:{{medicationlength}} <span class="dislength"></span></p>
+                </div>
+            </ng-template>
+            <ng-template pTemplate="header">
+
+                <tr>
+                    <th style="width:5%;border-top:2px solid #e7ecf1;" pSortableColumn="sno"> <p-sortIcon
+                            field="Sno"></p-sortIcon>S.No</th>
+                    <th style="width:15%;border-top:2px solid #e7ecf1;" pSortableColumn="medication"> <p-sortIcon
+                            field="medication"></p-sortIcon>Medication</th>
+                   
+                    <th style="width:8%;border-top:2px solid #e7ecf1;" pSortableColumn="Frequency"><p-sortIcon
+                            field="Frequency"></p-sortIcon>Frequency</th>
+                            <th style="width:8%;border-top:2px solid #e7ecf1;" pSortableColumn="Dose"> <p-sortIcon
+                                field="Dose"></p-sortIcon>Dose</th>
+                                
+                           <th style="width:10%;border-top:2px solid #e7ecf1;" pSortableColumn="PrimaryCondition"><p-sortIcon
+                            field="PrimaryCondition"></p-sortIcon> Instrations</th>
+                                <th style="width:5%;border-top:2px solid #e7ecf1;" pSortableColumn="RouteName"><p-sortIcon
+                                    field="RouteName"></p-sortIcon>Reason</th>
+                    <th style="width:10%;border-top:2px solid #e7ecf1;" pSortableColumn="StartingDat"><p-sortIcon
+                            field="StartingDat"></p-sortIcon> Date</th>
+                    <th style="width:10%;border-top:2px solid #e7ecf1;" pSortableColumn="EndDate"><p-sortIcon
+                            field="EndDate"></p-sortIcon>Note</th>
+        
+
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-item let-i="rowIndex" >
+                <tr>
+                    <td style="width:5%;">{{i + 1}}</td>
+                    <td title= {{item.ClinicalDrugName}} style="width:15%;">{{item.ClinicalDrugName}}</td>
+                 
+                    <td title={{item.FrequencyName}} style="width:8%;">{{item.FrequencyName}}</td>
+                    <td style="width:5%;">{{item.Dose}}-{{item.doseUnit}}</td>
+                  <td title={{item.Instructionsforpatient}} style="width:10%;">{{item.Instructionsforpatient}}</td>
+                    <td title="{{item.IndicationName }}" style="width:8%;">{{item.IndicationName}}</td>
+                    <td title={{item.StartingDat}} style="width:10%;">{{item.StartingDat | date: 'dd/MM/yyyy'}} -{{item.EndDate | date: 'dd/MM/yyyy'}}</td>
+            
+          
+
+                    <td style="width:10%;">{{item.notes}}</td> 
+                </tr>
+            </ng-template>
+
+        </p-table>
+    </ng-template>
+
+</p-dataView>

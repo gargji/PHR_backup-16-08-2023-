@@ -1,0 +1,646 @@
+<p-toast position="top-right"></p-toast>
+
+
+<p-confirmDialog [style]="{width: '40vw'}"></p-confirmDialog>
+
+
+
+<div class="d-flex " style="height:84vh;" style="padding-top: 3rem ;position: relative;min-height: 88vh;">
+
+    <div id="collapseWidthExample" [style.width]="isCollapsed ? '12%' : '0'" [style.transition]="'width 5s'"
+        style="min-width: 10%;background-color: #f5f2f2;   padding-top: 2rem;" class="text-center "
+        [class.collapse]="isCollapsed">
+
+        <button class="btn btn-outline-info " (click)="createfolder=true" style="">Create Folder</button>
+
+        <ul style="margin: 10%;" *ngFor="let item of folderdata">
+
+            <li class="li" (click)="folderwisedata(item)">{{item.Folder_name}}</li>
+
+        </ul>
+
+
+        <hr>
+
+        <ul style="margin: 10%;">
+
+            <li class="li" (click)="documentdata=Patientdocument">All</li>
+
+        </ul>
+
+        <ul style="margin: 10%;">
+            <li class="li" (click)="uploadbyme()">Upload By Me </li>
+
+
+
+        </ul>
+
+        <ul style="margin: 10%;">
+            <li class="li" (click)="sharewithme()">Shared With Me</li>
+
+
+
+        </ul>
+        <!-- <ul style="margin: 10%;">
+        <li class="li"   (click)="maildata()">Shared with Me</li>
+
+        
+     
+      </ul>
+       -->
+        <ul style="margin: 10%;">
+            <li class="li" (click)="sharebyme()">Shared By Me</li>
+
+
+
+        </ul>
+
+    </div>
+    <div class="" style="min-width: 80%; max-width: 100%; width: 100%;">
+        <p-dataView [value]="cars">
+            <ng-template pTemplate="header">
+
+
+                <div class="flex flex-column md:flex-row md:justify-content-between con" style="">
+
+                    <div class="Medication">
+
+                        <h1>
+                            <button (click)="toggleCollapse()" class="navbar-toggler"><span
+                                    class=" pi pi-align-justify"></span></button>
+
+
+                            Documents <i class="pi pi-file" style="font-size: 20px;"></i>
+                        </h1>
+
+                    </div>
+
+
+                    <div class="actionbtn">
+                        <!-- <div>
+                            <span> <i class="pi pi-share-alt"></i></span>
+                        </div> -->
+                        <div *ngIf="selectedPatients || showbutton">
+                            <button class="btn btn-outline-info mr-2" (click)="generateAndDownloadZip()"><i
+                                    class="pi pi-download"></i></button>
+                            <button class="btn btn-outline-info mr-2" (click)="sharefunc()"><i
+                                    class="pi pi-share-alt"></i></button>
+                        </div>
+                        <!-- <p-button type="text" (click)="display = true" icon="pi pi-plus" label="Show"></p-button> -->
+                        <!-- <p-button  (change)="onUpload($event)" class="madicationAdd custom-button" icon="pi pi-upload"
+                            label="Upload "></p-button> -->
+                        <!-- <input type="file"
+            id="imgSelector" class="p-button madicationAdd custom-button" style="display: none;" icon="pi pi-upload"  [(ngModel)]="files"
+            (change)="onUpload($event)"> -->
+
+
+                        <!--  -->
+
+                        <label class=" p-button madicationAdd ">
+                            <i class="pi pi-upload"></i>
+                            <input type="file" (change)="onUpload1($event)" style="display: none;">
+                        </label>
+                        <!--  -->
+
+
+
+                        <p-dataViewLayoutOptions></p-dataViewLayoutOptions>
+                    </div>
+                </div>
+            </ng-template>
+
+
+
+            <!-- <ng-template let-car pTemplate="gridItem" >
+                <div class="container-fluid Maindivscroll" style="border: none;">
+                    <div class="row" style="    padding-bottom: 2rem;">
+                   
+        
+                        <div class="col-lg-4" *ngFor="let item of  documentdata">
+                            <div class="w3-card-4">
+        
+                                <div class="w3-container BlockMain">
+                                    <div class="" style="padding-top: 10px;">
+                                        <div class="blockdetail" style="padding-bottom: 10px;">
+                                            <p-menu #menu [model]="items" [popup]="true" appendTo="body" [item]="item" (onShow)='data(item)' ></p-menu>
+                                            <div class="text-right dots" style="position: absolute; DISPLAY: INLINE; right: 30px;">
+                                                <i class="pi pi-ellipsis-v" (click)="menu.toggle($event)"></i>
+                                            </div>
+                                        </div>
+                                    </div>
+        
+                                    <p title={{item.fileName}}
+                                    style="font-size: 20px; color:rgb(23, 15, 146); font-weight: bold;" class="cardp">
+                                    {{item.fileName}}</p>
+                                   <div *ngIf="true" >
+                                    <div style="height: 100px; overflow: hidden;">
+                                <img src={{item.imgSrc}} alt="" class="img-fluid" >
+                                   </div>
+                                  </div>
+                                    
+                                   
+                                </div>
+                            </div>
+        
+                        </div>
+                    </div>
+                </div>
+            
+        
+           
+            </ng-template> -->
+
+
+            <ng-template let-car pTemplate="gridItem">
+                <div class="container-fluid Maindivscroll" style="border: none;">
+                    <div class="row" style="    padding-bottom: 2rem;">
+
+
+                        <div class="col-lg-4" *ngFor="let item of  documentdata">
+                            <div class="w3-card-4" style="height: 160px;">
+
+                                <div class=" BlockMain">
+                                    <div class="" style="">
+                                        <div class="blockdetail" style="padding-bottom: 10px;">
+                                            <p-menu #menu [model]="items" [popup]="true" appendTo="body" [item]="item"
+                                                (onShow)='data(item)'></p-menu>
+                                            <div class="text-right dots"
+                                                style="position: absolute; display: inline-block; right: 30px;">
+                                                <i class="pi pi-ellipsis-v" (click)="menu.toggle($event)"></i>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-6" style="margin-top: -10.4px;;">
+                                            <div *ngIf="true">
+                                                <div *ngIf="item.fileName.split('.').pop()!='pdf' && item.fileName.split('.').pop()!='xlsx' "
+                                                    style="height: 160px; overflow: hidden;">
+                                                    <img src={{envpath+item.full_path}} alt=""
+                                                        class="img-fluid" height="160px" width="160px">
+                                                    <!-- <img *ngIf="mailimage" src={{item.full_path}} alt="123" class="img-fluid"  height="160px" width="160px" > -->
+                                                </div>
+                                                <div *ngIf="item.fileName.split('.').pop()=='pdf' && item.fileName.split('.').pop()!='xlsx' "
+                                                    style="height: 160px; overflow: hidden;">
+                                                    <img src="assets/pdf.png" alt="" class="img-fluid" height="160px"
+                                                        width="160px">
+                                                </div>
+                                                <div *ngIf="item.fileName.split('.').pop()!='pdf' && item.fileName.split('.').pop()=='xlsx' "
+                                                    style="height: 160px; overflow: hidden;">
+                                                    <img src="assets/doc.png" alt="" class="img-fluid" height="160px"
+                                                        width="160px">
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6 " style="top: 1rem;">
+                                            <p title={{item.fileName}}
+                                                style="font-size: 20px; color:rgb(23, 15, 146); font-weight: bold; "
+                                                class="cardp">
+                                                {{item.fileName}}</p>
+                                            <!-- <p   >Shared by:{{item.firstName }} </p> -->
+                                            <p *ngIf="item.providername==' '" class=""><span
+                                                    style="font-weight: bold;">Shared by:
+                                                </span> {{item.firstName}} </p>
+                                            <p *ngIf="item.providername!=' '"><span style="font-weight: bold;">Shared
+                                                    by:
+                                                </span> {{item.providername}} </p>
+                                            <p><span style="font-weight: bold;">Date:
+                                                </span> {{item.Date_uplods |date: 'dd/MM/yyyy' }} </p>
+                                        </div>
+
+                                    </div>
+
+
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+
+
+            </ng-template>
+
+            <ng-template let-car pTemplate="listItem">
+
+                <p-table id="docshare" [value]="documentdata" [(selection)]="selectedPatient"
+                    styleClass="p-datatable-striped" paginatorPosition="bottom" #dt1 dataKey="id" [paginator]="true"
+                    [globalFilterFields]="['emailId','userId','statename','CountryName', 'phone','Specialityname','cityname',  'clinicName']"
+                    scrollHeight="calc(100vh - 25rem)" scrollDirection="both" (onRowUnselect)="onRowUnselect($event)"
+                    [scrollable]="true" [rowsPerPageOptions]="[7,10,15,25,50]" [rows]="7"
+                    [tableStyle]="{'min-width':'80rem'}" [Style]="{'height':'60rem'}">
+                    <ng-template pTemplate="caption">
+                        <div class="flex globalSearch">
+                            <p style="font-weight: bold; font-size: 1.2rem; margin-bottom: 0;">Total
+                                Records:{{documentdata.length}} <span class="dislength"></span></p>
+                        </div>
+                    </ng-template>
+                    <ng-template pTemplate="header">
+
+                        <tr>
+                            <th style="width: 3%">
+                                <p-tableHeaderCheckbox (click)="visibleButton()"></p-tableHeaderCheckbox>
+                            </th>
+                            <th style="width:5%;border-top:2px solid #e7ecf1;" pSortableColumn="sno">
+                                <!-- <p-sortIcon
+                                    field="Sno"></p-sortIcon> -->
+                                S.No
+                            </th>
+
+                            <th style="width:15%;border-top:2px solid #e7ecf1;" pSortableColumn="fileName"> <p-sortIcon
+                                    field="fileName"></p-sortIcon> Name</th>
+                            <th style="width:8%;border-top:2px solid #e7ecf1;" pSortableColumn="documentType">
+                                <p-sortIcon field="documentType"></p-sortIcon>Type</th>
+                            <!-- <th style="width:8%;border-top:2px solid #e7ecf1;" pSortableColumn="Frequency"><p-sortIcon
+                                    field="Frequency"></p-sortIcon>Frequency</th> -->
+                            <th style="width:10%;border-top:2px solid #e7ecf1;" pSortableColumn="Date_uplods">
+                                <p-sortIcon field="Date_uplods"></p-sortIcon>Date</th>
+                            <!-- <th style="width:10%;border-top:2px solid #e7ecf1;" pSortableColumn="EndDate"><p-sortIcon
+                                    field="EndDate"></p-sortIcon>End Date</th> -->
+                            <!-- <th style="width:5%;border-top:2px solid #e7ecf1;" pSortableColumn="RouteName"><p-sortIcon
+                                    field="RouteName"></p-sortIcon>Route</th> -->
+                            <!-- <th style="width:10%;border-top:2px solid #e7ecf1;" pSortableColumn="PrimaryCondition"><p-sortIcon
+                                    field="PrimaryCondition"></p-sortIcon>Primary Condition</th> -->
+                            <th style="width:10%;border-top:2px solid #e7ecf1;" pSortableColumn="providername">
+                                <p-sortIcon field="providername"></p-sortIcon> Shared by</th>
+
+                            <th style="width:10%;border-top:2px solid #e7ecf1; height: 54px;" pSortableColumn="Notes">
+                                Action</th>
+
+                        </tr>
+                    </ng-template>
+                    <ng-template pTemplate="body" let-item let-i="rowIndex">
+                        <tr (click)="getDownload()">
+                            <td>
+                                <p-tableCheckbox [value]="item"></p-tableCheckbox>
+                            </td>
+                            <td style="width:5%; ">{{i + 1}}</td>
+
+                            <td style="width:15%;">{{item.fileName}}</td>
+                            <td style="width:8%;">{{item.documentType}}</td>
+                            <!-- <td style="width:8%;">{{item.FrequencyName}}</td> -->
+                            <td style="width:10%;">{{item.Date_uplods |date: 'dd/MM/yyyy'}}</td>
+                            <!-- <td style="width:10%;">{{item.EndDate}}</td> -->
+                            <!-- <td style="width:5%;">{{item.RouteName}}</td>
+                            <td style="width:10%;">{{item.primaryindication}}</td> -->
+                            <td *ngIf="item.providername==' '" style="width:10%;">{{item.firstName }} </td>
+                            <td *ngIf="item.providername!=' '" style="width:10%;">{{item.providername }} </td>
+                            <td style="width:10%; min-width: 10% ;height: 54px;">
+                                <button class="btn btn-outline-info mr-2" (click)="downloadDocument(item)"><i
+                                        class="pi pi-download"></i></button>
+                                <button class="btn btn-outline-info mr-2" (click)="sharefunc1(item)"><i
+                                        class="pi pi-share-alt"></i></button>
+                                <button class="btn btn-outline-info" (click)="alldatadialog(item)"><i
+                                        class="pi pi-eye"></i></button>
+                            </td>
+                        </tr>
+                    </ng-template>
+
+                </p-table>
+            </ng-template>
+
+        </p-dataView>
+    </div>
+</div>
+
+
+
+
+
+
+<p-dialog header="{{headername}}" [(visible)]="viewdoc"
+    [style]="{ 'transition':' none','width': '100vw','height': '100vh', 'max-height': '100%',' top': '0','left':'0','position': 'absolute'}">
+    <div class="row">
+        <div class="col-md-9 text-center">
+            <div *ngIf="checktype.split('.').pop()=='pdf' ">
+                <iframe [src]=safeUrl style="width: 80%;height:80vh; align-items: center;" id="iframe"></iframe>
+                <!-- <iframe #ytPlayer style="width: 80%;height:80vh; align-items: center;" id="iframe"></iframe> -->
+            </div>
+            <div *ngIf=" checktype.split('.').pop()=='xlsx' ">
+
+                <p>not view for exel</p>
+            </div>
+            <div *ngIf="checktype.split('.').pop()!='pdf' && checktype.split('.').pop()!='xlsx' ">
+                <img src="{{envpath+siebarimage}}" alt="File" class="img-fluid card-img-top gridItemImg"
+                    style="height: 60vh; width: auto; padding: 10px;">
+            </div>
+
+        </div>
+        <div class="col-md-3">
+            <div>
+                <div *ngIf="checktype.split('.').pop()=='pdf' && checktype.split('.').pop()!='xlsx'">
+                    <div class="adgalleryimagdiv"
+                        style=" height: 12rem; width: 100%;text-align: center;  margin: 10px;border: 1px solid black;">
+                        <img src="assets/pdf.png" alt="File" class="img-fluid card-img-top gridItemImg"
+                            style="height: 100%; width: auto; padding: 10px;">
+                    </div>
+                </div>
+                <div *ngIf="checktype.split('.').pop()!='pdf' && checktype.split('.').pop()=='xlsx'">
+                    <div class="adgalleryimagdiv"
+                        style=" height: 12rem; width: 100%;text-align: center;  margin: 10px;border: 1px solid black;">
+                        <img src="assets/doc.png" alt="File" class="img-fluid card-img-top gridItemImg"
+                            style="height: 100%; width: auto;padding: 10px;">
+                    </div>
+                </div>
+                <div *ngIf="checktype.split('.').pop()!='pdf' && checktype.split('.').pop()!='xlsx'">
+                    <div class="adgalleryimagdiv"
+                        style=" height: 12rem; width: 100%;text-align: center;  margin: 10px;border: 1px solid black;">
+                        <img src="{{envpath+siebarimage}}" alt="File" class="img-fluid card-img-top gridItemImg"
+                            style="height: 100%; width: auto;padding: 10px;">
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <!-- <div class="col-md-12">
+                    <button
+                        [style]="{'margin-left':'5px','background-color': 'rgb(248 249 250)','border': '1px solid rgb(248 249 250)'}"
+                        title="Replace" pButton type="button" class="p-button-secondary p-button-rounded buttton-icon">
+                        <i class="fa fa-exchange" style="color: #1898ad;" aria-hidden="true"></i></button>
+
+                    <button
+                        [style]="{'margin-left':'5px','background-color': 'rgb(248 249 250)','border': '1px solid rgb(248 249 250)'}"
+                        title="Download" pButton type="button" class="p-button-secondary p-button-rounded buttton-icon">
+                        <i class="pi pi-download" style="color: #1898ad;" aria-hidden="true"></i></button>
+
+                    <button
+                        [style]="{ 'margin-left': '5px', 'opacity': ' 0.9', 'background-color': 'rgb(248 249 250)', 'border': '1px solid rgb(248 249 250)' }"
+                        title="Lock" pButton pRipple type="button" class="p-button-rounded  buttton-icon"> <i
+                            class="pi pi-unlock" style="color: #1898ad;" aria-hidden="true"></i></button>
+
+                    <button
+                        [style]="{ 'margin-left': '5px', 'opacity': ' 0.9', 'background-color': 'rgb(248 249 250)', 'border': '1px solid rgb(248 249 250)' }"
+                        title="Delete" pButton pRipple type="button" class="p-button-rounded  buttton-icon"><i
+                            class="pi pi-trash" style="color: #1898ad;" aria-hidden="true"></i></button>
+                </div> -->
+                <div class="col-md-5"><b>Document Name : </b> </div>
+                <div class="col-md-7"> {{checktype}} </div>
+                <div class="col-md-5"><b>Document Type :</b> </div>
+                <div class="col-md-7"> {{documentType}} </div>
+                <div class="col-md-5"> <b>Document Size :</b> </div>
+                <div class="col-md-7"> {{docSize}} </div>
+                <div class="col-md-5"> <b>Date upload :</b> </div>
+                <div class="col-md-7"> {{Date_uplods}} </div>
+                <!-- <div class="col-md-5"> <b>Patient Name :</b> </div>
+                <div class="col-md-7"> {{patientname}}</div> -->
+                <div class="col-md-5"> <b>Tags :</b> </div>
+                <div class="col-md-7"> {{tagname}}</div>
+                <div class="col-md-12">
+                    <div class="backgroundhead">
+                        <h4>Review Document</h4>
+                    </div>
+                </div>
+                <!-- <form [formGroup]="reviewerform">
+                    <div class="row">
+                        <div class="col-md-5"><b> Reviewer Name : </b></div>
+                        <div class="col-md-7"> <p-dropdown [ngStyle]="{'width': '100%'}"
+                                [style]="{'border-radius': '0px 6px 6px 0px'}" inputId="dropdown"
+                                placeholder="Select Reviewer" formControlName="reviewername" appendTo="body"
+                                [options]="Providerss" optionLabel="providername" optionValue="Id"></p-dropdown>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-5 mt-2"><b> Comments : </b></div>
+                        <div class="col-md-7 mt-2">
+                            <textarea rows="4" cols="30" formControlName="comment" placeholder="Add Comments..."
+                                style="  width: 100%; "></textarea>
+                        </div>
+                    </div>
+
+                    <div class="col-md-12" style="text-align: end; ">
+                        <button class="pbutton" (click)="reviewerdata()">Save</button>
+                    </div>
+                </form> -->
+            </div>
+        </div>
+    </div>
+
+</p-dialog>
+
+<p-dialog header="Header" [(visible)]="sharedoc" [modal]="true" [responsive]="true" id="trial"
+    [style]="{height: '50vh'}" (onHide)="documentshareformclear($event)">
+    <ng-template pTemplate="header">
+
+        <span class="text-xl font-bold">Share Document</span>
+
+    </ng-template>
+    <!-- <div class="container"></div> -->
+    <form [formGroup]="documentshare" prependId="false" style="margin-top: 10px;" id="documentshare">
+        <div class="form-container">
+            <div class="form-group ">
+                <!-- <span class="p-float-label"> -->
+                <label class="form-check-label " style="margin-right: 2rem;">Shared To</label>
+                <div class="form-check form-check-inline">
+                    <!-- <input class="form-check-input " type="radio"  id="inlineRadio1"
+                        
+                        value="option1"  (click)="anytime($event)" formControlName="check1"> -->
+                    <p-radioButton (click)="anytime()" value="option1" formControlName="check1"></p-radioButton>
+
+                    <label class="form-check-label" for="inlineRadio1">Members</label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <!-- <input class="form-check-input " type="radio" (click)="anytime($event)" formControlName="check1"
+                        id="inlineRadio2" value="option2"> -->
+                    <p-radioButton (click)="anytime()" value="option2" formControlName="check1"></p-radioButton>
+
+                    <label class="form-check-label" for="inlineRadio2">Other</label>
+                </div>
+                <!-- </span> -->
+
+
+
+            </div>
+
+
+            <div class="form-group mt-5 ">
+                <!--  -->
+                <div *ngIf="isdisable=='option1'">
+                    <p-dropdown appendTo="body" [options]="providernamedata" [style]="{'width':'100%'}"
+                        [ngClass]="showErrorBorderOnControls(documentshare.controls.provider_name)"
+                        formControlName="provider_name" placeholder="Select Provider Name" optionLabel="firstname"
+                        [showClear]="true"></p-dropdown>
+
+
+                </div>
+                <span class="p-float-label" *ngIf="isdisable=='option2'">
+                    <!-- <div > -->
+                    <input type="email" [style]="{width: '100%'}" pInputText formControlName="Email"
+                        [ngClass]="showErrorBorderOnControls(documentshare.controls.Email)">
+
+                    <label for="float-input">Email</label>
+                    <!-- </div> -->
+                </span>
+
+            </div>
+
+            <!-- checkbox -->
+
+            <div class="form-group mt-5 ">
+                <!-- <span class="p-float-label"> -->
+                <label class="form-check-label " style="margin-right: 2rem;">expire date</label>
+                <div class="form-check-inline">
+                    <label class="form-check-label " for="inlineRadio1">
+
+                        <p-radioButton (click)="expire()" value="1" formControlName="expirecheck"></p-radioButton>
+
+                        1 Day
+                    </label>
+                </div>
+                <div class="form-check-inline">
+                    <label class="form-check-label" for="inlineRadio2">
+                        <p-radioButton (click)="expire()" value="5" formControlName="expirecheck"></p-radioButton> 5
+                        Days
+                    </label>
+                </div>
+                <div class="form-check-inline ">
+                    <label class="form-check-label" for="inlineRadio3">
+                        <p-radioButton (click)="expire()" value="10" formControlName="expirecheck"></p-radioButton>10
+                        Days
+                    </label>
+                </div>
+            </div>
+            <!--  -->
+            <div class="form-group mt-4 mb-0" style=" height:102px; overflow:  auto;">
+
+                <span class="p-float-label">
+                    <div *ngFor="let item of selectedPatient" class="cmfw overflow-y mx-ht150  text-center m-1"
+                        id="share-doc" style="display: inline-block;width: 120px;">
+
+                        <!-- <div class="attach-docs-share fl" name="doc-det" data-doc-id="1241965000000022325"> -->
+                        <!-- <i class="pi pi-file" onclick="Share.removeSelectedDoc('1241965000000022325')"></i> -->
+                        <i class="pi pi-times" style="    float: right;
+                        top: -7px;
+                        position: relative;" (click)="canclselectedPatient(item.id)"></i>
+                        <div *ngIf="item.fileName.split('.').pop()!='pdf' && item.fileName.split('.').pop()!='xlsx' ">
+
+                            <img src={{envpath+item.full_path}} alt="" height="50px" width="120px" class="" style="">
+                            <!-- <label class="cardp" style=""> -->
+                            <div class="cmw60  txt-overfl cardp">{{item.fileName}}</div>
+                            <!-- <span class="fl fnt-11 cardp">{{item.Date_uplods}} &nbsp;{{item.docSize}}</span> -->
+                            <!-- </label> -->
+
+                        </div>
+                        <div *ngIf="item.fileName.split('.').pop()=='pdf' && item.fileName.split('.').pop()!='xlsx'">
+
+                            <img src="assets/pdf.png" alt="" height="50px" width="120px" class="" style="">
+                            <!-- <label class="cardp" style=""> -->
+                            <div class="cmw60  txt-overfl cardp">{{item.fileName}}</div>
+                            <!-- <span class="fl fnt-11 cardp">{{item.Date_uplods}} &nbsp;{{item.docSize}}</span> -->
+                            <!-- </label> -->
+
+                        </div>
+                        <div *ngIf="item.fileName.split('.').pop()!='pdf' && item.fileName.split('.').pop()=='xlsx'">
+
+                            <img src="assets/doc.png" alt="" height="50px" width="120px" class="" style="">
+                            <!-- <label class="cardp" style=""> -->
+                            <div class="cmw60   cardp">{{item.fileName}}</div>
+                            <!-- <span class="fl fnt-11 cardp">{{item.Date_uplods}} &nbsp;{{item.docSize}}</span> -->
+                            <!-- </label> -->
+
+                        </div>
+
+                    </div>
+                </span>
+            </div>
+        </div>
+
+
+        <div class="button-container" *ngIf="!isEdit" style="top: 0; margin-top: 0px;">
+
+            <button pButton type="button" style="margin-bottom: 5px;" label="Submit" (click)="submitshareAll()"
+                class="p-button-success"></button>
+        </div>
+        <div class="button-container" *ngIf="isEdit" style="top: 0; margin-top: 0px;">
+
+            <button pButton type="button" style="margin-bottom: 5px;" label="Submit" (click)="submitshareAll()"
+                class="p-button-success"></button>
+        </div>
+    </form>
+</p-dialog>
+
+<p-dialog header="create folder" [(visible)]="createfolder" [modal]="true" [responsive]="true" id="trial"
+    [style]="{height: '28vh',width:'30vw'}" (onHide)="createfolderformclear($event)">
+
+    <!-- <div class="container"></div> -->
+    <form [formGroup]="createfolderform" prependId="false" style="margin-top: 10px;">
+        <div class="form-container">
+
+
+
+            <div class="form-group ">
+
+
+                <span class="p-float-label">
+
+                    <input type="text" [style]="{width: '100%'}" pInputText formControlName="folder_name"
+                        [ngClass]="showErrorBorderOnControls(createfolderform.controls.folder_name)">
+
+                    <label for="float-input">Folder Name</label>
+
+                </span>
+
+            </div>
+
+
+
+
+
+        </div>
+
+
+
+        <div class="button-container">
+
+            <button pButton type="button" style="margin-bottom: 5px;" label="create" class="p-button-success"
+                (click)="submitfoldername()"></button>
+        </div>
+
+    </form>
+</p-dialog>
+
+
+<p-dialog header="Upload Document" [(visible)]="uploadDocumentmodel" [modal]="true" [responsive]="true" id="trial"
+    [style]="{height: '40vh',width:'30vw'}" (onHide)="cleardocform($event)">
+
+    <!-- <div class="container"></div> -->
+    <form [formGroup]="uploadDocumentform" prependId="false" style="margin-top: 10px;">
+        <div class="form-container">
+
+
+
+            <div class="form-group ">
+
+
+                <span class="p-float-label">
+
+                    <input type="text" [style]="{width: '100%'}" pInputText formControlName="file_name">
+
+                    <label for="float-input">File Name</label>
+
+                </span>
+
+            </div>
+
+            <div class="form-group mt-5">
+                <p-dropdown [options]="folderdata" [ngClass]="" [style]="{'width':'100%'}"
+                    [ngClass]="showErrorBorderOnControls(uploadDocumentform.controls.folder_name)"
+                    formControlName="folder_name" placeholder="Folder Name" optionLabel="Folder_name" [showClear]="true"
+                    appendTo="body"></p-dropdown>
+            </div>
+
+
+
+
+
+        </div>
+
+
+
+        <div class="button-container">
+
+            <button pButton type="button" style="margin-bottom: 5px;" label="Upload" class="p-button-success"
+                (click)="uploadDocument()"></button>
+        </div>
+
+    </form>
+</p-dialog>

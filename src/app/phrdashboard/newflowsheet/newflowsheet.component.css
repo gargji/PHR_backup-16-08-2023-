@@ -1,0 +1,110 @@
+.callculater{
+    /* font-size: 30px;
+    font-weight: 600;
+
+    font-variant: center;
+  
+    color: aliceblue;
+    background-color: #F05F40;
+    margin: 6px;
+
+    justify-content: center;
+    position: initial;
+    width: 73px */
+
+    font-size: 18px;
+    font-weight: 200px;
+    /* font-feature-settings: ; */
+    font-variant: center;
+    color: aliceblue;
+    background-color: #F05F40;
+    margin: 4px;
+    justify-content: center;
+    position: relative;
+    width: 3rem;
+}
+/* } */
+.timeheader{
+    font-weight: 300;
+    color: rgb(119, 122, 119);
+    
+}
+.btn-change {
+    color: Red;
+    background-color: white;
+  }
+  .vitalflowsheet{
+    padding-right: 10px;
+    white-space: nowrap; 
+  /* width: 24px;  */
+  overflow: hidden;
+  text-overflow: "----"; 
+  /* border: 1px solid #000000;  */
+    /* border: 1px solid #000000; */
+    padding-left: 1rem;
+ }
+.flowsheetContaner {
+  min-width:12rem; max-width: fit-content; height:1.7rem; background-color: #efeff1;  padding-right: 10px; text-align: right;
+}
+.activecell{
+  border: 1px solid rgb(184, 175, 175);
+  color:black;
+  background-color: #c7e0f0;
+ }
+
+ .listingfav{
+  padding: 5px 5px;
+  margin-bottom: 5px;
+  margin-top: 5px;
+  border-bottom: 1px solid #ddd;
+}
+.listingfav:hover{
+  padding: 5px 5px;
+  margin-bottom: 5px;
+  margin-top: 5px;
+  border-bottom: 1px solid #ddd;
+  background: #dddddd;
+  color: black;
+  cursor: pointer;
+}
+.blue-background {
+  background-color: blue;
+}
+.save_button{
+   
+    font-variant: center;
+    /* padding-left: 2rem; */
+    color: aliceblue;
+    background-color: #F05F40;
+    margin: 6px;
+    /* text-align: center; */
+    justify-content: center;
+    position: initial;
+  
+}
+
+
+
+.button-container {
+  text-align: right;
+  margin-top: 20px;
+ 
+    position: relative;
+    top: 2rem;
+/* bottom: 5px; */
+
+}
+  
+#trial label {
+  color: #5271e4;
+}
+
+.containe::-webkit-scrollbar-thumb {
+  background: rgb(69, 51, 92);
+  border-radius: 2px;
+}
+.containe::-webkit-scrollbar {
+  width: 5px;
+  height: 10px;
+}
+

@@ -1,0 +1,159 @@
+<p-toast position="top-right"></p-toast>
+<p-confirmDialog [style]="{width: '40vw'}"></p-confirmDialog>
+
+<p-dataView [value]="cars">
+    <ng-template pTemplate="header">
+        <div class="flex flex-column md:flex-row md:justify-content-between con" style="margin-top: 2%;">
+            <div class="Medication">
+                <h1> Invoice <i class="fa-solid fa-file-invoice-dollar"></i></h1>
+            </div>
+            <div class="actionbtn">
+                <!-- <p-button (click)="showModalDialog()" class="madicationAdd custom-button" icon="pi pi-plus"
+                    label="Add Procedure "></p-button> -->
+                <!-- <p-dialog header="Add Madication" [(visible)]="displayModal" [modal]="true" [style]="{width: '50vw'}"
+                (onHide)="Medication($event)"  [resizable]="false">
+                    <form [formGroup]="medicationinsert" style="margin-top: 10px;">
+                        <div class="mb-3 row">
+                            <label style=" color: black; font-weight: bold;" for="staticEmail"
+                                class="col-sm-3 col-form-label">Madication :</label>
+                            <div class="col-sm-9">
+                                <p-autoComplete formControlName="medication_insert" [showEmptyMessage]="true"
+                                 [suggestions]="medication_drug" 
+                                    appendTo="body" field="generic_name" [style]="{'width':'100%'}"
+                                    [inputStyle]="{'width':'100%'}" [minLength]="3"></p-autoComplete>
+                            </div>
+                        </div>
+
+                        <div class="mb-3 row">
+                        
+                                <label style=" color: black; font-weight: bold;" for="staticEmail"
+                                class="col-sm-3 col-form-label">Frequency :</label>
+                            <div class="col-sm-9">
+                                <p-dropdown [options]="Frequencyshow" [style]="{'width':'100%'}"
+                                formControlName="Frequency_name" placeholder="Select Frequency"
+                                optionLabel="name" [showClear]="true" ></p-dropdown>
+                              
+                            </div>
+                        </div>
+
+                        <div class="mb-3 row">
+        
+                                <label style=" color: black; font-weight: bold;" for="staticEmail"
+                                class="col-sm-3 col-form-label">Patient Instrations :</label>
+                            <div class="col-sm-9">
+                                <p-dropdown [options]="Instrationsshow"  [style]="{'width':'100%'}"
+                                formControlName="Patient_instration" placeholder="Select Patient Instrations"
+                                optionLabel="name" [showClear]="true"></p-dropdown>
+                               
+                            </div>
+                        </div>
+
+
+                        <div class="mb-3 row">
+                            <label style=" color: black; font-weight: bold;" for="staticEmail"
+                                class="col-sm-3 col-form-label">Start Date :</label>
+                                
+                            <div class="col-sm-9">
+                                <p-calendar inputId="basic"  appendTo="body" #myInput formControlName="start_date"
+                                     [style]="{'width':'100%'}"></p-calendar>
+                            </div>
+                        </div>
+
+                        <div class="mb-3 row">
+                            <label style=" color: black; font-weight: bold;" for="staticEmail"
+                                class="col-sm-3 col-form-label">End Date :</label>
+                            <div class="col-sm-9">
+                                <p-calendar inputId="basic" appendTo="body" #myInput formControlName="End_date"
+                                     [style]="{'width':'100%'}"></p-calendar>
+                            </div>
+                        </div>
+
+                    </form>
+                    <ng-template pTemplate="footer">
+                        <p-button icon="pi pi-check" (click)="submit_madiaction()" label="Submit"
+                            styleClass="p-button-text"></p-button>
+                    </ng-template>
+                </p-dialog> -->
+            
+
+                <!-- <p-dataViewLayoutOptions></p-dataViewLayoutOptions> -->
+            </div>
+        </div>
+    </ng-template>
+
+    <ng-template let-car pTemplate="listItem">
+        <p-table [value]="medicationdata" responsiveLayout="scroll" paginatorPosition="bottom" #dt1 dataKey="id"
+            [paginator]="true"  styleClass="p-datatable-striped" 
+            [globalFilterFields]="['emailId','userId','statename','CountryName', 'phone','Specialityname','cityname',  'clinicName']"
+            scrollDirection="both" styleClass="p-mt-3" [scrollable]="true" [rowsPerPageOptions]="[10,15,25,50]"
+            [rows]="15">
+            <ng-template pTemplate="caption">
+                <div class="flex globalSearch">
+                    <p style="font-weight: bold; font-size: 1.2rem; margin-bottom: 0;">Total
+                        Records:{{medicationlength}} <span class="dislength"></span></p>
+                </div>
+            </ng-template>
+            <ng-template pTemplate="header">
+
+                <tr>
+                    <th style="width:5%;border-top:2px solid #e7ecf1;" pSortableColumn="sno">
+                        <!-- <p-sortIcon
+                            field="Sno"></p-sortIcon> -->
+                        S.No
+                    </th>
+                    <th style="width:15%;border-top:2px solid #e7ecf1;" pSortableColumn="name"> <p-sortIcon
+                            field="name"></p-sortIcon>Patient Name</th>
+                    <th style="width:8%;border-top:2px solid #e7ecf1;" pSortableColumn="term"> <p-sortIcon
+                            field="term"></p-sortIcon>invoice Number</th>
+                    <!-- <th style="width:8%;border-top:2px solid #e7ecf1;" pSortableColumn="Frequency"><p-sortIcon
+                            field="Frequency"></p-sortIcon>Frequency</th> -->
+                    <th style="width:10%;border-top:2px solid #e7ecf1;" pSortableColumn="DatePerformed"><p-sortIcon
+                            field="DatePerformed"></p-sortIcon>Invoice Date</th>
+                            <th style="width:10%;border-top:2px solid #e7ecf1;" pSortableColumn="DatePerformed"><p-sortIcon
+                                field="DatePerformed"></p-sortIcon>Due Date</th>
+                                
+                                <th style="width:10%;border-top:2px solid #e7ecf1;" pSortableColumn="DatePerformed"><p-sortIcon
+                                    field="DatePerformed"></p-sortIcon>totalamount</th>
+                                    <th style="width:10%;border-top:2px solid #e7ecf1;" pSortableColumn="DatePerformed"><p-sortIcon
+                                        field="DatePerformed"></p-sortIcon>due amount</th>
+                    <!-- <th style="width:10%;border-top:2px solid #e7ecf1;" pSortableColumn="EndDate"><p-sortIcon
+                            field="EndDate"></p-sortIcon>End Date</th> -->
+                    <!-- <th style="width:5%;border-top:2px solid #e7ecf1;" pSortableColumn="RouteName"><p-sortIcon
+                            field="RouteName"></p-sortIcon>Route</th> -->
+                    <!-- <th style="width:10%;border-top:2px solid #e7ecf1;" pSortableColumn="PrimaryCondition"><p-sortIcon
+                            field="PrimaryCondition"></p-sortIcon>Primary Condition</th> -->
+                    <th style="width:10%;border-top:2px solid #e7ecf1;" pSortableColumn="Notes"><p-sortIcon
+                            field="Notes"></p-sortIcon> Payment Status</th>
+
+                    <th style="width:10%;border-top:2px solid #e7ecf1;" pSortableColumn="Notes"> Action</th>
+
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-item let-i="rowIndex">
+                <tr>
+                    <td style="width:5%; ">{{i + 1}}</td>
+                    <td style="width:15%;">{{item.patientname}}</td>
+                    <td style="width:8%;">{{item.invoicenumber}}</td>
+                    <!-- <td style="width:8%;">{{item.FrequencyName}}</td> -->
+                    <td style="width:10%;">{{item.invoicedate |date: 'dd/MM/yyyy'}}</td>
+                    <td style="width:10%;">{{item.duedate |date: 'dd/MM/yyyy'}}</td>
+        
+                    <!-- <td style="width:10%;">{{item.EndDate}}</td> -->
+                    <!-- <td style="width:5%;">{{item.RouteName}}</td>
+                    <td style="width:10%;">{{item.primaryindication}}</td> -->
+                   
+                    <td style="width:10%;">{{item.totalamount}}</td>
+                    <td style="width:10%;">{{item.dueamount}}</td>
+                    <td style="width:10%;">{{item.paymentstatus}}</td>
+                    <td  style="width:10%;">
+                        <!-- <button *ngIf="item.paymentstatus=='PHR'" class="btn btn-outline-info mr-2" (click)="edit_procedure(item.id)"><i class="pi pi-fw pi-pencil"></i></button>
+                        <button *ngIf="item.paymentstatus=='PHR'" class="btn btn-outline-danger" (click)="delete_procedure(item.id)"><i class="pi pi-fw pi-trash"></i></button> -->
+                     <span *ngIf="item.paymentstatus=='Not Paid'"style="width:10%;"> <button class="btn btn-outline-info" style="padding: .1rem .4rem ;"><i class="fa-solid fa-wallet"></i></button></span>
+                    </td>
+                </tr>
+            </ng-template>
+
+        </p-table>
+    </ng-template>
+
+</p-dataView>

@@ -1,0 +1,1326 @@
+<p-toast position="top-right"></p-toast>
+<p-confirmDialog [style]="{width: '40vw'}"></p-confirmDialog>
+
+<div class="container-fluid Maindivscroll  ">
+    <div class="contentdiv" style="position: relative; top: 60px;">
+        <div class="healthsummary">
+            <h1>Health Summary ({{usernames}}) </h1>
+            <p>Use the tabs to open a section of your Health Summary.</p>
+        </div>
+
+        <div class="card">
+
+            <p-tabView styleClass="tabview-custom" (onChange)="handleChange($event)"  [(activeIndex)]="activeIndex">
+                <p-tabPanel>
+                    <ng-template pTemplate="header">
+
+                        <span>Current Health Issues</span>
+                    </ng-template>
+                    <div class="energencyslogan">
+                        <h2>Please review your Health Issues and verify that the list is up to date. <span
+                                class="callemer">Call
+                                911 if you have an emergency</span> </h2>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-3">
+                            <div class="w3-card-4">
+
+                                <div class="blockadd" style="cursor: pointer;" (click)="showhealthissuesDialog()">
+
+
+                                    <i class="fa fa-plus" aria-hidden="true"></i> <span> Add Current Health Issues
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-3" *ngFor="let item of patientproblemdata" >
+                            <div class="w3-card-4 cardfixheight">
+                                <div class="w3-container BlockMain">
+                                    <!-- <div class="" style="padding-top: 10px;">
+                                        <div class="blockdetail" style="padding-bottom: 10px;">
+                                            <p-menu #menu [model]="items" [popup]="true" appendTo="body"   ></p-menu>
+                                            <div class="text-right dots" style="position: absolute; DISPLAY: INLINE; right: 30px;">
+                                                <i class="pi pi-ellipsis-v" (click)="menu.toggle($event)"></i>
+                                            </div>
+                                        </div>
+                                    </div> -->
+                                    <div class="row" style="padding-top: 10px;">
+                                        <div class="blockdetail" style="padding-bottom: 10px;">
+                                            <p title="{{item.problem_name}}" class="cardp"
+                                                style="font-size: 20px; color:rgb(23, 15, 146); font-weight: bold;overflow: hidden;">
+                                                {{item.problem_name}} </p>
+                                            <p><b>Added : </b>{{ item.onsetDate | date: 'dd/MM/yyyy'}}</p>
+                                            <!-- <p><b>Note : </b>{{ item.notes }}</p> -->
+
+                                            <p title={{item.notes}} class="fa-solid fa-message " aria-hidden="true"></p> <span title={{item.notes}} class="">
+                                                Note</span>
+                                        </div>
+                                    </div>
+
+                                </div>
+
+
+                                <button class="w3-button w3-block boxfooter" (click)="delete_patientprobl(item.id)"><i
+                                        class="fa fa-trash-o" aria-hidden="true"></i>Remove</button>
+                            </div>
+                        </div>
+
+
+
+
+                        <!-- <p-dialog header="Add Current Health Issues" [(visible)]="displayhealthissueModal" [modal]="true" (onHide)="HealthIssues($event)" [style]="{width: '50vw'  }" [draggable]="false" [resizable]="false" >
+                        
+                        <form [formGroup]="currenthealthinsert" prependId="false" style="margin-top: 10px;">
+                            <div class="mb-3 row">
+                                <label style=" color: black; font-weight: bold;" for="staticEmail" class="col-sm-2 col-form-label">Problem  :</label>
+                                <div class="col-sm-10">
+                                    <p-autoComplete formControlName="healthcare_insert" #myInput [ngClass]="showErrorBorderOnControls(currenthealthinsert.controls.healthcare_insert)" [showEmptyMessage]="true" [forceSelection]="true" [suggestions]="currenthealthissue" (completeMethod)="filterhealthisse($event)"
+                                        appendTo="body" field="term" [style]="{'width':'100%'}" [inputStyle]="{'width':'100%'}" [minLength]="3"></p-autoComplete>
+                                </div>
+                            </div>
+
+                            <div class="mb-3 row">
+                                <label style=" color: black; font-weight: bold;" for="staticEmail" class="col-sm-2 col-form-label">Date Onset :</label>
+                                <div class="col-sm-10">
+                                    <p-calendar inputId="basic" [ngClass]="showErrorBorderOnControls(currenthealthinsert.controls.healthissue_date)" appendTo="body" #myInput formControlName="healthissue_date" [style]="{'width':'100%'}"></p-calendar>
+                                </div>
+                            </div>
+
+
+                        </form>
+                  
+
+                        <ng-template pTemplate="footer">
+                            <p-button icon="pi pi-check" (click)="submit_healthissue()" label="Submit" styleClass="p-button-text"></p-button>
+                        </ng-template>
+
+
+                        
+                  
+                    </p-dialog> -->
+
+
+                        <!-- trial -->
+
+                        <p-dialog header="Add Problem " [(visible)]="displayhealthissueModal" [modal]="true"
+                            [responsive]="true" id="trial" (onHide)="HealthIssues($event)">
+                            <!-- <div class="container"></div> -->
+                            <form [formGroup]="currenthealthinsert" prependId="false" style="margin-top: 10px;">
+                                <div class="form-container">
+                                    <div class="form-group ">
+                                        <span class="p-float-label">
+                                            <!-- <input type="text" id="float-input" pInputText/> -->
+                                            <p-autoComplete formControlName="healthcare_insert" #myInput
+                                                [ngClass]="showErrorBorderOnControls(currenthealthinsert.controls.healthcare_insert)"
+                                                [showEmptyMessage]="true" [forceSelection]="true"
+                                                [suggestions]="currenthealthissue"
+                                                (completeMethod)="filterhealthisse($event)" appendTo="body" field="term"
+                                                [style]="{'width':'100%'}" [inputStyle]="{'width':'100%'}"
+                                                [minLength]="3"></p-autoComplete>
+                                            <label for="float-input">Problem</label>
+                                        </span>
+
+
+
+                                    </div>
+                                    <div class="form-group mt-5">
+
+                                        <span class="p-float-label">
+                                            <p-calendar inputId="basic" [showIcon]="true" dateFormat="dd/mm/yy"
+                                                [ngClass]="showErrorBorderOnControls(currenthealthinsert.controls.healthissue_date)"
+                                                appendTo="body" #myInput formControlName="healthissue_date"
+                                                [style]="{'width':'100%'}" id="helthproblem"></p-calendar>
+
+                                            <!-- <p-calendar inputId="basic" [showIcon]="true" [ngClass]="showErrorBorderOnControls(currenthealthinsert.controls.healthissue_date)"appendTo="body" #myInput formControlName="healthissue_date" [style]="{'width':'100%'}" id="helthproblem">
+                    <span *ngIf="currenthealthinsert.get('healthissue_date').hasError('required') && currenthealthinsert.get('healthissue_date').touched?'border':''"> this is test 
+            </span> -->
+                                            <!-- </p-calendar> -->
+
+
+                                            <label for="float-input">Date onset</label>
+                                        </span>
+                                    </div>
+                                    <!-- <div class="form-group mt-5">
+            <p-dropdown [options]="" [ngClass]="showErrorBorderOnControls(medicationinsert.controls.Patient_instration)" [style]="{'width':'100%'}" formControlName="Patient_instration" placeholder="Select Status" optionLabel="" appendTo="body" [showClear]="true" ></p-dropdown>
+          </div> -->
+                                    <div class="form-group mt-5">
+                                        <span class="p-float-label">
+                                            <textarea id="float-input" rows="1" cols="10"
+                                                formControlName="healthissue_note" pInputTextarea
+                                                [style]="{'width':'100%'}"></textarea>
+                                            <label for="float-input">Note</label>
+                                        </span>
+                                    </div>
+                                </div>
+                                <div class="button-container">
+                                    <!-- <button pButton type="button" label="Cancel" class="p-button-secondary" ></button> -->
+                                    <button pButton type="button" label="Submit" (click)="submit_healthissue()"
+                                        class="p-button-success"></button>
+                                </div>
+                            </form>
+                        </p-dialog>
+
+                    </div>
+
+
+                </p-tabPanel>
+
+
+                <p-tabPanel header="Medications">
+                    <ng-template pTemplate="header" click>
+                        <span>Medications</span>
+                    </ng-template>
+                    <div class="row" style="margin-bottom: 20px;">
+                        <div class="col-lg-3" >
+                            <div class="w3-card-4" style="cursor: pointer;" (click)="showModalDialog()">
+
+                                <div class="blockaddmedication">
+
+
+                                    <i class="fa fa-plus" aria-hidden="true"></i> <span> Add Medication</span>
+
+                                </div>
+
+                            </div>
+                        </div>
+
+                        <div class="col-lg-3" *ngFor="let item of summarymedicationdata">
+                            <div class="w3-card-4 medicationcardboxheight">
+
+                                <div class="w3-container BlockMain">
+                                    <div class="" style="padding-top: 10px;">
+                                        <div class="blockdetail" style="padding-bottom: 10px;">
+                                            <p-menu #menu [model]="items" [popup]="true" appendTo="body"  (onShow)='data(item.id)'></p-menu>
+                                            <div *ngIf="item.transaction_by=='patient'"   class="text-right dots" style="position: absolute; DISPLAY: INLINE; right: 15px;" (click)="menu.toggle($event)">
+                                                <i class="pi pi-ellipsis-v" ></i>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row" style=" width: 95%;">
+<!-- padding-top: 10px;  row class me lgi thi -->
+                                        <div class="blockdetail" style="padding-bottom: 10px; width: -webkit-fill-available;">
+
+                                            <p title= {{item.ClinicalDrugName}} style="font-size: 20px; color:rgb(23, 15, 146); font-weight: bold;" class="cardp">
+                                                {{item.ClinicalDrugName}}</p>
+                                            <p title={{item.FrequencyName}} class="cardp"><b>Frequency : </b>{{item.FrequencyName}}</p>
+                                            <p><b>Dose : </b>{{item.Dose}}- <span >{{item.doseUnit}}</span></p>
+                                            <!-- <i class="fa fa-info-circle" aria-hidden="true"></i>  -->
+                                            <p class="cardp" title={{item.Instructionsforpatient}}><b>Patient Instrations
+                                                    :</b><span>&nbsp;{{item.Instructionsforpatient}}</span> </p>
+                                                    <p class="cardp" title="{{item.IndicationName }}" ><b> Reason :</b> {{item.IndicationName }}</p>
+
+                                            <!-- <p><b>Dose Priority : </b> {{item.DosePriority}}</p> -->
+                                            <p title={{item.StartingDat}} class="cardp" ><b> Date :</b> {{item.StartingDat | date: 'dd/MM/yyyy'}} -{{item.EndDate | date: 'dd/MM/yyyy'}}</p>
+                                           
+                                            <p title={{item.notes}} class="fa-solid fa-message" aria-hidden="true"></p> <span title={{item.notes}}>
+                                                Note</span>
+
+                                                
+
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <!-- <div> <button class="w3-button w3-block boxfooter"><i class="fa fa-bell" -->
+                                    <!-- aria-hidden="true"></i> -->
+                                <!-- Notification</button> -->
+                                <!-- <button class="w3-button  "><i class="fa fa-bell"
+                                    aria-hidden="true"></i>
+                                Notification</button>-->
+                            <!-- </div>  -->
+                               
+                            </div>
+                        </div>
+
+
+
+
+                        <!-- <p-dialog header="Add Medication" [(visible)]="displayModal" [modal]="true" (onHide)="Medication($event)" [style]="{width: '50vw'}" [draggable]="false" [resizable]="false">
+                        <form [formGroup]="medicationinsert" style="margin-top: 10px;">
+                            <div class="mb-3 row">
+                                <label style=" color: black; font-weight: bold;" for="staticEmail" class="col-sm-3 col-form-label">Medication :</label>
+                                <div class="col-sm-9">
+                                    <p-autoComplete formControlName="medication_insert" [ngClass]="showErrorBorderOnControls(medicationinsert.controls.medication_insert)" [showEmptyMessage]="true" [suggestions]="medication_drug" (completeMethod)="filterMedication($event)" appendTo="body"
+                                    [forceSelection]="true"  field="name" [style]="{'width':'100%'}" [inputStyle]="{'width':'100%'}" [minLength]="3"></p-autoComplete>
+                                </div>
+                            </div>
+                            <div class="mb-3 row">
+                                <label style=" color: black; font-weight: bold;" for="staticEmail" class="col-sm-3 col-form-label">Frequency :</label>
+                                <div class="col-sm-9">
+                                    <p-dropdown [options]="Frequencyshow" [ngClass]="showErrorBorderOnControls(medicationinsert.controls.Frequency_name)" [style]="{'width':'100%'}" formControlName="Frequency_name" placeholder="Select Frequency" optionLabel="name" [showClear]="true"></p-dropdown>
+                                   
+                                </div>
+                            </div>
+                            <div class="mb-3 row">
+                                <label style=" color: black; font-weight: bold;" for="staticEmail" class="col-sm-3 col-form-label">Patient Instrations :</label>
+                                <div class="col-sm-9">
+                                    <p-dropdown [options]="Instrationsshow" [ngClass]="showErrorBorderOnControls(medicationinsert.controls.Patient_instration)" [style]="{'width':'100%'}" formControlName="Patient_instration" placeholder="Select Patient Instrations" optionLabel="name" appendTo="body" [showClear]="true"></p-dropdown>
+
+                                    
+                                </div>
+                            </div>
+
+                            <div class="mb-3 row">
+                                <label style=" color: black; font-weight: bold;" for="staticEmail" class="col-sm-3 col-form-label">Start Date :</label>
+                                <div class="col-sm-9">
+                                    <p-calendar inputId="basic" [ngClass]="showErrorBorderOnControls(medicationinsert.controls.start_date)" appendTo="body" #myInput formControlName="start_date" [style]="{'width':'100%'}"></p-calendar>
+                                </div>
+                            </div>
+
+                            <div class="mb-3 row">
+                                <label style=" color: black; font-weight: bold;" for="staticEmail" class="col-sm-3 col-form-label">End Date :</label>
+                                <div class="col-sm-9">
+                                    <p-calendar inputId="basic" [ngClass]="showErrorBorderOnControls(medicationinsert.controls.End_date)" appendTo="body" #myInput formControlName="End_date" [style]="{'width':'100%'}"></p-calendar>
+                                </div>
+                            </div>
+                        </form>
+                        <ng-template pTemplate="footer">
+                            <p-button icon="pi pi-check" (click)="submit_madiaction()" label="Submit" styleClass="p-button-text"></p-button>
+                        </ng-template>
+                    </p-dialog> -->
+
+
+
+                        <!-- new form  -->
+                        <p-dialog header="Add Medication" [(visible)]="displayModal" [modal]="true" [responsive]="true"
+                            id="trial" (onHide)="Medication($event)"  [resizable]="false">
+
+                            <form [formGroup]="medicationinsert" prependId="false" style="margin-top: 10px;">
+                                <div class="form-container">
+                                    <div class="form-group ">
+                                        <span class="p-float-label">
+
+                                            <p-autoComplete formControlName="medication_insert"
+                                                [ngClass]="showErrorBorderOnControls(medicationinsert.controls.medication_insert)"
+                                                [showEmptyMessage]="true" [suggestions]="medication_drug"
+                                                (completeMethod)="filterMedication($event)" appendTo="body"
+                                                [forceSelection]="true" field="name" [style]="{'width':'100%'}"
+                                                [inputStyle]="{'width':'100%'}" [minLength]="3"></p-autoComplete>
+                                            <label for="float-input">Medication</label>
+                                        </span>
+
+
+
+                                    </div>
+                                    <div class="form-group mt-5">
+                                        <div class="container-fluid">
+                                            <div class="row">
+                                                <div class="col-lg-6 colmedi">
+                                                    <p-dropdown [options]="Frequencyshow"
+                                                        [ngClass]="showErrorBorderOnControls(medicationinsert.controls.Frequency_name)"
+                                                        [style]="{'width':'100%'}" formControlName="Frequency_name"
+                                                        placeholder="Select Frequency" optionLabel="name"
+                                                        [showClear]="true" ></p-dropdown>
+                                                </div>
+                                                <div class="col-lg-6  colmedi2">
+                                                    <div class="row">
+
+                                                        <div class="col-md-6 col-sm-4 ">
+                                                            <span class="p-float-label">
+                                                            <p-inputNumber  inputId="integeronly"
+                                                                [style]="{'width':'100%'}" formControlName="dose" autocomplete="null" >
+                                                            </p-inputNumber>
+                                                            <label for="float-input">Dose</label>
+                                                        </span>
+                                                        </div>
+                                                        <div class="col-md-6 col-sm-4 colmedi3"> <p-dropdown
+                                                                [options]="dose_quantity" [style]="{'width':'100%'}"
+                                                                formControlName="dose_unit" placeholder="" optionLabel="name"
+                                                                appendTo="body"></p-dropdown></div>
+
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+                                    <!-- </div>
+          <div class="form-group mt-5"> -->
+
+                                    <div class="form-group mt-5">
+                                        <div class="container-fluid">
+                                            <div class="row">
+                                                <div class="col-sm-6 colmedi">
+                                                    <p-dropdown [options]="Instrationsshow"
+                                                    [ngClass]="showErrorBorderOnControls(medicationinsert.controls.Patient_instration)"
+                                                    [style]="{'width':'100%'}" formControlName="Patient_instration" 
+                                                    placeholder="Select Patient Instructions" optionLabel="name" appendTo="body"
+                                                    [showClear]="true"></p-dropdown>
+                                                </div>
+                                                <div class="col-sm-6 colmedi4">
+                                                <p-dropdown [options]="patientproblemdata"
+                                         
+                                                [style]="{'width':'100%'}" formControlName="Patient_reason"
+                                                placeholder="Select Reason" optionLabel="problem_name" appendTo="body"
+                                                [showClear]="true"></p-dropdown></div>
+                                            </div>
+                                        </div>
+                                       
+                                    </div>
+
+                                    <div class="form-group mt-5">
+
+                                        <div class="container-fluid">
+                                            <div class="row">
+                                                <div class="col-lg-6 colmedi">
+                                                    <span class="p-float-label">
+                                                        <p-calendar [showIcon]="true" inputId="basic" dateFormat="dd/mm/yy" onchange="datevaild()"
+                                                            [ngClass]="showErrorBorderOnControls(medicationinsert.controls.start_date)"
+                                                            appendTo="body" #myInput formControlName="start_date"
+                                                            [style]="{'width':'100%'}" id="helthproblem"></p-calendar>
+
+
+
+                                                        <label for="float-input">Start Date </label>
+                                                    </span>
+                                                </div>
+                                                <div class="col-lg-6 colmedi2">
+                                                    <span class="p-float-label">
+                                                        <p-calendar inputId="basic" [showIcon]="true" dateFormat="dd/mm/yy"
+                                                      [minDate]=medicationinsert.value.start_date
+                                                            [ngClass]="showErrorBorderOnControls(medicationinsert.controls.End_date)"
+                                                            appendTo="body" #myInput formControlName="End_date"
+                                                            [style]="{'width':'100%'}" id="helthproblem"></p-calendar>
+
+
+
+
+                                                        <label for="float-input">End Date </label>
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <!-- </div> -->
+
+
+                                        <!-- <div class="form-group mt-5"> -->
+
+
+                                    </div>
+
+
+                                    <div class="form-group mt-5">
+                                        <span class="p-float-label">
+                                            <textarea id="float-input" rows="1" cols="10" formControlName="note"
+                                                pInputTextarea [style]="{'width':'100%'}"></textarea>
+                                            <label for="float-input">Note</label>
+                                        </span>
+                                    </div>
+                                </div>
+                                <div class="button-container">
+                                    <!-- <button pButton type="button" label="Cancel" class="p-button-secondary" ></button> -->
+                                    <button pButton type="button" label="Submit" (click)="submit_madiaction()"
+                                        class="p-button-success"></button>
+                                </div>
+                            </form>
+                        </p-dialog>
+
+                    </div>
+                </p-tabPanel>
+
+
+                <p-tabPanel header="Allergies">
+                    <ng-template pTemplate="header">
+
+                        <span>Allergies</span>
+
+                    </ng-template>
+                    <div class="energencyslogan">
+                        <h2>Please review your allergies and verify that the list is up to date. <span
+                                class="callemer">Call
+                                911 if you have an emergency</span> </h2>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-lg-3" >
+                            <div class="w3-card-4 "style="cursor: pointer;" (click)="showallargyDialog()">
+
+                                <div class="blockaddallargy">
+                                    <i class="fa fa-plus" aria-hidden="true"></i> <span> Add Allergies</span>
+                                </div>
+
+                            </div>
+                        </div>
+
+                        <div class="col-lg-3" *ngFor="let item of summaryAllergiesdata">
+                            <div class="w3-card-4 cardfixheightallargy">
+
+                                <div class="w3-container BlockMain">
+
+                                    <div class="row" style="padding-top: 10px;">
+                                        <!-- <div style="padding-left: 10PX;">
+                                                <img src="assets/img_480660.png" width="20px" alt="Avatar"
+                                                    class="w3-left w3-circle w3-margin-right" style="width:60px">
+                                            </div> -->
+                                        <div class="blockdetail" >
+
+                                            <p style="font-size: 20px; color:rgb(23, 15, 146); font-weight: bold;" class="cardp">
+                                                {{item.AllergyName}}</p>
+                                            <p><b>Reaction Severity : </b> {{item.Severity_Name}}</p>
+                                            <p class="cardp"><b>Allergy Type : </b> {{item.Allergytype}}</p>
+                                            <p><b>Date :</b> {{item.DateOfOnSet | date: 'dd/MM/yyyy'}} -{{item.last_occurance | date: 'dd/MM/yyyy'}}</p>
+                                            <!-- <p><b>Last Occurance:</b> {{item.last_occurance | date: 'dd/MM/yyyy'}}</p> -->
+                                            <!-- <p><b>Resolve Status:</b> {{item.Resolve_status}}</p> -->
+
+
+                                            <!-- <i class="fa fa-info-circle" aria-hidden="true"></i> <span>  Learn More</span>  -->
+                                            <p title={{item.notes}} class=" fa-solid fa-message" aria-hidden="true"></p>  <span title={{item.notes}}> Note</span>
+                                            <!-- i hta diya blue color ke liye i  -->
+
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <button class="w3-button w3-block boxfooter" (click)="delete_allergy(item.id)"><i
+                                        class="fa fa-trash-o" aria-hidden="true"></i> Remove
+
+                                </button>
+
+                                <!-- <p-button (click)="delete_allergy(item.id)" icon="pi pi-check" label="Confirm"></p-button> -->
+                                <!-- <p-button class="w3-button w3-block boxfooter" (click)="delete_allergy(item.id)" icon="pi pi-trash-o" label="Remove"></p-button> -->
+
+
+                            </div>
+
+                        </div>
+
+
+
+
+
+                        <!-- <p-dialog header="Add Allergies" [(visible)]="displayallargyModal" [modal]="true" (onHide)="Allergy($event)" [style]="{width: '60vw'}" [draggable]="false" [resizable]="false">
+
+                        <form [formGroup]="allargyinsert" style="margin-top: 10px;">
+                            <div class="mb-3 row">
+                                <label style=" color: black; font-weight: bold;" for="staticEmail" class="col-sm-3 col-form-label">Add Allergy :</label>
+                                <div class="col-sm-9">
+                                    <p-autoComplete formControlName="allargy_insert" [ngClass]="showErrorBorderOnControls(allargyinsert.controls.allargy_insert)" [showEmptyMessage]="true" [suggestions]="allargydatasub" (completeMethod)="filterallargy($event)" appendTo="body" field="name"
+                                    [forceSelection]="true"  [style]="{'width':'100%'}" [inputStyle]="{'width':'100%'}" [minLength]="3"></p-autoComplete>
+                                </div>
+                            </div>
+
+                            <div class="mb-3 row">
+                                <label style=" color: black; font-weight: bold;" for="staticEmail" class="col-sm-3 col-form-label">Reaction Severity :</label>
+                                <div class="col-sm-9">
+
+                                    <p-dropdown [options]="severityshow" [ngClass]="showErrorBorderOnControls(allargyinsert.controls.reaction_serverity)" [style]="{'width':'100%'}" formControlName="reaction_serverity" placeholder="Select Severity" optionLabel="name" [showClear]="true"></p-dropdown>
+
+                            
+                                </div>
+                            </div>
+
+
+                            <div class="mb-3 row">
+                                <label style=" color: black; font-weight: bold;" for="staticEmail" class="col-sm-3 col-form-label">Date  Onset :</label>
+                                <div class="col-sm-9">
+                                    <p-calendar inputId="basic" appendTo="body" [ngClass]="showErrorBorderOnControls(allargyinsert.controls.dateofonsetn_date)" formControlName="dateofonsetn_date" [style]="{'width':'100%'}"></p-calendar>
+                                </div>
+                            </div>
+
+                            <div class="mb-3 row">
+                                <label style=" color: black; font-weight: bold;" for="staticEmail" class="col-sm-3 col-form-label">Last Occurance :</label>
+                                <div class="col-sm-9">
+                                    <p-calendar inputId="basic" appendTo="body" [ngClass]="showErrorBorderOnControls(allargyinsert.controls.lastoccurencen_date)" formControlName="lastoccurencen_date" [style]="{'width':'100%'}"></p-calendar>
+                                </div>
+                            </div>
+
+
+
+                        </form>
+                        <ng-template pTemplate="footer">
+                            <p-button icon="pi pi-check" (click)="submit_allargy()" label="Submit" styleClass="p-button-text"></p-button>
+                        </ng-template>
+                    </p-dialog> -->
+
+                        <!-- new form -->
+
+
+
+                        <p-dialog header="Add Allergies" [(visible)]="displayallargyModal" [modal]="true"
+                            [responsive]="true" id="trial" (onHide)="Allergy($event)"
+                            [draggable]="false" [resizable]="false" class="addallergy">
+<!--  [style]="{width: '50vw'}" -->
+                            <form [formGroup]="allargyinsert" prependId="false" style="margin-top: 10px;">
+                                <div class="form-container">
+                                    <div class="form-group ">
+                                        <span class="p-float-label">
+                                            <p-autoComplete formControlName="allargy_insert"
+                                                [ngClass]="showErrorBorderOnControls(allargyinsert.controls.allargy_insert)"
+                                                [showEmptyMessage]="true" [suggestions]="allargydatasub"
+                                                (completeMethod)="filterallargy($event)" appendTo="body" field="name"
+                                                [forceSelection]="true" [style]="{'width':'100%'}"
+                                                [inputStyle]="{'width':'100%'}" [minLength]="3"></p-autoComplete>
+                                            <label for="float-input">Add Allergy</label>
+                                        </span>
+
+
+
+                                    </div>
+                                    <div class="form-group mt-5">
+                                        <div class="container-fluid">
+                                            <div class="row">
+                                                <div class="col-sm-6 colmedi"> <p-dropdown [options]="Allergy_Type" [style]="{'width':'100%'}"
+                                                    formControlName="Allergytype" placeholder="Allergy Type"
+                                                    optionLabel="name" appendTo="body" [showClear]="true"></p-dropdown></div>
+                                                <div class="col-sm-6 colmedi4"> <p-dropdown [options]="severityshow"
+                                                    [ngClass]="showErrorBorderOnControls(allargyinsert.controls.reaction_serverity)"
+                                                    [style]="{'width':'100%'}" formControlName="reaction_serverity"
+                                                    placeholder="Select Reaction Severity " optionLabel="name"
+                                                    [showClear]="true"></p-dropdown></div>
+                                            </div>
+                                        </div>
+                                       
+                   
+                                      
+                                    </div>
+                                 
+
+
+                                    <div class="form-group mt-5">
+                                        <div class="container-fluid">
+                                            <div class="row">
+                                                <div class="col-lg-6 colmedi"> <span class="p-float-label">
+                                                    <p-calendar inputId="basic" [showIcon]="true" appendTo="body" dateFormat="dd/mm/yy"
+                                                        [ngClass]="showErrorBorderOnControls(allargyinsert.controls.dateofonsetn_date)"
+                                                        formControlName="dateofonsetn_date" [style]="{'width':'100%'}"
+                                                        id="helthproblem"></p-calendar>
+        
+        
+        
+                                                    <label for="float-input"> Date Onset</label>
+                                                </span></div>
+                                                <div class="col-lg-6 colmedi2">
+                                                    <span class="p-float-label">
+                                                        <p-calendar inputId="basic" [showIcon]="true" appendTo="body" dateFormat="dd/mm/yy"
+                                                        [minDate]=allargyinsert.value.dateofonsetn_date
+                                                            [ngClass]="showErrorBorderOnControls(allargyinsert.controls.lastoccurencen_date)"
+                                                            formControlName="lastoccurencen_date" [style]="{'width':'100%'}"
+                                                            id="helthproblem"></p-calendar>
+            
+            
+            
+            
+                                                        <label for="float-input">Last occurrence </label>
+                                                    </span></div>
+                                            </div>
+                                        </div>
+
+                                       
+                                    <!-- </div>
+
+
+                                    <div class="form-group mt-5"> -->
+
+                                    </div>
+
+
+                                    <div class="form-group mt-5">
+                                        <span class="p-float-label">
+                                            <textarea id="float-input" rows="1" cols="10" formControlName="note"
+                                                pInputTextarea [style]="{'width':'100%'}"></textarea>
+                                            <label for="float-input">Reaction</label>
+                                        </span>
+                                    </div>
+                                </div>
+                                <div class="button-container">
+                                    <!-- <button pButton type="button" label="Cancel" class="p-button-secondary" ></button> -->
+                                    <button pButton type="button" label="Submit" (click)="submit_allargy()"
+                                        class="p-button-success"></button>
+                                </div>
+                            </form>
+                        </p-dialog>
+                        <!-- new form close-->
+                    </div>
+
+                </p-tabPanel>
+                <p-tabPanel header="Immunizations">
+                    <ng-template pTemplate="header">
+
+                        <span>Immunizations</span>
+
+                    </ng-template>
+                    <div class="energencyslogan">
+                        <h2>This is a list of Immunizations that your clinic has on file for you </h2>
+                    </div>
+                    <div class="row">
+
+                        <div class="col-lg-3" >
+                            <div class="w3-card-4" style="cursor: pointer;" (click)="showImmunizationsDialog()">
+
+                                <div class="blockadd">
+
+
+                                    <i class="fa fa-plus" aria-hidden="true"></i> <span> Add Immunizations</span>
+                                </div>
+
+                            </div>
+                        </div>
+
+
+                        <!-- <div class="col-lg-3" *ngFor="let item of summaryImmunizations">
+                            <div class="w3-card-4 cardfixheightimmunization">
+
+                                <div class="w3-container BlockMain">
+
+                                    <div class="row" style="padding-top: 10px;">
+
+                                        <div class="blockdetail" style="padding-bottom: 10px;">
+
+                                            <p-menu  #menu [model]="items1" [popup]="true" appendTo="body"  (onShow)='data(item.id)'></p-menu>
+                                                            <div   class="text-right dots" style="position: absolute; DISPLAY: INLINE; right: 15px;" (click)="menu.toggle($event)">
+                                                                <i class="pi pi-ellipsis-v" ></i>
+                                                            </div>
+                                                             </div>
+
+                                            <p title= {{item.FullVaccineName}} style="font-size: 20px; color:rgb(23, 15, 146); font-weight: bold;" class="cardp">
+                                                {{item.FullVaccineName}}</p>
+
+                                            <p><b>Date  : </b> {{item.Date_Administerd | date: 'dd/MM/yyyy'}}
+                                            </p>
+                                          
+
+                                            <p title={{item.Notes}} class=" fa-solid fa-message" aria-hidden="true"></p>  <span title={{item.Notes}}> Note</span>
+
+
+
+                                       
+                                    </div>
+
+                                </div>
+                       
+                            </div>
+                        </div> -->
+
+
+
+
+                        <div class="col-lg-3" *ngFor="let item of summaryImmunizations">
+                            <div class="w3-card-4 cardfixheightimmunization">
+
+                                <div class="w3-container BlockMain">
+                                    <div class="" style="padding-top: 10px;">
+                                        <div class="blockdetail" style="">
+                                            <p-menu #menu [model]="items1" [popup]="true" appendTo="body"  (onShow)='data(item.id)'></p-menu>
+                                            <div *ngIf="item.uploaded_by=='PHR'"  class="text-right dots" style="position: absolute; DISPLAY: INLINE; right: 15px;" (click)="menu.toggle($event)">
+                                                <i class="pi pi-ellipsis-v" ></i>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row" style=" width: 95%;">
+<!-- padding-top: 10px;  row class me lgi thi -->
+                                        <div class="blockdetail" style="padding-bottom: 10px; width: -webkit-fill-available;">
+
+                                    
+                                            <p title= {{item.FullVaccineName}} style="font-size: 20px; color:rgb(23, 15, 146); font-weight: bold;" class="cardp">
+                                                {{item.FullVaccineName}}</p>
+
+                                            <p><b>Date  : </b> {{item.Date_Administerd | date: 'dd/MM/yyyy'}}
+                                            </p>
+                                            <!-- <p title={{item.Notes}} class="fa-solid fa-message"><span title={{item.Notes}} >Note : </span> </p> -->
+
+                                            <p title={{item.Notes}} class=" fa-solid fa-message" aria-hidden="true"></p>  <span title={{item.Notes}}> Note</span>
+
+
+                                                
+
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <!-- <div> <button class="w3-button w3-block boxfooter"><i class="fa fa-bell" -->
+                                    <!-- aria-hidden="true"></i> -->
+                                <!-- Notification</button> -->
+                                <!-- <button class="w3-button  "><i class="fa fa-bell"
+                                    aria-hidden="true"></i>
+                                Notification</button>-->
+                            <!-- </div>  -->
+                               
+                            </div>
+                        </div>
+
+
+
+
+                        <!-- <p-dialog header="Add Immunizations" [(visible)]="displayImmunizationsModal"
+                            (onHide)="Immunizations($event)" [modal]="true" [style]="{width: '50vw'}"
+                            [draggable]="false" [resizable]="false">
+
+                            <form [formGroup]="Immunizationsinsert" style="margin-top: 10px;">
+                                <div class="mb-3 row">
+                                    <label style=" color: black; font-weight: bold;" for="staticEmail"
+                                        class="col-sm-3 col-form-label">Add Vaccine :</label>
+                                    <div class="col-sm-9">
+                                        <p-autoComplete class="ImmunizationsAutocomplete"
+                                            formControlName="Immunizationsname_insert" 
+                                        
+                                            [ngClass]="showErrorBorderOnControls(Immunizationsinsert.controls.Immunizationsname_insert)"
+                                            [showEmptyMessage]="true" [suggestions]="Immunizationsdatasub"
+                                            (completeMethod)="filterImmunizations($event)" [forceSelection]="true"
+                                            appendTo="body" field="name" [size]="30" [style]="{'width':'100%'}"
+                                            [inputStyle]="{'width':'100%'}" [minLength]="3"></p-autoComplete>
+                                    </div>
+                                </div>
+
+                                <div class="mb-3 row">
+                                    <label style=" color: black; font-weight: bold;" for="staticEmail"
+                                        class="col-sm-3 col-form-label">Date Administered :</label>
+                                    <div class="col-sm-9">
+                                        <p-calendar inputId="basic"
+                                            [ngClass]="showErrorBorderOnControls(Immunizationsinsert.controls.dateAdministerd_date)"
+                                            appendTo="body" formControlName="dateAdministerd_date"
+                                            [style]="{'width':'100%'}"></p-calendar>
+                                    </div>
+                                </div>
+                            </form>
+                            <ng-template pTemplate="footer">
+                                <p-button icon="pi pi-check" (click)="submit_Immunizations()" label="Submit"
+                                    styleClass="p-button-text"></p-button>
+                            </ng-template>
+                        </p-dialog> -->
+                        <!-- new form -->
+                        <p-dialog header="Add Immunizations" [(visible)]="displayImmunizationsModal" [modal]="true"
+                            [responsive]="true" id="trial" (onHide)="Immunizations($event)" 
+                            [draggable]="false" [resizable]="false">
+                            <!-- [style]="{width: '50vw'}" -->
+                            <form [formGroup]="Immunizationsinsert" prependId="false" style="margin-top: 10px;">
+                                <div class="form-container">
+                                    <div class="form-group ">
+                                        <span class="p-float-label">
+                                            <p-autoComplete class="ImmunizationsAutocomplete"
+                                                formControlName="Immunizationsname_insert"
+                                                (onSelect)="getVaccinedata($event)"
+                                                [ngClass]="showErrorBorderOnControls(Immunizationsinsert.controls.Immunizationsname_insert)"
+                                                [showEmptyMessage]="true" [suggestions]="Immunizationsdatasub"
+                                                (completeMethod)="filterImmunizations($event)" [forceSelection]="true"
+                                                appendTo="body" field="CVXShortDescription" [size]="10" [style]="{'width':'100%'}"
+                                                [inputStyle]="{'width':'100%'}" [minLength]="3"></p-autoComplete>
+                                            <label for="float-input">Add Vaccine</label>
+                                        </span>
+
+
+
+                                    </div>
+                                    <div class="form-group mt-5">
+                                        <p-dropdown [options]="ManufactureDose" [ngClass]="" [style]="{'width':'100%'}"
+                                            formControlName="manufacture" placeholder="Select Manufacture"
+                                            optionLabel="manufacturer_name" [showClear]="true"></p-dropdown>
+                                    </div>
+                        
+
+
+                                    <div class="form-group mt-5">
+
+                                        <span class="p-float-label">
+                                       
+
+                                            <p-calendar inputId="basic" [showIcon]="true" dateFormat="dd/mm/yy"
+                                                [ngClass]="showErrorBorderOnControls(Immunizationsinsert.controls.dateAdministerd_date)"
+                                                appendTo="body" formControlName="dateAdministerd_date"
+                                                [style]="{'width':'100%'}" id="helthproblem"></p-calendar>
+
+                                            <label for="float-input"> Date Onset</label>
+                                        </span>
+                                    </div>
+
+
+
+
+                                    <div class="form-group mt-5">
+                                        <span class="p-float-label">
+                                            <textarea id="float-input" rows="1" cols="10" formControlName="note"
+                                                pInputTextarea [style]="{'width':'100%'}"></textarea>
+                                            <label for="float-input">Notes</label>
+                                        </span>
+                                    </div>
+                                </div>
+                                <div class="button-container">
+                                   
+                                    <button pButton type="button" label="Submit" (click)="submit_Immunizations()"
+                                        class="p-button-success"></button>
+                                </div>
+                            </form>
+                        </p-dialog>
+
+                        <!-- new form end-->
+                    </div>
+
+
+                </p-tabPanel>
+
+                <p-tabPanel header="Preventive Care" >
+                    <ng-template pTemplate="header">
+
+                        <span>Preventive Care</span>
+
+                    </ng-template>
+                    <p class="mt-3">At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis
+                        praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint
+                        occaecati cupiditate non provident, similique sunt in culpa qui officia
+                        deserunt mollitia animi, id est laborum et dolorum fuga. Et harum quidem rerum facilis est et
+                        expedita distinctio. Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil
+                        impedit quo minus.</p>
+                </p-tabPanel>
+
+                <p-tabPanel header="History">
+                    <ng-template pTemplate="header">
+
+                        <span>History</span>
+
+                    </ng-template>
+                    <!-- Maindivscroll  -->
+                    <div class="container-fluid ">
+                        <div style="padding-top: 20px;">
+                            <!-- <div class="familyhistory">
+                            <h1>Family History ({{usernames}}) </h1>
+                            <p>This is an overview of your family history on file with the clinic</p>
+                        </div> -->
+
+
+
+<!-- add id for removing scroll familytab -->
+                            <p-tabView (onChange)="handleChange2($event)" id="familytab">
+                                <p-tabPanel header="Family History" >
+                                    <div class="row">
+                                        <div class="col-lg-3">
+                                            <div class="w3-card-4">
+
+                                                <div class="blockaddfamily " style="cursor: pointer;"
+                                                    (click)="showFamilyDialog()">
+
+
+                                                    <i class="fa fa-plus" aria-hidden="true"></i> <span> &nbsp;Add
+                                                        Family History </span>
+                                                </div>
+
+
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-3" *ngFor="let item of FamiltHistorydata">
+                                            <div class="w3-card-4 cardfixheightfamily">
+                                                <div class="w3-container BlockMain">
+                                                  
+                                                    <div class="row" style="padding-top: 10px;">
+                                                        <div class="blockdetail" style="padding-bottom: 10px;">
+                                                            <p-menu  #menu [model]="items2" [popup]="true" appendTo="body"  (onShow)='data(item.id)'></p-menu>
+                                                            <div  *ngIf="item.uploaded_by=='PHR'" class="text-right dots" style="position: absolute; DISPLAY: INLINE; right: 15px;" (click)="menu.toggle($event)">
+                                                                <i class="pi pi-ellipsis-v" ></i>
+                                                            </div>
+                                                            <p
+                                                                style="font-size: 20px; color:rgb(23, 15, 146); font-weight: bold;">
+                                                                 {{item.name}} </p>
+                                                            <p><b>Age :</b> {{item.Age}}</p>
+                                                            <p><b>Status :</b> {{item.Alive}}</p>
+                                                            <p><b>Relation :</b> {{item.relation}}</p>
+                                                            <p class="cardp" title=" {{item.problem_name}}"><b>Problem :</b> {{item.problem_name}}</p>
+                                                            <p><b>Date :</b> {{item.OnsetDate | date: 'dd/MM/yyyy'}}
+                                                            </p>
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+                                                <!-- <button class="w3-button w3-block boxfooter" (click)="delete_patientprobl(item.id)"><i class="fa fa-trash-o"
+                                    aria-hidden="true"></i>Remove</button> -->
+                                            </div>
+                                        </div>
+
+
+
+
+
+
+                                        <!-- new form  -->
+                                        <p-dialog header="Add Family History" [(visible)]="displayFamilyModal" [modal]="true" [responsive]="true"
+                                        id="trial"  (onHide)="Familyhistory($event)"  [resizable]="false">
+            
+                                        <form [formGroup]="familyhistoryinsert" prependId="false" style="margin-top: 10px;">
+                                            <div class="form-container">
+                                                <div class="form-group ">
+                                                    <span class="p-float-label">
+                                                        <input type="text" [style]="{width: '100%'}"
+                                                        [ngClass]="showErrorBorderOnControls(familyhistoryinsert.controls.family_patient_name)"
+                                                        pInputText formControlName="family_patient_name" pattern="[a-zA-Z ]*">
+                                                        <!-- <p-autoComplete formControlName="medication_insert"
+                                                            [ngClass]="showErrorBorderOnControls(medicationinsert.controls.medication_insert)"
+                                                            [showEmptyMessage]="true" [suggestions]="medication_drug"
+                                                            (completeMethod)="filterMedication($event)" appendTo="body"
+                                                            [forceSelection]="true" field="name" [style]="{'width':'100%'}"
+                                                            [inputStyle]="{'width':'100%'}" [minLength]="3"></p-autoComplete> -->
+                                                        <label for="float-input">Name</label>
+                                                    </span>
+            
+            
+            
+                                                </div>
+                                                <div class="form-group mt-5">
+                                                    <div class="container-fluid">
+                                                        <div class="row">
+                                                            <div class="col-sm-6 colmedi">
+                                                                
+
+
+                                                                <span class="p-float-label">
+                                                                    <input type="text" [style]="{width: '100%'}"
+                                                                [ngClass]="showErrorBorderOnControls(familyhistoryinsert.controls.family_patient_age)"
+                                                                pInputText formControlName="family_patient_age" 
+                                                                >
+
+                                                                  
+                                                                    <label for="float-input">Age</label>
+                                                                </span>
+                                                            </div>
+                                                            <div class="col-sm-6  colmedi4 bottoampadding">
+                                                                <!-- <div class="row">
+            
+                                                                    <div class="col-md-6 col-sm-4 ">
+                                                                        <span class="p-float-label"> -->
+                                                                        <!-- <p-inputNumber  inputId="integeronly"
+                                                                            [style]="{'width':'100%'}" formControlName="dose" autocomplete="null" >
+                                                                        </p-inputNumber> -->
+                                                                        <p-dropdown [options]="statusdatashow"
+                                                                        [ngClass]="showErrorBorderOnControls(familyhistoryinsert.controls.family_patient_status)"
+                                                                        formControlName="family_patient_status"
+                                                                        [style]="{'width':'100%'}"
+                                                                        formControlName="family_patient_status"
+                                                                        placeholder="Select Status " optionLabel="status"
+                                                                        [showClear]="true"></p-dropdown>
+                                                                        <!-- <label for="float-input">Dose</label> -->
+                                                                    <!-- </span> -->
+                                                                    <!-- </div> -->
+                                                                    <!-- <div class="col-md-6 col-sm-4 colmedi3">
+                                                                         <p-dropdown
+                                                                            [options]="dose_quantity" [style]="{'width':'100%'}"
+                                                                            formControlName="dose_unit" placeholder="" optionLabel="name"
+                                                                            appendTo="body"></p-dropdown>
+
+                                                                        
+                                                                    </div> -->
+            
+                                                                <!-- </div> -->
+                                                            </div>
+            
+                                                        </div>
+                                                    </div>
+                                                </div>
+            
+            
+                                                <!-- </div>
+                      <div class="form-group mt-5"> -->
+            
+                                                <div class="form-group mt-5">
+                                                    <div class="container-fluid">
+                                                        <div class="row">
+                                                            <div class="col-sm-6 colmedi">
+                                                                <p-dropdown [options]="Relationdatashow"
+                                                                [ngClass]="showErrorBorderOnControls(familyhistoryinsert.controls.family_patient_relation)"
+                                                                formControlName="family_patient_relation"
+                                                                [style]="{'width':'100%'}"
+                                                                formControlName="family_patient_relation"
+                                                                placeholder="Select Relation" optionLabel="name"
+                                                                [showClear]="true"></p-dropdown>
+                                                            </div>
+
+                                                            <div class="col-sm-6 colmedi4 bottoampadding">
+                                                                 <span class="p-float-label">
+                                                        <p-autoComplete formControlName="family_patient_Problem"
+                                                            [ngClass]="showErrorBorderOnControls(familyhistoryinsert.controls.family_patient_Problem)"
+                                                            [showEmptyMessage]="true" [suggestions]="familyhistorydata"
+                                                            (completeMethod)="filterfamilyhistory($event)"
+                                                            [forceSelection]="true" field="term"
+                                                            [style]="{'width':'100%'}" [inputStyle]="{'width':'100%'}"
+                                                            [minLength]="3" appendTo="body"></p-autoComplete>
+                                                            <label for="float-input">Problem</label>
+                                                            </span>
+                                                        </div>
+                                                    </div>
+                                                   
+                                                </div>
+                                            </div>
+                                                <div class="form-group mt-5">
+            
+                                                    <!-- <div class="container-fluid"> -->
+                                                        <!-- <div class="row">
+                                                            <div class="col-lg-6 colmedi"> -->
+                                                                <span class="p-float-label">
+                                                                    <p-calendar inputId="basic" appendTo="body" #myInput dateFormat="dd/mm/yy"
+                                                                    [ngClass]="showErrorBorderOnControls(familyhistoryinsert.controls.family_patient_onset)"
+                                                                    formControlName="family_patient_onset"
+                                                                    [style]="{'width':'100%'}"></p-calendar>
+            
+            
+            
+                                                                    <label for="float-input">Start Date </label>
+                                                                </span>
+                                                            <!-- </div> -->
+                                                            <!-- <div class="col-lg-6 colmedi2">
+                                                                <span class="p-float-label">
+                                                                    <p-calendar inputId="basic" [showIcon]="true"
+                                                                        [ngClass]="showErrorBorderOnControls(medicationinsert.controls.End_date)"
+                                                                        appendTo="body" #myInput formControlName="End_date"
+                                                                        [style]="{'width':'100%'}" id="helthproblem"></p-calendar>
+            
+            
+            
+            
+                                                                    <label for="float-input">End Date </label>
+                                                                </span>
+                                                            </div> -->
+                                                        <!-- </div> -->
+                                                    <!-- </div> -->
+            
+                                                    <!-- </div> -->
+            
+            
+                                                    <!-- <div class="form-group mt-5"> -->
+            
+            
+                                                </div>
+            
+            
+                                                <!-- <div class="form-group mt-5">
+                                                    <span class="p-float-label">
+                                                        <textarea id="float-input" rows="1" cols="10" formControlName="note"
+                                                            pInputTextarea [style]="{'width':'100%'}"></textarea>
+                                                        <label for="float-input">Note</label>
+                                                    </span>
+                                                </div> -->
+                                            </div>
+                                            <div class="button-container">
+                                                <!-- <button pButton type="button" label="Cancel" class="p-button-secondary" ></button> -->
+                                                <button pButton type="button" label="Submit" (click)="submit_familyhistory()"
+                                                    class="p-button-success"></button>
+                                            </div>
+                                        </form>
+                                    </p-dialog>
+
+                                        <!-- new form  end -->
+                                    </div>
+                                </p-tabPanel>
+                                <p-tabPanel header="Procedure History">
+                                    <div class="row">
+                                        <div class="col-lg-3" *ngFor="let item of ProcedureHistory">
+                                            <div class="w3-card-4 cardfixheightprcudure">
+                                                <div class="w3-container BlockMain">
+                                                    <div class="row" style="padding-top: 10px;">
+                                                        <div class="blockdetail" style="padding-bottom: 10px;">
+                                                            <p title={{item.ProcedureName}} class="prociderhistoryhead cardp">
+                                                                {{item.ProcedureName}}  </p>
+                                                                <p title={{item.IndicationForProcedureName}} class="cardp"><span style="font-weight: bold;">Indication :
+                                                                </span> {{item.IndicationForProcedureName}} </p>
+                                                            <p><b>Performed By : </b>{{item.PerformerName}}</p>
+                                                            <!-- <p><b>Hospital :</b>UP</p> -->
+                                                            <!-- <p><b>Laterality :</b>Right</p> -->
+                                                            <p><b>Date Performed : </b>{{item.DatePerformed | date:
+                                                                'dd/MM/yyyy'}}</p>
+                                                            <!-- <p><b>Indication For Procedure :</b>sdsdsd</p> -->
+                                                            <!-- <p><b>Source :</b>{{item.SourceName}}</p>
+                                                            <p><b>Recorded By :</b>{{item.recorded_by}}</p> -->
+                                                            <!-- <p><b>Recorded Date :</b>{{item.recorded_date | date:
+                                                                'dd/MM/yyyy'}}</p> -->
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+                                                <!-- <button class="w3-button w3-block boxfooter" (click)="delete_patientprobl(item.id)"><i class="fa fa-trash-o"
+                                    aria-hidden="true"></i>Remove</button> -->
+                                            </div>
+                                        </div>
+                                        <!-- <div class="col-lg-3" >
+                                        <div class="w3-card-4 cardfixheightfamily">
+                                            <div class="w3-container BlockMain">
+                                                <div class="row" style="padding-top: 10px;">
+                                                    <div class="blockdetail" style="padding-bottom: 10px;">
+                                                        <p class="prociderhistoryhead">
+                                                            Deepak Dixit</p>
+                                                         <p><b>Performed By :</b>90yera</p>
+                                                         <p><b>Date Performed :</b>20/10/2022</p>
+                                                         <p><b>Source :</b>Patient</p>
+                                                         <p><b>Recorded By :</b>DNPL@DNPL</p>
+                                                         <p><b>Recorded Date :</b>sdsdsd</p>
+                                                    </div>
+                                                </div>
+            
+                                            </div>
+                                           
+                                        </div>
+                                    </div> -->
+                                    </div>
+
+
+
+                                </p-tabPanel>
+                                <p-tabPanel header="Tobacco Use">
+                                    <div class="row">
+                                        <div class="col-lg-3" *ngFor="let item of tobaccohistory">
+                                            <div class="w3-card-4 cardfixheighttobacco">
+                                                <div class="w3-container BlockMain">
+                                                    <div class="row" style="padding-top: 10px;">
+                                                        <div class="blockdetail" style="padding-bottom: 10px;">
+                                                            <p title="item.Smokingtypes" class="cardp"
+                                                                style="font-size: 20px; color:rgb(23, 15, 146); font-weight: bold;">
+                                                                {{item.Smokingtypes}}</p>
+                                                            <p><b>Tobacco Cartegory :</b> {{item.smokingCategory}}</p>
+                                                            <p><b>Status :</b> {{item.SmokeStatusName}}</p>
+                                                            <p><b> Date :</b> {{item.SmokedTobaccoStartDate | date:
+                                                                'dd/MM/yyyy' }}-{{item.SmokedTobaccoQuitDate | date:
+                                                                'dd/MM/yyyy' }}</p>
+                                                            <!-- <p><b> Date:</b> </p> -->
+                                                            <p><b>Quantity :</b> {{item.PackYears}}</p>
+                                                            <p><b>Counselling :</b>
+                                                                {{item.SmokedTobacco_Counselling}}</p>
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </p-tabPanel>
+                                <p-tabPanel header="Sexual History">
+                                    <div class="row">
+                                        <div class="col-lg-3" *ngFor="let item of Sexualhistory">
+                                            <div class="w3-card-4 cardfixheightfamily">
+                                                <div class="w3-container BlockMain">
+                                                    <div class="row" style="padding-top: 10px;">
+                                                        <div class="blockdetail" style="padding-bottom: 10px;">
+                                                            <p
+                                                                style="font-size: 20px; color:rgb(23, 15, 146); font-weight: bold;">
+                                                                <b style="color: #000;">Sexually Active :
+                                                                </b> {{item.Sexually_active}}
+                                                            </p>
+                                                            <p><b>Protection : </b> {{item.Protection}}</p>
+                                                            <p><b>Hight Risk Bahaviours :</b> {{item.HighRiskbehaviour}}
+                                                            </p>
+                                                            <p><b>Counselling Done : </b> {{item.Counselling}}</p>
+                                                            <p><b>Recorded By : </b> {{item.Recordedby}}</p>
+                                                            <p><b> Date : </b> {{item.recorded_date |  date:
+                                                                'dd/MM/yyyy' }}</p>
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </p-tabPanel>
+                                <p-tabPanel header="Implanted Devices">
+                                    <div class="row">
+                                        <div class="col-lg-3" *ngFor="let item of ImplantedDeviceshistory">
+                                            <div class="w3-card-4 cardfixheightDevices">
+                                                <div class="w3-container BlockMain">
+                                                    <div class="row" style="padding-top: 10px;">
+                                                        <div class="blockdetail" style="padding-bottom: 10px;">
+                                                            <p class="cardp" title="{{item.deviceName}}"
+                                                                style="font-size: 20px; color:rgb(23, 15, 146); font-weight: bold;">
+                                                                <b style="color: #000;">Device: </b>{{item.deviceName}}
+                                                            </p>
+                                                            <p><b>Date Of Implantation
+                                                                    : </b> {{item.date_of_Implantation | date:
+                                                                        'dd/MM/yyyy' }}</p>
+                                                            <p class="cardp" title="{{item.indicationName}}"><b>Indication : </b> {{item.indicationName}}</p>
+                                                            <p class="cardp" title="{{item.location}}"><b>Location : </b> {{item.location}}</p>
+                                                            <p><b>Expaire Date : </b> {{item.Expire_date | date:
+                                                                'dd/MM/yyyy' }}</p>
+                                                            <!-- <p><b>Recrded By Date Time:</b>{{item.datetime |  date:
+                                                                'dd/MM/yyyy' }}</p> -->
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+                                                <!-- <button class="w3-button w3-block boxfooter" (click)="delete_patientprobl(item.id)"><i class="fa fa-trash-o"
+                                    aria-hidden="true"></i>Remove</button> -->
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </p-tabPanel>
+                                <p-tabPanel header="Hospitalization">
+                                    <div class="row">
+                                        <div class="col-lg-3" *ngFor="let item of Hospitalizationhistory">
+                                            <div class="w3-card-4 cardfixheighthospital">
+                                                <div class="w3-container BlockMain">
+                                                    <div class="row" style="padding-top: 10px;">
+                                                        <div class="blockdetail" style="padding-bottom: 10px;">
+                                                            <p
+                                                                style="font-size: 20px; color:rgb(23, 15, 146); font-weight: bold;">
+                                                                <b>Hospital Name : </b> {{item.Hospital_NameValue}}
+                                                            </p>
+                                                            <p><b>Admission Date : </b> {{item.Admission_date | date:'dd/MM/y, h:mm a'}}</p>
+                                                            <p><b>Dsicharge Date : </b> {{item.Discharge_date  | date:'dd/MM/y, h:mm a'}}</p>
+                                                            <p class="cardp" title="{{item.Admission_Category}}"><b>Admission Category : </b> {{item.Admission_Category}}
+                                                            </p>
+                                                            <p class="cardp" title="{{item.Admission_ReasonName}}"><b>Admission Reason : </b> {{item.Admission_ReasonName}}</p>
+                                                            <p><b>Status : </b> {{item.Status}}</p>
+                                                            <p><b>Sources : </b> {{item.Source}}</p>
+                                                            <!-- <p><b>Recorded By :</b>{{item.Recorded_by}}</p> -->
+                                                            <!-- <p><b>Data Times :</b>{{item.DateTimes}}</p> -->
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+                                                <!-- <button class="w3-button w3-block boxfooter" (click)="delete_patientprobl(item.id)"><i class="fa fa-trash-o"
+                                    aria-hidden="true"></i>Remove</button> -->
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </p-tabPanel>
+                                <p-tabPanel header="  Alcohol & Substances Use">
+                                    <div class="row">
+                                        <div class="col-lg-3" *ngFor="let item of AlcohslSubstanceshistory">
+                                            <div class="w3-card-4 cardfixheightAlcohslSubstances">
+                                                <div class="w3-container BlockMain">
+                                                    <div class="row" style="padding-top: 10px;">
+                                                        <div class="blockdetail" style="padding-bottom: 10px;">
+                                                            <p
+                                                                style="font-size: 20px; color:rgb(23, 15, 146); font-weight: bold;">
+                                                                Status {{item.DrugUse_alcoholuseBoolean}}</p>
+                                                            <p><b>Type : </b>{{item.drugs}}</p>
+                                                            <p><b>Drug Type : </b> {{item.formTypeName}}</p>
+                                                            <p><b>Use/Week : </b> {{item.UsePerweek}}</p>
+                                                            <p><b>Recorded By : </b> {{item.recorded_by}}</p>
+                                                            <p><b>Recorded Date : </b> {{item.recorded_date |  date:'dd/MM/y'}}</p>
+                                                            <p><b>Counselling : </b> {{item.SubstanceUseCounsellingBoolean}}</p>
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+                                                <!-- <button class="w3-button w3-block boxfooter" (click)="delete_patientprobl(item.id)"><i class="fa fa-trash-o"
+                                    aria-hidden="true"></i>Remove</button> -->
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </p-tabPanel>
+                            </p-tabView>
+
+
+
+
+
+
+                            <!-- 
+                        <div class="familyhistory2">
+                            <a routerLink="#" (click)="showFamilyDialog()" ><i  aria-hidden="true" class="fa fa-plus"></i></a> 
+                            <a routerLink="#"><i aria-hidden="true" class="fa fa-print"></i></a>
+                            <a routerLink="#"><i aria-hidden="true" class="fa fa-question-circle"></i></a>
+                        </div> -->
+                        </div>
+
+                    </div>
+
+
+                </p-tabPanel>
+
+            </p-tabView>
+        </div>
+        <!-- </div> -->
+    </div>
+</div>

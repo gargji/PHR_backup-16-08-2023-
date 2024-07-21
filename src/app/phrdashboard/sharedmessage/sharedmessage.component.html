@@ -1,0 +1,170 @@
+<ng-sidebar-container style="height: 90vh; background: #eee;"  >
+  <!-- A sidebar -->
+  <ng-sidebar [(opened)]="_opened" mode="push" position="left"   >
+    <div class="col-lg-12" style="background-color: #f7f7f7;">
+      <div  class="row">
+  
+  <div class="col-lg-12"  style=" margin-top: 2.2rem;" >
+  <div class="row Conversionmsg">
+  
+  <div style="width: 100%; height: 100%; display:flex ;">
+  
+    <div class="sidebarmainbar" >
+          <nav id="sidebar">
+          <h2 class="mainsection">Message Center  <span> <i class="pi pi-times" style="    font-size: large;
+            float: right;cursor: pointer;" (click)="closesidebar()"></i></span></h2>
+     <ul class="list-unstyled CTAs">
+         <li>
+             <a style="cursor: pointer;" class="article" (click)="showBasicDialog2()"> Send a Message</a>
+         </li> 
+          <p-dialog header="Send A Message"  [(visible)]="displayBasic3" [modal]="true" id="trial" (onHide)="onDialogClosed($event,'isCalledOnHide')">
+          <app-compousemessage  (CancleDialogtoenit)="cancelDialog()"  [events]="eventsSubject.asObservable()"> </app-compousemessage>
+        </p-dialog>
+     </ul>
+      <ul class="list-unstyled components">
+        <li (mouseenter)="toggleSubMenu('inboxSubMenu')" (mouseleave)="toggleSubMenu('inboxSubMenu')" class="active linkshow">
+          <a  (click)="openClickedComponent('Inbox')" data-toggle="collapse" aria-expanded="false">
+              <i class="fa fa-envelope-o" aria-hidden="true"></i> &nbsp;Inbox
+              <i class="totalnumber" aria-hidden="true">{{messagecounts}}</i>
+          </a>
+          <ul class="submenu collapse" id="inboxSubMenu">
+              <!-- <li>  <a (click)="openClickedComponent('Submenu Item 1')"> Conversation</a></li> -->
+              <!-- <li><a (click)="openClickedComponent('Submenu Item 2')">Appointment</a></li> -->
+              <!-- <li class="linkshow">
+                <a (click)="openClickedComponent('Appointment')" data-toggle="collapse" aria-expanded="false" > <i class="fa fa-comment" aria-hidden="true"></i> &nbsp;Conversation <i  class="totalnumber" aria-hidden="true">8</i></a>   
+            </li> -->
+              <li class="linkshow">
+                <a (click)="openClickedComponent('Appointment')" data-toggle="collapse" aria-expanded="false" > <i class="fa fa-calendar" aria-hidden="true"></i> &nbsp;Appointment <i  class="totalnumber" aria-hidden="true">{{messageappointmentscounts}}</i></a>   
+            </li>
+              <li class="linkshow">  
+                <a (click)="openClickedComponent('Reminder')" data-toggle="collapse" aria-expanded="false" > <i class="fa fa-bell" aria-hidden="true"></i> &nbsp;Clinical Reminder <i  class="totalnumber" aria-hidden="true">{{messageremindercounts}}</i></a>
+            </li>
+            <li class="linkshow">  
+              <a (click)="openClickedComponent('Vaccine')" data-toggle="collapse" aria-expanded="false" > <i class="fa fa-syringe" aria-hidden="true"></i> &nbsp;Vaccine <i  class="totalnumber" aria-hidden="true">{{messagevaccinecounts}}</i></a>
+          </li>
+          <li class="linkshow">  
+            <a (click)="openClickedComponent('Labs & Result')" data-toggle="collapse" aria-expanded="false" > <i class="fa fa-vial" aria-hidden="true"></i> &nbsp;Labs & Result <i  class="totalnumber" aria-hidden="true">{{messageordercounts}}</i></a>
+        </li>
+        <li class="linkshow">  
+          <a (click)="openClickedComponent('Letters')" data-toggle="collapse" aria-expanded="false" > <i class="fa fa-envelope-o" aria-hidden="true"></i> &nbsp;Letters<i  class="totalnumber" aria-hidden="true">7</i></a>
+      </li>
+              <!-- <li><a (click)="openClickedComponent('Submenu Item 3')">Clinical Reminder</a></li> -->
+              <!-- <li><a (click)="openClickedComponent('Submenu Item 4')">Vaccine</a></li> -->
+              <!-- <li><a (click)="openClickedComponent('Submenu Item 5')">Labs & Result</a></li> -->
+              <!-- <li><a (click)="openClickedComponent('Submenu Item 6')">Letters</a></li> -->
+             
+              <!-- Add more submenu items as needed -->
+          </ul>
+      </li>
+      <li class="linkshow">  
+        <a (click)="openClickedComponent('Sent')" data-toggle="collapse" aria-expanded="false" > <img src="https://ssl.gstatic.com/ui/v1/icons/mail/gm3/1x/send_baseline_nv700_20dp.png" alt=""> &nbsp;SENT <i  class="totalnumber" aria-hidden="true">{{sentdata}}</i></a>
+    </li>
+      <li class="linkshow">  
+          <a (click)="openClickedComponent('Starred')" data-toggle="collapse" aria-expanded="false" > <i class="fa fa-star-o" aria-hidden="true"></i> &nbsp;Starred <i  class="totalnumber" aria-hidden="true">{{bookmarkdata}}</i></a>
+      </li>
+    <li class="linkshow">
+          <a (click)="openClickedComponent('Drafts')" data-toggle="collapse" aria-expanded="false" > <i class="fa fa-file-text-o" aria-hidden="true"></i> &nbsp;Drafts <i  class="totalnumber" aria-hidden="true">{{draftdata}}</i></a>   
+      </li>
+      <li class="linkshow">  
+          <a (click)="openClickedComponent('Trash')" data-toggle="collapse" aria-expanded="false" > <i class="fa fa-trash" aria-hidden="true"></i> &nbsp;Trash <i  class="totalnumber" aria-hidden="true">{{messagetrashtlength}}</i></a>
+      </li>
+
+      <!-- <li class="linkshow">  
+          <a (click)="openClickedComponent('Reminder')" data-toggle="collapse" aria-expanded="false" > <i class="fa fa-bell" aria-hidden="true"></i> &nbsp;Reminder <i  class="totalnumber" aria-hidden="true">7</i></a>
+      </li> -->
+       <!-- <li class="linkshow">  
+    <a (click)="openClickedComponent('ShareDocument')" data-toggle="collapse" aria-expanded="false" > <i class="fa fa-share-square-o" aria-hidden="true"></i> &nbsp;Share Document <i  class="totalnumber" aria-hidden="true">5</i></a>
+    </li> -->
+     </ul>
+  
+    </nav>
+      
+    </div>
+  </div>
+  </div>
+      </div>
+     </div>
+     </div>
+  </ng-sidebar>
+
+
+  <!-- Page content -->
+  <div ng-sidebar-content  class="mobiletext">
+    <button (click)="_toggleSidebar()"  class="fa fa-bars sidebarmain"   [style.display]="_opened ? 'none' : 'block'"></button>
+
+    <div class="col-12 container-fluid rightsection" >
+    
+     
+      <p-toast position="top-right"></p-toast>
+      
+      
+      <ng-templete *ngIf="message=='Inbox'" >
+       
+       <app-messagecontent class="content" [_opened]="_opened" (backbuttonToEmit)="backbutton($event)"></app-messagecontent>
+      
+      </ng-templete>
+      <ng-templete *ngIf="message=='Sent'" >
+       
+        <app-sentmsg  ></app-sentmsg>
+       
+       </ng-templete>
+      <ng-templete *ngIf="message=='Starred'">
+       
+      <app-bookmarked [ngClass]="{ 'shifted': _opened }"> </app-bookmarked>
+       
+       </ng-templete>
+      <ng-templete *ngIf="message=='Drafts'">
+       
+      
+      <app-messagedrafts></app-messagedrafts>
+       
+       </ng-templete>
+         
+       <ng-templete *ngIf="message=='Trash'">
+       <app-trash></app-trash>		 
+       </ng-templete>
+    
+       <ng-templete *ngIf="message=='Appointment'">
+       
+      
+      <app-messageappointment></app-messageappointment>
+       
+       </ng-templete>
+
+       <ng-templete *ngIf="message=='Labs & Result'">
+       
+     <app-messagelabs></app-messagelabs>
+         
+         </ng-templete>
+
+         <ng-templete *ngIf="message=='Vaccine'">
+       
+          <app-messagevaccine></app-messagevaccine>
+              
+              </ng-templete>
+              <ng-templete *ngIf="message=='Letters'">
+       
+                <app-messageletter></app-messageletter>
+                    
+                    </ng-templete>
+       <ng-templete *ngIf="message=='Reminder'">
+       
+      
+      <app-messagereminder></app-messagereminder>
+       
+       </ng-templete>
+       <ng-templete *ngIf="message=='ShareDocument'">
+       
+      
+      <app-sharedoc></app-sharedoc>
+       
+       </ng-templete>
+     
+    </div>
+  </div>
+
+
+</ng-sidebar-container>
+
+
+

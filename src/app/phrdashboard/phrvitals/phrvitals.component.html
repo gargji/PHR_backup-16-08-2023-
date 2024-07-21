@@ -1,0 +1,255 @@
+<p-toast position="top-right"></p-toast>
+<p-confirmDialog [style]="{width: '40vw'}"></p-confirmDialog>
+
+<p-dialog header="Add Vitals"   [(visible)]="displayvitalModal" [modal]="true" [style]="{width: '50vw'}"
+[draggable]="false" [resizable]="false" (onHide)="vitaldata($event)">
+<form [formGroup]="vitaldatainsert" style="margin-top: 10px;">
+<div class="row">
+    <div class="col-6 col-sm-6">
+     <div>
+        <label  class="col-lg-3 col-form-label" style="color: black; font-weight: bold;">SBP <span style="color: rgb(240, 3, 3);">*</span> :</label>
+        <p-inputNumber [style]="{'width':'100%'}"  formControlName="Site_SBP" [ngClass]="showErrorBorderOnControls(vitaldatainsert.controls.Site_SBP)"class="col-lg-9" placeholder="SBP (mmHg)" inputId="minmaxfraction" [format]="false" mode="decimal" [minFractionDigits]="2" [maxFractionDigits]="5">
+
+        </p-inputNumber>
+    </div>
+    </div>
+    <div class="col-6 col-sm-6">
+        <div >
+            <label class="col-lg-3 col-form-label" style="color: black; font-weight: bold;">DBP <span style="color: rgb(240, 3, 3);">*</span> :</label>
+      
+        <p-inputNumber class="col-lg-9" [ngClass]="showErrorBorderOnControls(vitaldatainsert.controls.DBP)" [format]="false" formControlName="DBP" placeholder="DBP (mmHg)" [style]="{'width':'100%'}">
+        </p-inputNumber>
+         </div>
+    </div>
+
+<div class="col-6 col-sm-6 mt-3" >
+    <div>
+       <label class="col-lg-3 col-form-label" style="color: black; font-weight: bold;">Pulse  <span style="color: rgb(240, 3, 3);">*</span> :</label>
+       <p-inputNumber class="col-lg-9" [ngClass]="showErrorBorderOnControls(vitaldatainsert.controls.Pulse)" [format]="false" formControlName="Pulse" placeholder="bpm" [style]="{'width':'100%'}">
+    </p-inputNumber>
+
+    </div>
+   </div>
+   <div class="col-6 col-sm-6 mt-3">
+    <div>
+       <label class="col-lg-3 col-form-label" style="color: black; font-weight: bold;">Temp <span style="color: rgb(240, 3, 3);">*</span> :</label>
+       <p-inputNumber class="col-lg-9" [ngClass]="showErrorBorderOnControls(vitaldatainsert.controls.Temp)"formControlName="Temp" [format]="false" placeholder="°F" [style]="{'width':'100%'}">
+    </p-inputNumber>
+    </div>
+   </div>
+
+   <div class="col-6 col-sm-6 mt-3" >
+    <div style="display: flex; padding-left: 0px; padding-right: 0px;">
+       <label class="col-lg-3 col-form-label" style="color: black; font-weight: bold;">Site <span style="color: rgb(240, 3, 3);">*</span> :</label>
+       <p-dropdown class="col-lg-9"    [inputStyle]="{'width':'100%'}" [format]="false" [ngClass]="showErrorBorderOnControls(vitaldatainsert.controls.bpsite_name)"  [style]="{'width':'100%'}" [options]="vitalsiteshow" formControlName="bpsite_name" aceholder="Select Site" optionLabel="name" [showClear]="true">
+
+       </p-dropdown>
+    </div>
+   </div>
+   <div class="col-6 col-sm-6 mt-3">
+    <div>
+       <label class="col-lg-3 col-form-label" style="color: black; font-weight: bold;">Device <span style="color: rgb(240, 3, 3);">*</span> :</label>
+       <input type="text" pInputText class="col-lg-9"  [ngClass]="showErrorBorderOnControls(vitaldatainsert.controls.device)" formControlName="device"[style]="{'width':'100%'}">
+   
+    </div>
+   </div>
+
+   <div class="col-6 col-sm-6 mt-3" >
+    <div>
+       <label class="col-lg-3 col-form-label" style="color: black; font-weight: bold;">RR <span style="color: rgb(240, 3, 3);">*</span> :</label>
+       <p-inputNumber  class="col-lg-9" [format]="false" [ngClass]="showErrorBorderOnControls(vitaldatainsert.controls.RR)" formControlName="RR" placeholder="Per Minutes" [style]="{'width':'100%'}">
+    </p-inputNumber> 
+    </div>
+   </div>
+   <div class="col-6 col-sm-6 mt-3">
+    <div>
+       <label class="col-lg-3 col-form-label" style="color: black; font-weight: bold;">SpO2 <span style="color: rgb(240, 3, 3);">*</span> :</label>
+       <p-inputNumber  class="col-lg-9"  [format]="false" [ngClass]="showErrorBorderOnControls(vitaldatainsert.controls.SpO2)" formControlName="SpO2" placeholder="%" [style]="{'width':'100%'}">
+    </p-inputNumber>
+    </div>
+   </div>
+
+   <div class="col-6 col-sm-6 mt-3" >
+    <div>
+       <label class="col-lg-3 col-form-label" style="color: black; font-weight: bold;">O2 Flow <span style="color: rgb(240, 3, 3);">*</span>:</label>
+       <p-inputNumber  class="col-lg-9" [format]="false" [ngClass]="showErrorBorderOnControls(vitaldatainsert.controls.o2flow)"  formControlName="o2flow" placeholder="bpm" [style]="{'width':'100%'}">
+    </p-inputNumber>
+    </div>
+   </div>
+   <div class="col-6 col-sm-6 mt-3">
+    <div>
+       <label  class="col-lg-3 col-form-label" style="color: black; font-weight: bold;">Height  :</label>
+       <p-inputNumber class="col-lg-9" [format]="false" formControlName="hight" placeholder="cm/m" [style]="{'width':'100%'}">
+    </p-inputNumber>
+    </div>
+   </div>
+   <div class="col-6 col-sm-6 mt-3" >
+    <div>
+       <label class="col-lg-3 col-form-label" style="color: black; font-weight: bold;">Weight :</label>
+       <p-inputNumber  class="col-lg-9"  [format]="false" formControlName="weight" placeholder="kg/lb" [style]="{'width':'100%'}">
+    </p-inputNumber>
+    </div>
+   </div>
+   <div class="col-6 col-sm-6 mt-3">
+    <div>
+       <label  class="col-lg-3 col-form-label" style="color: black; font-weight: bold;">BSA <span style="color: rgb(240, 3, 3);">*</span> :</label>
+       <p-inputNumber  class="col-lg-9" [format]="false" [ngClass]="showErrorBorderOnControls(vitaldatainsert.controls.BSA)" formControlName="BSA" placeholder="m2" [style]="{'width':'100%'}">
+    </p-inputNumber>
+    </div>
+   </div>
+   <div class="col-6 col-sm-6 mt-3">
+    <div>
+       <label  class="col-lg-3 col-form-label" style="color: black; font-weight: bold;">Date <span style="color: rgb(240, 3, 3);">*</span> :</label>
+       <p-calendar  [showTime]="true" class="col-lg-12" placeholder="DD/MM/YYYY" [ngClass]="showErrorBorderOnControls(vitaldatainsert.controls.datevital_date)" formControlName="datevital_date" [style]="{'width':'100%', 'max-width':'75%'}" [showSeconds]="true" inputId="time"></p-calendar>
+    </div>
+   </div>
+
+  </div>
+  </form>
+ 
+    <ng-template pTemplate="footer">
+        <p-button label="Submit"  (click)="submit_vitaldata()" icon="pi pi-check"></p-button>
+    <!-- <p-button icon="pi pi-check" (click)="submit_vitaldata()" label="Submit" styleClass="p-button-text"></p-button> -->
+    </ng-template>
+</p-dialog>
+
+<div class="container-fluid Maindivscroll">
+    <div class="healthsummary">
+        <h1>Flow Chart </h1>
+        <p>Use the tabs to open a section of your Investigation And Vitals Records.</p>
+    </div>
+    <div class="card">
+         <p-tabView styleClass="tabview-custom">
+            <p-tabPanel>
+                <ng-template pTemplate="header">
+                    <span>Investigation</span>
+                </ng-template>
+                <p-table   [value]="Investigationdata"  responsiveLayout="scroll" paginatorPosition="bottom" #dt1 dataKey="id" [paginator]="true"scrollDirection="both" styleClass="p-mt-3" [scrollable]="true" [rowsPerPageOptions]="[10,15,25,50]"  [rows]="15" >
+                    <ng-template pTemplate="caption">
+                        <div class="globalSearch">
+                            <p style="font-weight: bold; font-size: 1.2rem; margin-bottom: 0;">Total Records:&nbsp; {{Investigationlength}} <span class="dislength"></span></p>
+                         
+                          </div>
+
+                       
+                    </ng-template>
+                    <ng-template pTemplate="header">
+                        <tr>
+                            <th style="border-top:2px solid #e7ecf1;" pSortableColumn="dateandtime"><p-sortIcon field="dateandtime"></p-sortIcon>Parent Name</th>
+                            <th style="border-top:2px solid #e7ecf1;" pSortableColumn="SBP"><p-sortIcon field="SBP"></p-sortIcon>Expire</th>
+                            <th style="border-top:2px solid #e7ecf1;" pSortableColumn="DBP"><p-sortIcon field="DBP"></p-sortIcon>Priority</th>
+                            <th style="border-top:2px solid #e7ecf1;" pSortableColumn="Pulse"><p-sortIcon field="Pulse"></p-sortIcon>Status</th>
+                            
+                        
+                        </tr>
+                    </ng-template>
+                    <ng-template pTemplate="body"  let-item let-i="rowIndex">
+                        <tr>
+                            <!-- <td style="width:5%;">{{i + 1}}</td> -->
+                            
+                            <!-- <td style="font-weight: bold;">{{item.DateAndTime}}</td> -->
+                            <td>{{item.ParentName}}</td>
+                            <td>{{item.expiry}}</td>
+                            <td>{{item.Priority}}</td>
+                            <td *ngIf="item.ResultStatus == '0'" ><span style="color:rgb(228, 148, 1)"> Pending</span></td>
+                            <td (click)="showModalDialog(item)" *ngIf="item.ResultStatus == '1' "><span style="cursor: pointer; color:rgb(35, 90, 4)"> Resulted</span></td>
+                      
+                        </tr>
+                    </ng-template>
+                
+                </p-table>
+            </p-tabPanel>
+            <p-tabPanel header="Medications">
+                <ng-template pTemplate="header">
+                    <span>Vitals</span>
+                </ng-template>
+                <p-table   [value]="vitalsdata"  responsiveLayout="scroll" paginatorPosition="bottom" #dt1 dataKey="id" [paginator]="true"scrollDirection="both" styleClass="p-mt-3" [scrollable]="true" [rowsPerPageOptions]="[10,15,25,50]"  [rows]="15" >
+                    <ng-template pTemplate="caption">
+                        <div class="globalSearch">
+                            <p style="font-weight: bold; font-size: 1.2rem; margin-bottom: 0;">Total Records:&nbsp; {{vitalslength}} <span class="dislength"></span></p>
+                            <div class="addvitalbtn">
+                                <p-button label="Add" (click)="showvitalDialog()"  icon="pi pi-check"></p-button>
+                            </div>
+                          </div>
+
+                       
+                    </ng-template>
+                    <ng-template pTemplate="header">
+                        <tr>
+                            <th style="border-top:2px solid #e7ecf1;" pSortableColumn="dateandtime"><p-sortIcon field="dateandtime"></p-sortIcon>Date And Time</th>
+                            <th style="border-top:2px solid #e7ecf1;" pSortableColumn="SBP"><p-sortIcon field="SBP"></p-sortIcon>S.B.P</th>
+                            <th style="border-top:2px solid #e7ecf1;" pSortableColumn="DBP"><p-sortIcon field="DBP"></p-sortIcon>D.B.P</th>
+                            <th style="border-top:2px solid #e7ecf1;" pSortableColumn="Pulse"><p-sortIcon field="Pulse"></p-sortIcon>Pulse</th>
+                            <th style="border-top:2px solid #e7ecf1;" pSortableColumn="Temprature"><p-sortIcon field="Temprature"></p-sortIcon>Temprature</th>
+                            <th style="border-top:2px solid #e7ecf1;" pSortableColumn ="site"> <p-sortIcon field="site"></p-sortIcon>Site</th>                            
+                            <th style="border-top:2px solid #e7ecf1;" pSortableColumn="Device"><p-sortIcon field="Device"></p-sortIcon>Device</th>
+                            <th style="border-top:2px solid #e7ecf1;" pSortableColumn="RR"><p-sortIcon field="RR"></p-sortIcon>RR</th>
+                            <th style="border-top:2px solid #e7ecf1;" pSortableColumn="spO2"><p-sortIcon field="spO2"></p-sortIcon>spO2</th>
+                            <th style="border-top:2px solid #e7ecf1;" pSortableColumn="o2flow"><p-sortIcon field="o2flow"></p-sortIcon>O2 Flow</th>
+                            <th style="border-top:2px solid #e7ecf1;" pSortableColumn="Height"><p-sortIcon field="Height"></p-sortIcon>Height</th>
+                            <th style="border-top:2px solid #e7ecf1;" pSortableColumn="Weight"><p-sortIcon field="Weight"></p-sortIcon>Weight</th>
+                            <th style="border-top:2px solid #e7ecf1;" pSortableColumn="BSA"><p-sortIcon field="BSA"></p-sortIcon>B.S.A</th>
+                        
+                        </tr>
+                    </ng-template>
+                    <ng-template pTemplate="body"  let-item let-i="rowIndex">
+                        <tr>
+                            <!-- <td style="width:5%;">{{i + 1}}</td> -->
+                            
+                            <td style="font-weight: bold;">{{item.DateAndTime}}</td>
+                            <td>{{item.SBP}}</td>
+                            <td>{{item.DBP}}</td>
+                            <td>{{item.Pulse}}</td>
+                            <td>{{item.Temprature}}</td>
+                            <td>{{item.Sitename}}</td>
+                            <td>{{item.Temprature_Device}}</td>
+                            <td>{{item.RR}}</td>
+                            <td>{{item.spO2}}</td>
+                            <td>{{item.O2Flow}}</td>
+                            <td>{{item.Weight}}</td>
+                            <td>{{item.Height}}</td>
+                            <td>{{item.BSA}}</td>
+                        </tr>
+                    </ng-template>
+                
+                </p-table>
+            </p-tabPanel>
+        </p-tabView>
+
+        <p-dialog header="{{headerPanleorlist}}" [(visible)]="display_lab_results_dialog"  [modal]="true" [style]="{width: '50vw'}"
+        [draggable]="false" [resizable]="false">
+     
+            <div class="row" id="allergies_component" >
+                
+                    <div class="col-lg-6" *ngFor="let importResults of importResultOfreviewData">
+                      <div class="w3-card-4">
+
+                          <div class="w3-container BlockMain" >
+                            
+                              <div class="row" style="padding-top: 10px;">
+                                  
+                                  <div class="blockdetail" style="padding-bottom: 10px;">
+
+                                      <p style="font-size: 20px; color:rgb(23, 15, 146); font-weight: bold;" >Test: {{importResults?.labOrderName}}</p>
+                                     
+                                      <p><span style="font-weight: bold;">Results: </span>  {{importResults?.Results}}   {{importResults?.units}}</p>
+                                      <p><span style="font-weight: bold;">Reference: </span>   {{importResults?.ranges}}</p>
+                                      <span style="font-weight: bold;"> <p [style]="importResults.intrepretation=='Normal'?'color:#44a119;':'color:#c03a3d;'"> Interpretation:  {{importResults?.intrepretation}}</p></span>
+                                    
+                                  </div>
+                              </div>
+
+                          </div>
+                        </div>
+                  </div>
+                     
+            </div>
+              
+              <ng-template pTemplate="footer">
+                <header class="saveTopBtn">
+                    <p-button icon="pi pi-times" (click)="display_lab_results_dialog=false" label="Cancel"></p-button>
+            </header>
+              </ng-template>
+             </p-dialog>
+    </div>
+</div>

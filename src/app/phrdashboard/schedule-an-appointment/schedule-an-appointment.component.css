@@ -1,0 +1,181 @@
+
+.column{
+    /* margin-top: 40px; */
+    padding-top: 5%;
+}
+  
+  .MainBlock{
+    background-color: #f3f3f354;
+    padding: 10px 20px;
+    border: 1px dotted   #774bdd;
+    border-radius: 10px;
+    margin-top: 20px;
+    -webkit-box-shadow: -1px 0px 5px 0px rgba(0,0,0,0.2);
+-moz-box-shadow: -1px 0px 5px 0px rgba(0,0,0,0.2);
+box-shadow: -1px 0px 5px 0px rgba(0,0,0,0.2);
+
+  }
+  .appointStatus{
+    font-size: 1.125rem;
+    font-weight: bold;
+    color: #5271e4;
+    margin-bottom: 20px;
+  }
+ /* rightside design */
+
+ .appoteam{
+    font-size: 1rem;
+    border: 1px solid #dbdeed;
+    background-color: #f3eded;
+    /* margin-left: 70px; */
+    padding-top: 10px;
+    width: 100%;
+    border-radius: 5px;
+  font-weight: bold;
+  }
+  .appoteam p{
+    margin-bottom: 10px;
+    padding-left: 15px;
+
+  }
+
+ .appoteam img {
+    float: left;
+    max-width: 30px;
+    width: 100%;
+    margin-right: 10px;
+    border-radius: 50%;
+    margin-top: 0px;
+    margin-left: 5px;
+  }
+  
+  .appoteam img.right {
+    float: right;
+    margin-left: 20px;
+    margin-right:0;
+  }
+
+
+.appointmanage{
+    font-size: 14px;
+    text-align: center;
+    font-weight: bold;
+}
+
+.appointmentschudule h1{
+font-size: 1.4rem;
+color: #5271e4;
+font-weight: bold;
+}
+  .appointmentdate h1{
+color: #000;
+font-size: 1.2rem;
+font-weight: bold;
+  }
+.Schedulinghead h2{
+  color: #1d4ed8;
+  font-size: 1.2rem;
+  font-weight: bold;
+  margin-bottom: 30px;
+}
+
+/* card design */
+
+.card {
+  height: 20vh !important;
+  /* min-height: 400px !important; */
+  /* margin-bottom: 1em !important; */
+  
+}
+.card{
+  min-height: 190px !important;
+  margin-bottom: 1em !important;
+  border: 1px solid !important;
+  border-color: #ddd !important;
+  box-shadow: -1px 0px 5px 0px rgba(0,0,0,0.2);
+}
+.card-title{
+  color: #000;
+  font-size: 1.3rem;
+  font-weight: bold;
+  line-height: initial;
+}
+
+
+.appointmentprovider{
+  font-size: 1rem;
+    /* border: 1px solid #dbdeed; */
+    /* background-color: #f3eded; */
+    /* padding-top: 10px; */
+    width: 100%;
+    border-radius: 5px;
+    font-weight: bold;
+}
+
+.appointmentprovider h2{
+  margin-bottom: 10px;
+  padding-left: 15px;
+  color: #000;
+  font-size: 1.4rem;
+  font-weight: bold;
+}
+
+.appointmentprovider p{
+  margin-bottom: 10px;
+  padding-left: 15px;
+
+} 
+.appointmentprovider img {
+  float: left;
+  max-width: 60px;
+  width: 100%;
+  margin-right: 10px;
+  border-radius: 50%;
+  margin-top: 0px;
+  margin-left: 5px;
+}
+
+.appointmentprovider img.right {
+  float: right;
+  margin-left: 20px;
+  margin-right:0;
+}
+.Provider{
+  text-align: center;
+  margin-bottom: 10px;
+}
+.Provider h2{
+font-size: 1.2rem;
+color: #1d4ed8;
+
+font-weight: bold;
+}
+
+.cardnew {
+  height: 15vh !important;
+  /* min-height: 400px !important; */
+  /* margin-bottom: 1em !important; */
+  
+}
+.cardnew{
+  min-height: 135px !important;
+  margin-bottom: 1em !important;
+  border: 1px solid !important;
+  border-color: #ddd !important;
+  box-shadow: -1px 0px 5px 0px rgba(0,0,0,0.2);
+}
+
+.cardtitle{
+  font-size: 1.2rem;
+}
+
+.cardnewthree{
+  height: 17vh !important;
+}
+.cardnewthree{
+  min-height: 100px !important;
+  margin-bottom: 1em !important;
+  border: 1px solid !important;
+  border-color: #ddd !important;
+  box-shadow: -1px 0px 5px 0px rgba(0,0,0,0.2);
+}
